@@ -61,7 +61,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				haby: {
+					primary: '#7E69AB',
+					secondary: '#6E59A5',
+					dark: '#1A1F2C',
+					light: '#E5DEFF',
+					accent: '#D946EF'
 				}
+			},
+			fontFamily: {
+				sans: ['Poppins', 'sans-serif'],
+				heading: ['Montserrat', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
