@@ -5,7 +5,7 @@ const projects = [
   {
     title: "HABYKeys",
     description: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
-    image: "bg-haby-light",
+    image: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
     category: "Productividad",
     url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
     client: "Perla Itzel Rosales Flores"
@@ -13,17 +13,17 @@ const projects = [
   {
     title: "HABY Score Tracker",
     description: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
-    image: "bg-haby-light",
+    image: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
     category: "Educación",
     url: "https://prep-score-tracker.lovable.app",
     client: "Prof. Martha Norma Ramírez Albarrán"
   },
   {
     title: "HABY CLASS",
-    description: "Plataforma educativa inspirada en Google Classroom que facilita la gestión de clases y mejora la comunicación entre profesores y estudiantes.",
-    image: "bg-haby-light",
-    category: "Educación",
-    client: "Cecytem Ixtapaluca II",
+    description: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
+    image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
+    category: "Proyecto Escolar",
+    client: "Proyecto Personal",
     url: "#"
   }
 ];

@@ -1,4 +1,3 @@
-
 import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +5,11 @@ const plans = [
   {
     name: "Básico",
     description: "Ideal para pequeños proyectos o soluciones sencillas",
-    price: "Desde $X,XXX MXN",
+    prices: {
+      mxn: "14,999",
+      usd: "899",
+      eur: "799"
+    },
     features: [
       "Diseño web responsive",
       "Hasta 5 secciones",
@@ -20,7 +23,11 @@ const plans = [
   {
     name: "Profesional",
     description: "Para proyectos más complejos y funcionalidades avanzadas",
-    price: "Desde $XX,XXX MXN",
+    prices: {
+      mxn: "24,999",
+      usd: "1,499",
+      eur: "1,299"
+    },
     features: [
       "Todo lo del plan Básico",
       "Hasta 10 secciones",
@@ -35,8 +42,12 @@ const plans = [
   },
   {
     name: "Premium",
-    description: "Soluciones completamente personalizadas",
-    price: "Cotización personalizada",
+    description: "Soluciones completamente personalizadas para necesidades específicas",
+    prices: {
+      mxn: "Desde 34,999",
+      usd: "Desde 1,999",
+      eur: "Desde 1,799"
+    },
     features: [
       "Análisis completo de necesidades",
       "Diseño y desarrollo a medida",
@@ -49,6 +60,15 @@ const plans = [
     buttonText: "Contactar"
   }
 ];
+
+const PriceDisplay = ({ prices }: { prices: { mxn: string; usd: string; eur: string } }) => (
+  <div className="space-y-1">
+    <div className="text-2xl font-bold text-haby-primary">${prices.mxn} MXN</div>
+    <div className="text-sm text-gray-600">
+      (${prices.usd} USD / €{prices.eur} EUR)
+    </div>
+  </div>
+);
 
 const PricingSection = () => {
   return (
@@ -85,7 +105,7 @@ const PricingSection = () => {
               )}
               <h3 className="text-xl font-bold text-gray-800 mb-2">{plan.name}</h3>
               <p className="text-gray-600 mb-4">{plan.description}</p>
-              <div className="text-2xl font-bold text-haby-primary mb-6">{plan.price}</div>
+              <PriceDisplay prices={plan.prices} />
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start">
