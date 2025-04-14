@@ -1,25 +1,30 @@
 
 import { Link } from 'react-router-dom';
 
-// Estos son proyectos de ejemplo. Habría que reemplazarlos con los proyectos reales de HABY
 const projects = [
   {
-    title: "Gestor de Tareas Inteligente",
-    description: "Aplicación web que ayuda a organizar y priorizar tareas diarias, optimizando el flujo de trabajo.",
-    image: "bg-haby-light", // Placeholder - imagen real necesaria
-    category: "Productividad"
+    title: "HABYKeys",
+    description: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
+    image: "bg-haby-light",
+    category: "Productividad",
+    url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
+    client: "Perla Itzel Rosales Flores"
   },
   {
-    title: "Sistema de Reservas Online",
-    description: "Plataforma que automatiza el proceso de reservas y gestión de citas para pequeños negocios.",
-    image: "bg-haby-light", // Placeholder - imagen real necesaria
-    category: "Gestión"
+    title: "HABY Score Tracker",
+    description: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
+    image: "bg-haby-light",
+    category: "Educación",
+    url: "https://prep-score-tracker.lovable.app",
+    client: "Prof. Martha Norma Ramírez Albarrán"
   },
   {
-    title: "E-commerce Personalizado",
-    description: "Tienda online con funcionalidades a medida para un cliente del sector retail.",
-    image: "bg-haby-light", // Placeholder - imagen real necesaria
-    category: "E-commerce"
+    title: "HABY CLASS",
+    description: "Plataforma educativa inspirada en Google Classroom que facilita la gestión de clases y mejora la comunicación entre profesores y estudiantes.",
+    image: "bg-haby-light",
+    category: "Educación",
+    client: "Cecytem Ixtapaluca II",
+    url: "#"
   }
 ];
 
@@ -35,7 +40,7 @@ const PortfolioSection = () => {
             Proyectos que abren puertas
           </h2>
           <p className="text-gray-600">
-            Descubre cómo hemos ayudado a otros clientes a solucionar problemas cotidianos 
+            Descubre cómo hemos ayudado a nuestros clientes a solucionar problemas cotidianos 
             y optimizar su tiempo a través de soluciones web personalizadas.
           </p>
         </div>
@@ -48,17 +53,25 @@ const PortfolioSection = () => {
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <div className={`aspect-video ${project.image} flex items-center justify-center`}>
-                <span className="text-haby-primary font-medium">Imagen del proyecto</span>
+                <span className="text-haby-primary font-medium">{project.title}</span>
               </div>
               <div className="p-6">
                 <div className="text-sm text-haby-primary font-medium mb-2">{project.category}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-haby-primary transition-colors">
+                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-haby-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <Link to="/portafolio" className="text-haby-primary hover:text-haby-secondary font-medium">
-                  Ver detalles
-                </Link>
+                <p className="text-gray-600 mb-3">{project.description}</p>
+                <div className="text-sm text-gray-500 mb-4">
+                  Cliente: {project.client}
+                </div>
+                <a 
+                  href={project.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-haby-primary hover:text-haby-secondary font-medium inline-flex items-center"
+                >
+                  Ver proyecto <span className="ml-2">→</span>
+                </a>
               </div>
             </div>
           ))}
@@ -75,3 +88,4 @@ const PortfolioSection = () => {
 };
 
 export default PortfolioSection;
+
