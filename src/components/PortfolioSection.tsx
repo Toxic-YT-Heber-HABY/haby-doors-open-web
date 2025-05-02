@@ -55,6 +55,23 @@ const itemVariants = {
   }
 };
 
+// Variantes para el efecto hover
+const cardHoverVariants = {
+  initial: { 
+    scale: 1,
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+  },
+  hover: { 
+    scale: 1.05, 
+    boxShadow: "0 10px 25px rgba(126, 105, 171, 0.3)",
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20
+    }
+  }
+};
+
 const PortfolioSection = () => {
   return (
     <section className="section bg-white py-20">
@@ -90,38 +107,45 @@ const PortfolioSection = () => {
               key={index} 
               variants={itemVariants}
             >
-              <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                <CardHeader className="pb-2">
-                  <div className="text-sm text-haby-primary font-medium">{project.category}</div>
-                  <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-haby-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pb-2 flex-grow">
-                  <CardDescription className="text-gray-600">{project.description}</CardDescription>
-                  <div className="text-sm text-gray-500 mt-3">
-                    Cliente: {project.client}
+              <motion.div
+                className="h-full"
+                initial="initial"
+                whileHover="hover"
+                variants={cardHoverVariants}
+              >
+                <Card className="h-full overflow-hidden transition-all duration-300 flex flex-col">
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <a 
-                    href={project.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-haby-primary hover:text-haby-secondary font-medium inline-flex items-center group"
-                  >
-                    Ver proyecto 
-                    <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </CardFooter>
-              </Card>
+                  <CardHeader className="pb-2">
+                    <div className="text-sm text-haby-primary font-medium">{project.category}</div>
+                    <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-haby-primary transition-colors">
+                      {project.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pb-2 flex-grow">
+                    <CardDescription className="text-gray-600">{project.description}</CardDescription>
+                    <div className="text-sm text-gray-500 mt-3">
+                      Cliente: {project.client}
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <a 
+                      href={project.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-haby-primary hover:text-haby-secondary font-medium inline-flex items-center group"
+                    >
+                      Ver proyecto 
+                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
