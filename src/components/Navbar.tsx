@@ -22,6 +22,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
+              alt="HABY Logo" 
+              className="h-10 mr-2" 
+            />
             <span className="text-2xl font-heading font-bold text-haby-primary">HABY</span>
           </Link>
 

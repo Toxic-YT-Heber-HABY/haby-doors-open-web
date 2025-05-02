@@ -10,6 +10,11 @@ const Footer = () => {
           {/* Logo y descripción */}
           <div>
             <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
+                alt="HABY Logo" 
+                className="h-10 mr-2 invert" 
+              />
               <span className="text-2xl font-heading font-bold text-white">HABY</span>
             </Link>
             <p className="mt-4 text-gray-300">
