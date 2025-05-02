@@ -4,9 +4,16 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Model({ modelPath, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }) {
-  const ref = useRef();
-  const { scene } = useGLTF('/lovable-uploads/haby_logo_3d.glb', true);
+interface ModelProps {
+  modelPath?: string;
+  scale?: number;
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+}
+
+function Model({ modelPath = '/lovable-uploads/haby_logo_3d.glb', scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: ModelProps) {
+  const ref = useRef<THREE.Mesh>(null);
+  const { scene } = useGLTF(modelPath, true);
   
   useFrame((state) => {
     if (ref.current) {
@@ -26,8 +33,7 @@ function Model({ modelPath, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0
 }
 
 function LogoModel() {
-  // Creamos un modelo 3D básico de un logo con THREE.js
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -53,7 +59,16 @@ function LogoModel() {
   );
 }
 
-export default function ThreeDModel({ type = 'logo', ...props }) {
+interface ThreeDModelProps {
+  type?: 'logo' | 'custom';
+  modelPath?: string;
+  scale?: number;
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  className?: string;
+}
+
+export default function ThreeDModel({ type = 'logo', modelPath, scale, position, rotation, ...props }: ThreeDModelProps) {
   return (
     <div className={`w-full h-full ${props.className || ''}`} style={{ minHeight: '300px' }}>
       <Canvas shadows>
@@ -65,7 +80,7 @@ export default function ThreeDModel({ type = 'logo', ...props }) {
         {type === 'logo' ? (
           <LogoModel />
         ) : (
-          <Model {...props} />
+          <Model modelPath={modelPath} scale={scale} position={position} rotation={rotation} />
         )}
         
         <OrbitControls 
