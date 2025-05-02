@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float, Text } from '@react-three/drei';
+import { OrbitControls, useGLTF, PerspectiveCamera, Float, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ModelProps {
@@ -101,7 +101,7 @@ export default function ThreeDModel({
           shadow-mapSize-height={1024}
         />
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
-        <Environment preset="city" />
+        {/* Removed Environment component that was causing the error */}
         
         {type === 'logo' ? (
           <LogoModel />
