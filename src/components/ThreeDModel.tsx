@@ -5,14 +5,14 @@ import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float } from '@
 import * as THREE from 'three';
 
 interface ModelProps {
-  modelPath?: string;
+  modelPath: string;
   scale?: number;
   position?: [number, number, number];
   rotation?: [number, number, number];
 }
 
 function Model({ modelPath = '/lovable-uploads/haby_logo_3d.glb', scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: ModelProps) {
-  const ref = useRef<THREE.Mesh>(null);
+  const ref = useRef<THREE.Mesh>(null!);
   const { scene } = useGLTF(modelPath, true);
   
   useFrame((state) => {
@@ -33,7 +33,7 @@ function Model({ modelPath = '/lovable-uploads/haby_logo_3d.glb', scale = 1, pos
 }
 
 function LogoModel() {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<THREE.Mesh>(null!);
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -80,7 +80,12 @@ export default function ThreeDModel({ type = 'logo', modelPath, scale, position,
         {type === 'logo' ? (
           <LogoModel />
         ) : (
-          <Model modelPath={modelPath} scale={scale} position={position} rotation={rotation} />
+          <Model 
+            modelPath={modelPath || '/lovable-uploads/haby_logo_3d.glb'} 
+            scale={scale} 
+            position={position} 
+            rotation={rotation} 
+          />
         )}
         
         <OrbitControls 
