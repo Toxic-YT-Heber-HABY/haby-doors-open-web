@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float, Text } from '@react-three/drei';
+import { OrbitControls, useGLTF, PerspectiveCamera, Text, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ModelProps {
@@ -70,6 +70,18 @@ function LogoModel() {
   );
 }
 
+// Custom environment to replace the HDR environment
+function CustomEnvironment() {
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[10, 10, 5]} intensity={1.5} castShadow />
+      <directionalLight position={[-10, -10, -5]} intensity={0.5} />
+      <hemisphereLight args={['#f8f9fa', '#7E69AB', 0.7]} />
+    </>
+  );
+}
+
 interface ThreeDModelProps {
   type?: 'logo' | 'custom';
   modelPath?: string;
@@ -92,16 +104,11 @@ export default function ThreeDModel({
       <Canvas shadows dpr={[1, 2]}>
         <color attach="background" args={['#f8f9fa']} />
         <fog attach="fog" args={['#f8f9fa', 5, 20]} />
-        <ambientLight intensity={0.8} />
-        <directionalLight 
-          position={[5, 5, 5]} 
-          intensity={1} 
-          castShadow 
-          shadow-mapSize-width={1024} 
-          shadow-mapSize-height={1024}
-        />
+        
+        {/* Replaced Environment component with CustomEnvironment */}
+        <CustomEnvironment />
+        
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
-        <Environment preset="sunset" />
         
         {type === 'logo' ? (
           <LogoModel />
