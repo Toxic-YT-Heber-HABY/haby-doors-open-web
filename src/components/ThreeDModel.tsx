@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float } from '@react-three/drei';
+import { OrbitControls, useGLTF, PerspectiveCamera, Environment, Float, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ModelProps {
@@ -11,8 +11,8 @@ interface ModelProps {
   rotation?: [number, number, number];
 }
 
-function Model({ modelPath = '/lovable-uploads/haby_logo_3d.glb', scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: ModelProps) {
-  const ref = useRef<THREE.Mesh>(null!);
+function Model({ modelPath, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: ModelProps) {
+  const ref = useRef<THREE.Group>(null);
   const { scene } = useGLTF(modelPath, true);
   
   useFrame((state) => {
@@ -33,7 +33,7 @@ function Model({ modelPath = '/lovable-uploads/haby_logo_3d.glb', scale = 1, pos
 }
 
 function LogoModel() {
-  const meshRef = useRef<THREE.Mesh>(null!);
+  const meshRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -42,19 +42,30 @@ function LogoModel() {
   });
 
   return (
-    <Float speed={4} rotationIntensity={0.2} floatIntensity={0.5}>
-      <mesh ref={meshRef}>
-        <boxGeometry args={[2, 0.4, 0.1]} />
-        <meshStandardMaterial color="#7E69AB" />
-        <mesh position={[-0.6, 0, 0.06]}>
-          <boxGeometry args={[0.1, 0.6, 0.1]} />
-          <meshStandardMaterial color="#7E69AB" />
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+      <group ref={meshRef}>
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[2, 0.4, 0.1]} />
+          <meshStandardMaterial color="#7E69AB" metalness={0.2} roughness={0.3} />
         </mesh>
-        <mesh position={[0.6, 0, 0.06]}>
+        <mesh position={[-0.6, 0, 0.06]} castShadow>
           <boxGeometry args={[0.1, 0.6, 0.1]} />
-          <meshStandardMaterial color="#7E69AB" />
+          <meshStandardMaterial color="#7E69AB" metalness={0.2} roughness={0.3} />
         </mesh>
-      </mesh>
+        <mesh position={[0.6, 0, 0.06]} castShadow>
+          <boxGeometry args={[0.1, 0.6, 0.1]} />
+          <meshStandardMaterial color="#7E69AB" metalness={0.2} roughness={0.3} />
+        </mesh>
+        <Text
+          position={[0, 0.7, 0]}
+          fontSize={0.3}
+          color="#7E69AB"
+          anchorX="center"
+          anchorY="middle"
+        >
+          HABY
+        </Text>
+      </group>
     </Float>
   );
 }
@@ -68,20 +79,35 @@ interface ThreeDModelProps {
   className?: string;
 }
 
-export default function ThreeDModel({ type = 'logo', modelPath, scale, position, rotation, ...props }: ThreeDModelProps) {
+export default function ThreeDModel({ 
+  type = 'logo', 
+  modelPath = '/lovable-uploads/haby_logo_3d.glb', 
+  scale, 
+  position, 
+  rotation, 
+  className 
+}: ThreeDModelProps) {
   return (
-    <div className={`w-full h-full ${props.className || ''}`} style={{ minHeight: '300px' }}>
-      <Canvas shadows>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={50} />
+    <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
+      <Canvas shadows dpr={[1, 2]}>
+        <color attach="background" args={['#f8f9fa']} />
+        <fog attach="fog" args={['#f8f9fa', 5, 20]} />
+        <ambientLight intensity={0.8} />
+        <directionalLight 
+          position={[5, 5, 5]} 
+          intensity={1} 
+          castShadow 
+          shadow-mapSize-width={1024} 
+          shadow-mapSize-height={1024}
+        />
+        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
         <Environment preset="city" />
         
         {type === 'logo' ? (
           <LogoModel />
         ) : (
           <Model 
-            modelPath={modelPath || '/lovable-uploads/haby_logo_3d.glb'} 
+            modelPath={modelPath} 
             scale={scale} 
             position={position} 
             rotation={rotation} 
@@ -93,7 +119,13 @@ export default function ThreeDModel({ type = 'logo', modelPath, scale, position,
           enablePan={false}
           minPolarAngle={Math.PI / 2 - 0.5}
           maxPolarAngle={Math.PI / 2 + 0.5}
+          autoRotate
+          autoRotateSpeed={1}
         />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
+          <planeGeometry args={[50, 50]} />
+          <shadowMaterial transparent opacity={0.2} />
+        </mesh>
       </Canvas>
     </div>
   );
