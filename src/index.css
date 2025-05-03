@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -120,11 +121,11 @@
   }
   
   .btn-primary {
-    @apply bg-haby-primary text-white hover:bg-haby-secondary transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+    @apply bg-haby-primary text-white hover:bg-haby-secondary transition-all duration-300 px-6 py-3 rounded-md font-medium shadow-md hover:shadow-lg transform hover:translate-y-[-2px];
   }
 
   .btn-secondary {
-    @apply bg-white text-haby-primary border border-haby-primary hover:bg-haby-light transition-colors duration-300 px-6 py-3 rounded-md font-medium;
+    @apply bg-white text-haby-primary border border-haby-primary hover:bg-haby-light transition-all duration-300 px-6 py-3 rounded-md font-medium shadow-sm hover:shadow-md transform hover:translate-y-[-2px];
   }
 
   .section {
@@ -140,5 +141,73 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+}
+
+/* Nuevos estilos para animaciones y efectos visuales */
+@layer components {
+  /* Gradientes */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-haby-primary to-haby-secondary;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-haby-secondary to-haby-accent;
+  }
+
+  .gradient-dark {
+    @apply bg-gradient-to-r from-haby-dark to-haby-primary;
+  }
+
+  .gradient-light {
+    @apply bg-gradient-to-r from-haby-light to-white;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/10 border border-black/20;
+  }
+
+  .glass-card {
+    @apply rounded-xl shadow-lg backdrop-blur-md bg-white/70 border border-white/20;
+  }
+
+  /* Animaciones */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-float {
+    @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,105,171,0.6)];
+  }
+
+  /* Bordes y sombras */
+  .border-glow {
+    @apply border border-haby-primary/50 shadow-[0_0_10px_rgba(126,105,171,0.4)];
+  }
+
+  .shadow-soft {
+    @apply shadow-[0_10px_30px_-15px_rgba(0,0,0,0.2)];
+  }
+
+  .shadow-card {
+    @apply shadow-[0_4px_20px_-5px_rgba(0,0,0,0.15)];
+  }
+
+  /* Efectos de imagen */
+  .image-hover-zoom {
+    @apply overflow-hidden;
+  }
+
+  .image-hover-zoom img {
+    @apply transition-transform duration-500 hover:scale-110;
   }
 }

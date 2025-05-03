@@ -5,8 +5,14 @@ import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 import { CheckCircle, Code, Layout, Server, Smartphone, Globe } from 'lucide-react';
 import ThreeDModel from "@/components/ThreeDModel";
+import usePageTitle from "@/hooks/usePageTitle";
+import AnimatedGradient from "@/components/AnimatedGradient";
+import ImageZoom from "@/components/ImageZoom";
 
 const DesarrolloWeb = () => {
+  // Actualiza el título de la página
+  usePageTitle();
+
   const staggerContainer = {
     hidden: { opacity: 0 },
     show: {
@@ -28,12 +34,32 @@ const DesarrolloWeb = () => {
     }
   };
 
+  // Ejemplos de capturas de proyectos de desarrollo web
+  const projectImages = [
+    {
+      src: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
+      alt: "Proyecto de desarrollo web - Dashboard"
+    },
+    {
+      src: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
+      alt: "Proyecto de desarrollo web - Aplicación"
+    },
+    {
+      src: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
+      alt: "Proyecto de desarrollo web - E-commerce"
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
         {/* Hero */}
-        <section className="bg-gradient-to-r from-haby-dark to-haby-primary text-white py-20 md:py-28">
+        <AnimatedGradient 
+          colors={["#1A1F2C", "#6E59A5", "#7E69AB", "#D946EF"]}
+          className="text-white py-20 md:py-28"
+          duration={15}
+        >
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <motion.div
@@ -41,7 +67,7 @@ const DesarrolloWeb = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7 }}
               >
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">Desarrollo Web Profesional</h1>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Desarrollo Web Profesional</h1>
                 <p className="text-xl text-gray-200 mb-8">
                   Creamos sitios web y aplicaciones web que no solo se ven profesionales sino que también resuelven problemas reales y optimizan tu tiempo.
                 </p>
@@ -66,7 +92,7 @@ const DesarrolloWeb = () => {
               </motion.div>
             </div>
           </div>
-        </section>
+        </AnimatedGradient>
 
         {/* Características */}
         <section className="py-16 md:py-24 bg-white">
@@ -268,6 +294,53 @@ const DesarrolloWeb = () => {
           </div>
         </section>
 
+        {/* Portfolio Showcase */}
+        <AnimatedGradient 
+          className="py-16 bg-gray-50"
+          colors={["#E5DEFF", "#F2FCE2", "#FEF7CD", "#FFDEE2"]}
+          duration={12}
+        >
+          <div className="container mx-auto px-4">
+            <motion.div 
+              className="text-center max-w-3xl mx-auto mb-16"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+                Proyectos Destacados
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                Ejemplos de nuestro trabajo
+              </h2>
+              <p className="text-gray-600">
+                Explora algunos de nuestros proyectos recientes y descubre cómo hemos ayudado a empresas 
+                a transformar su presencia digital.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {projectImages.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  className="rounded-xl overflow-hidden shadow-lg"
+                >
+                  <ImageZoom 
+                    src={image.src} 
+                    alt={image.alt}
+                    className="aspect-video"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </AnimatedGradient>
+
         {/* Tecnologías */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -404,9 +477,27 @@ const DesarrolloWeb = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-20 bg-gray-50">
+        <AnimatedGradient 
+          className="py-16 md:py-20"
+          colors={["#7E69AB", "#D946EF", "#6E59A5", "#1A1F2C"]}
+        >
           <div className="container mx-auto px-4">
-            <div className="bg-gradient-to-r from-haby-primary to-haby-secondary rounded-lg shadow-xl p-8 md:p-12 text-white text-center">
+            <motion.div 
+              className="rounded-lg shadow-xl p-8 md:p-12 text-white text-center backdrop-blur-sm bg-black/30"
+              whileInView={{ 
+                boxShadow: [
+                  "0 10px 15px -3px rgba(126, 105, 171, 0.3)",
+                  "0 15px 25px -5px rgba(126, 105, 171, 0.4)",
+                  "0 10px 15px -3px rgba(126, 105, 171, 0.3)"
+                ]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+              viewport={{ once: true }}
+            >
               <motion.h2 
                 className="text-3xl md:text-4xl font-bold mb-6"
                 initial={{ opacity: 0, y: -20 }}
@@ -432,16 +523,16 @@ const DesarrolloWeb = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.4 }}
               >
-                <Link to="/contacto" className="btn-primary bg-white text-haby-primary hover:bg-gray-100">
+                <Link to="/contacto" className="btn-primary bg-white text-haby-primary hover:bg-gray-100 shadow-lg hover:shadow-xl transition-shadow">
                   Solicitar cotización
                 </Link>
-                <Link to="/portafolio" className="btn-secondary bg-transparent border-white text-white hover:bg-white hover:bg-opacity-10">
+                <Link to="/portafolio" className="btn-secondary bg-transparent border-white text-white hover:bg-white hover:bg-opacity-10 shadow-lg hover:shadow-xl transition-shadow">
                   Ver nuestro portafolio
                 </Link>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </AnimatedGradient>
       </main>
       <Footer />
     </div>

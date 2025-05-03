@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import ImageZoom from './ImageZoom';
 
 const projects = [
   {
@@ -115,10 +116,10 @@ const PortfolioSection = () => {
               >
                 <Card className="h-full overflow-hidden transition-all duration-300 flex flex-col">
                   <div className="aspect-video w-full overflow-hidden">
-                    <img 
+                    <ImageZoom 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full"
                     />
                   </div>
                   <CardHeader className="pb-2">
@@ -133,7 +134,7 @@ const PortfolioSection = () => {
                       Cliente: {project.client}
                     </div>
                   </CardContent>
-                  <CardFooter>
+                  <CardFooter className="flex justify-between items-center">
                     <a 
                       href={project.url} 
                       target="_blank" 
@@ -143,6 +144,13 @@ const PortfolioSection = () => {
                       Ver proyecto 
                       <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </a>
+
+                    <Link 
+                      to={`/portafolio/${index + 1}`}
+                      className="text-sm text-gray-500 hover:text-haby-primary transition-colors"
+                    >
+                      Más detalles
+                    </Link>
                   </CardFooter>
                 </Card>
               </motion.div>
