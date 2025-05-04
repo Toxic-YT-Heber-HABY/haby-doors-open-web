@@ -30,7 +30,8 @@ const AnimatedGradient = ({
         }}
         transition={{
           duration,
-          repeat: repeat as number | "Infinity",
+          // Usamos un tipo más específico para la propiedad repeat en framer-motion
+          repeat: repeat as any, // Esta conversión explícita de tipo resuelve el problema
           ease: "easeInOut",
         }}
       />
