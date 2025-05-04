@@ -30,7 +30,7 @@ const AnimatedGradient = ({
         }}
         transition={{
           duration,
-          repeat,
+          repeat: repeat as number | "Infinity",
           ease: "easeInOut",
         }}
       />
