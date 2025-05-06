@@ -29,6 +29,14 @@ const projects = [
     category: "Proyecto Escolar",
     client: "Proyecto Personal",
     url: "#"
+  },
+  {
+    title: "Progresión 8: Los poderes fácticos y el Estado",
+    description: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
+    image: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
+    category: "Educacional e Informativa",
+    url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
+    client: "Colegio De Estudios y Tecnológicos Del Estado De México"
   }
 ];
 
