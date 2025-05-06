@@ -223,7 +223,12 @@ const DetalleProyecto = () => {
           localStorage.setItem('habyProjects', JSON.stringify(projects));
         }
 
+        console.log("ID buscado:", id);
+        console.log("Proyectos disponibles:", projects.map(p => p.id));
+        
         const foundProject = projects.find(p => p.id === id);
+        console.log("Proyecto encontrado:", foundProject);
+        
         if (foundProject) {
           setProject(foundProject);
           
