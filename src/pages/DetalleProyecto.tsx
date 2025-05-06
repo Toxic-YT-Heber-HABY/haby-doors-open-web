@@ -86,6 +86,23 @@ const DetalleProyecto = () => {
                 "Análisis de rendimiento por alumno"
               ],
               results: "Mejora del 55% en la organización del aula y reducción del 30% en el tiempo dedicado a tareas administrativas por parte de los profesores."
+            },
+            {
+              id: "4",
+              title: "Progresión 8: Los poderes fácticos y el Estado",
+              description: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
+              image: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
+              category: "Educacional e Informativa",
+              url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
+              client: "Colegio De Estudios y Tecnológicos Del Estado De México",
+              features: [
+                "Contenido educativo interactivo",
+                "Recursos visuales explicativos",
+                "Material de estudio estructurado",
+                "Referencias bibliográficas completas",
+                "Ejemplos contextualizados"
+              ],
+              results: "Mejora en la comprensión de conceptos complejos de ciencias sociales y aumento del 30% en el interés de los estudiantes por temas políticos y sociales."
             }
           ];
           localStorage.setItem('habyProjects', JSON.stringify(projects));
@@ -159,7 +176,7 @@ const DetalleProyecto = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              {project.title}
+              {project?.title}
             </motion.h1>
             <motion.div 
               className="flex items-center mb-6"
@@ -168,10 +185,10 @@ const DetalleProyecto = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <span className="text-haby-accent font-medium mr-4">
-                {project.category}
+                {project?.category}
               </span>
               <span className="text-gray-300">
-                Cliente: {project.client}
+                Cliente: {project?.client}
               </span>
             </motion.div>
             <motion.p 
@@ -180,9 +197,9 @@ const DetalleProyecto = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              {project.description}
+              {project?.description}
             </motion.p>
-            {project.url && project.url !== '#' && (
+            {project?.url && project.url !== '#' && (
               <motion.div 
                 className="mt-8"
                 initial={{ opacity: 0 }}
@@ -215,10 +232,10 @@ const DetalleProyecto = () => {
               >
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Acerca del proyecto</h2>
                 <p className="text-gray-700 mb-8">
-                  {project.description}
+                  {project?.description}
                 </p>
 
-                {project.features && project.features.length > 0 && (
+                {project?.features && project.features.length > 0 && (
                   <div className="mb-8">
                     <h3 className="text-xl font-bold text-gray-800 mb-4">Características principales</h3>
                     <ul className="space-y-2">
@@ -238,7 +255,7 @@ const DetalleProyecto = () => {
                   </div>
                 )}
 
-                {project.results && (
+                {project?.results && (
                   <div>
                     <h3 className="text-xl font-bold text-gray-800 mb-4">Resultados</h3>
                     <div className="bg-gray-50 border-l-4 border-haby-primary pl-4 py-3">
@@ -256,8 +273,8 @@ const DetalleProyecto = () => {
               >
                 <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
                   <img 
-                    src={project.image} 
-                    alt={project.title} 
+                    src={project?.image} 
+                    alt={project?.title} 
                     className="w-full h-96 object-cover object-center"
                   />
                 </div>
