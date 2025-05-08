@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
@@ -70,10 +69,12 @@ const SobreNosotros = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1 relative">
                 <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                  {/* Aquí iría una imagen del fundador */}
-                  <div className="w-full h-full flex items-center justify-center bg-haby-light">
-                    <span className="text-haby-primary text-lg font-medium">Heber Zadkiel García Pérez</span>
-                  </div>
+                  {/* Reemplazamos el placeholder con la imagen real del fundador */}
+                  <img 
+                    src="/public/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png" 
+                    alt="Heber Zadkiel García Pérez" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="absolute -bottom-5 -right-5 bg-white p-6 shadow-lg rounded-lg">
                   <p className="text-haby-primary font-bold text-lg">Fundador & Visionario</p>

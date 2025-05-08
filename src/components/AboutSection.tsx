@@ -10,10 +10,12 @@ const AboutSection = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <div className="aspect-square max-w-md bg-gray-100 rounded-lg overflow-hidden">
-                {/* Aquí iría la imagen del fundador, por ahora usamos un placeholder */}
-                <div className="w-full h-full flex items-center justify-center bg-haby-light">
-                  <span className="text-haby-primary text-lg font-medium">Heber Zadkiel García Pérez</span>
-                </div>
+                {/* Reemplazamos el placeholder con la imagen real del fundador */}
+                <img 
+                  src="/public/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png" 
+                  alt="Heber Zadkiel García Pérez" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-5 -right-5 bg-white p-4 shadow-lg rounded-lg max-w-[250px]">
                 <p className="text-haby-primary font-medium">Fundador de HABY</p>
