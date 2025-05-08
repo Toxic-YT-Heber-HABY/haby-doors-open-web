@@ -12,7 +12,7 @@ const AboutSection = () => {
               <div className="aspect-square max-w-md bg-gray-100 rounded-lg overflow-hidden">
                 {/* Reemplazamos el placeholder con la imagen real del fundador */}
                 <img 
-                  src="/public/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png" 
+                  src="/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png" 
                   alt="Heber Zadkiel García Pérez" 
                   className="w-full h-full object-cover"
                 />
