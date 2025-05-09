@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import cross-browser compatibility fixes */
+@import './styles/cross-browser.css';
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -97,7 +100,10 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -105,31 +111,35 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-2xl sm:text-3xl md:text-4xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  img {
+    @apply max-w-full h-auto;
   }
 
   .container {
-    @apply px-4 md:px-6 mx-auto max-w-7xl;
+    @apply px-4 sm:px-5 md:px-6 mx-auto max-w-7xl;
   }
   
   .btn-primary {
-    @apply bg-haby-primary text-white hover:bg-haby-secondary transition-all duration-300 px-6 py-3 rounded-md font-medium shadow-md hover:shadow-lg transform hover:translate-y-[-2px];
+    @apply bg-haby-primary text-white hover:bg-haby-secondary transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium shadow-md hover:shadow-lg transform hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply bg-white text-haby-primary border border-haby-primary hover:bg-haby-light transition-all duration-300 px-6 py-3 rounded-md font-medium shadow-sm hover:shadow-md transform hover:translate-y-[-2px];
+    @apply bg-white text-haby-primary border border-haby-primary hover:bg-haby-light transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium shadow-sm hover:shadow-md transform hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
   .section {
-    @apply py-12 md:py-20;
+    @apply py-10 sm:py-12 md:py-16 lg:py-20;
   }
 
   .animate-fade-in {
@@ -163,20 +173,23 @@
     @apply bg-gradient-to-r from-haby-light to-white;
   }
 
-  /* Glassmorphism */
+  /* Glassmorphism - enhanced for cross-browser compatibility */
   .glass {
     @apply backdrop-blur-md bg-white/10 border border-white/20;
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .glass-dark {
     @apply backdrop-blur-md bg-black/10 border border-black/20;
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .glass-card {
     @apply rounded-xl shadow-lg backdrop-blur-md bg-white/70 border border-white/20;
+    -webkit-backdrop-filter: blur(12px);
   }
 
-  /* Animaciones */
+  /* Animated hover effects - with fallbacks */
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-105;
   }
@@ -189,25 +202,102 @@
     @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,105,171,0.6)];
   }
 
-  /* Bordes y sombras */
+  /* Improved responsive image containers */
+  .responsive-img-container {
+    @apply relative w-full overflow-hidden;
+  }
+
+  .responsive-img {
+    @apply w-full h-full object-cover;
+  }
+
+  /* New animation classes */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Animated button hover effect */
+  .btn-animated {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-animated::after {
+    content: '';
+    @apply absolute inset-0 bg-white/20 scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .btn-animated:hover::after {
+    @apply scale-x-100;
+  }
+  
+  /* Improved borders and shadows with better cross-browser support */
   .border-glow {
-    @apply border border-haby-primary/50 shadow-[0_0_10px_rgba(126,105,171,0.4)];
+    @apply border border-haby-primary/50;
+    box-shadow: 0 0 10px rgba(126,105,171,0.4);
   }
 
   .shadow-soft {
-    @apply shadow-[0_10px_30px_-15px_rgba(0,0,0,0.2)];
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.2);
   }
 
   .shadow-card {
-    @apply shadow-[0_4px_20px_-5px_rgba(0,0,0,0.15)];
+    box-shadow: 0 4px 20px -5px rgba(0,0,0,0.15);
   }
 
-  /* Efectos de imagen */
+  /* Image hover effects */
   .image-hover-zoom {
     @apply overflow-hidden;
   }
 
   .image-hover-zoom img {
     @apply transition-transform duration-500 hover:scale-110;
+  }
+  
+  /* New keyframes */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* Responsive typography system */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Print styles for better document printing */
+@media print {
+  body {
+    font-size: 12pt;
+  }
+  
+  h1 {
+    font-size: 18pt;
+  }
+  
+  h2 {
+    font-size: 16pt;
   }
 }
