@@ -89,8 +89,9 @@ const SobreNosotros = () => {
                     }
                   }}
                 >
-                  {["HABY nació de la visión de Heber Zadkiel García Pérez, quien identificó una necesidad fundamental en el mercado: soluciones web que realmente resolvieran problemas cotidianos y ayudaran a las personas a optimizar su tiempo.",
-                    "Desde su fundación, HABY ha estado impulsada por la filosofía de "abrir puertas" a nuevas posibilidades. Creemos firmemente que la tecnología debe ser una herramienta de liberación que permita a las personas enfocarse en lo que realmente importa, dejando atrás las tareas tediosas y repetitivas.",
+                  {[
+                    "HABY nació de la visión de Heber Zadkiel García Pérez, quien identificó una necesidad fundamental en el mercado: soluciones web que realmente resolvieran problemas cotidianos y ayudaran a las personas a optimizar su tiempo.",
+                    "Desde su fundación, HABY ha estado impulsada por la filosofía de 'abrir puertas' a nuevas posibilidades. Creemos firmemente que la tecnología debe ser una herramienta de liberación que permita a las personas enfocarse en lo que realmente importa, dejando atrás las tareas tediosas y repetitivas.",
                     "Nuestra trayectoria ha estado marcada por un compromiso inquebrantable con la innovación, la eficiencia y la creación de soluciones personalizadas que realmente transformen la forma en que nuestros clientes gestionan su tiempo día a día."
                   ].map((paragraph, index) => (
                     <motion.p 
@@ -153,7 +154,8 @@ const SobreNosotros = () => {
                     }
                   }}
                 >
-                  {["Heber Zadkiel García Pérez es el visionario detrás de HABY. Con una sólida formación en desarrollo web y una pasión por resolver problemas, Heber fundó HABY con la misión de crear soluciones web que realmente marcaran una diferencia en la vida cotidiana de las personas.",
+                  {[
+                    "Heber Zadkiel García Pérez es el visionario detrás de HABY. Con una sólida formación en desarrollo web y una pasión por resolver problemas, Heber fundó HABY con la misión de crear soluciones web que realmente marcaran una diferencia en la vida cotidiana de las personas.",
                     "Su enfoque único combina habilidades técnicas avanzadas con una profunda comprensión de las necesidades humanas, lo que le permite diseñar soluciones que no solo son técnicamente sólidas, sino también intuitivas y centradas en el usuario.",
                     "La filosofía de Heber, que ha permeado toda la cultura de HABY, se basa en la idea de que la tecnología debe abrir puertas a nuevas posibilidades, liberando tiempo y recursos que pueden ser dedicados a actividades más significativas, ya sean profesionales o personales."
                   ].map((paragraph, index) => (
@@ -291,8 +293,8 @@ const SobreNosotros = () => {
                   }}
                 >
                   {[
-                    ""HABY OPEN THE DOORS" es más que un lema, es la esencia de nuestra filosofía. Representa nuestra misión de abrir puertas a nuevas posibilidades a través de soluciones web innovadoras.",
-                    "Cada solución que desarrollamos está diseñada para "abrir puertas" – para eliminar obstáculos, automatizar tareas repetitivas y liberar tiempo valioso que puede ser invertido en actividades más significativas, ya sean profesionales o personales.",
+                    "HABY OPEN THE DOORS es más que un lema, es la esencia de nuestra filosofía. Representa nuestra misión de abrir puertas a nuevas posibilidades a través de soluciones web innovadoras.",
+                    "Cada solución que desarrollamos está diseñada para 'abrir puertas' – para eliminar obstáculos, automatizar tareas repetitivas y liberar tiempo valioso que puede ser invertido en actividades más significativas, ya sean profesionales o personales.",
                     "Creemos firmemente que la tecnología debe ser una herramienta liberadora que expanda horizontes y cree nuevas oportunidades, no una complicación adicional en nuestras vidas ya ocupadas."
                   ].map((paragraph, index) => (
                     <motion.p 
