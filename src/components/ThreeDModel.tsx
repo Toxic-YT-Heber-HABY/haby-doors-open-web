@@ -85,7 +85,7 @@ function CustomEnvironment() {
 }
 
 interface ThreeDModelProps {
-  type?: 'logo' | 'custom';
+  type?: 'logo' | 'door' | 'text';
   modelPath?: string;
   scale?: number;
   position?: [number, number, number];
@@ -108,7 +108,7 @@ export default function ThreeDModel({
   if (capabilities.preferredRenderMode === 'static' || capabilities.isMobile) {
     return (
       <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
-        <MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />
+        <MobileOptimizedVisual type={type} />
       </div>
     );
   }
@@ -126,7 +126,7 @@ export default function ThreeDModel({
   if (capabilities.preferredRenderMode === '3d') {
     return (
       <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
-        <Suspense fallback={<MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />}>
+        <Suspense fallback={<MobileOptimizedVisual type={type} />}>
           <Canvas 
             shadows 
             dpr={[1, Math.min(2, capabilities.performanceLevel === 'high' ? 2 : 1.5)]}
@@ -171,7 +171,7 @@ export default function ThreeDModel({
   // Fallback por defecto
   return (
     <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
-      <MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />
+      <MobileOptimizedVisual type={type} />
     </div>
   );
 }
