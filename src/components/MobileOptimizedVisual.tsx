@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import ImageOptimized from "./ImageOptimized";
 
 interface MobileOptimizedVisualProps {
-  type?: "logo" | "door" | "text";
+  type?: "logo" | "door" | "text" | "hero";
   animate?: boolean;
   className?: string;
 }
@@ -38,6 +38,13 @@ const MobileOptimizedVisual = ({
           alt: "HABY Text Logo",
           gradientFrom: "haby-accent/30",
           gradientTo: "haby-secondary/20"
+        };
+      case "hero":
+        return {
+          imageSrc: "/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png",
+          alt: "HABY Hero Logo",
+          gradientFrom: "haby-primary/35",
+          gradientTo: "haby-accent/25"
         };
       case "logo":
       default:
@@ -106,7 +113,6 @@ const MobileOptimizedVisual = ({
             src={config.imageSrc}
             alt={config.alt}
             className="w-full h-full object-contain drop-shadow-2xl"
-            priority={type === "logo"}
           />
         </motion.div>
 

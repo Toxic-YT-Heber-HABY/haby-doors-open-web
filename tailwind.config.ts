@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -72,7 +73,8 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Poppins', 'sans-serif'],
-				heading: ['Montserrat', 'sans-serif']
+				heading: ['Montserrat', 'sans-serif'],
+				poppins: ['Poppins', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -83,7 +83,7 @@
   }
   
   body {
-    @apply bg-background text-foreground font-poppins;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
     /* Mejorar renderizado de fuentes */
     -webkit-font-smoothing: antialiased;

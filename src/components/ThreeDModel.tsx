@@ -85,7 +85,7 @@ function CustomEnvironment() {
 }
 
 interface ThreeDModelProps {
-  type?: 'logo' | 'door' | 'text';
+  type?: 'logo' | 'door' | 'text' | 'hero';
   modelPath?: string;
   scale?: number;
   position?: [number, number, number];
@@ -139,7 +139,7 @@ export default function ThreeDModel({
             
             <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
             
-            {type === 'logo' ? (
+            {(type === 'logo' || type === 'hero') ? (
               <LogoModel />
             ) : (
               <Model 
