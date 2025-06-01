@@ -1,8 +1,19 @@
 
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { StrictMode, Suspense } from 'react';
 import App from './App.tsx';
 import './index.css';
+
+// TypeScript interfaces for ErrorBoundary
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error?: Error;
+}
 
 /**
  * ErrorBoundary Component
@@ -10,18 +21,18 @@ import './index.css';
  * Catches JavaScript errors in child components and displays a fallback UI
  * instead of crashing the entire application.
  */
-class ErrorBoundary extends React.Component {
-  constructor(props) {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error information for debugging
     console.error('Error caught by ErrorBoundary:', error, errorInfo);
   }
