@@ -1,8 +1,11 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerspectiveCamera, Text, Float } from '@react-three/drei';
 import * as THREE from 'three';
+import { useDeviceCapabilities } from '@/hooks/useDeviceCapabilities';
+import MobileOptimizedVisual from './MobileOptimizedVisual';
+import ThreeDModelFallback from './ThreeDModelFallback';
 
 interface ModelProps {
   modelPath: string;
@@ -70,7 +73,6 @@ function LogoModel() {
   );
 }
 
-// Custom environment to replace the HDR environment
 function CustomEnvironment() {
   return (
     <>
@@ -99,41 +101,77 @@ export default function ThreeDModel({
   rotation, 
   className 
 }: ThreeDModelProps) {
+  const capabilities = useDeviceCapabilities();
+  const [renderError, setRenderError] = useState(false);
+
+  // Si el dispositivo no puede manejar 3D o es móvil, usar versión optimizada
+  if (capabilities.preferredRenderMode === 'static' || capabilities.isMobile) {
+    return (
+      <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
+        <MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />
+      </div>
+    );
+  }
+
+  // Si hay un error de renderizado, usar fallback
+  if (renderError || capabilities.preferredRenderMode === 'fallback') {
+    return (
+      <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
+        <ThreeDModelFallback type={type} />
+      </div>
+    );
+  }
+
+  // Solo renderizar 3D real en dispositivos de alta capacidad
+  if (capabilities.preferredRenderMode === '3d') {
+    return (
+      <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
+        <Suspense fallback={<MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />}>
+          <Canvas 
+            shadows 
+            dpr={[1, Math.min(2, capabilities.performanceLevel === 'high' ? 2 : 1.5)]}
+            onError={() => setRenderError(true)}
+          >
+            <color attach="background" args={['#f8f9fa']} />
+            <fog attach="fog" args={['#f8f9fa', 5, 20]} />
+            
+            <CustomEnvironment />
+            
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
+            
+            {type === 'logo' ? (
+              <LogoModel />
+            ) : (
+              <Model 
+                modelPath={modelPath} 
+                scale={scale} 
+                position={position} 
+                rotation={rotation} 
+              />
+            )}
+            
+            <OrbitControls 
+              enableZoom={false}
+              enablePan={false}
+              minPolarAngle={Math.PI / 2 - 0.5}
+              maxPolarAngle={Math.PI / 2 + 0.5}
+              autoRotate
+              autoRotateSpeed={1}
+            />
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
+              <planeGeometry args={[50, 50]} />
+              <shadowMaterial transparent opacity={0.2} />
+            </mesh>
+          </Canvas>
+        </Suspense>
+      </div>
+    );
+  }
+
+  // Fallback por defecto
   return (
     <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
-      <Canvas shadows dpr={[1, 2]}>
-        <color attach="background" args={['#f8f9fa']} />
-        <fog attach="fog" args={['#f8f9fa', 5, 20]} />
-        
-        {/* Replaced Environment component with CustomEnvironment */}
-        <CustomEnvironment />
-        
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
-        
-        {type === 'logo' ? (
-          <LogoModel />
-        ) : (
-          <Model 
-            modelPath={modelPath} 
-            scale={scale} 
-            position={position} 
-            rotation={rotation} 
-          />
-        )}
-        
-        <OrbitControls 
-          enableZoom={false}
-          enablePan={false}
-          minPolarAngle={Math.PI / 2 - 0.5}
-          maxPolarAngle={Math.PI / 2 + 0.5}
-          autoRotate
-          autoRotateSpeed={1}
-        />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
-          <planeGeometry args={[50, 50]} />
-          <shadowMaterial transparent opacity={0.2} />
-        </mesh>
-      </Canvas>
+      <MobileOptimizedVisual type={type === 'logo' ? 'logo' : 'hero'} />
     </div>
   );
 }

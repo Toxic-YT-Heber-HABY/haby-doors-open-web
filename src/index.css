@@ -1,351 +1,329 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import './styles/cross-browser.css';
+@import './styles/mobile-optimizations.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import cross-browser compatibility fixes */
-@import './styles/cross-browser.css';
-
+/* Variables CSS optimizadas para mejor rendimiento */
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 260 30% 54%; /* HABY primary purple */
+    --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 265 30% 50%; /* HABY secondary purple */
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 300 84% 60%; /* HABY accent magenta */
-    --accent-foreground: 210 40% 98%;
-
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 260 30% 54%;
-
+    --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Colores personalizados de HABY optimizados */
+    --haby-primary: #7E69AB;
+    --haby-secondary: #6E59A5;
+    --haby-accent: #D946EF;
+    --haby-light: #E5DEFF;
+    --haby-dark: #2A1065;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
+/* Reset y configuración base optimizada */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
-
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /* Optimización para móviles */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
   body {
-    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    @apply bg-background text-foreground font-poppins;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Mejorar renderizado de fuentes */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Optimización para scroll en móviles */
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
-  }
-
-  h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl;
-  }
-
-  h3 {
-    @apply text-xl sm:text-2xl md:text-3xl;
-  }
-
+  /* Optimizaciones para imágenes */
   img {
-    @apply max-w-full h-auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* Mejorar carga de imágenes */
+    loading: lazy;
+    decoding: async;
   }
 
-  .container {
-    @apply px-4 sm:px-5 md:px-6 mx-auto max-w-7xl;
+  /* Optimizaciones para enlaces */
+  a {
+    color: inherit;
+    text-decoration: none;
+    /* Mejorar área táctil */
+    touch-action: manipulation;
   }
-  
+
+  /* Optimizaciones para formularios en móviles */
+  input, textarea, select {
+    /* Prevenir zoom en iOS */
+    font-size: 16px;
+    background-color: transparent;
+  }
+
+  /* Mejorar enfoque para accesibilidad */
+  :focus-visible {
+    outline: 2px solid var(--haby-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Componentes base optimizados */
+@layer components {
+  /* Botones principales con mejor accesibilidad */
   .btn-primary {
-    @apply bg-haby-primary text-white hover:bg-haby-secondary transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium shadow-md hover:shadow-lg transform hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+           transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50
+           px-6 py-3 bg-haby-primary text-white hover:bg-haby-secondary active:scale-95;
+    min-height: 44px; /* Área táctil mínima */
+    touch-action: manipulation;
   }
 
   .btn-secondary {
-    @apply bg-white text-haby-primary border border-haby-primary hover:bg-haby-light transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium shadow-sm hover:shadow-md transform hover:translate-y-[-2px] disabled:opacity-70 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+           transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50
+           px-6 py-3 border border-haby-primary text-haby-primary hover:bg-haby-light active:scale-95;
+    min-height: 44px;
+    touch-action: manipulation;
   }
 
-  .section {
-    @apply py-10 sm:py-12 md:py-16 lg:py-20;
+  /* Contenedor principal optimizado */
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+    width: 100%;
   }
 
-  .animate-fade-in {
-    @apply opacity-0 translate-y-4 animate-[fade-in_0.6s_ease-out_forwards];
-  }
-
-  @keyframes fade-in {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* Configuración global para animaciones más suaves */
-* {
-  @apply transition-colors duration-300 ease-in-out;
-}
-
-/* Soporte para reducción de movimiento para accesibilidad */
-.reduce-animations *,
-.reduce-animations *::before,
-.reduce-animations *::after,
-@media (prefers-reduced-motion) {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-  scroll-behavior: auto !important;
-}
-
-/* Nuevos estilos para animaciones y efectos visuales */
-@layer components {
-  /* Gradientes */
-  .gradient-primary {
-    @apply bg-gradient-to-r from-haby-primary to-haby-secondary;
-  }
-
-  .gradient-accent {
-    @apply bg-gradient-to-r from-haby-secondary to-haby-accent;
-  }
-
-  .gradient-dark {
-    @apply bg-gradient-to-r from-haby-dark to-haby-primary;
-  }
-
-  .gradient-light {
-    @apply bg-gradient-to-r from-haby-light to-white;
-  }
-
-  /* Glassmorphism - enhanced for cross-browser compatibility */
-  .glass {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .glass-dark {
-    @apply backdrop-blur-md bg-black/10 border border-black/20;
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .glass-card {
-    @apply rounded-xl shadow-lg backdrop-blur-md bg-white/70 border border-white/20;
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  /* Animated hover effects - with fallbacks */
+  /* Efectos hover optimizados para dispositivos táctiles */
   .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-transform duration-200;
+  }
+  
+  @media (hover: hover) {
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
   }
 
   .hover-float {
-    @apply transition-transform duration-300 hover:-translate-y-2;
-  }
-
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,105,171,0.6)];
-  }
-
-  /* Improved responsive image containers */
-  .responsive-img-container {
-    @apply relative w-full overflow-hidden;
-  }
-
-  .responsive-img {
-    @apply w-full h-full object-cover;
-  }
-
-  /* New animation classes */
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  /* Animated button hover effect */
-  .btn-animated {
-    @apply relative overflow-hidden;
-  }
-
-  .btn-animated::after {
-    content: '';
-    @apply absolute inset-0 bg-white/20 scale-x-0 origin-left transition-transform duration-300;
-  }
-
-  .btn-animated:hover::after {
-    @apply scale-x-100;
+    @apply transition-transform duration-300;
   }
   
-  /* Improved borders and shadows with better cross-browser support */
-  .border-glow {
-    @apply border border-haby-primary/50;
-    box-shadow: 0 0 10px rgba(126,105,171,0.4);
-  }
-
-  .shadow-soft {
-    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.2);
-  }
-
-  .shadow-card {
-    box-shadow: 0 4px 20px -5px rgba(0,0,0,0.15);
-  }
-
-  /* Image hover effects */
-  .image-hover-zoom {
-    @apply overflow-hidden;
-  }
-
-  .image-hover-zoom img {
-    @apply transition-transform duration-500 hover:scale-110;
-  }
-  
-  /* New keyframes */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
+  @media (hover: hover) {
+    .hover-float:hover {
+      transform: translateY(-4px);
     }
   }
 
-  /* Nuevas animaciones optimizadas para rendimiento */
-  .animate-smooth-entrance {
-    @apply opacity-0 translate-y-4;
-    animation: smooth-entrance 0.6s ease-out forwards;
+  /* Animaciones optimizadas para rendimiento */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
   }
 
-  @keyframes smooth-entrance {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
   }
 
-  /* Animaciones optimizadas para dispositivos móviles */
-  @media (max-width: 768px) {
-    .animate-pulse-slow {
-      animation-duration: 4s; /* Más lento en móviles para ahorrar batería */
-    }
-    
-    .hover-scale, .hover-float {
-      @apply transform-none; /* Desactivar transformaciones en móviles */
-    }
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
   }
-  
-  /* Mejoras para accesibilidad en elementos interactivos */
-  .interactive-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-haby-primary focus:ring-opacity-50;
+
+  /* Glass effect optimizado */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  
-  .interactive-element {
-    @apply interactive-focus cursor-pointer;
+
+  /* Solo aplicar glass effect en dispositivos que lo soporten */
+  @supports not (backdrop-filter: blur(10px)) {
+    .glass {
+      background: rgba(255, 255, 255, 0.9);
+    }
   }
 }
 
-/* Responsive typography system */
-@media (max-width: 640px) {
-  html {
-    font-size: 14px;
+/* Utilidades personalizadas */
+@layer utilities {
+  /* Colores personalizados de HABY */
+  .text-haby-primary { color: var(--haby-primary); }
+  .text-haby-secondary { color: var(--haby-secondary); }
+  .text-haby-accent { color: var(--haby-accent); }
+  .text-haby-light { color: var(--haby-light); }
+  .text-haby-dark { color: var(--haby-dark); }
+
+  .bg-haby-primary { background-color: var(--haby-primary); }
+  .bg-haby-secondary { background-color: var(--haby-secondary); }
+  .bg-haby-accent { background-color: var(--haby-accent); }
+  .bg-haby-light { background-color: var(--haby-light); }
+  .bg-haby-dark { background-color: var(--haby-dark); }
+
+  .border-haby-primary { border-color: var(--haby-primary); }
+  .border-haby-accent { border-color: var(--haby-accent); }
+
+  /* Utilidades de espaciado responsivo */
+  .space-y-responsive > * + * {
+    margin-top: clamp(0.5rem, 2vw, 2rem);
+  }
+
+  .gap-responsive {
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Utilidades para safe areas en dispositivos con notch */
+  .pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }
+  .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  .pl-safe { padding-left: max(1rem, env(safe-area-inset-left)); }
+  .pr-safe { padding-right: max(1rem, env(safe-area-inset-right)); }
+
+  /* Utilidad para ocultar elementos en reducción de movimiento */
+  .motion-reduce-hidden {
+    @media (prefers-reduced-motion: reduce) {
+      display: none !important;
+    }
+  }
+
+  /* Optimización para scroll horizontal */
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-snap-center {
+    scroll-snap-align: center;
   }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
-  html {
-    font-size: 15px;
+/* Animaciones optimizadas con will-change para mejor rendimiento */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (min-width: 1025px) {
-  html {
-    font-size: 16px;
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* Print styles for better document printing */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optimizaciones específicas para rendimiento */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/* Print styles optimizados */
 @media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
   body {
     font-size: 12pt;
+    line-height: 1.5;
   }
   
-  h1 {
-    font-size: 18pt;
-  }
-  
-  h2 {
-    font-size: 16pt;
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 }
