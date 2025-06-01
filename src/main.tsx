@@ -1,4 +1,15 @@
 
+/**
+ * Punto de entrada principal de la aplicación
+ * 
+ * Este archivo configura el renderizado inicial de la aplicación React,
+ * incluyendo:
+ * - Manejo de errores con ErrorBoundary
+ * - Suspense para carga lazy
+ * - Configuraciones de accesibilidad
+ * - Compatibilidad cross-browser
+ */
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { StrictMode, Suspense } from 'react';
@@ -65,8 +76,15 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 // Loading component for Suspense fallback
 const Loading = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse-slow text-haby-primary">
-      Cargando HABY...
+    <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
+      <div className="w-16 h-16 mb-4">
+        <img 
+          src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
+          alt="HABY Logo"
+          className="w-full h-full" 
+        />
+      </div>
+      <p className="text-lg font-medium">Cargando HABY...</p>
     </div>
   </div>
 );
@@ -77,6 +95,9 @@ const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error('Failed to find the root element');
 }
+
+// Establecer atributos de accesibilidad en el documento
+document.documentElement.lang = 'es';
 
 // Create root and render app with error handling
 const root = createRoot(rootElement);
@@ -90,3 +111,44 @@ root.render(
     </ErrorBoundary>
   </StrictMode>
 );
+
+// Detectar navegadores obsoletos y mostrar advertencia si es necesario
+const isIE = /*@cc_on!@*/false || !!(document as any).documentMode;
+const isEdgeLegacy = !isIE && !!(window as any).StyleMedia;
+
+if (isIE || isEdgeLegacy) {
+  console.warn('Estás usando un navegador obsoleto. Algunas funcionalidades pueden no estar disponibles.');
+  
+  const showBrowserWarning = () => {
+    const warningDiv = document.createElement('div');
+    warningDiv.style.position = 'fixed';
+    warningDiv.style.top = '0';
+    warningDiv.style.left = '0';
+    warningDiv.style.right = '0';
+    warningDiv.style.backgroundColor = '#fff3cd';
+    warningDiv.style.color = '#664d03';
+    warningDiv.style.padding = '12px';
+    warningDiv.style.textAlign = 'center';
+    warningDiv.style.zIndex = '9999';
+    warningDiv.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    
+    warningDiv.innerHTML = `
+      <p style="margin: 0; font-family: sans-serif;">
+        Estás usando un navegador obsoleto. Para una mejor experiencia, 
+        te recomendamos actualizar tu navegador.
+        <button id="dismiss-warning" style="background: none; border: none; text-decoration: underline; cursor: pointer; color: #0d6efd; margin-left: 10px;">
+          Cerrar
+        </button>
+      </p>
+    `;
+    
+    document.body.prepend(warningDiv);
+    
+    document.getElementById('dismiss-warning')?.addEventListener('click', () => {
+      warningDiv.style.display = 'none';
+    });
+  };
+  
+  // Mostrar advertencia después de que el sitio haya cargado
+  window.addEventListener('load', showBrowserWarning);
+}
