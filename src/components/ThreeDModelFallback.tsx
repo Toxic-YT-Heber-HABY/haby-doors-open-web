@@ -6,14 +6,14 @@
  * o tienen problemas con Three.js. Ofrece una representación estática pero visualmente
  * similar del modelo 3D.
  * 
- * @param {string} type - Tipo de modelo (logo, door, etc.)
+ * @param {string} type - Tipo de modelo (logo, door, text, hero)
  * @param {string} className - Clases CSS adicionales
  */
 import { motion } from "framer-motion";
 import ImageOptimized from "./ImageOptimized";
 
 interface ThreeDModelFallbackProps {
-  type?: "logo" | "door" | "text";
+  type?: "logo" | "door" | "text" | "hero";
   className?: string;
 }
 
@@ -27,6 +27,8 @@ const ThreeDModelFallback = ({
       case "door":
         return "/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png";
       case "text":
+        return "/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png";
+      case "hero":
         return "/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png";
       case "logo":
       default:
