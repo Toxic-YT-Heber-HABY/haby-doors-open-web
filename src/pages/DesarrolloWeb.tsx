@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from 'framer-motion';
@@ -54,45 +53,195 @@ const DesarrolloWeb = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero */}
-        <AnimatedGradient 
-          colors={["#1A1F2C", "#6E59A5", "#7E69AB", "#D946EF"]}
-          className="text-white py-20 md:py-28"
-          duration={15}
-        >
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        {/* Hero Section Mejorado */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <AnimatedGradient 
+            colors={["#1A1F2C", "#6E59A5", "#7E69AB", "#D946EF", "#E5DEFF"]}
+            className="absolute inset-0"
+            duration={20}
+          />
+          
+          {/* Elementos decorativos de fondo */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-32 right-16 w-48 h-48 bg-haby-accent rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-haby-light rounded-full blur-2xl animate-pulse delay-500"></div>
+          </div>
+
+          {/* Contenido principal */}
+          <div className="relative z-10 container mx-auto px-4 py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                className="text-center lg:text-left"
+                initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Desarrollo Web Profesional</h1>
-                <p className="text-xl text-gray-200 mb-8">
-                  Creamos sitios web y aplicaciones web que no solo se ven profesionales sino que también resuelven problemas reales y optimizan tu tiempo.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link to="/contacto" className="btn-primary bg-white text-haby-primary hover:bg-gray-100">
-                    Solicitar cotización
+                {/* Badge mejorado */}
+                <motion.div 
+                  className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm font-medium mb-6"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                  Desarrollo Web Profesional
+                </motion.div>
+
+                {/* Título principal mejorado */}
+                <motion.h1 
+                  className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                  Creamos{" "}
+                  <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent">
+                    experiencias web
+                  </span>{" "}
+                  extraordinarias
+                </motion.h1>
+
+                {/* Descripción mejorada */}
+                <motion.p 
+                  className="text-xl text-gray-200 mb-8 max-w-xl leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  Transformamos tus ideas en sitios web y aplicaciones que no solo impresionan visualmente, 
+                  sino que impulsan tu negocio hacia el éxito.
+                </motion.p>
+
+                {/* Botones mejorados */}
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                >
+                  <Link 
+                    to="/contacto" 
+                    className="group relative overflow-hidden bg-white text-haby-primary px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-gray-100 hover:scale-105 shadow-xl hover:shadow-2xl"
+                  >
+                    <span className="relative z-10">Comenzar Proyecto</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-haby-accent to-haby-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </Link>
-                  <Link to="/portafolio" className="btn-secondary">
-                    Ver nuestro portafolio
+                  <Link 
+                    to="/portafolio" 
+                    className="group bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-haby-primary hover:scale-105 shadow-xl hover:shadow-2xl"
+                  >
+                    Ver Portafolio
                   </Link>
-                </div>
+                </motion.div>
+
+                {/* Estadísticas rápidas */}
+                <motion.div 
+                  className="flex flex-wrap justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-white/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.9 }}
+                >
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">50+</div>
+                    <div className="text-sm text-gray-300">Proyectos</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">98%</div>
+                    <div className="text-sm text-gray-300">Satisfacción</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">24/7</div>
+                    <div className="text-sm text-gray-300">Soporte</div>
+                  </div>
+                </motion.div>
               </motion.div>
+
+              {/* Sección visual mejorada */}
               <motion.div
-                className="hidden lg:block"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                className="relative"
+                initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="h-80 relative">
-                  <ThreeDModel type="logo" />
+                <div className="relative h-96 lg:h-[500px]">
+                  {/* Círculos decorativos animados */}
+                  <motion.div 
+                    className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-haby-accent/30 to-transparent rounded-full blur-xl"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-white/20 to-transparent rounded-full blur-xl"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.2, 0.5, 0.2]
+                    }}
+                    transition={{ 
+                      duration: 5, 
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+                  
+                  {/* Modelo 3D con marco mejorado */}
+                  <div className="relative w-full h-full bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+                    <ThreeDModel type="hero" />
+                    
+                    {/* Efecto de brillo */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+
+                  {/* Elementos flotantes */}
+                  <motion.div 
+                    className="absolute -top-6 left-1/4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <Code className="w-4 h-4 text-haby-primary" />
+                      <span className="text-sm font-semibold text-gray-800">React + TypeScript</span>
+                    </div>
+                  </motion.div>
+
+                  <motion.div 
+                    className="absolute -bottom-6 right-1/4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <Smartphone className="w-4 h-4 text-haby-accent" />
+                      <span className="text-sm font-semibold text-gray-800">Responsive Design</span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
           </div>
-        </AnimatedGradient>
+
+          {/* Scroll indicator */}
+          <motion.div 
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="flex flex-col items-center space-y-2">
+              <span className="text-sm opacity-70">Descubre más</span>
+              <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+                <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
 
         {/* Características */}
         <section className="py-16 md:py-24 bg-white">
