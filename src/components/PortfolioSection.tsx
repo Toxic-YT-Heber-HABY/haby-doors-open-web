@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Star, Calendar, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ImageZoom from './ImageZoom';
@@ -13,7 +13,9 @@ const projects = [
     image: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
     category: "Productividad",
     url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
-    client: "Perla Itzel Rosales Flores"
+    client: "Perla Itzel Rosales Flores",
+    date: "2024",
+    featured: true
   },
   {
     id: "2",
@@ -22,7 +24,9 @@ const projects = [
     image: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
     category: "Educación",
     url: "https://prep-score-tracker.lovable.app",
-    client: "Prof. Martha Norma Ramírez Albarrán"
+    client: "Prof. Martha Norma Ramírez Albarrán",
+    date: "2024",
+    featured: true
   },
   {
     id: "3",
@@ -31,7 +35,8 @@ const projects = [
     image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
     category: "Proyecto Escolar",
     client: "Proyecto Personal",
-    url: "#"
+    url: "#",
+    date: "2024"
   },
   {
     id: "4",
@@ -40,7 +45,8 @@ const projects = [
     image: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
     category: "Educacional e Informativa",
     url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
-    client: "Colegio De Estudios y Tecnológicos Del Estado De México"
+    client: "Colegio De Estudios y Tecnológicos Del Estado De México",
+    date: "2024"
   }
 ];
 
@@ -50,118 +56,132 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.15,
+      delayChildren: 0.1
     }
   }
 };
 
 const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
       type: "spring",
       stiffness: 100,
-      damping: 10
-    }
-  }
-};
-
-// Variantes para el efecto hover
-const cardHoverVariants = {
-  initial: { 
-    scale: 1,
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
-  },
-  hover: { 
-    scale: 1.05, 
-    boxShadow: "0 10px 25px rgba(126, 105, 171, 0.3)",
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20
+      damping: 12
     }
   }
 };
 
 const PortfolioSection = () => {
   return (
-    <section className="section bg-white py-20">
-      <div className="container mx-auto">
+    <section className="py-20 lg:py-32 bg-gradient-to-br from-white via-gray-50 to-haby-light/30 relative overflow-hidden">
+      {/* Elementos decorativos de fondo */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-32 left-10 w-72 h-72 bg-haby-accent/20 rounded-full mix-blend-multiply filter blur-xl"></div>
+        <div className="absolute bottom-32 right-10 w-72 h-72 bg-haby-primary/20 rounded-full mix-blend-multiply filter blur-xl"></div>
+      </div>
+
+      <div className="container mx-auto relative z-10">
         <motion.div 
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: -20 }}
+          className="text-center max-w-4xl mx-auto mb-20"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-haby-primary to-haby-accent text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+            <Star className="w-4 h-4" />
             Nuestro Portafolio
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Proyectos que abren puertas
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+            Proyectos que{' '}
+            <span className="bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">
+              abren puertas
+            </span>
           </h2>
-          <p className="text-gray-600">
+          <p className="text-xl text-gray-600 leading-relaxed">
             Descubre cómo hemos ayudado a nuestros clientes a solucionar problemas cotidianos 
-            y optimizar su tiempo a través de soluciones web personalizadas.
+            y optimizar su tiempo a través de soluciones web personalizadas e innovadoras.
           </p>
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <motion.div 
               key={project.id} 
               variants={itemVariants}
+              className={index < 2 ? "lg:col-span-1" : "lg:col-span-1"}
             >
               <motion.div
-                className="h-full"
-                initial="initial"
-                whileHover="hover"
-                variants={cardHoverVariants}
+                className="h-full group cursor-pointer"
+                whileHover={{ y: -12 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <Card className="h-full overflow-hidden transition-all duration-300 flex flex-col">
-                  <div className="aspect-video w-full overflow-hidden">
+                <Card className="h-full overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:bg-white">
+                  <div className="relative aspect-video w-full overflow-hidden">
                     <ImageZoom 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full"
+                      className="w-full h-full transition-transform duration-700 group-hover:scale-110"
                     />
+                    {project.featured && (
+                      <div className="absolute top-4 left-4 bg-gradient-to-r from-haby-accent to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        ⭐ Destacado
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <CardHeader className="pb-2">
-                    <div className="text-sm text-haby-primary font-medium">{project.category}</div>
-                    <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-haby-primary transition-colors">
+                  
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-haby-primary bg-haby-light px-3 py-1 rounded-full">
+                        {project.category}
+                      </span>
+                      <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <Calendar className="w-3 h-3" />
+                        {project.date}
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-haby-primary transition-colors leading-tight">
                       {project.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="pb-2 flex-grow">
-                    <CardDescription className="text-gray-600">{project.description}</CardDescription>
-                    <div className="text-sm text-gray-500 mt-3">
-                      Cliente: {project.client}
+                  
+                  <CardContent className="pb-4 flex-grow">
+                    <CardDescription className="text-gray-600 leading-relaxed mb-4">
+                      {project.description}
+                    </CardDescription>
+                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <User className="w-4 h-4" />
+                      <span className="font-medium">Cliente:</span> {project.client}
                     </div>
                   </CardContent>
-                  <CardFooter className="flex justify-between items-center">
+                  
+                  <CardFooter className="flex justify-between items-center pt-4 border-t border-gray-100">
                     <a 
                       href={project.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-haby-primary hover:text-haby-secondary font-medium inline-flex items-center group"
+                      className="inline-flex items-center gap-2 text-haby-primary hover:text-haby-secondary font-semibold transition-all duration-300 group-hover:translate-x-1"
                     >
                       Ver proyecto 
-                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ExternalLink className="w-4 h-4 transition-transform group-hover:scale-110" />
                     </a>
 
                     <Link 
                       to={`/portafolio/${project.id}`}
-                      className="text-sm text-gray-500 hover:text-haby-primary transition-colors"
+                      className="text-sm text-gray-500 hover:text-haby-primary transition-colors font-medium"
                     >
-                      Más detalles
+                      Más detalles →
                     </Link>
                   </CardFooter>
                 </Card>
@@ -171,14 +191,18 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <Link to="/portafolio" className="btn-primary">
+          <Link 
+            to="/portafolio" 
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-haby-primary to-haby-secondary text-white px-8 py-4 rounded-full font-bold hover:shadow-lg hover:shadow-haby-primary/25 transition-all duration-300 transform hover:scale-105"
+          >
             Ver todos los proyectos
+            <Star className="w-5 h-5" />
           </Link>
         </motion.div>
       </div>
