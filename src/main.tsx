@@ -1,3 +1,4 @@
+
 /**
  * Punto de entrada principal de la aplicación
  * 
@@ -53,16 +54,15 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Algo salió mal / Something went wrong</h2>
+            <h2 className="text-2xl font-bold text-red-600 mb-4">Algo salió mal</h2>
             <p className="text-gray-700 mb-4">
-              Ha ocurrido un error inesperado. Por favor, recarga la página o intenta nuevamente más tarde. / 
-              An unexpected error has occurred. Please reload the page or try again later.
+              Ha ocurrido un error inesperado. Por favor, recarga la página o intenta nuevamente más tarde.
             </p>
             <button 
               onClick={() => window.location.reload()} 
               className="btn-primary"
             >
-              Recargar página / Reload page
+              Recargar página
             </button>
           </div>
         </div>
@@ -84,7 +84,7 @@ const Loading = () => (
           className="w-full h-full" 
         />
       </div>
-      <p className="text-lg font-medium">Cargando HABY... / Loading HABY...</p>
+      <p className="text-lg font-medium">Cargando HABY...</p>
     </div>
   </div>
 );

@@ -25,7 +25,6 @@ import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { AnimationController } from "./components/AnimationController";
 import PageTransition from "./components/PageTransition";
-import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 
 // Configuración del cliente de consultas
 const queryClient = new QueryClient({
@@ -52,22 +51,20 @@ const Admin = lazy(() => import("./pages/Admin"));
 const DetalleProyecto = lazy(() => import("./pages/DetalleProyecto"));
 
 // Componente para el estado de carga
-const LoadingPage = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
-        <div className="w-16 h-16 mb-4">
-          <img 
-            src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
-            alt="HABY Logo" 
-            className="w-full h-full"
-          />
-        </div>
-        <p className="text-lg font-medium">Cargando...</p>
+const LoadingPage = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
+      <div className="w-16 h-16 mb-4">
+        <img 
+          src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
+          alt="HABY Logo" 
+          className="w-full h-full"
+        />
       </div>
+      <p className="text-lg font-medium">Cargando HABY...</p>
     </div>
-  );
-};
+  </div>
+);
 
 // Componente para manejar las animaciones de transición
 const AnimatedRoutes = () => {
@@ -111,17 +108,15 @@ const AnimatedRoutes = () => {
  */
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <AnimationController>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AnimatedRoutes />
-          </BrowserRouter>
-        </TooltipProvider>
-      </AnimationController>
-    </LanguageProvider>
+    <AnimationController>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AnimatedRoutes />
+        </BrowserRouter>
+      </TooltipProvider>
+    </AnimationController>
   </QueryClientProvider>
 );
 

@@ -1,11 +1,8 @@
 
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Twitter, Phone } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
-  const { t } = useLanguage();
-
   return (
     <footer className="bg-haby-dark text-white">
       <div className="container mx-auto px-4 py-12">
@@ -21,7 +18,7 @@ const Footer = () => {
               <span className="text-2xl font-heading font-bold text-white">HABY</span>
             </Link>
             <p className="mt-4 text-gray-300">
-              {t('footer.description')}
+              HABY Open The Doors: Desarrollamos soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo.
             </p>
             <div className="mt-6 flex space-x-4">
               <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-haby-accent transition-colors">
@@ -41,32 +38,32 @@ const Footer = () => {
 
           {/* Enlaces rápidos */}
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.quickLinks')}</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">Enlaces rápidos</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors">{t('nav.home')}</Link>
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors">Inicio</Link>
               </li>
               <li>
-                <Link to="/sobre-nosotros" className="text-gray-300 hover:text-white transition-colors">{t('nav.about')}</Link>
+                <Link to="/sobre-nosotros" className="text-gray-300 hover:text-white transition-colors">Sobre Nosotros</Link>
               </li>
               <li>
-                <Link to="/servicios" className="text-gray-300 hover:text-white transition-colors">{t('nav.services')}</Link>
+                <Link to="/servicios" className="text-gray-300 hover:text-white transition-colors">Servicios</Link>
               </li>
               <li>
-                <Link to="/portafolio" className="text-gray-300 hover:text-white transition-colors">{t('nav.portfolio')}</Link>
+                <Link to="/portafolio" className="text-gray-300 hover:text-white transition-colors">Portafolio</Link>
               </li>
               <li>
-                <Link to="/precios" className="text-gray-300 hover:text-white transition-colors">{t('nav.pricing')}</Link>
+                <Link to="/precios" className="text-gray-300 hover:text-white transition-colors">Precios</Link>
               </li>
               <li>
-                <Link to="/contacto" className="text-gray-300 hover:text-white transition-colors">{t('nav.contact')}</Link>
+                <Link to="/contacto" className="text-gray-300 hover:text-white transition-colors">Contacto</Link>
               </li>
             </ul>
           </div>
 
           {/* Contacto */}
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.contact')}</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">Contacto</h3>
             <div className="space-y-4">
               <div className="flex items-center">
                 <Phone className="h-5 w-5 mr-2 text-haby-accent" />
@@ -81,7 +78,7 @@ const Footer = () => {
                     <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
                     <path d="M14.05 6A5 5 0 0 1 18 10"></path>
                   </svg>
-                  {t('footer.whatsappContact')}
+                  Contactar por WhatsApp
                 </div>
               </a>
             </div>
@@ -90,7 +87,7 @@ const Footer = () => {
 
         <div className="mt-12 border-t border-gray-700 pt-8">
           <p className="text-center text-gray-400">
-            © {new Date().getFullYear()} HABY. {t('footer.copyright')}
+            © {new Date().getFullYear()} HABY. Todos los derechos reservados. Creado por Heber Zadkiel García Pérez.
           </p>
         </div>
       </div>
