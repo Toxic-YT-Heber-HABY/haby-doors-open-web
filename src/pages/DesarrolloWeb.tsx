@@ -53,19 +53,106 @@ const DesarrolloWeb = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section Mejorado */}
+        {/* Hero Section Mejorado con fondo premium y elementos complementarios */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <AnimatedGradient 
-            colors={["#1A1F2C", "#6E59A5", "#7E69AB", "#D946EF", "#E5DEFF"]}
-            className="absolute inset-0"
-            duration={20}
-          />
+          {/* Fondo principal con gradientes múltiples y capas */}
+          <div className="absolute inset-0">
+            {/* Capa base con gradiente principal */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+            
+            {/* Gradiente animado superpuesto */}
+            <AnimatedGradient 
+              colors={["#0f172a", "#1e1b4b", "#581c87", "#7c2d12", "#0f172a"]}
+              className="absolute inset-0 opacity-80"
+              duration={25}
+              variant="cosmic"
+            />
+            
+            {/* Capa de textura sutil */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/10 to-purple-500/10"></div>
+            
+            {/* Overlay de puntos para textura */}
+            <div 
+              className="absolute inset-0 opacity-30"
+              style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+                backgroundSize: '30px 30px'
+              }}
+            ></div>
+          </div>
           
-          {/* Elementos decorativos de fondo */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-32 right-16 w-48 h-48 bg-haby-accent rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-haby-light rounded-full blur-2xl animate-pulse delay-500"></div>
+          {/* Elementos decorativos flotantes mejorados */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* Círculos decorativos animados */}
+            <motion.div 
+              className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/30 to-purple-600/30 rounded-full blur-xl"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+                x: [0, 20, 0],
+                y: [0, -10, 0]
+              }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute bottom-32 right-16 w-48 h-48 bg-gradient-to-br from-haby-accent/40 to-pink-600/40 rounded-full blur-2xl"
+              animate={{ 
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.5, 0.2],
+                x: [0, -30, 0],
+                y: [0, 20, 0]
+              }}
+              transition={{ 
+                duration: 12, 
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2
+              }}
+            />
+            <motion.div 
+              className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-cyan-400/50 to-blue-600/50 rounded-full blur-xl"
+              animate={{ 
+                scale: [1, 1.4, 1],
+                opacity: [0.4, 0.7, 0.4],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 15, 
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            {/* Líneas geométricas decorativas */}
+            <motion.div 
+              className="absolute top-1/4 left-1/3 w-64 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              animate={{ 
+                scaleX: [0, 1, 0],
+                opacity: [0, 1, 0]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute bottom-1/3 right-1/4 w-32 h-0.5 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent rotate-45"
+              animate={{ 
+                scaleX: [0, 1, 0],
+                opacity: [0, 0.8, 0]
+              }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 3
+              }}
+            />
           </div>
 
           {/* Contenido principal */}
@@ -77,18 +164,19 @@ const DesarrolloWeb = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                {/* Badge mejorado */}
+                {/* Badge mejorado con más estilo */}
                 <motion.div 
-                  className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm font-medium mb-6"
+                  className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-full text-white text-sm font-medium mb-6 shadow-lg"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                  <span className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mr-3 animate-pulse shadow-lg"></span>
                   Desarrollo Web Profesional
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full blur-xl -z-10"></div>
                 </motion.div>
 
-                {/* Título principal mejorado */}
+                {/* Título principal con efectos mejorados */}
                 <motion.h1 
                   className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
                   initial={{ opacity: 0, y: 30 }}
@@ -96,7 +184,7 @@ const DesarrolloWeb = () => {
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
                   Creamos{" "}
-                  <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-haby-accent via-pink-500 to-blue-400 bg-clip-text text-transparent filter drop-shadow-lg">
                     experiencias web
                   </span>{" "}
                   extraordinarias
@@ -104,16 +192,16 @@ const DesarrolloWeb = () => {
 
                 {/* Descripción mejorada */}
                 <motion.p 
-                  className="text-xl text-gray-200 mb-8 max-w-xl leading-relaxed"
+                  className="text-xl text-gray-200 mb-8 max-w-xl leading-relaxed backdrop-blur-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                 >
                   Transformamos tus ideas en sitios web y aplicaciones que no solo impresionan visualmente, 
-                  sino que impulsan tu negocio hacia el éxito.
+                  sino que impulsan tu negocio hacia el éxito digital.
                 </motion.p>
 
-                {/* Botones mejorados */}
+                {/* Botones mejorados con efectos premium */}
                 <motion.div 
                   className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                   initial={{ opacity: 0, y: 20 }}
@@ -122,37 +210,42 @@ const DesarrolloWeb = () => {
                 >
                   <Link 
                     to="/contacto" 
-                    className="group relative overflow-hidden bg-white text-haby-primary px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-gray-100 hover:scale-105 shadow-xl hover:shadow-2xl"
+                    className="group relative overflow-hidden bg-gradient-to-r from-haby-accent to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-purple-500/25"
                   >
                     <span className="relative z-10">Comenzar Proyecto</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-haby-accent to-haby-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
                   </Link>
                   <Link 
                     to="/portafolio" 
-                    className="group bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-haby-primary hover:scale-105 shadow-xl hover:shadow-2xl"
+                    className="group relative bg-transparent border-2 border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10 hover:border-white hover:scale-105 shadow-xl backdrop-blur-sm"
                   >
-                    Ver Portafolio
+                    <span className="relative z-10">Ver Portafolio</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
                   </Link>
                 </motion.div>
 
-                {/* Estadísticas rápidas */}
+                {/* Estadísticas mejoradas con efectos visuales */}
                 <motion.div 
-                  className="flex flex-wrap justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-white/20"
+                  className="flex flex-wrap justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-white/30"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.9 }}
                 >
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">50+</div>
+                  <div className="text-center group">
+                    <div className="text-3xl font-bold text-white mb-1 group-hover:text-haby-accent transition-colors">50+</div>
                     <div className="text-sm text-gray-300">Proyectos</div>
+                    <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-haby-accent to-transparent opacity-0 group-hover:opacity-100 transition-opacity mt-2"></div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">98%</div>
+                  <div className="text-center group">
+                    <div className="text-3xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">98%</div>
                     <div className="text-sm text-gray-300">Satisfacción</div>
+                    <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity mt-2"></div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">24/7</div>
+                  <div className="text-center group">
+                    <div className="text-3xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors">24/7</div>
                     <div className="text-sm text-gray-300">Soporte</div>
+                    <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity mt-2"></div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -165,12 +258,13 @@ const DesarrolloWeb = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <div className="relative h-96 lg:h-[500px]">
-                  {/* Círculos decorativos animados */}
+                  {/* Círculos decorativos mejorados con más capas */}
                   <motion.div 
-                    className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-haby-accent/30 to-transparent rounded-full blur-xl"
+                    className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-haby-accent/30 via-purple-500/20 to-transparent rounded-full blur-xl"
                     animate={{ 
                       scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3]
+                      opacity: [0.3, 0.6, 0.3],
+                      rotate: [0, 180, 360]
                     }}
                     transition={{ 
                       duration: 4, 
@@ -179,10 +273,11 @@ const DesarrolloWeb = () => {
                     }}
                   />
                   <motion.div 
-                    className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-white/20 to-transparent rounded-full blur-xl"
+                    className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-white/20 via-blue-500/20 to-transparent rounded-full blur-xl"
                     animate={{ 
                       scale: [1, 1.3, 1],
-                      opacity: [0.2, 0.5, 0.2]
+                      opacity: [0.2, 0.5, 0.2],
+                      rotate: [360, 180, 0]
                     }}
                     transition={{ 
                       duration: 5, 
@@ -192,18 +287,28 @@ const DesarrolloWeb = () => {
                     }}
                   />
                   
-                  {/* Modelo 3D con marco mejorado */}
-                  <div className="relative w-full h-full bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+                  {/* Modelo 3D con marco premium mejorado */}
+                  <div className="relative w-full h-full bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-3xl border border-white/30 shadow-2xl overflow-hidden">
+                    {/* Efectos de borde interno */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-purple-500/10 rounded-3xl"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent"></div>
+                    
                     <ThreeDModel type="hero" />
                     
-                    {/* Efecto de brillo */}
+                    {/* Efecto de brillo mejorado */}
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
+                    
+                    {/* Efectos de esquinas */}
+                    <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-lg"></div>
+                    <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/30 rounded-tr-lg"></div>
+                    <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/30 rounded-bl-lg"></div>
+                    <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-white/30 rounded-br-lg"></div>
                   </div>
 
-                  {/* Elementos flotantes */}
+                  {/* Elementos flotantes mejorados */}
                   <motion.div 
-                    className="absolute -top-6 left-1/4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl"
+                    className="absolute -top-6 left-1/4 bg-gradient-to-r from-white/90 to-white/80 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl border border-white/20"
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
@@ -214,7 +319,7 @@ const DesarrolloWeb = () => {
                   </motion.div>
 
                   <motion.div 
-                    className="absolute -bottom-6 right-1/4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl"
+                    className="absolute -bottom-6 right-1/4 bg-gradient-to-r from-white/90 to-white/80 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl border border-white/20"
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                   >
@@ -228,7 +333,7 @@ const DesarrolloWeb = () => {
             </div>
           </div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator mejorado */}
           <motion.div 
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
             animate={{ y: [0, 10, 0] }}
@@ -236,8 +341,8 @@ const DesarrolloWeb = () => {
           >
             <div className="flex flex-col items-center space-y-2">
               <span className="text-sm opacity-70">Descubre más</span>
-              <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-                <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+              <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center bg-white/5 backdrop-blur-sm">
+                <div className="w-1 h-3 bg-gradient-to-b from-white to-haby-accent rounded-full mt-2 animate-pulse shadow-lg"></div>
               </div>
             </div>
           </motion.div>
