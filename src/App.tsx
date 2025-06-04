@@ -1,3 +1,4 @@
+
 /**
  * App Component
  * 
@@ -52,8 +53,6 @@ const DetalleProyecto = lazy(() => import("./pages/DetalleProyecto"));
 
 // Componente para el estado de carga
 const LoadingPage = () => {
-  const { t } = useLanguage();
-  
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
@@ -64,7 +63,7 @@ const LoadingPage = () => {
             className="w-full h-full"
           />
         </div>
-        <p className="text-lg font-medium">{t('common.loading')}</p>
+        <p className="text-lg font-medium">Cargando...</p>
       </div>
     </div>
   );

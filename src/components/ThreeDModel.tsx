@@ -103,6 +103,27 @@ export default function ThreeDModel({
 }: ThreeDModelProps) {
   const capabilities = useDeviceCapabilities();
   const [renderError, setRenderError] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    // Pequeño delay para evitar conflictos durante cambios de estado
+    const timer = setTimeout(() => {
+      setIsInitialized(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Si no está inicializado, mostrar loading
+  if (!isInitialized) {
+    return (
+      <div className={`w-full h-full flex items-center justify-center ${className || ''}`} style={{ minHeight: '300px' }}>
+        <div className="animate-pulse text-haby-primary">
+          <div className="w-16 h-16 bg-haby-primary/20 rounded-full"></div>
+        </div>
+      </div>
+    );
+  }
 
   // Si el dispositivo no puede manejar 3D o es móvil, usar versión optimizada
   if (capabilities.preferredRenderMode === 'static' || capabilities.isMobile) {
@@ -128,9 +149,17 @@ export default function ThreeDModel({
       <div className={`w-full h-full ${className || ''}`} style={{ minHeight: '300px' }}>
         <Suspense fallback={<MobileOptimizedVisual type={type} />}>
           <Canvas 
+            key={`canvas-${type}`} // Key único para evitar conflictos
             shadows 
             dpr={[1, Math.min(2, capabilities.performanceLevel === 'high' ? 2 : 1.5)]}
-            onError={() => setRenderError(true)}
+            onCreated={(state) => {
+              // Configuración inicial del canvas
+              state.gl.setClearColor('#f8f9fa');
+            }}
+            onError={(error) => {
+              console.warn('Canvas error:', error);
+              setRenderError(true);
+            }}
           >
             <color attach="background" args={['#f8f9fa']} />
             <fog attach="fog" args={['#f8f9fa', 5, 20]} />

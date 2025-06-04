@@ -30,19 +30,28 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   });
 
   const [translations, setTranslations] = useState<Record<string, any>>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadTranslations = async () => {
       try {
+        setIsLoading(true);
         const translationModule = await import(`../locales/${language}.ts`);
         setTranslations(translationModule.default);
       } catch (error) {
         console.error('Error loading translations:', error);
         // Fallback to Spanish if translation fails
         if (language !== 'es') {
-          const fallbackModule = await import('../locales/es.ts');
-          setTranslations(fallbackModule.default);
+          try {
+            const fallbackModule = await import('../locales/es.ts');
+            setTranslations(fallbackModule.default);
+          } catch (fallbackError) {
+            console.error('Error loading fallback translations:', fallbackError);
+            setTranslations({});
+          }
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -55,6 +64,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [language]);
 
   const t = (key: string): string => {
+    if (isLoading) return key;
+    
     const keys = key.split('.');
     let value = translations;
     
@@ -69,8 +80,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return typeof value === 'string' ? value : key;
   };
 
+  const contextValue = {
+    language,
+    setLanguage,
+    t
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
