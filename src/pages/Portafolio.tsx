@@ -1,100 +1,148 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, Lock } from "lucide-react";
 
-// Proyectos de ejemplo (reemplazar con proyectos reales)
+// Proyectos completos (públicos y privados)
 const proyectos = [
   {
     id: 1,
-    title: "Sistema de Gestión de Tareas",
+    title: "HABYKeys",
     category: "Productividad",
-    description: "Aplicación web que permite organizar, priorizar y dar seguimiento a tareas diarias, optimizando el flujo de trabajo y aumentando la productividad.",
+    description: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
     image: "bg-haby-light",
+    isPublic: true,
     features: [
-      "Lista de tareas personalizable",
-      "Priorización inteligente",
-      "Recordatorios automáticos",
-      "Seguimiento de tiempo",
-      "Informes de productividad"
+      "Diseño personalizable para diferentes tipos de usuarios",
+      "Atajos y combinaciones de teclas configurables",
+      "Integración con múltiples aplicaciones",
+      "Modo de accesibilidad mejorada",
+      "Estadísticas de productividad"
     ],
-    results: "Reducción del 40% en el tiempo dedicado a la gestión de tareas y un aumento del 25% en la productividad general."
+    results: "Mejora de hasta un 35% en la eficiencia de entrada de datos y reducción del 25% en errores de digitación.",
+    url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
+    client: "Perla Itzel Rosales Flores"
   },
   {
     id: 2,
-    title: "Plataforma de Reservas Online",
-    category: "Servicios",
-    description: "Sistema completo para gestionar reservas y citas, eliminando la necesidad de gestión manual y optimizando la agenda del negocio.",
+    title: "HABY Score Tracker",
+    category: "Educación",
+    description: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
     image: "bg-haby-light",
+    isPublic: true,
     features: [
-      "Calendario interactivo",
-      "Reservas automáticas",
-      "Recordatorios por email/SMS",
-      "Panel de administración",
-      "Integración con Google Calendar"
+      "Cálculos automáticos mediante regla de tres",
+      "Visualización gráfica de resultados",
+      "Exportación en múltiples formatos (PDF, Excel)",
+      "Sistema de metas y objetivos",
+      "Historial de calificaciones"
     ],
-    results: "Reducción del 70% en el tiempo dedicado a la gestión de reservas y disminución del 30% en cancelaciones de última hora."
+    results: "Incremento del 40% en el compromiso de los estudiantes con su rendimiento académico y mejora del 22% en las calificaciones promedio.",
+    url: "https://prep-score-tracker.lovable.app",
+    client: "Prof. Martha Norma Ramírez Albarrán"
   },
   {
     id: 3,
-    title: "E-commerce Personalizado",
-    category: "Comercio",
-    description: "Tienda online con funcionalidades a medida para un cliente del sector retail, incluyendo gestión de inventario y procesamiento de pagos.",
+    title: "HABY CLASS",
+    category: "Educación",
+    description: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
     image: "bg-haby-light",
+    isPublic: false,
     features: [
-      "Catálogo de productos",
-      "Carrito de compras",
-      "Procesamiento de pagos",
-      "Gestión de inventario",
-      "Seguimiento de pedidos"
+      "Sistema de gestión de asistencia",
+      "Calendario integrado para entregas y exámenes",
+      "Comunicación directa entre profesores y estudiantes",
+      "Repositorio de materiales educativos",
+      "Análisis de rendimiento por alumno"
     ],
-    results: "Aumento del 50% en ventas online y reducción del 35% en tiempo dedicado a la gestión del inventario."
+    results: "Mejora del 55% en la organización del aula y reducción del 30% en el tiempo dedicado a tareas administrativas por parte de los profesores.",
+    client: "Proyecto Personal"
   },
   {
     id: 4,
-    title: "Dashboard Financiero",
-    category: "Finanzas",
-    description: "Herramienta de visualización de datos financieros que permite tomar decisiones basadas en información clara y actualizada.",
+    title: "Progresión 8: Los poderes fácticos y el Estado",
+    category: "Educacional e Informativa",
+    description: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
     image: "bg-haby-light",
+    isPublic: true,
     features: [
-      "Visualización de datos en tiempo real",
-      "Informes personalizados",
-      "Alertas automáticas",
-      "Proyecciones financieras",
-      "Exportación de datos"
+      "Contenido educativo interactivo",
+      "Recursos visuales explicativos",
+      "Material de estudio estructurado",
+      "Referencias bibliográficas completas",
+      "Ejemplos contextualizados"
     ],
-    results: "Reducción del 60% en el tiempo dedicado a la generación de informes financieros y mejora en la toma de decisiones estratégicas."
+    results: "Mejora en la comprensión de conceptos complejos de ciencias sociales y aumento del 30% en el interés de los estudiantes por temas políticos y sociales.",
+    url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
+    client: "Colegio De Estudios y Tecnológicos Del Estado De México"
   },
   {
     id: 5,
-    title: "Plataforma Educativa",
-    category: "Educación",
-    description: "Sistema de gestión de aprendizaje que facilita la creación y distribución de contenido educativo, así como el seguimiento del progreso de los estudiantes.",
+    title: "Sistema de Gestión Empresarial",
+    category: "Productividad",
+    description: "Plataforma integral para la gestión de recursos humanos, inventario y procesos administrativos, diseñada específicamente para empresas medianas.",
     image: "bg-haby-light",
+    isPublic: false,
     features: [
-      "Gestión de cursos",
-      "Sistema de evaluación",
-      "Foros de discusión",
-      "Biblioteca de recursos",
-      "Seguimiento de progreso"
+      "Gestión de empleados y nómina",
+      "Control de inventario en tiempo real",
+      "Módulo de facturación automática",
+      "Dashboard ejecutivo con métricas",
+      "Sistema de reportes personalizados"
     ],
-    results: "Aumento del 45% en la participación de los estudiantes y reducción del 50% en el tiempo dedicado a tareas administrativas."
+    results: "Reducción del 65% en tiempo administrativo y aumento del 30% en la eficiencia operativa.",
+    client: "Empresa Privada"
   },
   {
     id: 6,
-    title: "Sistema de Gestión de Inventario",
-    category: "Logística",
-    description: "Aplicación web para la gestión eficiente de inventario, con funcionalidades de seguimiento, alertas y generación de informes.",
+    title: "Plataforma de E-learning Corporativo",
+    category: "Educación",
+    description: "Sistema de capacitación en línea para empresas, con seguimiento de progreso, certificaciones y evaluaciones automáticas.",
     image: "bg-haby-light",
+    isPublic: false,
     features: [
-      "Seguimiento de stock en tiempo real",
-      "Alertas de nivel bajo",
-      "Generación de órdenes de compra",
-      "Informes de rotación",
-      "Escaneo de códigos de barras"
+      "Cursos interactivos multimedia",
+      "Sistema de certificaciones",
+      "Evaluaciones automáticas",
+      "Seguimiento de progreso detallado",
+      "Integración con sistemas HR"
     ],
-    results: "Reducción del 80% en pérdidas por falta de stock y disminución del 40% en tiempo dedicado a la gestión de inventario."
+    results: "Aumento del 80% en la retención de conocimiento y reducción del 50% en costos de capacitación.",
+    client: "Corporación Internacional"
+  },
+  {
+    id: 7,
+    title: "Dashboard Financiero Avanzado",
+    category: "Finanzas",
+    description: "Herramienta de análisis financiero con inteligencia artificial para predicciones y toma de decisiones estratégicas en tiempo real.",
+    image: "bg-haby-light",
+    isPublic: false,
+    features: [
+      "Análisis predictivo con IA",
+      "Visualización de datos en tiempo real",
+      "Alertas automáticas de riesgo",
+      "Integración con múltiples fuentes de datos",
+      "Reportes ejecutivos automatizados"
+    ],
+    results: "Mejora del 45% en precisión de predicciones financieras y reducción del 60% en tiempo de análisis.",
+    client: "Institución Financiera"
+  },
+  {
+    id: 8,
+    title: "App de Gestión de Proyectos",
+    category: "Productividad",
+    description: "Aplicación web para gestión de proyectos con metodologías ágiles, colaboración en tiempo real y seguimiento automático de métricas.",
+    image: "bg-haby-light",
+    isPublic: false,
+    features: [
+      "Metodologías Scrum y Kanban",
+      "Colaboración en tiempo real",
+      "Seguimiento automático de tiempo",
+      "Reportes de productividad",
+      "Integración con herramientas externas"
+    ],
+    results: "Incremento del 55% en velocidad de entrega de proyectos y mejora del 40% en colaboración del equipo.",
+    client: "Agencia de Desarrollo"
   }
 ];
 
@@ -144,15 +192,27 @@ const Portafolio = () => {
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow animate-fade-in"
                   style={{ animationDelay: `${0.1 + proyecto.id * 0.05}s` }}
                 >
-                  <div className={`aspect-video ${proyecto.image} flex items-center justify-center`}>
+                  <div className={`aspect-video ${proyecto.image} flex items-center justify-center relative`}>
                     <div className="text-haby-primary px-4 py-2 bg-white rounded-full font-medium">
                       {proyecto.category}
                     </div>
+                    {!proyecto.isPublic && (
+                      <div className="absolute top-2 right-2 bg-gray-800 text-white p-2 rounded-full">
+                        <Lock className="h-4 w-4" />
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-haby-primary transition-colors">
-                      {proyecto.title}
-                    </h3>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-xl font-bold text-gray-800 hover:text-haby-primary transition-colors">
+                        {proyecto.title}
+                      </h3>
+                      {!proyecto.isPublic && (
+                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                          Privado
+                        </span>
+                      )}
+                    </div>
                     <p className="text-gray-600 mb-4">{proyecto.description}</p>
                     <Link to={`/portafolio/${proyecto.id}`} className="inline-flex items-center text-haby-primary hover:text-haby-secondary font-medium">
                       Ver detalles del proyecto <ArrowRight className="ml-2 h-4 w-4" />

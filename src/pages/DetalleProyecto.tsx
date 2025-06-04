@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, ExternalLink, CheckCircle } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle, Lock, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { 
   Table,
@@ -20,8 +20,9 @@ interface Project {
   description: string;
   category: string;
   image: string;
-  url: string;
+  url?: string;
   client: string;
+  isPublic: boolean;
   features?: string[];
   results?: string;
   detailedContent?: {
@@ -40,11 +41,10 @@ const DetalleProyecto = () => {
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    // En una implementación real, esto sería una llamada a una API
     const fetchProject = () => {
       try {
-        // Datos iniciales (simulando una base de datos)
-        const initialProjects: Project[] = [
+        // Proyectos completos con información pública y privada
+        const allProjects: Project[] = [
           {
             id: "1",
             title: "HABYKeys",
@@ -53,6 +53,7 @@ const DetalleProyecto = () => {
             category: "Productividad",
             url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
             client: "Perla Itzel Rosales Flores",
+            isPublic: true,
             features: [
               "Diseño personalizable para diferentes tipos de usuarios",
               "Atajos y combinaciones de teclas configurables",
@@ -70,6 +71,7 @@ const DetalleProyecto = () => {
             category: "Educación",
             url: "https://prep-score-tracker.lovable.app",
             client: "Prof. Martha Norma Ramírez Albarrán",
+            isPublic: true,
             features: [
               "Cálculos automáticos mediante regla de tres",
               "Visualización gráfica de resultados",
@@ -84,9 +86,9 @@ const DetalleProyecto = () => {
             title: "HABY CLASS",
             description: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
             image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
-            category: "Proyecto Escolar",
-            url: "#",
+            category: "Educación",
             client: "Proyecto Personal",
+            isPublic: false,
             features: [
               "Sistema de gestión de asistencia",
               "Calendario integrado para entregas y exámenes",
@@ -104,6 +106,7 @@ const DetalleProyecto = () => {
             category: "Educacional e Informativa",
             url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
             client: "Colegio De Estudios y Tecnológicos Del Estado De México",
+            isPublic: true,
             features: [
               "Contenido educativo interactivo",
               "Recursos visuales explicativos",
@@ -270,39 +273,86 @@ const DetalleProyecto = () => {
                 }
               ]
             }
+          },
+          {
+            id: "5",
+            title: "Sistema de Gestión Empresarial",
+            description: "Plataforma integral para la gestión de recursos humanos, inventario y procesos administrativos, diseñada específicamente para empresas medianas.",
+            image: "/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png",
+            category: "Productividad",
+            client: "Empresa Privada",
+            isPublic: false,
+            features: [
+              "Gestión de empleados y nómina",
+              "Control de inventario en tiempo real",
+              "Módulo de facturación automática",
+              "Dashboard ejecutivo con métricas",
+              "Sistema de reportes personalizados"
+            ],
+            results: "Reducción del 65% en tiempo administrativo y aumento del 30% en la eficiencia operativa."
+          },
+          {
+            id: "6",
+            title: "Plataforma de E-learning Corporativo",
+            description: "Sistema de capacitación en línea para empresas, con seguimiento de progreso, certificaciones y evaluaciones automáticas.",
+            image: "/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png",
+            category: "Educación",
+            client: "Corporación Internacional",
+            isPublic: false,
+            features: [
+              "Cursos interactivos multimedia",
+              "Sistema de certificaciones",
+              "Evaluaciones automáticas",
+              "Seguimiento de progreso detallado",
+              "Integración con sistemas HR"
+            ],
+            results: "Aumento del 80% en la retención de conocimiento y reducción del 50% en costos de capacitación."
+          },
+          {
+            id: "7",
+            title: "Dashboard Financiero Avanzado",
+            description: "Herramienta de análisis financiero con inteligencia artificial para predicciones y toma de decisiones estratégicas en tiempo real.",
+            image: "/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png",
+            category: "Finanzas",
+            client: "Institución Financiera",
+            isPublic: false,
+            features: [
+              "Análisis predictivo con IA",
+              "Visualización de datos en tiempo real",
+              "Alertas automáticas de riesgo",
+              "Integración con múltiples fuentes de datos",
+              "Reportes ejecutivos automatizados"
+            ],
+            results: "Mejora del 45% en precisión de predicciones financieras y reducción del 60% en tiempo de análisis."
+          },
+          {
+            id: "8",
+            title: "App de Gestión de Proyectos",
+            description: "Aplicación web para gestión de proyectos con metodologías ágiles, colaboración en tiempo real y seguimiento automático de métricas.",
+            image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
+            category: "Productividad",
+            client: "Agencia de Desarrollo",
+            isPublic: false,
+            features: [
+              "Metodologías Scrum y Kanban",
+              "Colaboración en tiempo real",
+              "Seguimiento automático de tiempo",
+              "Reportes de productividad",
+              "Integración con herramientas externas"
+            ],
+            results: "Incremento del 55% en velocidad de entrega de proyectos y mejora del 40% en colaboración del equipo."
           }
         ];
 
-        let projects = initialProjects;
-        const savedProjects = localStorage.getItem('habyProjects');
-        
-        if (savedProjects) {
-          const parsedProjects = JSON.parse(savedProjects);
-          // Asegurarse de que los proyectos guardados tienen los detalles completos
-          const hasProject4WithDetails = parsedProjects.some((p: Project) => 
-            p.id === "4" && p.detailedContent && p.detailedContent.sections && p.detailedContent.sections.length > 0
-          );
-          
-          // Si no tiene los detalles completos, usar los iniciales
-          if (!hasProject4WithDetails) {
-            localStorage.setItem('habyProjects', JSON.stringify(initialProjects));
-            projects = initialProjects;
-          } else {
-            projects = parsedProjects;
-          }
-        } else {
-          localStorage.setItem('habyProjects', JSON.stringify(initialProjects));
-        }
-
         // Buscar el proyecto que corresponde al ID
-        const foundProject = projects.find(p => p.id === id);
+        const foundProject = allProjects.find(p => p.id === id);
         
         if (foundProject) {
           setProject(foundProject);
           
-          // Encontrar proyectos relacionados (misma categoría)
-          const related = projects
-            .filter(p => p.id !== id && p.category === foundProject.category)
+          // Encontrar proyectos relacionados (misma categoría y públicos)
+          const related = allProjects
+            .filter(p => p.id !== id && p.category === foundProject.category && p.isPublic)
             .slice(0, 2);
           setRelatedProjects(related);
         }
@@ -347,6 +397,118 @@ const DetalleProyecto = () => {
     );
   }
 
+  // Renderizar mensaje especial para proyectos privados
+  if (!project.isPublic) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          {/* Hero del proyecto privado */}
+          <div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white py-20">
+            <div className="container mx-auto px-4">
+              <Link to="/portafolio" className="inline-flex items-center text-gray-200 hover:text-white mb-6 transition-colors">
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Volver a todos los proyectos
+              </Link>
+              <div className="flex items-center mb-6">
+                <Shield className="h-8 w-8 text-yellow-400 mr-3" />
+                <span className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-medium">
+                  Proyecto Privado
+                </span>
+              </div>
+              <motion.h1 
+                className="text-4xl md:text-5xl font-bold mb-4"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {project.title}
+              </motion.h1>
+              <motion.div 
+                className="flex items-center mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <span className="text-yellow-400 font-medium mr-4">
+                  {project.category}
+                </span>
+                <span className="text-gray-300">
+                  Cliente: {project.client}
+                </span>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Mensaje de restricción */}
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-amber-50 border-l-4 border-amber-400 p-8 rounded-lg shadow-lg">
+                  <div className="flex items-start">
+                    <Lock className="h-6 w-6 text-amber-600 mr-4 flex-shrink-0 mt-1" />
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-800 mb-4">Proyecto de Acceso Restringido</h2>
+                      <p className="text-gray-700 mb-6 leading-relaxed">
+                        Debido a nuestros términos y condiciones, así como a nuestra política de privacidad, 
+                        nos vemos limitados a únicamente mencionar la existencia de dicho proyecto y a proporcionar 
+                        una breve descripción del mismo. Esto se debe a que este proyecto en particular es de carácter 
+                        privado y, por lo tanto, no está abierto al acceso público general. Agradecemos profundamente 
+                        su comprensión al respecto.
+                      </p>
+                      
+                      <div className="bg-white p-6 rounded-lg border">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Información disponible del proyecto</h3>
+                        <p className="text-gray-600 mb-4">{project.description}</p>
+                        
+                        {project.features && project.features.length > 0 && (
+                          <div className="mb-4">
+                            <h4 className="font-semibold text-gray-800 mb-2">Características generales:</h4>
+                            <ul className="space-y-1">
+                              {project.features.map((feature, index) => (
+                                <li key={index} className="flex items-start text-gray-600">
+                                  <CheckCircle className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0 mt-0.5" />
+                                  <span>{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {project.results && (
+                          <div className="bg-gray-50 border-l-4 border-gray-300 pl-4 py-3">
+                            <p className="text-gray-700 text-sm"><strong>Resultados generales:</strong> {project.results}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA para contacto */}
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="bg-gradient-to-r from-haby-primary to-haby-secondary rounded-lg shadow-xl p-8 md:p-12 text-white text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">¿Te interesa un proyecto similar?</h2>
+                <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
+                  Podemos ayudarte a desarrollar una solución personalizada que se adapte a tus necesidades específicas.
+                </p>
+                <Link to="/contacto" className="btn-primary bg-white text-haby-primary hover:bg-gray-100">
+                  Hablemos de tu proyecto
+                </Link>
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Renderizado normal para proyectos públicos
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
