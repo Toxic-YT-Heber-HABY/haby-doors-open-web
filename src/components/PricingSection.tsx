@@ -3,8 +3,6 @@ import { Check, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { toast } from 'sonner';
 import {
   Dialog,
   DialogContent,
@@ -14,14 +12,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
-
 const plans = [
   {
-    id: "basico",
     name: "Básico",
     description: "Ideal para pequeños proyectos o soluciones sencillas",
     prices: {
@@ -40,7 +32,6 @@ const plans = [
     buttonText: "Elegir plan"
   },
   {
-    id: "profesional",
     name: "Profesional",
     description: "Para proyectos más complejos y funcionalidades avanzadas",
     prices: {
@@ -61,7 +52,6 @@ const plans = [
     buttonText: "Plan recomendado"
   },
   {
-    id: "premium",
     name: "Premium",
     description: "Soluciones completamente personalizadas para necesidades específicas",
     prices: {
@@ -169,7 +159,6 @@ const TermsDialog = () => (
 
 const PricingSection = () => {
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
-  const [loading, setLoading] = useState<string | null>(null);
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -191,54 +180,6 @@ const PricingSection = () => {
         stiffness: 100,
         damping: 12
       }
-    }
-  };
-
-  const handlePlanSelection = async (planId: string) => {
-    if (planId === "premium") {
-      // Para el plan premium, redirigir a contacto
-      window.location.href = "/contacto?plan=premium";
-      return;
-    }
-
-    setLoading(planId);
-    
-    try {
-      console.log("Iniciando proceso de pago para plan:", planId);
-      
-      // Obtener el token de autenticación si existe
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-      };
-      
-      if (session?.access_token) {
-        headers['Authorization'] = `Bearer ${session.access_token}`;
-      }
-      
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { plan: planId },
-        headers
-      });
-
-      if (error) {
-        console.error("Error en create-checkout:", error);
-        throw error;
-      }
-
-      if (data?.url) {
-        console.log("Redirigiendo a Stripe Checkout:", data.url);
-        // Abrir Stripe checkout en una nueva pestaña
-        window.open(data.url, '_blank');
-      } else {
-        throw new Error("No se recibió URL de checkout");
-      }
-    } catch (error) {
-      console.error("Error al procesar el pago:", error);
-      toast.error("Error al procesar el pago. Por favor, inténtalo de nuevo.");
-    } finally {
-      setLoading(null);
     }
   };
 
@@ -299,18 +240,17 @@ const PricingSection = () => {
                   </li>
                 ))}
               </ul>
-              <button 
-                onClick={() => handlePlanSelection(plan.id)}
-                disabled={loading === plan.id}
+              <Link 
+                to="/contacto" 
                 className={`
-                  w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 disabled:opacity-50
+                  w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300
                   ${plan.highlighted 
                     ? 'bg-haby-primary text-white hover:bg-haby-secondary' 
                     : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}
                 `}
               >
-                {loading === plan.id ? "Procesando..." : plan.buttonText}
-              </button>
+                {plan.buttonText}
+              </Link>
             </motion.div>
           ))}
         </motion.div>
