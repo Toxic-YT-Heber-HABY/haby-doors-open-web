@@ -1,39 +1,41 @@
-
 import { Link } from 'react-router-dom';
 import { Code, Lightbulb, Clock, ArrowRight, Zap, Shield, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const services = [
-  {
-    icon: <Code className="h-12 w-12 text-haby-accent" />,
-    title: "Desarrollo Web",
-    description: "Creamos páginas web y aplicaciones a medida, diseñadas meticulosamente para resolver problemas específicos con tecnología moderna.",
-    features: ["React & Next.js", "Responsive Design", "SEO Optimizado"],
-    color: "from-blue-500/20 to-cyan-500/20"
-  },
-  {
-    icon: <Lightbulb className="h-12 w-12 text-haby-accent" />,
-    title: "Soluciones Personalizadas",
-    description: "Diseñamos soluciones a medida para problemas específicos, incluso cuando no tienes claro qué necesitas exactamente.",
-    features: ["Consultoría Gratuita", "Análisis Profundo", "Propuesta Única"],
-    color: "from-purple-500/20 to-pink-500/20"
-  },
-  {
-    icon: <Clock className="h-12 w-12 text-haby-accent" />,
-    title: "Optimización de Tiempo",
-    description: "Nuestro enfoque principal es ayudarte a trabajar de forma más eficiente, eliminando tareas repetitivas y automatizando procesos.",
-    features: ["Automatización", "Integración API", "Workflow Mejorado"],
-    color: "from-green-500/20 to-emerald-500/20"
-  }
-];
-
-const additionalFeatures = [
-  { icon: <Zap className="h-6 w-6" />, text: "Entrega Rápida" },
-  { icon: <Shield className="h-6 w-6" />, text: "Seguridad Garantizada" },
-  { icon: <Users className="h-6 w-6" />, text: "Soporte 24/7" }
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: <Code className="h-12 w-12 text-haby-accent" />,
+      title: t('services.webDev.title'),
+      description: t('services.webDev.description'),
+      features: t('services.webDev.features'),
+      color: "from-blue-500/20 to-cyan-500/20"
+    },
+    {
+      icon: <Lightbulb className="h-12 w-12 text-haby-accent" />,
+      title: t('services.customSolutions.title'),
+      description: t('services.customSolutions.description'),
+      features: t('services.customSolutions.features'),
+      color: "from-purple-500/20 to-pink-500/20"
+    },
+    {
+      icon: <Clock className="h-12 w-12 text-haby-accent" />,
+      title: t('services.optimization.title'),
+      description: t('services.optimization.description'),
+      features: t('services.optimization.features'),
+      color: "from-green-500/20 to-emerald-500/20"
+    }
+  ];
+
+  const additionalFeatures = [
+    { icon: <Zap className="h-6 w-6" />, text: t('services.fastDelivery') },
+    { icon: <Shield className="h-6 w-6" />, text: t('services.guaranteedSecurity') },
+    { icon: <Users className="h-6 w-6" />, text: t('services.support247') }
+  ];
+
   return (
     <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Elementos decorativos de fondo */}
@@ -52,17 +54,13 @@ const ServicesSection = () => {
         >
           <div className="inline-flex items-center gap-2 bg-haby-light text-haby-primary px-6 py-3 rounded-full text-sm font-semibold mb-6 border border-haby-primary/20">
             <Zap className="w-4 h-4" />
-            Nuestros Servicios
+            {t('services.badge')}
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-            ¿Cómo podemos{' '}
-            <span className="bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">
-              ayudarte?
-            </span>
+            {t('services.title')}
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            En HABY nos especializamos en abrir puertas a través de soluciones web 
-            innovadoras que transforman la manera en que gestionas tu tiempo y optimizas tus procesos.
+            {t('services.description')}
           </p>
         </motion.div>
 
@@ -91,7 +89,7 @@ const ServicesSection = () => {
                 
                 {/* Features list */}
                 <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, idx) => (
+                  {Array.isArray(service.features) && service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-sm text-gray-500">
                       <div className="w-2 h-2 bg-haby-accent rounded-full mr-3"></div>
                       {feature}
@@ -103,7 +101,7 @@ const ServicesSection = () => {
                   to="/servicios" 
                   className="inline-flex items-center text-haby-primary hover:text-haby-secondary font-semibold group-hover:translate-x-2 transition-all duration-300"
                 >
-                  Saber más 
+                  {t('services.learnMore')}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -122,10 +120,10 @@ const ServicesSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-3xl font-bold mb-4">
-                ¿Por qué elegir HABY?
+                {t('services.whyChoose')}
               </h3>
               <p className="text-lg text-purple-100 mb-6">
-                Nos comprometemos a entregar soluciones que realmente marquen la diferencia en tu día a día.
+                {t('services.whyDescription')}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {additionalFeatures.map((feature, index) => (
@@ -141,7 +139,7 @@ const ServicesSection = () => {
                 to="/servicios" 
                 className="inline-block bg-white text-haby-primary px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors transform hover:scale-105 hover:shadow-lg"
               >
-                Ver todos nuestros servicios
+                {t('services.viewAll')}
               </Link>
             </div>
           </div>

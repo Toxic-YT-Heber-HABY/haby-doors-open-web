@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 import AdminLoginModal from './AdminLoginModal';
+import LanguageSelector from './LanguageSelector';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -53,45 +56,46 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className="text-gray-700 hover:text-haby-primary font-medium transition-colors">
-                Inicio
+                {t('nav.home')}
               </Link>
               <Link to="/sobre-nosotros" className="text-gray-700 hover:text-haby-primary font-medium transition-colors">
-                Sobre Nosotros
+                {t('nav.about')}
               </Link>
               <div className="relative group">
                 <button 
                   onClick={toggleServices} 
                   className="flex items-center text-gray-700 hover:text-haby-primary font-medium transition-colors"
                 >
-                  Servicios <ChevronDown className="ml-1 h-4 w-4" />
+                  {t('nav.services')} <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 <div className="absolute left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left">
                   <div className="bg-white shadow-lg rounded-md py-2">
                     <Link to="/servicios" className="block px-4 py-2 text-sm text-gray-700 hover:bg-haby-light hover:text-haby-primary">
-                      Todos los Servicios
+                      {t('nav.allServices')}
                     </Link>
                     <Link to="/desarrollo-web" className="block px-4 py-2 text-sm text-gray-700 hover:bg-haby-light hover:text-haby-primary">
-                      Desarrollo Web
+                      {t('nav.webDevelopment')}
                     </Link>
                     <Link to="/soluciones-personalizadas" className="block px-4 py-2 text-sm text-gray-700 hover:bg-haby-light hover:text-haby-primary">
-                      Soluciones Personalizadas
+                      {t('nav.customSolutions')}
                     </Link>
                   </div>
                 </div>
               </div>
               <Link to="/portafolio" className="text-gray-700 hover:text-haby-primary font-medium transition-colors">
-                Portafolio
+                {t('nav.portfolio')}
               </Link>
               <Link to="/precios" className="text-gray-700 hover:text-haby-primary font-medium transition-colors">
-                Precios
+                {t('nav.pricing')}
               </Link>
               <Link to="/contacto" className="btn-primary">
-                Contáctanos
+                {t('nav.contact')}
               </Link>
+              <LanguageSelector />
               <button 
                 onClick={openAdminModal}
                 className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
-                aria-label="Administración"
+                aria-label={t('nav.administration')}
               >
                 <Plus className="h-4 w-4" />
               </button>
@@ -99,10 +103,11 @@ const Navbar = () => {
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-3">
+              <LanguageSelector />
               <button 
                 onClick={openAdminModal}
                 className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
-                aria-label="Administración"
+                aria-label={t('nav.administration')}
               >
                 <Plus className="h-4 w-4" />
               </button>
@@ -117,10 +122,10 @@ const Navbar = () => {
             <div className="md:hidden mt-4 pb-4">
               <div className="flex flex-col space-y-4">
                 <Link to="/" className="text-gray-700 hover:text-haby-primary font-medium transition-colors" onClick={toggleMenu}>
-                  Inicio
+                  {t('nav.home')}
                 </Link>
                 <Link to="/sobre-nosotros" className="text-gray-700 hover:text-haby-primary font-medium transition-colors" onClick={toggleMenu}>
-                  Sobre Nosotros
+                  {t('nav.about')}
                 </Link>
                 
                 <div>
@@ -128,32 +133,32 @@ const Navbar = () => {
                     onClick={toggleServices} 
                     className="flex items-center text-gray-700 hover:text-haby-primary font-medium transition-colors w-full"
                   >
-                    Servicios <ChevronDown className={`ml-1 h-4 w-4 transform transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+                    {t('nav.services')} <ChevronDown className={`ml-1 h-4 w-4 transform transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
                   {servicesOpen && (
                     <div className="mt-2 ml-4 flex flex-col space-y-2">
                       <Link to="/servicios" className="text-gray-700 hover:text-haby-primary" onClick={toggleMenu}>
-                        Todos los Servicios
+                        {t('nav.allServices')}
                       </Link>
                       <Link to="/desarrollo-web" className="text-gray-700 hover:text-haby-primary" onClick={toggleMenu}>
-                        Desarrollo Web
+                        {t('nav.webDevelopment')}
                       </Link>
                       <Link to="/soluciones-personalizadas" className="text-gray-700 hover:text-haby-primary" onClick={toggleMenu}>
-                        Soluciones Personalizadas
+                        {t('nav.customSolutions')}
                       </Link>
                     </div>
                   )}
                 </div>
                 
                 <Link to="/portafolio" className="text-gray-700 hover:text-haby-primary font-medium transition-colors" onClick={toggleMenu}>
-                  Portafolio
+                  {t('nav.portfolio')}
                 </Link>
                 <Link to="/precios" className="text-gray-700 hover:text-haby-primary font-medium transition-colors" onClick={toggleMenu}>
-                  Precios
+                  {t('nav.pricing')}
                 </Link>
                 <Link to="/contacto" className="btn-primary text-center" onClick={toggleMenu}>
-                  Contáctanos
+                  {t('nav.contact')}
                 </Link>
               </div>
             </div>
