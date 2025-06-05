@@ -2,8 +2,70 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Contacto = () => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
+    servicio: "",
+    mensaje: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.nombre || !formData.email || !formData.servicio || !formData.mensaje) {
+      toast.error("Por favor completa todos los campos requeridos");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      console.log("Enviando formulario de contacto:", formData);
+      
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        console.error("Error al enviar correo:", error);
+        throw error;
+      }
+
+      console.log("Correo enviado exitosamente:", data);
+      toast.success("¡Mensaje enviado! Te responderemos pronto.");
+      
+      // Limpiar formulario
+      setFormData({
+        nombre: "",
+        email: "",
+        telefono: "",
+        servicio: "",
+        mensaje: ""
+      });
+
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      toast.error("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -39,7 +101,7 @@ const Contacto = () => {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
@@ -48,6 +110,9 @@ const Contacto = () => {
                       <input
                         type="text"
                         id="nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                         placeholder="Tu nombre"
                         required
@@ -60,6 +125,9 @@ const Contacto = () => {
                       <input
                         type="email"
                         id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                         placeholder="tu@email.com"
                         required
@@ -74,6 +142,9 @@ const Contacto = () => {
                     <input
                       type="tel"
                       id="telefono"
+                      name="telefono"
+                      value={formData.telefono}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                       placeholder="Tu número de teléfono"
                     />
@@ -85,16 +156,23 @@ const Contacto = () => {
                     </label>
                     <select
                       id="servicio"
+                      name="servicio"
+                      value={formData.servicio}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                       required
                     >
                       <option value="">Selecciona un servicio</option>
-                      <option value="desarrollo-web">Desarrollo Web Personalizado</option>
-                      <option value="soluciones-medida">Soluciones a Medida</option>
-                      <option value="optimizacion-procesos">Optimización de Procesos</option>
-                      <option value="plataformas-colaborativas">Plataformas Colaborativas</option>
-                      <option value="sistemas-gestion">Sistemas de Gestión</option>
-                      <option value="otro">Otro</option>
+                      <option value="Plan Básico">Plan Básico - $14,999 MXN</option>
+                      <option value="Plan Profesional">Plan Profesional - $24,999 MXN</option>
+                      <option value="Plan Premium">Plan Premium - Desde $34,999 MXN</option>
+                      <option value="LNA Gratuito">LNA Gratuito (bien común)</option>
+                      <option value="Desarrollo Web Personalizado">Desarrollo Web Personalizado</option>
+                      <option value="Soluciones a Medida">Soluciones a Medida</option>
+                      <option value="Optimización de Procesos">Optimización de Procesos</option>
+                      <option value="Plataformas Colaborativas">Plataformas Colaborativas</option>
+                      <option value="Sistemas de Gestión">Sistemas de Gestión</option>
+                      <option value="Otro">Otro</option>
                     </select>
                   </div>
 
@@ -104,7 +182,10 @@ const Contacto = () => {
                     </label>
                     <textarea
                       id="mensaje"
+                      name="mensaje"
                       rows={6}
+                      value={formData.mensaje}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                       placeholder="Cuéntanos sobre tu proyecto o problema que quieres resolver..."
                       required
@@ -125,9 +206,11 @@ const Contacto = () => {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-6 rounded-md transition-colors"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50"
                   >
-                    Enviar mensaje <Send className="ml-2 h-5 w-5" />
+                    {isSubmitting ? "Enviando..." : "Enviar mensaje"} 
+                    <Send className="ml-2 h-5 w-5" />
                   </button>
                 </form>
               </div>

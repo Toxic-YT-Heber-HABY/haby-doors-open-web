@@ -21,8 +21,33 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    const { plan } = await req.json();
+    // Verificar que el request tiene contenido
+    const contentType = req.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Content-Type debe ser application/json");
+    }
+
+    const requestText = await req.text();
+    logStep("Request text received", { length: requestText.length, content: requestText });
+
+    if (!requestText.trim()) {
+      throw new Error("Request body está vacío");
+    }
+
+    let requestData;
+    try {
+      requestData = JSON.parse(requestText);
+    } catch (parseError) {
+      logStep("JSON parse error", { error: parseError.message, text: requestText });
+      throw new Error(`Error parsing JSON: ${parseError.message}`);
+    }
+
+    const { plan } = requestData;
     logStep("Request body parsed", { plan });
+
+    if (!plan) {
+      throw new Error("Plan es requerido");
+    }
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
@@ -38,15 +63,19 @@ serve(async (req) => {
 
     const authHeader = req.headers.get("Authorization");
     let user = null;
-    let email = "guest@example.com"; // Email por defecto para invitados
+    let email = "guest@example.com";
 
     if (authHeader) {
-      const token = authHeader.replace("Bearer ", "");
-      const { data } = await supabaseClient.auth.getUser(token);
-      user = data.user;
-      if (user?.email) {
-        email = user.email;
-        logStep("User authenticated", { userId: user.id, email: user.email });
+      try {
+        const token = authHeader.replace("Bearer ", "");
+        const { data } = await supabaseClient.auth.getUser(token);
+        user = data.user;
+        if (user?.email) {
+          email = user.email;
+          logStep("User authenticated", { userId: user.id, email: user.email });
+        }
+      } catch (authError) {
+        logStep("Auth error (continuing as guest)", { error: authError.message });
       }
     } else {
       logStep("Guest checkout initiated");
@@ -54,23 +83,22 @@ serve(async (req) => {
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-    // Configuración de precios según el plan
     const planConfig = {
       basico: {
         name: "Plan Básico",
-        amount: 1499900, // $14,999 MXN en centavos
+        amount: 1499900,
         currency: "mxn",
         description: "Diseño web responsive con hasta 5 secciones"
       },
       profesional: {
         name: "Plan Profesional", 
-        amount: 2499900, // $24,999 MXN en centavos
+        amount: 2499900,
         currency: "mxn",
         description: "Proyecto complejo con funcionalidades avanzadas"
       },
       premium: {
         name: "Plan Premium",
-        amount: 3499900, // $34,999 MXN en centavos
+        amount: 3499900,
         currency: "mxn", 
         description: "Solución completamente personalizada"
       }
@@ -78,12 +106,11 @@ serve(async (req) => {
 
     const selectedPlan = planConfig[plan as keyof typeof planConfig];
     if (!selectedPlan) {
-      throw new Error("Plan no válido");
+      throw new Error(`Plan no válido: ${plan}`);
     }
 
     logStep("Plan configuration selected", selectedPlan);
 
-    // Verificar si existe un cliente en Stripe
     const customers = await stripe.customers.list({ email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {

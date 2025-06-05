@@ -1,9 +1,8 @@
-
 import { Check, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -13,11 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-const supabase = createClient(
-  "https://qhxuilnkeombzquubgst.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoeHVpbG5rZW9tYnpxdXViZ3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxNjU5NTYsImV4cCI6MjA1OTc0MTk1Nn0.t9C6jGl0SHieJCddClEoLVlrB-PDvSbI1tJ-arxqlPI"
-);
 
 const plans = [
   {
@@ -82,7 +76,6 @@ const plans = [
   }
 ];
 
-// Términos y condiciones para LNA gratuito
 const lnaTerms = [
   "El proyecto debe estar ligado al bien común y ser accesible para cualquier persona.",
   "El acceso a la solución debe ser irrestricto y estar alineado con su propósito original.",
@@ -196,7 +189,6 @@ const PricingSection = () => {
 
   const handlePlanSelection = async (planId: string) => {
     if (planId === "premium") {
-      // Para el plan premium, redirigir a contacto
       window.location.href = "/contacto?plan=premium";
       return;
     }
@@ -206,20 +198,17 @@ const PricingSection = () => {
     try {
       console.log("Iniciando proceso de pago para plan:", planId);
       
-      // Obtener el token de autenticación si existe
       const { data: { session } } = await supabase.auth.getSession();
       
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-      };
-      
-      if (session?.access_token) {
-        headers['Authorization'] = `Bearer ${session.access_token}`;
-      }
+      const requestBody = { plan: planId };
+      console.log("Enviando datos:", requestBody);
       
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { plan: planId },
-        headers
+        body: requestBody,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
+        }
       });
 
       if (error) {
@@ -229,14 +218,13 @@ const PricingSection = () => {
 
       if (data?.url) {
         console.log("Redirigiendo a Stripe Checkout:", data.url);
-        // Abrir Stripe checkout en una nueva pestaña
         window.open(data.url, '_blank');
       } else {
         throw new Error("No se recibió URL de checkout");
       }
     } catch (error) {
       console.error("Error al procesar el pago:", error);
-      toast.error("Error al procesar el pago. Por favor, inténtalo de nuevo.");
+      toast.error("Error al procesar el pago. Por favor, inténtalo de nuevo o contáctanos directamente.");
     } finally {
       setLoading(null);
     }
