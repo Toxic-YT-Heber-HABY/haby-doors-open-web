@@ -37,14 +37,24 @@ const Precios = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-haby-dark to-haby-primary text-white py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Nuestros Precios</h1>
-              <p className="text-xl text-gray-200">
-                Opciones flexibles que se adaptan a tus necesidades y presupuesto. Invierte en soluciones que optimizarán tu tiempo y abrirán nuevas puertas.
-              </p>
+        {/* Header con gradiente mejorado */}
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-haby-dark via-haby-primary to-haby-secondary opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          <div className="relative bg-gradient-to-r from-haby-dark to-haby-primary text-white py-16 md:py-24">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                  Nuestros Precios
+                </h1>
+                <p className="text-xl text-gray-200 leading-relaxed">
+                  Opciones flexibles que se adaptan a tus necesidades y presupuesto. Invierte en soluciones que optimizarán tu tiempo y abrirán nuevas puertas.
+                </p>
+              </div>
+              
+              {/* Elementos decorativos */}
+              <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+              <div className="absolute bottom-10 left-10 w-24 h-24 bg-haby-accent/20 rounded-full blur-lg"></div>
             </div>
           </div>
         </div>
