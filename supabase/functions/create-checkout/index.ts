@@ -25,7 +25,10 @@ serve(async (req) => {
     logStep("Request body parsed", { plan });
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
+    if (!stripeKey) {
+      logStep("ERROR: STRIPE_SECRET_KEY not found");
+      throw new Error("STRIPE_SECRET_KEY is not set");
+    }
     logStep("Stripe key verified");
 
     const supabaseClient = createClient(
@@ -88,6 +91,8 @@ serve(async (req) => {
       logStep("Existing customer found", { customerId });
     }
 
+    const origin = req.headers.get("origin") || "https://haby-three.vercel.app";
+    
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : email,
@@ -105,8 +110,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/contacto?payment=success&plan=${plan}`,
-      cancel_url: `${req.headers.get("origin")}/precios?payment=cancelled`,
+      success_url: `${origin}/contacto?payment=success&plan=${plan}`,
+      cancel_url: `${origin}/precios?payment=cancelled`,
       metadata: {
         plan: plan,
         user_id: user?.id || "guest",

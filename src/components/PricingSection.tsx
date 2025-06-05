@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/dialog";
 
 const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
+  "https://qhxuilnkeombzquubgst.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoeHVpbG5rZW9tYnpxdXViZ3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxNjU5NTYsImV4cCI6MjA1OTc0MTk1Nn0.t9C6jGl0SHieJCddClEoLVlrB-PDvSbI1tJ-arxqlPI"
 );
 
 const plans = [

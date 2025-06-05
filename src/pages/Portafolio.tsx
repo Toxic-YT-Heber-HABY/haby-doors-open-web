@@ -9,69 +9,81 @@ import { Link } from "react-router-dom";
 const proyectos = [
   {
     id: 1,
-    titulo: "Plataforma E-commerce",
-    descripcion: "Tienda online completa con sistema de pagos integrado y gestión de inventario.",
-    imagen: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
-    tecnologias: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    categoria: "E-commerce",
-    url: "https://example-ecommerce.com",
-    github: "https://github.com/ejemplo/ecommerce",
-    esPrivado: false
+    titulo: "HABYKeys",
+    descripcion: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
+    imagen: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
+    tecnologias: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    categoria: "Productividad",
+    url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
+    github: null,
+    esPrivado: false,
+    cliente: "Perla Itzel Rosales Flores",
+    fecha: "2024"
   },
   {
     id: 2,
+    titulo: "HABY Score Tracker",
+    descripcion: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
+    imagen: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
+    tecnologias: ["React", "Lovable", "PDF Export", "Chart.js"],
+    categoria: "Educación",
+    url: "https://prep-score-tracker.lovable.app",
+    github: null,
+    esPrivado: false,
+    cliente: "Prof. Martha Norma Ramírez Albarrán",
+    fecha: "2024"
+  },
+  {
+    id: 3,
+    titulo: "HABY CLASS",
+    descripcion: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
+    imagen: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
+    tecnologias: ["React", "Supabase", "PostgreSQL", "Real-time"],
+    categoria: "Educación",
+    url: "#",
+    github: null,
+    esPrivado: true,
+    cliente: "Proyecto Personal",
+    fecha: "2024"
+  },
+  {
+    id: 4,
+    titulo: "Progresión 8: Los poderes fácticos y el Estado",
+    descripcion: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
+    imagen: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
+    tecnologias: ["Gamma", "Interactive Design", "Educational Content"],
+    categoria: "Educacional",
+    url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
+    github: null,
+    esPrivado: false,
+    cliente: "Colegio De Estudios y Tecnológicos Del Estado De México",
+    fecha: "2024"
+  },
+  {
+    id: 5,
     titulo: "Sistema de Gestión Médica",
-    descripcion: "Aplicación web para gestión de citas médicas y historiales de pacientes.",
+    descripcion: "Aplicación web para gestión de citas médicas y historiales de pacientes con funcionalidades avanzadas de seguridad y privacidad.",
     imagen: "/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png",
     tecnologias: ["Vue.js", "Express", "MongoDB", "JWT"],
     categoria: "Salud",
     url: null,
     github: null,
-    esPrivado: true
-  },
-  {
-    id: 3,
-    titulo: "Dashboard Analítico",
-    descripcion: "Panel de control con visualización de datos en tiempo real para empresas.",
-    imagen: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
-    tecnologias: ["React", "D3.js", "Python", "FastAPI"],
-    categoria: "Analytics",
-    url: "https://example-dashboard.com",
-    github: "https://github.com/ejemplo/dashboard",
-    esPrivado: false
-  },
-  {
-    id: 4,
-    titulo: "App de Delivery",
-    descripcion: "Aplicación móvil para delivery de comida con seguimiento en tiempo real.",
-    imagen: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
-    tecnologias: ["React Native", "Firebase", "Google Maps"],
-    categoria: "Mobile",
-    url: null,
-    github: null,
-    esPrivado: true
-  },
-  {
-    id: 5,
-    titulo: "CRM Empresarial",
-    descripcion: "Sistema completo de gestión de relaciones con clientes para empresas medianas.",
-    imagen: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
-    tecnologias: ["Angular", "Spring Boot", "MySQL"],
-    categoria: "Business",
-    url: null,
-    github: null,
-    esPrivado: true
+    esPrivado: true,
+    cliente: "Clínica Privada",
+    fecha: "2024"
   },
   {
     id: 6,
-    titulo: "Plataforma Educativa",
-    descripcion: "LMS (Learning Management System) para instituciones educativas.",
+    titulo: "Plataforma E-commerce Avanzada",
+    descripcion: "Tienda online completa con sistema de pagos integrado, gestión de inventario y análisis de ventas en tiempo real.",
     imagen: "/lovable-uploads/d3be837f-42a6-40ff-a75e-ea4c473f067e.png",
-    tecnologias: ["Next.js", "Prisma", "PostgreSQL"],
-    categoria: "Educación",
-    url: "https://example-lms.com",
-    github: "https://github.com/ejemplo/lms",
-    esPrivado: false
+    tecnologias: ["Next.js", "Prisma", "PostgreSQL", "Stripe"],
+    categoria: "E-commerce",
+    url: null,
+    github: null,
+    esPrivado: true,
+    cliente: "Empresa de Retail",
+    fecha: "2024"
   }
 ];
 
@@ -161,6 +173,7 @@ const Portafolio = () => {
                       <span className="inline-block bg-haby-light text-haby-primary px-2 py-1 rounded text-sm">
                         {proyecto.categoria}
                       </span>
+                      <span className="text-xs text-gray-500">{proyecto.fecha}</span>
                     </div>
                     
                     <h3 className="text-xl font-bold text-gray-800 mb-2">{proyecto.titulo}</h3>
@@ -179,6 +192,10 @@ const Portafolio = () => {
                       )}
                     </div>
                     
+                    <div className="text-sm text-gray-600 mb-4">
+                      <strong>Cliente:</strong> {proyecto.cliente}
+                    </div>
+                    
                     <div className="flex items-center justify-between">
                       <Link 
                         to={`/portafolio/${proyecto.id}`}
@@ -190,7 +207,7 @@ const Portafolio = () => {
                       
                       {!proyecto.esPrivado && (
                         <div className="flex gap-2">
-                          {proyecto.url && (
+                          {proyecto.url && proyecto.url !== "#" && (
                             <a 
                               href={proyecto.url}
                               target="_blank"
