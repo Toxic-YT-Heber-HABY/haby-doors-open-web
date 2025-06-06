@@ -14,6 +14,7 @@ const logStep = (step: string, details?: any) => {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -21,38 +22,27 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    // Verificar que el request tiene contenido
-    const contentType = req.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Content-Type debe ser application/json");
-    }
-
-    const requestText = await req.text();
-    logStep("Request text received", { length: requestText.length, content: requestText });
-
-    if (!requestText.trim()) {
-      throw new Error("Request body está vacío");
-    }
-
+    // Verificar que el request tiene contenido y manejar el parsing del JSON
     let requestData;
     try {
-      requestData = JSON.parse(requestText);
+      requestData = await req.json();
+      logStep("Request data parsed", requestData);
     } catch (parseError) {
-      logStep("JSON parse error", { error: parseError.message, text: requestText });
-      throw new Error(`Error parsing JSON: ${parseError.message}`);
+      logStep("ERROR parsing JSON request", { error: parseError.message });
+      throw new Error(`Error al parsear la solicitud: ${parseError.message}`);
     }
 
     const { plan } = requestData;
-    logStep("Request body parsed", { plan });
+    logStep("Plan extracted", { plan });
 
     if (!plan) {
-      throw new Error("Plan es requerido");
+      throw new Error("El parámetro 'plan' es requerido");
     }
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
       logStep("ERROR: STRIPE_SECRET_KEY not found");
-      throw new Error("STRIPE_SECRET_KEY is not set");
+      throw new Error("La clave secreta de Stripe no está configurada");
     }
     logStep("Stripe key verified");
 
@@ -111,11 +101,14 @@ serve(async (req) => {
 
     logStep("Plan configuration selected", selectedPlan);
 
-    const customers = await stripe.customers.list({ email, limit: 1 });
+    // Buscar si el usuario ya existe como cliente en Stripe
     let customerId;
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-      logStep("Existing customer found", { customerId });
+    if (email && email !== "guest@example.com") {
+      const customers = await stripe.customers.list({ email, limit: 1 });
+      if (customers.data.length > 0) {
+        customerId = customers.data[0].id;
+        logStep("Existing customer found", { customerId });
+      }
     }
 
     const origin = req.headers.get("origin") || "https://haby-three.vercel.app";

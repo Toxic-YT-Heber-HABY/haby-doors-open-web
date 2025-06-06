@@ -35,7 +35,15 @@ serve(async (req) => {
 
     const resend = new Resend(resendKey);
 
-    const requestData: ContactEmailRequest = await req.json();
+    // Parsear los datos de la solicitud con manejo de errores
+    let requestData: ContactEmailRequest;
+    try {
+      requestData = await req.json();
+    } catch (parseError) {
+      logStep("ERROR parsing JSON request", { error: parseError.message });
+      throw new Error(`Error al parsear la solicitud: ${parseError.message}`);
+    }
+    
     const { nombre, email, telefono, servicio, mensaje } = requestData;
 
     logStep("Request data received", { nombre, email, servicio });

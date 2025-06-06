@@ -1,8 +1,71 @@
 
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    email: '',
+    telefono: '',
+    servicio: '',
+    mensaje: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validación básica
+    if (!formData.nombre || !formData.email || !formData.servicio || !formData.mensaje) {
+      toast.error("Por favor completa todos los campos requeridos");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      console.log("Enviando formulario de contacto:", formData);
+      
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        console.error("Error al enviar correo:", error);
+        throw error;
+      }
+
+      console.log("Correo enviado exitosamente:", data);
+      toast.success("¡Mensaje enviado! Te responderemos pronto.");
+      
+      // Limpiar formulario
+      setFormData({
+        nombre: '',
+        email: '',
+        telefono: '',
+        servicio: '',
+        mensaje: ''
+      });
+
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      toast.error("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="section bg-white">
       <div className="container mx-auto">
@@ -86,17 +149,21 @@ const ContactSection = () => {
           </div>
           
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <form className="bg-white shadow-md rounded-lg p-8">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
               
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                  <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
                   <input 
                     type="text" 
-                    id="name" 
+                    id="nombre" 
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                     placeholder="Tu nombre"
+                    required
                   />
                 </div>
                 
@@ -105,36 +172,68 @@ const ContactSection = () => {
                   <input 
                     type="email" 
                     id="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                     placeholder="tu@email.com"
+                    required
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                  <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">Teléfono (opcional)</label>
                   <input 
-                    type="text" 
-                    id="subject" 
+                    type="tel" 
+                    id="telefono" 
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                    placeholder="¿En qué podemos ayudarte?"
+                    placeholder="Tu número de teléfono"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                  <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">Servicio de interés</label>
+                  <select 
+                    id="servicio" 
+                    name="servicio"
+                    value={formData.servicio}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                    required
+                  >
+                    <option value="">Selecciona un servicio</option>
+                    <option value="Plan Básico">Plan Básico</option>
+                    <option value="Plan Profesional">Plan Profesional</option>
+                    <option value="Plan Premium">Plan Premium</option>
+                    <option value="LNA Gratuito">LNA Gratuito (bien común)</option>
+                    <option value="Otro">Otro / Consulta general</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
                   <textarea 
-                    id="message" 
+                    id="mensaje" 
+                    name="mensaje"
+                    value={formData.mensaje}
+                    onChange={handleInputChange}
                     rows={5}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
                     placeholder="Describe el problema que quieres resolver o la idea que tienes en mente..."
+                    required
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="w-full bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-4 rounded-md transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-4 rounded-md transition-colors disabled:opacity-50 flex items-center justify-center"
                 >
-                  Enviar mensaje
+                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                  {!isSubmitting && <Mail className="ml-2 h-4 w-4" />}
                 </button>
               </div>
             </form>
