@@ -3,7 +3,8 @@
  * ImageOptimized Component
  * 
  * Un componente optimizado para mostrar imágenes de manera eficiente,
- * soportando lazy loading, fallbacks, y compatibilidad cross-browser.
+ * soportando lazy loading, fallbacks, y compatibilidad cross-browser
+ * con mejoras específicas para calidad visual.
  * 
  * @param {string} src - URL de la imagen
  * @param {string} alt - Texto alternativo para la imagen
@@ -67,15 +68,25 @@ const ImageOptimized = ({
     className
   );
 
-  // Define image classes
+  // Define image classes with enhanced quality settings
   const imgClasses = cn(
-    "w-full h-full transition-opacity duration-300",
+    "w-full h-full transition-opacity duration-300 select-none",
     {
-      "object-cover": aspectRatio !== "auto",
+      "object-contain": aspectRatio === "square",
+      "object-cover": aspectRatio === "video",
+      "object-contain": aspectRatio === "auto",
       "opacity-0": !isLoaded,
       "opacity-100": isLoaded,
     }
   );
+
+  // Enhanced style object for better image quality
+  const enhancedStyle = {
+    imageRendering: 'high-quality' as const,
+    WebkitImageRendering: 'high-quality' as const,
+    msInterpolationMode: 'bicubic' as const,
+    ...style
+  };
 
   return (
     <div className={containerClasses} style={style} onClick={onClick}>
@@ -83,14 +94,17 @@ const ImageOptimized = ({
         src={imgSrc}
         alt={alt}
         className={imgClasses}
+        style={enhancedStyle}
         loading={lazy ? "lazy" : "eager"}
         onLoad={() => setIsLoaded(true)}
         onError={handleError}
+        draggable={false}
       />
       
-      {/* Placeholder/Loading state */}
+      {/* Placeholder/Loading state mejorado */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-100 animate-pulse flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center rounded-lg">
+          <div className="w-12 h-12 border-4 border-haby-primary/20 border-t-haby-primary rounded-full animate-spin" />
           <span className="sr-only">Cargando imagen...</span>
         </div>
       )}
