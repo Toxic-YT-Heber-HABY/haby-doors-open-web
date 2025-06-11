@@ -58,9 +58,8 @@ const ThreeDModelFallback = ({
             className="w-full h-full object-contain filter drop-shadow-2xl"
             aspectRatio="square"
             style={{
-              imageRendering: 'crisp-edges',
-              WebkitImageRendering: 'crisp-edges',
-              msInterpolationMode: 'nearest-neighbor'
+              imageRendering: 'crisp-edges' as any,
+              msInterpolationMode: 'nearest-neighbor' as any
             }}
           />
           

@@ -68,23 +68,21 @@ const ImageOptimized = ({
     className
   );
 
-  // Define image classes with enhanced quality settings
+  // Define image classes with enhanced quality settings - fix duplicate object-fit
   const imgClasses = cn(
     "w-full h-full transition-opacity duration-300 select-none",
     {
-      "object-contain": aspectRatio === "square",
-      "object-cover": aspectRatio === "video",
+      "object-cover": aspectRatio === "square" || aspectRatio === "video",
       "object-contain": aspectRatio === "auto",
       "opacity-0": !isLoaded,
       "opacity-100": isLoaded,
     }
   );
 
-  // Enhanced style object for better image quality
-  const enhancedStyle = {
-    imageRendering: 'high-quality' as const,
-    WebkitImageRendering: 'high-quality' as const,
-    msInterpolationMode: 'bicubic' as const,
+  // Enhanced style object for better image quality - fix invalid CSS properties
+  const enhancedStyle: React.CSSProperties = {
+    imageRendering: 'crisp-edges',
+    msInterpolationMode: 'bicubic' as any, // Cast to any for IE compatibility
     ...style
   };
 
