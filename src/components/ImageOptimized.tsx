@@ -68,7 +68,7 @@ const ImageOptimized = ({
     className
   );
 
-  // Define image classes with enhanced quality settings
+  // Define image classes
   const imgClasses = cn(
     "w-full h-full transition-opacity duration-300 select-none",
     {
@@ -79,30 +79,22 @@ const ImageOptimized = ({
     }
   );
 
-  // Enhanced style object for better image quality using standard CSS properties
-  const enhancedStyle: React.CSSProperties = {
-    imageRendering: 'auto',
-    ...style
-  };
-
   return (
     <div className={containerClasses} style={style} onClick={onClick}>
       <img
         src={imgSrc}
         alt={alt}
         className={imgClasses}
-        style={enhancedStyle}
         loading={lazy ? "lazy" : "eager"}
         onLoad={() => setIsLoaded(true)}
         onError={handleError}
         draggable={false}
       />
       
-      {/* Placeholder/Loading state mejorado */}
+      {/* Loading state */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center rounded-lg">
-          <div className="w-12 h-12 border-4 border-haby-primary/20 border-t-haby-primary rounded-full animate-spin" />
-          <span className="sr-only">Cargando imagen...</span>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-haby-primary/20 border-t-haby-primary rounded-full animate-spin" />
         </div>
       )}
     </div>
