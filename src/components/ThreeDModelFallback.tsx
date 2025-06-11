@@ -57,10 +57,6 @@ const ThreeDModelFallback = ({
             alt="HABY Logo"
             className="w-full h-full object-contain filter drop-shadow-2xl"
             aspectRatio="square"
-            style={{
-              imageRendering: 'crisp-edges' as any,
-              msInterpolationMode: 'nearest-neighbor' as any
-            }}
           />
           
           {/* Overlay para mejorar la definición */}

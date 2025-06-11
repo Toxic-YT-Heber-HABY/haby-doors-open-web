@@ -68,7 +68,7 @@ const ImageOptimized = ({
     className
   );
 
-  // Define image classes with enhanced quality settings - fix duplicate object-fit
+  // Define image classes with enhanced quality settings
   const imgClasses = cn(
     "w-full h-full transition-opacity duration-300 select-none",
     {
@@ -79,10 +79,9 @@ const ImageOptimized = ({
     }
   );
 
-  // Enhanced style object for better image quality - fix invalid CSS properties
+  // Enhanced style object for better image quality using standard CSS properties
   const enhancedStyle: React.CSSProperties = {
-    imageRendering: 'crisp-edges',
-    msInterpolationMode: 'bicubic' as any, // Cast to any for IE compatibility
+    imageRendering: 'auto',
     ...style
   };
 
