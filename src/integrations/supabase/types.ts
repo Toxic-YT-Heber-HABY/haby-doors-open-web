@@ -9,13 +9,96 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      admin_users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_active: boolean
+          last_login: string | null
+          password_hash: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          password_hash: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          password_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          category: string
+          client: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          image: string
+          title: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          category: string
+          client?: string | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          id?: string
+          image: string
+          title: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          category?: string
+          client?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          image?: string
+          title?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_admin_user: {
+        Args: { admin_email: string; admin_password: string }
+        Returns: string
+      }
+      verify_admin_auth: {
+        Args: { admin_email: string; admin_password: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AdminAuth from "@/components/AdminAuth";
 import { toast } from 'sonner';
 import { 
   PlusCircle, 
@@ -13,105 +13,26 @@ import {
   Loader2, 
   ExternalLink 
 } from 'lucide-react';
-
-// Definición de proyecto
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  url: string;
-  client: string;
-}
+import { useAdminAuth } from '@/hooks/useAdminAuth';
+import { useProjects, Project } from '@/hooks/useProjects';
 
 const DEFAULT_IMAGE = "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png";
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const { isAuthenticated, isLoading: authLoading } = useAdminAuth();
+  const { projects, isLoading: projectsLoading, createProject, updateProject, deleteProject } = useProjects();
+  const [editingProject, setEditingProject] = useState<Partial<Project> | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  // Verificar autorización - en una implementación real, esto sería a través de una API
   useEffect(() => {
-    // Simulación de verificación de autorización
-    const checkAuth = () => {
-      // En una implementación real, aquí verificaríamos el token o sesión
-      const authorized = sessionStorage.getItem('adminAuthorized') === 'true';
-      setIsAuthorized(authorized);
-      setIsLoading(false);
-      
-      if (!authorized) {
-        toast.error("No estás autorizado para acceder a esta página");
-        navigate('/');
-      }
-    };
-    
-    // Simulamos un pequeño retraso para la carga
-    setTimeout(checkAuth, 500);
-    
-    // Simulación de carga de proyectos - en un caso real, esto vendría de una API
-    const savedProjects = localStorage.getItem('habyProjects');
-    if (savedProjects) {
-      setProjects(JSON.parse(savedProjects));
-    } else {
-      // Proyectos iniciales
-      const initialProjects = [
-        {
-          id: "1",
-          title: "HABYKeys",
-          description: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
-          image: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
-          category: "Productividad",
-          url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
-          client: "Perla Itzel Rosales Flores"
-        },
-        {
-          id: "2",
-          title: "HABY Score Tracker",
-          description: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
-          image: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
-          category: "Educación",
-          url: "https://prep-score-tracker.lovable.app",
-          client: "Prof. Martha Norma Ramírez Albarrán"
-        },
-        {
-          id: "3",
-          title: "HABY CLASS",
-          description: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
-          image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
-          category: "Proyecto Escolar",
-          url: "#",
-          client: "Proyecto Personal"
-        },
-        {
-          id: "4",
-          title: "Progresión 8: Los poderes fácticos y el Estado",
-          description: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
-          image: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
-          category: "Educacional e Informativa",
-          url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
-          client: "Colegio De Estudios y Tecnológicos Del Estado De México"
-        }
-      ];
-      setProjects(initialProjects);
-      localStorage.setItem('habyProjects', JSON.stringify(initialProjects));
+    if (!authLoading && !isAuthenticated) {
+      // Don't redirect, just show the auth form
     }
-    
-  }, [navigate]);
-
-  // Esta función simula lo que normalmente sería una petición a un backend
-  const saveProjects = (updatedProjects: Project[]) => {
-    localStorage.setItem('habyProjects', JSON.stringify(updatedProjects));
-    setProjects(updatedProjects);
-  };
+  }, [authLoading, isAuthenticated, navigate]);
 
   const handleAddProject = () => {
     setEditingProject({
-      id: Date.now().toString(),
       title: '',
       description: '',
       category: '',
@@ -127,30 +48,52 @@ const Admin = () => {
     setIsFormOpen(true);
   };
 
-  const handleDeleteProject = (id: string) => {
+  const handleDeleteProject = async (id: string) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este proyecto?')) {
-      const updatedProjects = projects.filter(project => project.id !== id);
-      saveProjects(updatedProjects);
-      toast.success('Proyecto eliminado correctamente');
+      await deleteProject(id);
     }
   };
 
-  const handleSaveProject = (e: React.FormEvent) => {
+  const handleSaveProject = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!editingProject) return;
     
-    const updatedProjects = editingProject.id 
-      ? projects.map(p => p.id === editingProject.id ? editingProject : p)
-      : [...projects, editingProject];
+    try {
+      if (editingProject.id) {
+        // Update existing project
+        await updateProject(editingProject.id, {
+          title: editingProject.title!,
+          description: editingProject.description!,
+          category: editingProject.category!,
+          image: editingProject.image!,
+          url: editingProject.url || null,
+          client: editingProject.client || null
+        });
+      } else {
+        // Create new project
+        await createProject({
+          title: editingProject.title!,
+          description: editingProject.description!,
+          category: editingProject.category!,
+          image: editingProject.image!,
+          url: editingProject.url || null,
+          client: editingProject.client || null
+        });
+      }
       
-    saveProjects(updatedProjects);
-    toast.success('Proyecto guardado correctamente');
-    setEditingProject(null);
-    setIsFormOpen(false);
+      setEditingProject(null);
+      setIsFormOpen(false);
+    } catch (error) {
+      console.error('Error saving project:', error);
+    }
   };
 
-  if (isLoading) {
+  const handleAuthSuccess = () => {
+    // Auth successful, component will re-render with isAuthenticated = true
+  };
+
+  if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
@@ -163,8 +106,8 @@ const Admin = () => {
     );
   }
 
-  if (!isAuthorized) {
-    return null; // La redirección ya se maneja en el useEffect
+  if (!isAuthenticated) {
+    return <AdminAuth onAuthSuccess={handleAuthSuccess} />;
   }
 
   return (
@@ -207,7 +150,7 @@ const Admin = () => {
                     <input
                       id="title"
                       type="text"
-                      value={editingProject.title}
+                      value={editingProject.title || ''}
                       onChange={(e) => setEditingProject({...editingProject, title: e.target.value})}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                       required
@@ -219,7 +162,7 @@ const Admin = () => {
                     <input
                       id="category"
                       type="text"
-                      value={editingProject.category}
+                      value={editingProject.category || ''}
                       onChange={(e) => setEditingProject({...editingProject, category: e.target.value})}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                       required
@@ -230,7 +173,7 @@ const Admin = () => {
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descripción</label>
                     <textarea
                       id="description"
-                      value={editingProject.description}
+                      value={editingProject.description || ''}
                       onChange={(e) => setEditingProject({...editingProject, description: e.target.value})}
                       rows={4}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
@@ -243,7 +186,7 @@ const Admin = () => {
                     <input
                       id="url"
                       type="url"
-                      value={editingProject.url}
+                      value={editingProject.url || ''}
                       onChange={(e) => setEditingProject({...editingProject, url: e.target.value})}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                     />
@@ -254,7 +197,7 @@ const Admin = () => {
                     <input
                       id="client"
                       type="text"
-                      value={editingProject.client}
+                      value={editingProject.client || ''}
                       onChange={(e) => setEditingProject({...editingProject, client: e.target.value})}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                     />
@@ -265,7 +208,7 @@ const Admin = () => {
                     <input
                       id="image"
                       type="text"
-                      value={editingProject.image}
+                      value={editingProject.image || ''}
                       onChange={(e) => setEditingProject({...editingProject, image: e.target.value})}
                       className="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                     />
@@ -297,60 +240,65 @@ const Admin = () => {
               </div>
             )}
 
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">ID</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Título</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Categoría</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Cliente</th>
-                    <th className="py-3 px-4 text-right text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projects.map(project => (
-                    <tr key={project.id} className="hover:bg-gray-50 border-b">
-                      <td className="py-3 px-4">{project.id}</td>
-                      <td className="py-3 px-4">{project.title}</td>
-                      <td className="py-3 px-4">{project.category}</td>
-                      <td className="py-3 px-4">{project.client}</td>
-                      <td className="py-3 px-4 text-right space-x-2">
-                        {project.url && project.url !== '#' && (
-                          <a 
-                            href={project.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex items-center text-haby-primary hover:text-haby-secondary"
+            {projectsLoading ? (
+              <div className="flex justify-center py-8">
+                <Loader2 className="animate-spin h-8 w-8 text-haby-primary" />
+                <span className="ml-2">Cargando proyectos...</span>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Título</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Categoría</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Cliente</th>
+                      <th className="py-3 px-4 text-right text-sm font-medium text-gray-700 uppercase tracking-wider border-b">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {projects.map(project => (
+                      <tr key={project.id} className="hover:bg-gray-50 border-b">
+                        <td className="py-3 px-4">{project.title}</td>
+                        <td className="py-3 px-4">{project.category}</td>
+                        <td className="py-3 px-4">{project.client}</td>
+                        <td className="py-3 px-4 text-right space-x-2">
+                          {project.url && project.url !== '#' && (
+                            <a 
+                              href={project.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="inline-flex items-center text-haby-primary hover:text-haby-secondary"
+                            >
+                              <ExternalLink className="h-5 w-5" />
+                            </a>
+                          )}
+                          <button 
+                            onClick={() => handleEditProject(project)}
+                            className="text-blue-600 hover:text-blue-800"
                           >
-                            <ExternalLink className="h-5 w-5" />
-                          </a>
-                        )}
-                        <button 
-                          onClick={() => handleEditProject(project)}
-                          className="text-blue-600 hover:text-blue-800"
-                        >
-                          <Edit className="h-5 w-5" />
-                        </button>
-                        <button 
-                          onClick={() => handleDeleteProject(project.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 className="h-5 w-5" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                  {projects.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="py-4 text-center text-gray-500">
-                        No hay proyectos disponibles
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                            <Edit className="h-5 w-5" />
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteProject(project.id)}
+                            className="text-red-600 hover:text-red-800"
+                          >
+                            <Trash2 className="h-5 w-5" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                    {projects.length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="py-4 text-center text-gray-500">
+                          No hay proyectos disponibles
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </main>

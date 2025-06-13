@@ -1,16 +1,17 @@
-
 import { useState } from 'react';
-import { Menu, X, ChevronDown, Plus } from 'lucide-react';
+import { Menu, X, ChevronDown, Plus, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "sonner";
 import AdminLoginModal from './AdminLoginModal';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated, logoutAdmin } = useAdminAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,17 +24,21 @@ const Navbar = () => {
   };
 
   const openAdminModal = () => {
-    setIsAdminModalOpen(true);
+    if (isAuthenticated) {
+      navigate("/admin");
+    } else {
+      setIsAdminModalOpen(true);
+    }
   };
 
-  const handleAdminLogin = (password: string) => {
-    if (password === "B4$w7K&1zP!X") {
-      toast.success("Acceso autorizado");
-      navigate("/admin");
-      setIsAdminModalOpen(false);
-    } else {
-      toast.error("Código de acceso incorrecto");
-    }
+  const handleAdminLogin = () => {
+    navigate("/admin");
+    setIsAdminModalOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logoutAdmin();
+    navigate("/");
   };
 
   return (
@@ -88,24 +93,64 @@ const Navbar = () => {
               <Link to="/contacto" className="btn-primary">
                 Contáctanos
               </Link>
-              <button 
-                onClick={openAdminModal}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
-                aria-label="Administración"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+              
+              {/* Admin button with authentication state */}
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={openAdminModal}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
+                    aria-label="Panel de administración"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                  <button 
+                    onClick={handleLogout}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
+                    aria-label="Cerrar sesión"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={openAdminModal}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
+                  aria-label="Acceso de administrador"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              )}
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-3">
-              <button 
-                onClick={openAdminModal}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
-                aria-label="Administración"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={openAdminModal}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
+                    aria-label="Panel de administración"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                  <button 
+                    onClick={handleLogout}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
+                    aria-label="Cerrar sesión"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={openAdminModal}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-haby-primary text-white hover:bg-haby-secondary transition-colors"
+                  aria-label="Acceso de administrador"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              )}
               <button onClick={toggleMenu}>
                 {isOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
               </button>
