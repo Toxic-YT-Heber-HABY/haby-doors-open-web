@@ -95,7 +95,7 @@ const useQueryParam = (param: string) => {
   return params.get(param);
 };
 
-// NUEVO: función para estados iniciales
+// NUEVO: función para estados iniciales, ahora incluye más campos
 const getInitialFormData = () => ({
   nombre: "",
   email: "",
@@ -105,11 +105,21 @@ const getInitialFormData = () => ({
   institucion: "",
   area: "",
   ubicacion: "",
+  proyecto_nombre: "",
+  proyecto_objetivo: "",
+  proyecto_estado: "",
+  proyecto_fechainicio: "",
+  proyecto_descripcion: "",
   tipo_impacto: "",
+  grupos_beneficiados: "",
   estimacion_beneficiarios: "",
-  motivacion: "",
+  ubicacion_impacto: "",
+  aliados_colaboradores: "",
   recursos_adicionales: "",
-  web_o_redes: ""
+  plan_seguimiento: "",
+  plan_sustentabilidad: "",
+  web_o_redes: "",
+  motivacion: ""
 });
 
 const Contacto = () => {
@@ -149,8 +159,15 @@ const Contacto = () => {
         !formData.institucion ||
         !formData.area ||
         !formData.ubicacion ||
+        !formData.proyecto_nombre ||
+        !formData.proyecto_objetivo ||
+        !formData.proyecto_estado ||
+        !formData.proyecto_fechainicio ||
+        !formData.proyecto_descripcion ||
         !formData.tipo_impacto ||
+        !formData.grupos_beneficiados ||
         !formData.estimacion_beneficiarios ||
+        !formData.ubicacion_impacto ||
         !formData.motivacion
       ) {
         toast.error("Completa todos los campos obligatorios del plan gratuito.");
@@ -281,20 +298,6 @@ const Contacto = () => {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
-                      Teléfono
-                    </label>
-                    <input
-                      type="tel"
-                      id="telefono"
-                      name="telefono"
-                      value={formData.telefono}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                      placeholder="Tu número de teléfono"
-                    />
-                  </div>
-                  <div>
                     <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">
                       Servicio de interés*
                     </label>
@@ -320,14 +323,14 @@ const Contacto = () => {
                     </select>
                   </div>
 
-                  {/* --- NUEVAS SECCIONES LNA GRATUITO --- */}
+                  {/* --- SECCIÓN: Datos del solicitante --- */}
                   {isLNAGratuito && (
                     <>
                       <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Información del solicitante</h3>
+                        <h3 className="text-lg font-bold text-green-700 mb-2">Datos del solicitante</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="institucion" className="text-sm text-gray-700">Institución / comunidad / colectivo *</label>
+                            <label htmlFor="institucion" className="text-sm text-gray-700">Organización, institución o colectivo *</label>
                             <input
                               type="text"
                               id="institucion"
@@ -353,7 +356,7 @@ const Contacto = () => {
                             />
                           </div>
                           <div>
-                            <label htmlFor="ubicacion" className="text-sm text-gray-700">Ubicación geográfica *</label>
+                            <label htmlFor="ubicacion" className="text-sm text-gray-700">Ubicación institucional *</label>
                             <input
                               type="text"
                               id="ubicacion"
@@ -365,13 +368,103 @@ const Contacto = () => {
                               required
                             />
                           </div>
+                          <div>
+                            <label htmlFor="telefono" className="text-sm text-gray-700">Teléfono de contacto</label>
+                            <input
+                              type="tel"
+                              id="telefono"
+                              name="telefono"
+                              value={formData.telefono}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="Número de teléfono"
+                            />
+                          </div>
                         </div>
                       </div>
+                      
+                      {/* --- SECCIÓN: Sobre el proyecto --- */}
                       <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Información del proyecto / iniciativa</h3>
-                        <div className="space-y-4">
+                        <h3 className="text-lg font-bold text-green-700 mb-2">Sobre el proyecto / iniciativa</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="tipo_impacto" className="text-sm text-gray-700">Tipo de impacto social/comunitario *</label>
+                            <label htmlFor="proyecto_nombre" className="text-sm text-gray-700">Nombre del proyecto *</label>
+                            <input
+                              type="text"
+                              id="proyecto_nombre"
+                              name="proyecto_nombre"
+                              value={formData.proyecto_nombre}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="Ejemplo: Biblioteca digital para niños"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="proyecto_fechainicio" className="text-sm text-gray-700">Fecha prevista de inicio *</label>
+                            <input
+                              type="date"
+                              id="proyecto_fechainicio"
+                              name="proyecto_fechainicio"
+                              value={formData.proyecto_fechainicio}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="proyecto_estado" className="text-sm text-gray-700">Estado del proyecto *</label>
+                            <select
+                              id="proyecto_estado"
+                              name="proyecto_estado"
+                              value={formData.proyecto_estado}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              required
+                            >
+                              <option value="">Selecciona...</option>
+                              <option value="Idea">Solo idea</option>
+                              <option value="En planeación">En planeación</option>
+                              <option value="En curso">En ejecución</option>
+                              <option value="Con resultados iniciales">Con resultados iniciales</option>
+                              <option value="Consolidado">Consolidado</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label htmlFor="proyecto_objetivo" className="text-sm text-gray-700">Objetivo principal *</label>
+                            <input
+                              type="text"
+                              id="proyecto_objetivo"
+                              name="proyecto_objetivo"
+                              value={formData.proyecto_objetivo}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="¿Qué se busca lograr?"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div className="my-3">
+                          <label htmlFor="proyecto_descripcion" className="text-sm text-gray-700">Descripción breve *</label>
+                          <textarea
+                            id="proyecto_descripcion"
+                            name="proyecto_descripcion"
+                            value={formData.proyecto_descripcion}
+                            onChange={handleInputChange}
+                            rows={3}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                            placeholder="Describe claramente el proyecto, a quién beneficia y cómo funciona"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      {/* --- SECCIÓN: Impacto social o comunitario --- */}
+                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                        <h3 className="text-lg font-bold text-green-700 mb-2">Impacto social/comunitario</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="tipo_impacto" className="text-sm text-gray-700">Tipo de impacto *</label>
                             <select
                               id="tipo_impacto"
                               name="tipo_impacto"
@@ -391,7 +484,20 @@ const Contacto = () => {
                             </select>
                           </div>
                           <div>
-                            <label htmlFor="estimacion_beneficiarios" className="text-sm text-gray-700">Estimación de beneficiarios *</label>
+                            <label htmlFor="grupos_beneficiados" className="text-sm text-gray-700">Grupo(s) beneficiado(s) *</label>
+                            <input
+                              type="text"
+                              id="grupos_beneficiados"
+                              name="grupos_beneficiados"
+                              value={formData.grupos_beneficiados}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="Ej: niños, comunidad local, mujeres, etc."
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="estimacion_beneficiarios" className="text-sm text-gray-700">Personas beneficiadas *</label>
                             <input
                               type="number"
                               min={1}
@@ -405,18 +511,51 @@ const Contacto = () => {
                             />
                           </div>
                           <div>
-                            <label htmlFor="motivacion" className="text-sm text-gray-700">¿Por qué solicita el plan gratuito para este proyecto?* <span className="font-normal text-xs">(sea breve y claro)</span></label>
-                            <textarea
-                              id="motivacion"
-                              name="motivacion"
-                              value={formData.motivacion}
+                            <label htmlFor="ubicacion_impacto" className="text-sm text-gray-700">Ubicación del impacto *</label>
+                            <input
+                              type="text"
+                              id="ubicacion_impacto"
+                              name="ubicacion_impacto"
+                              value={formData.ubicacion_impacto}
                               onChange={handleInputChange}
-                              rows={3}
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Explica la motivación social/comunitaria..."
+                              placeholder="Ciudad, municipio, localidad"
                               required
                             />
                           </div>
+                          <div>
+                            <label htmlFor="aliados_colaboradores" className="text-sm text-gray-700">Aliados o colaboradores</label>
+                            <input
+                              type="text"
+                              id="aliados_colaboradores"
+                              name="aliados_colaboradores"
+                              value={formData.aliados_colaboradores}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="Instituciones aliadas, ONGs, etc."
+                            />
+                          </div>
+                        </div>
+                        {/* Motivación social/comunitaria */}
+                        <div className="my-3">
+                          <label htmlFor="motivacion" className="text-sm text-gray-700">¿Por qué solicita el plan gratuito?* <span className="font-normal text-xs">(breve y claro)</span></label>
+                          <textarea
+                            id="motivacion"
+                            name="motivacion"
+                            value={formData.motivacion}
+                            onChange={handleInputChange}
+                            rows={3}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                            placeholder="Explica la motivación social/comunitaria..."
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* --- SECCIÓN: Recursos y sustentabilidad --- */}
+                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                        <h3 className="text-lg font-bold text-green-700 mb-2">Recursos y sustentabilidad</h3>
+                        <div className="space-y-4">
                           <div>
                             <label htmlFor="recursos_adicionales" className="text-sm text-gray-700">¿Cuenta con recursos o apoyos adicionales?</label>
                             <input
@@ -427,6 +566,30 @@ const Contacto = () => {
                               onChange={handleInputChange}
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
                               placeholder="Ej: donaciones, equipo voluntario, etc."
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="plan_seguimiento" className="text-sm text-gray-700">¿Cómo planea dar seguimiento al impacto?</label>
+                            <input
+                              type="text"
+                              id="plan_seguimiento"
+                              name="plan_seguimiento"
+                              value={formData.plan_seguimiento}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="¿Cómo documentarán resultados, retroalimentación, etc.?"
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="plan_sustentabilidad" className="text-sm text-gray-700">Plan de sustentabilidad del proyecto</label>
+                            <input
+                              type="text"
+                              id="plan_sustentabilidad"
+                              name="plan_sustentabilidad"
+                              value={formData.plan_sustentabilidad}
+                              onChange={handleInputChange}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                              placeholder="¿Cómo se dará continuidad cuando acabe el apoyo?"
                             />
                           </div>
                           <div>
