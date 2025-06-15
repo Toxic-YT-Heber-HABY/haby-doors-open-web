@@ -105,5 +105,49 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		// Plugin personalizado para gradientes seguros en móviles
+		function({ addUtilities }: { addUtilities: any }) {
+			const newUtilities = {
+				'.text-gradient-safe': {
+					'color': 'var(--haby-primary)',
+					'font-weight': '600',
+					'@media (min-width: 768px) and (hover: hover)': {
+						'background': 'linear-gradient(135deg, var(--haby-primary), var(--haby-accent))',
+						'-webkit-background-clip': 'text',
+						'-webkit-text-fill-color': 'transparent',
+						'background-clip': 'text',
+					}
+				},
+				'.text-gradient-rainbow-safe': {
+					'color': 'var(--haby-accent)',
+					'font-weight': '600',
+					'@media (min-width: 768px) and (hover: hover)': {
+						'background': 'linear-gradient(90deg, var(--haby-accent) 0%, #3b82f6 25%, #10b981 50%, #f59e0b 75%, var(--haby-accent) 100%)',
+						'-webkit-background-clip': 'text',
+						'-webkit-text-fill-color': 'transparent',
+						'background-clip': 'text',
+					}
+				},
+				'.text-gradient-hero-safe': {
+					'color': 'var(--haby-accent)',
+					'font-weight': '700',
+					'@media (min-width: 768px) and (hover: hover)': {
+						'background': 'linear-gradient(135deg, var(--haby-accent), #ec4899, #3b82f6)',
+						'-webkit-background-clip': 'text',
+						'-webkit-text-fill-color': 'transparent',
+						'background-clip': 'text',
+					}
+				},
+				'.bg-gradient-mobile-safe': {
+					'background-color': 'var(--haby-primary)',
+					'@media (min-width: 768px)': {
+						'background': 'linear-gradient(135deg, var(--haby-primary), var(--haby-secondary))',
+					}
+				}
+			}
+			addUtilities(newUtilities)
+		}
+	],
 } satisfies Config;

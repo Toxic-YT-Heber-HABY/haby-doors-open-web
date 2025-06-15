@@ -41,6 +41,10 @@
     --haby-accent: #D946EF;
     --haby-light: #E5DEFF;
     --haby-dark: #2A1065;
+    
+    /* Colores de fallback para gradientes móviles */
+    --haby-gradient-fallback: #9333EA;
+    --text-gradient-fallback: #7E69AB;
   }
 
   .dark {
@@ -202,6 +206,79 @@
       background: rgba(255, 255, 255, 0.9);
     }
   }
+
+  /* Gradientes de texto mejorados con fallbacks para móviles */
+  .text-gradient-primary {
+    /* Fallback para navegadores que no soportan gradientes de texto */
+    color: var(--haby-primary);
+    
+    /* Gradiente moderno */
+    background: linear-gradient(135deg, var(--haby-primary), var(--haby-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Detectar soporte y aplicar fallback en móviles problemáticos */
+    @supports not (-webkit-background-clip: text) {
+      background: none;
+      color: var(--haby-primary);
+    }
+  }
+
+  .text-gradient-rainbow {
+    /* Fallback sólido */
+    color: var(--haby-accent);
+    
+    /* Gradiente arcoíris */
+    background: linear-gradient(90deg, 
+      var(--haby-accent) 0%, 
+      #3b82f6 25%, 
+      #10b981 50%, 
+      #f59e0b 75%, 
+      var(--haby-accent) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Fallback para navegadores sin soporte */
+    @supports not (-webkit-background-clip: text) {
+      background: none;
+      color: var(--haby-accent);
+    }
+  }
+
+  .text-gradient-purple-blue {
+    /* Fallback */
+    color: #9333ea;
+    
+    /* Gradiente púrpura-azul */
+    background: linear-gradient(135deg, #9333ea, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @supports not (-webkit-background-clip: text) {
+      background: none;
+      color: #9333ea;
+    }
+  }
+
+  .text-gradient-pink-purple {
+    /* Fallback */
+    color: var(--haby-accent);
+    
+    /* Gradiente rosa-púrpura */
+    background: linear-gradient(135deg, var(--haby-accent), #ec4899, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @supports not (-webkit-background-clip: text) {
+      background: none;
+      color: var(--haby-accent);
+    }
+  }
 }
 
 /* Utilidades personalizadas */
@@ -252,6 +329,51 @@
 
   .scroll-snap-center {
     scroll-snap-align: center;
+  }
+
+  /* Nuevas utilidades de gradientes responsivos */
+  .gradient-text-safe {
+    /* Fallback universal */
+    color: var(--haby-primary);
+    font-weight: 600;
+    
+    /* Solo aplicar gradiente en dispositivos de escritorio */
+    @media (min-width: 768px) and (hover: hover) {
+      background: linear-gradient(135deg, var(--haby-primary), var(--haby-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .gradient-text-rainbow-safe {
+    color: var(--haby-accent);
+    font-weight: 600;
+    
+    @media (min-width: 768px) and (hover: hover) {
+      background: linear-gradient(90deg, 
+        var(--haby-accent) 0%, 
+        #3b82f6 25%, 
+        #10b981 50%, 
+        #f59e0b 75%, 
+        var(--haby-accent) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .gradient-text-hero-safe {
+    color: var(--haby-accent);
+    font-weight: 700;
+    
+    @media (min-width: 768px) and (hover: hover) {
+      background: linear-gradient(135deg, var(--haby-accent), #ec4899, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 }
 

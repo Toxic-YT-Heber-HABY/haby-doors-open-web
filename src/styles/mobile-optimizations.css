@@ -21,6 +21,31 @@
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Fallback para gradientes de texto en dispositivos táctiles */
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple,
+  .bg-gradient-to-r,
+  .bg-gradient-to-br,
+  .bg-gradient-to-tr {
+    background: var(--haby-primary) !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: border-box !important;
+    color: white !important;
+  }
+
+  /* Específico para textos con gradientes */
+  .gradient-text-safe,
+  .gradient-text-rainbow-safe,
+  .gradient-text-hero-safe {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: border-box !important;
+  }
 }
 
 /* Optimizaciones para dispositivos de baja potencia */
@@ -32,10 +57,40 @@
     filter: none;
   }
   
-  /* Simplificar gradientes complejos */
+  /* Simplificar gradientes complejos en móviles */
   .bg-gradient-to-br,
-  .bg-gradient-to-r {
+  .bg-gradient-to-r,
+  .bg-gradient-to-tr {
     background: var(--haby-primary) !important;
+  }
+
+  /* Asegurar legibilidad de textos con gradiente en móviles */
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: border-box !important;
+    color: var(--haby-primary) !important;
+    font-weight: 600;
+  }
+
+  /* Utilidades seguras para móviles */
+  .gradient-text-safe {
+    color: var(--haby-primary) !important;
+    background: none !important;
+  }
+
+  .gradient-text-rainbow-safe {
+    color: var(--haby-accent) !important;
+    background: none !important;
+  }
+
+  .gradient-text-hero-safe {
+    color: var(--haby-accent) !important;
+    background: none !important;
   }
   
   /* Optimizar animaciones para móviles */
@@ -66,6 +121,18 @@
     font-size: clamp(0.875rem, 4vw, 1.125rem);
     line-height: 1.6;
   }
+
+  /* Asegurar contraste en elementos importantes */
+  .text-white {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-gray-200,
+  .text-gray-100 {
+    color: #f8fafc !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* Optimizaciones específicas para iPhone */
@@ -84,6 +151,19 @@
   .overflow-auto,
   .overflow-y-auto {
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Forzar fallback de gradientes en iOS problemático */
+  @media (max-width: 768px) {
+    .text-gradient-primary,
+    .text-gradient-rainbow,
+    .text-gradient-purple-blue,
+    .text-gradient-pink-purple {
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      -webkit-text-fill-color: initial !important;
+      color: var(--haby-primary) !important;
+    }
   }
 }
 
@@ -112,6 +192,17 @@
   img, video {
     image-rendering: -webkit-optimize-contrast;
   }
+
+  /* Asegurar fallback de gradientes en Android */
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--haby-primary) !important;
+  }
 }
 
 /* Optimizaciones para dispositivos muy pequeños */
@@ -129,6 +220,21 @@
   .py-16 { padding-top: 2rem; padding-bottom: 2rem; }
   .py-20 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
   .py-24 { padding-top: 3rem; padding-bottom: 3rem; }
+
+  /* Forzar texto legible en pantallas muy pequeñas */
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple,
+  .gradient-text-safe,
+  .gradient-text-rainbow-safe,
+  .gradient-text-hero-safe {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--haby-primary) !important;
+    font-weight: 700 !important;
+  }
 }
 
 /* Modo de alto contraste */
@@ -142,6 +248,21 @@
   .bg-opacity-10,
   .bg-opacity-20 {
     background-opacity: 0.8 !important;
+  }
+
+  /* Asegurar máximo contraste para gradientes */
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple,
+  .gradient-text-safe,
+  .gradient-text-rainbow-safe,
+  .gradient-text-hero-safe {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--foreground) !important;
+    font-weight: 800 !important;
   }
 }
 
@@ -177,7 +298,47 @@
   }
   
   /* Reducir gradientes complejos */
-  .bg-gradient-to-br {
-    background: linear-gradient(45deg, var(--haby-primary), var(--haby-secondary)) !important;
+  .bg-gradient-to-br,
+  .text-gradient-primary,
+  .text-gradient-rainbow,
+  .text-gradient-purple-blue,
+  .text-gradient-pink-purple {
+    background: var(--haby-primary) !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    color: white !important;
+  }
+
+  .gradient-text-safe,
+  .gradient-text-rainbow-safe,
+  .gradient-text-hero-safe {
+    background: none !important;
+    color: var(--haby-primary) !important;
+  }
+}
+
+/* Detección específica de navegadores móviles problemáticos */
+@media (max-width: 767px) {
+  /* Fallback universal para móviles */
+  .bg-clip-text,
+  [class*="text-gradient"],
+  [class*="gradient-text"] {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: border-box !important;
+    color: var(--haby-primary) !important;
+    font-weight: 600;
+  }
+
+  /* Asegurar que los textos importantes mantengan contraste */
+  .text-white {
+    color: white !important;
+    background: none !important;
+  }
+
+  .text-haby-accent {
+    color: var(--haby-accent) !important;
+    background: none !important;
   }
 }
