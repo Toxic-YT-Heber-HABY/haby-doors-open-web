@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { ContactEmailRequest } from "./types.ts";
@@ -43,7 +42,7 @@ serve(async (req) => {
     let emailToHaby;
     try {
       emailToHaby = await resend.emails.send({
-        from: "HABY Contact <onboarding@resend.dev>",
+        from: "HABY <habyopenthedoors@gmail.com>",
         to: ["info@habydoors.com"], // puedes agregar más destinatarios aquí si lo deseas
         subject: `Nueva consulta de ${nombre} - ${servicio}`,
         html: `
@@ -68,7 +67,7 @@ serve(async (req) => {
     let emailToClient;
     try {
       emailToClient = await resend.emails.send({
-        from: "HABY <onboarding@resend.dev>",
+        from: "HABY <habyopenthedoors@gmail.com>",
         to: [email],
         subject: `¡Solicitud recibida! Seguimiento PRIORITARIO a tu petición [${servicio}]`,
         html: `
