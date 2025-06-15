@@ -362,7 +362,7 @@ const PricingSection = () => {
           <Link to="/contacto" className="btn-primary">
             Solicitar cotización
           </Link>
-        </motion-div>
+        </motion.div>
       </div>
     </section>
   );
