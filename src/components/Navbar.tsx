@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import AdminLoginModal from './AdminLoginModal';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
+import AdminButtons from './AdminButtons';
+import DesktopNavMenu from './DesktopNavMenu';
+import MobileNavMenu from './MobileNavMenu';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,96 +62,22 @@ const Navbar = () => {
             </Link>
 
             {/* Navegación Desktop */}
-            <div className="hidden md:flex items-center space-x-5">
-              <Link to="/" className="nav-link" tabIndex={0} aria-label="Inicio">Inicio</Link>
-              <Link to="/sobre-nosotros" className="nav-link" tabIndex={0} aria-label="Sobre Nosotros">Sobre Nosotros</Link>
-              {/* menú servicios */}
-              <div className="relative group">
-                <button 
-                  onClick={toggleServices} 
-                  className="nav-link flex items-center"
-                  tabIndex={0}
-                  aria-label="Servicios"
-                >
-                  Servicios <ChevronDown className="ml-1 h-4 w-4 transition-transform" />
-                </button>
-                <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg z-40 opacity-0 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 transition-all duration-200 origin-top-left pointer-events-none group-hover:pointer-events-auto">
-                  <div className="py-2">
-                    <Link to="/servicios" className="dropdown-link" tabIndex={0} aria-label="Todos los Servicios">
-                      Todos los Servicios
-                    </Link>
-                    <Link to="/desarrollo-web" className="dropdown-link" tabIndex={0} aria-label="Desarrollo Web">
-                      Desarrollo Web
-                    </Link>
-                    <Link to="/soluciones-personalizadas" className="dropdown-link" tabIndex={0} aria-label="Soluciones Personalizadas">
-                      Soluciones Personalizadas
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <Link to="/portafolio" className="nav-link" tabIndex={0} aria-label="Portafolio">Portafolio</Link>
-              <Link to="/precios" className="nav-link" tabIndex={0} aria-label="Precios">Precios</Link>
-              <Link to="/contacto" className="btn-primary hover:scale-105 active:scale-95 transition-transform" tabIndex={0} aria-label="Contáctanos">
-                Contáctanos
-              </Link>
-              
-              {/* Admin buttons */}
-              {isAuthenticated ? (
-                <div className="flex items-center space-x-2">
-                  <button 
-                    onClick={openAdminModal}
-                    className="icon-btn bg-haby-primary hover:bg-haby-secondary"
-                    aria-label="Panel de administración"
-                  >
-                    <Plus />
-                  </button>
-                  <button 
-                    onClick={handleLogout}
-                    className="icon-btn bg-red-500 hover:bg-red-600"
-                    aria-label="Cerrar sesión"
-                  >
-                    <LogOut />
-                  </button>
-                </div>
-              ) : (
-                <button 
-                  onClick={openAdminModal}
-                  className="icon-btn bg-haby-primary hover:bg-haby-secondary"
-                  aria-label="Acceso de administrador"
-                >
-                  <Plus />
-                </button>
-              )}
-            </div>
+            <DesktopNavMenu
+              servicesOpen={servicesOpen}
+              toggleServices={toggleServices}
+              isAuthenticated={isAuthenticated}
+              openAdminModal={openAdminModal}
+              handleLogout={handleLogout}
+              AdminButtons={AdminButtons}
+            />
 
             {/* Botón menú móvil */}
             <div className="md:hidden flex items-center gap-2">
-              {isAuthenticated ? (
-                <div className="flex items-center space-x-2">
-                  <button 
-                    onClick={openAdminModal}
-                    className="icon-btn bg-haby-primary hover:bg-haby-secondary"
-                    aria-label="Panel de administración"
-                  >
-                    <Plus />
-                  </button>
-                  <button 
-                    onClick={handleLogout}
-                    className="icon-btn bg-red-500 hover:bg-red-600"
-                    aria-label="Cerrar sesión"
-                  >
-                    <LogOut />
-                  </button>
-                </div>
-              ) : (
-                <button 
-                  onClick={openAdminModal}
-                  className="icon-btn bg-haby-primary hover:bg-haby-secondary"
-                  aria-label="Acceso de administrador"
-                >
-                  <Plus />
-                </button>
-              )}
+              <AdminButtons
+                isAuthenticated={isAuthenticated}
+                openAdminModal={openAdminModal}
+                handleLogout={handleLogout}
+              />
               <button 
                 className="icon-btn border border-gray-200 bg-white hover:bg-haby-light"
                 onClick={toggleMenu}
@@ -160,42 +89,12 @@ const Navbar = () => {
           </nav>
 
           {/* Navegación móvil */}
-          {isOpen && (
-            <div className="md:hidden mt-3 pb-4 shadow-inner rounded-lg bg-white/95 animate-fade-in z-40">
-              <div className="flex flex-col space-y-2 px-2">
-                <Link to="/" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Inicio">Inicio</Link>
-                <Link to="/sobre-nosotros" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Sobre Nosotros">Sobre Nosotros</Link>
-                <div>
-                  <button 
-                    onClick={toggleServices} 
-                    className="mobile-link flex items-center w-full"
-                    tabIndex={0}
-                    aria-label="Servicios"
-                  >
-                    Servicios <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {servicesOpen && (
-                    <div className="mt-1 ml-4 flex flex-col space-y-2">
-                      <Link to="/servicios" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Todos los Servicios">
-                        Todos los Servicios
-                      </Link>
-                      <Link to="/desarrollo-web" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Desarrollo Web">
-                        Desarrollo Web
-                      </Link>
-                      <Link to="/soluciones-personalizadas" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Soluciones Personalizadas">
-                        Soluciones Personalizadas
-                      </Link>
-                    </div>
-                  )}
-                </div>
-                <Link to="/portafolio" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Portafolio">Portafolio</Link>
-                <Link to="/precios" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Precios">Precios</Link>
-                <Link to="/contacto" className="mobile-link font-semibold bg-haby-primary/90 text-white rounded-md px-3 py-2 text-center" onClick={toggleMenu} tabIndex={0} aria-label="Contáctanos">
-                  Contáctanos
-                </Link>
-              </div>
-            </div>
-          )}
+          <MobileNavMenu
+            isOpen={isOpen}
+            servicesOpen={servicesOpen}
+            toggleServices={toggleServices}
+            toggleMenu={toggleMenu}
+          />
         </div>
       </header>
       <AdminLoginModal 
