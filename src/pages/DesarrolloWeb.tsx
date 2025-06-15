@@ -288,26 +288,40 @@ const DesarrolloWeb = () => {
                     }}
                   />
                   
-                  {/* Modelo 3D con marco premium mejorado */}
-                  <div className="relative w-full h-full bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-3xl border border-white/30 shadow-2xl overflow-hidden">
+                  {/* Marco premium mejorado */}
+                  <div className="relative w-full h-full bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-3xl border border-white/30 shadow-2xl overflow-hidden flex items-center justify-center">
+                    {/* Fallback visual SIEMPRE visible (debajo o encima del modelo 3D segun el z-index) */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none">
+                      <img
+                        src="/lovable-uploads/photo-1487058792275-0ad4aaf24ca7.jpg"
+                        alt="Monitor con código de ejemplo"
+                        className="w-28 h-28 object-contain opacity-60 mb-3"
+                        draggable="false"
+                      />
+                      <span className="text-white text-lg font-semibold drop-shadow glow-sm opacity-70">Vista previa</span>
+                    </div>
+                    
                     {/* Efectos de borde interno */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-purple-500/10 rounded-3xl"></div>
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent"></div>
                     
-                    <ThreeDModel type="hero" />
+                    {/* Modelo 3D sobre el fallback */}
+                    <div className="relative z-10 w-full h-full">
+                      <ThreeDModel type="hero" />
+                    </div>
                     
                     {/* Efecto de brillo mejorado */}
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
                     
-                    {/* Efectos de esquinas */}
+                    {/* Esquinas */}
                     <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-lg"></div>
                     <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/30 rounded-tr-lg"></div>
                     <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/30 rounded-bl-lg"></div>
                     <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-white/30 rounded-br-lg"></div>
                   </div>
-
-                  {/* Elementos flotantes mejorados */}
+                  
+                  {/* Elementos flotantes */}
                   <motion.div 
                     className="absolute -top-6 left-1/4 bg-gradient-to-r from-white/90 to-white/80 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl border border-white/20"
                     animate={{ y: [0, -10, 0] }}
