@@ -1,6 +1,6 @@
 
 import { Input } from "@/components/ui/input";
-import { Help } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
 const tips = {
@@ -27,7 +27,7 @@ const LNAStep1_UserInfo = ({
             Nombre completo*
             <Tooltip>
               <TooltipTrigger asChild>
-                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><Help size={16} className="text-haby-primary" /></span>
+                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><HelpCircle size={16} className="text-haby-primary" /></span>
               </TooltipTrigger>
               <TooltipContent side="top">{tips.nombre}</TooltipContent>
             </Tooltip>
@@ -48,7 +48,7 @@ const LNAStep1_UserInfo = ({
             Correo electrónico*
             <Tooltip>
               <TooltipTrigger asChild>
-                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><Help size={16} className="text-haby-primary" /></span>
+                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><HelpCircle size={16} className="text-haby-primary" /></span>
               </TooltipTrigger>
               <TooltipContent side="top">{tips.email}</TooltipContent>
             </Tooltip>
@@ -69,7 +69,7 @@ const LNAStep1_UserInfo = ({
             Teléfono <span className="text-xs text-gray-400">(opcional)</span>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><Help size={16} className="text-haby-primary" /></span>
+                <span tabIndex={0} className="ml-1 cursor-help rounded-full bg-gray-100 p-0.5"><HelpCircle size={16} className="text-haby-primary" /></span>
               </TooltipTrigger>
               <TooltipContent side="top">{tips.telefono}</TooltipContent>
             </Tooltip>
