@@ -303,6 +303,7 @@ const PricingSection = () => {
           ))}
         </motion.div>
 
+        {/* Opción LNA gratuita */}
         <motion.div 
           className="mt-16 bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
@@ -332,18 +333,19 @@ const PricingSection = () => {
               
               <div className="flex items-center justify-between">
                 <TermsDialog />
-                
+                {/* Este botón SÍ debe ir a LNA gratuito */}
                 <Link 
                   to="/contacto?plan=lna-gratuito" 
                   className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md font-medium transition-colors"
                 >
-                  Solicitar LNA gratuito
+                  Solicitar LNA gratuita
                 </Link>
               </div>
             </div>
           </div>
         </motion.div>
 
+        {/* CTA Solicitar cotización – corregido para NO llevar a LNA */}
         <motion.div 
           className="text-center mt-12 bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
@@ -356,10 +358,11 @@ const PricingSection = () => {
             Contáctanos para una cotización detallada adaptada a tus necesidades específicas.
             Analizaremos tu problema y te proporcionaremos la mejor solución posible.
           </p>
+          {/* ¡CORREGIDO! Solo va a /contacto, SIN query, para cotización tradicional */}
           <Link to="/contacto" className="btn-primary">
             Solicitar cotización
           </Link>
-        </motion.div>
+        </motion-div>
       </div>
     </section>
   );
