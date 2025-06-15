@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import LNAWizard from "@/components/contacto-lna/LNAWizard";
+import { Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 
 // Resumen visual y modal de términos para plan gratuito
 const lnaTermsSummary = [
@@ -330,53 +331,45 @@ const Contacto = () => {
                   <div className="pt-10 border-t border-gray-200 mt-8">
                     <h3 className="text-base font-bold text-haby-primary mb-3">Síguenos en redes sociales</h3>
                     <div className="flex space-x-3">
+                      {/* Facebook */}
                       <a
                         href="https://www.facebook.com/zadkiel.garcia.31/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                        aria-label="Facebook"
+                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-gray-200"
                       >
-                        {/* Facebook Icon */}
-                        <svg className="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path fillRule="evenodd" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                          <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
-                          <path d="M14.05 6A5 5 0 0 1 18 10"></path>
-                        </svg>
+                        <Facebook className="h-5 w-5 text-blue-600 group-hover:text-haby-primary transition-colors" />
                       </a>
+                      {/* Instagram - ENLACE ACTUALIZADO */}
                       <a
-                        href="https://www.instagram.com/habydoors/"
+                        href="https://www.instagram.com/habyopenthedoors/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-9 w-9 bg-gradient-to-tr from-pink-500 via-yellow-500 to-purple-500 rounded-full flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition will-change-transform group"
-                        style={{ background: "radial-gradient(circle at 30% 120%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)" }}
+                        aria-label="Instagram"
+                        className="h-10 w-10 bg-gradient-to-tr from-pink-500 via-yellow-400 to-purple-500 rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all border border-pink-200"
                       >
-                        {/* Instagram Lucide Icon */}
-                        <span className="sr-only">Instagram</span>
-                        <svg className="h-5 w-5 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.4)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                          <rect width="18" height="18" x="3" y="3" rx="5" ry="5" />
-                          <path d="M16.5 7.5h.01" />
-                          <circle cx="12" cy="12" r="4" />
-                        </svg>
+                        <Instagram className="h-5 w-5 text-white drop-shadow" />
                       </a>
+                      {/* YouTube */}
                       <a
                         href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                        aria-label="YouTube"
+                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-red-200"
                       >
-                        <svg className="h-4 w-4 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
-                        </svg>
+                        <Youtube className="h-5 w-5 text-red-600 group-hover:text-haby-accent transition-colors" />
                       </a>
+                      {/* X / Twitter */}
                       <a
                         href="https://x.com/Haby_Open_Doors"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                        aria-label="Twitter"
+                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-gray-300"
                       >
-                        <svg className="h-4 w-4 text-black" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                        </svg>
+                        <Twitter className="h-5 w-5 text-black group-hover:text-haby-primary transition-colors" />
                       </a>
                     </div>
                   </div>
