@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Code, Lightbulb, Clock, ArrowRight, Zap, Shield, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -56,7 +55,7 @@ const ServicesSection = () => {
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
             ¿Cómo podemos{' '}
-            <span className="bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">
+            <span className="text-gradient-safe force-visible-mobile">
               ayudarte?
             </span>
           </h2>
