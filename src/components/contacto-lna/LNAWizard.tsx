@@ -159,12 +159,19 @@ const LNAWizard = () => {
         onSubmit={isLastStep ? handleSubmit : handleNext}
         autoComplete="off"
       >
-        <StepComponent
-          data={data}
-          onChange={handleChange}
-          lnaTermsAccepted={lnaTermsAccepted}
-          setLnaTermsAccepted={setLnaTermsAccepted}
-        />
+        {step === 4 ? (
+          <StepComponent
+            data={data}
+            onChange={handleChange}
+            lnaTermsAccepted={lnaTermsAccepted}
+            setLnaTermsAccepted={setLnaTermsAccepted}
+          />
+        ) : (
+          <StepComponent
+            data={data}
+            onChange={handleChange}
+          />
+        )}
         <div className="flex justify-between items-center mt-4 gap-4">
           {!isFirstStep ? (
             <button
@@ -191,3 +198,4 @@ const LNAWizard = () => {
 };
 
 export default LNAWizard;
+
