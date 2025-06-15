@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import LNAWizard from "@/components/contacto-lna/LNAWizard";
 
 // Resumen visual y modal de términos para plan gratuito
 const lnaTermsSummary = [
@@ -228,42 +229,13 @@ const Contacto = () => {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Formulario */}
+              {/* FORMULARIO: Si es LNA Gratuito, se reemplaza por Wizard */}
               <div>
-                <div className="mb-10">
-                  <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-                    Envíanos un mensaje
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                    Cuéntanos sobre tu proyecto
-                  </h2>
-                  <p className="text-gray-600">
-                    Completa el formulario a continuación y nos pondremos en contacto contigo a la brevedad.
-                    Ya sea que tengas una idea clara o necesites orientación, estamos aquí para ayudarte.
-                  </p>
-                </div>
-
-                {/* Advertencia y resumen de Términos LNA Gratuito */}
-                {isLNAGratuito && (
-                  <div className="bg-green-50 border-l-4 border-green-500 shadow p-6 rounded-lg mb-8">
-                    <div className="flex items-center mb-3">
-                      <Info className="h-5 w-5 text-green-600 mr-2" />
-                      <span className="font-medium text-green-700">
-                        ¡Estás solicitando el plan LNA Gratuito para bien común!
-                      </span>
-                    </div>
-                    <ol className="mb-3 list-decimal list-inside text-green-800 space-y-1 text-sm">
-                      {lnaTermsSummary.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ol>
-                    <div>
-                      <LNATermsDialog />
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {isLNAGratuito ? (
+                  <LNAWizard />
+                ) : (
+                  // ... keep existing code (formulario habitual) the same ...
+                  <>
                   {/* Sección: Información personal básica */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -608,7 +580,7 @@ const Contacto = () => {
                       </div>
                     </>
                   )}
-
+  
                   {/* Sección mensaje libre */}
                   <div>
                     <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
@@ -666,101 +638,102 @@ const Contacto = () => {
                   </button>
                 </form>
               </div>
-
-              {/* Información de contacto */}
-              <div>
-                <div className="bg-gray-50 rounded-lg p-8 h-full">
-                  <div className="mb-10">
-                    <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-                      Información de contacto
-                    </div>
-                    <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                      ¿Prefieres contactarnos directamente?
-                    </h2>
-                    <p className="text-gray-600">
-                      Contáctanos por cualquiera de estos medios y te responderemos a la brevedad.
-                    </p>
+            )}
+            {/* Información de contacto */}
+            <div>
+              <div className="bg-gray-50 rounded-lg p-8 h-full">
+                <div className="mb-10">
+                  <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Información de contacto
                   </div>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                    ¿Prefieres contactarnos directamente?
+                  </h2>
+                  <p className="text-gray-600">
+                    Contáctanos por cualquiera de estos medios y te responderemos a la brevedad.
+                  </p>
+                </div>
 
-                  <div className="space-y-8">
-                    <div className="flex items-start">
-                      <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
-                        <Phone className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-1">Teléfono / WhatsApp</h3>
-                        <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-haby-primary hover:underline">
-                          56 5368 1237
-                        </a>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Disponible de lunes a viernes de 9:00 a 18:00
-                        </p>
-                      </div>
+                <div className="space-y-8">
+                  <div className="flex items-start">
+                    <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
+                      <Phone className="h-6 w-6" />
                     </div>
-
-                    <div className="flex items-start">
-                      <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
-                        <Mail className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-1">Correo electrónico</h3>
-                        <a href="mailto:info@habydoors.com" className="text-haby-primary hover:underline">
-                          info@habydoors.com
-                        </a>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Te responderemos en menos de 24 horas
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start">
-                      <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
-                        <Clock className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-1">Horario de atención</h3>
-                        <p className="text-gray-700">Lunes a Viernes</p>
-                        <p className="text-gray-700">9:00 - 18:00</p>
-                      </div>
-                    </div>
-
-                    <div className="pt-8 border-t border-gray-200">
-                      <h3 className="text-lg font-bold text-gray-800 mb-4">Síguenos en redes sociales</h3>
-                      <div className="flex space-x-4">
-                        <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                          <svg className="h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                          </svg>
-                        </a>
-                        <a href="https://www.instagram.com/habydoors/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                          <svg className="h-5 w-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.045-1.064.218-1.791.465-2.427a4.902 4.902 0 01-1.768-1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.504 2.504 0 01-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 01-1.768-1.768C2 15.255 2 12 2 12s0-3.255-.417-4.814a2.507 2.507 0 01 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
-                          </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                          <svg className="h-5 w-5 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
-                          </svg>
-                        </a>
-                        <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                          <svg className="h-5 w-5 text-black" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-                          </svg>
-                        </a>
-                      </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800 mb-1">Teléfono / WhatsApp</h3>
+                      <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-haby-primary hover:underline">
+                        56 5368 1237
+                      </a>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Disponible de lunes a viernes de 9:00 a 18:00
+                      </p>
                     </div>
                   </div>
 
-                  <div className="mt-12">
-                    <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 mr-2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
-                        <path d="M14.05 6A5 5 0 0 1 18 10"></path>
-                      </svg>
-                      Contactar por WhatsApp
-                    </a>
+                  <div className="flex items-start">
+                    <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
+                      <Mail className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800 mb-1">Correo electrónico</h3>
+                      <a href="mailto:info@habydoors.com" className="text-haby-primary hover:underline">
+                        info@habydoors.com
+                      </a>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Te responderemos en menos de 24 horas
+                      </p>
+                    </div>
                   </div>
+
+                  <div className="flex items-start">
+                    <div className="h-12 w-12 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0">
+                      <Clock className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800 mb-1">Horario de atención</h3>
+                      <p className="text-gray-700">Lunes a Viernes</p>
+                      <p className="text-gray-700">9:00 - 18:00</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-8 border-t border-gray-200">
+                    <h3 className="text-lg font-bold text-gray-800 mb-4">Síguenos en redes sociales</h3>
+                    <div className="flex space-x-4">
+                      <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                        <svg className="h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path fillRule="evenodd" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                          <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
+                          <path d="M14.05 6A5 5 0 0 1 18 10"></path>
+                        </svg>
+                      </a>
+                      <a href="https://www.instagram.com/habydoors/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                        <svg className="h-5 w-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.045-1.064.218-1.791.465-2.427a4.902 4.902 0 01-1.768-1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.504 2.504 0 01-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255-.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
+                        </svg>
+                      </a>
+                      <a href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                        <svg className="h-5 w-5 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
+                        </svg>
+                      </a>
+                      <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                        <svg className="h-5 w-5 text-black" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 mr-2">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
+                      <path d="M14.05 6A5 5 0 0 1 18 10"></path>
+                    </svg>
+                    Contactar por WhatsApp
+                  </a>
                 </div>
               </div>
             </div>
