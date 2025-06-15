@@ -266,10 +266,94 @@ const Contacto = () => {
                     <LNAWizard />
                   </div>
                 ) : (
-                  // ... keep existing code (formulario alternativo, si no es LNA Gratuito) the same ...
-                  <>
-                  {/* ... */}
-                  </>
+                  <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
+
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                        <input
+                          type="text"
+                          id="nombre"
+                          name="nombre"
+                          value={formData.nombre}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="Tu nombre"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="tu@email.com"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">Teléfono (opcional)</label>
+                        <input
+                          type="tel"
+                          id="telefono"
+                          name="telefono"
+                          value={formData.telefono}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="Tu número de teléfono"
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">Servicio de interés</label>
+                        <select
+                          id="servicio"
+                          name="servicio"
+                          value={formData.servicio}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          required
+                        >
+                          <option value="">Selecciona un servicio</option>
+                          <option value="Plan Básico">Plan Básico</option>
+                          <option value="Plan Profesional">Plan Profesional</option>
+                          <option value="Plan Premium">Plan Premium</option>
+                          <option value="LNA Gratuito">LNA Gratuito (bien común)</option>
+                          <option value="Otro">Otro / Consulta general</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                        <textarea
+                          id="mensaje"
+                          name="mensaje"
+                          value={formData.mensaje}
+                          onChange={handleInputChange}
+                          rows={5}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="Describe el problema que quieres resolver o la idea que tienes en mente..."
+                          required
+                        ></textarea>
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-4 rounded-md transition-colors disabled:opacity-50 flex items-center justify-center"
+                      >
+                        {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                        {!isSubmitting && <Mail className="ml-2 h-4 w-4" />}
+                      </button>
+                    </div>
+                  </form>
                 )}
               </div>
               
@@ -307,9 +391,9 @@ const Contacto = () => {
                       </div>
                       <div>
                         <h3 className="text-base font-bold text-purple-800 mb-1">Correo electrónico</h3>
-                        <a href="mailto:info@habydoors.com"
+                        <a href="mailto:habyopenthedoors@gmail.com"
                           className="text-haby-primary hover:underline font-semibold hover:text-haby-secondary transition-colors">
-                          info@habydoors.com
+                          habyopenthedoors@gmail.com
                         </a>
                         <p className="text-xs text-gray-600 mt-1">
                           Te responderemos en menos de 24 horas
