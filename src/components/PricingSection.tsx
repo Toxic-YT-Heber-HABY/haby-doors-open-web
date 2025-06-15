@@ -188,11 +188,8 @@ const PricingSection = () => {
   };
 
   const handlePlanSelection = async (planId: string) => {
-    if (planId === "premium") {
-      window.location.href = "/contacto?plan=premium";
-      return;
-    }
-
+    if (planId === "premium") return; // Prevención extra: nunca hace location.href aquí
+    
     setLoading(planId);
     
     try {
@@ -287,15 +284,13 @@ const PricingSection = () => {
                   </li>
                 ))}
               </ul>
-              {/* Corrección del botón "Contactar" */}
+              {/* Corrección y validación final de botones */}
               {plan.id === "premium" ? (
                 <Link
                   to="/contacto?plan=premium"
-                  className={`
-                    w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300
-                    bg-haby-primary text-white hover:bg-haby-secondary
-                  `}
+                  className={`w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 bg-haby-primary text-white hover:bg-haby-secondary`}
                   tabIndex={0}
+                  aria-label="Contactar para plan Premium"
                 >
                   {plan.buttonText}
                 </Link>
@@ -303,12 +298,12 @@ const PricingSection = () => {
                 <button
                   onClick={() => handlePlanSelection(plan.id)}
                   disabled={loading === plan.id}
-                  className={`
-                    w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 disabled:opacity-50
-                    ${plan.highlighted
+                  className={`w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 disabled:opacity-50 ${
+                    plan.highlighted
                       ? 'bg-haby-primary text-white hover:bg-haby-secondary'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}
-                  `}
+                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                  }`}
+                  aria-label={`Seleccionar plan ${plan.name}`}
                 >
                   {loading === plan.id ? "Procesando..." : plan.buttonText}
                 </button>
@@ -347,10 +342,11 @@ const PricingSection = () => {
               
               <div className="flex items-center justify-between">
                 <TermsDialog />
-                {/* Este botón SÍ debe ir a LNA gratuito */}
                 <Link 
                   to="/contacto?plan=lna-gratuito" 
                   className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md font-medium transition-colors"
+                  tabIndex={0}
+                  aria-label="Solicitar LNA gratuita"
                 >
                   Solicitar LNA gratuita
                 </Link>
@@ -359,7 +355,7 @@ const PricingSection = () => {
           </div>
         </motion.div>
 
-        {/* CTA Solicitar cotización correctamente corregida */}
+        {/* CTA Solicitar cotización */}
         <motion.div 
           className="text-center mt-12 bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
@@ -372,7 +368,12 @@ const PricingSection = () => {
             Contáctanos para una cotización detallada adaptada a tus necesidades específicas.
             Analizaremos tu problema y te proporcionaremos la mejor solución posible.
           </p>
-          <Link to="/contacto" className="btn-primary" tabIndex={0}>
+          <Link
+            to="/contacto"
+            className="btn-primary"
+            tabIndex={0}
+            aria-label="Solicitar cotización"
+          >
             Solicitar cotización
           </Link>
         </motion.div>
