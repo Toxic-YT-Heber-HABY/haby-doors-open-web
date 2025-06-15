@@ -158,8 +158,8 @@ const LNAWizard = () => {
         onSubmit={isLastStep ? handleSubmit : handleNext}
         autoComplete="off"
       >
-        {StepComponent === steps[4].component ? (
-          <StepComponent
+        {step === 4 ? (
+          <LNAStep5_Confirm
             data={data}
             onChange={handleChange}
             lnaTermsAccepted={lnaTermsAccepted}
