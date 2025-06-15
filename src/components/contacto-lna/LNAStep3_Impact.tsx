@@ -37,7 +37,7 @@ const LNAStep3_Impact = ({
           name="grupos_beneficiados"
           value={data.grupos_beneficiados}
           onChange={e => onChange({ grupos_beneficiados: e.target.value })}
-          placeholder="Ej: niños, comunidad local...",
+          placeholder="Ej: niños, comunidad local..."
           required
         />
       </div>
@@ -73,7 +73,9 @@ const LNAStep3_Impact = ({
         />
       </div>
       <div className="md:col-span-2">
-        <label className="block text-sm font-medium text-gray-700 mb-1">¿Por qué solicita el plan gratuito?* <span className="font-normal text-xs">(breve y claro)</span></label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          ¿Por qué solicita el plan gratuito?* <span className="font-normal text-xs">(breve y claro)</span>
+        </label>
         <textarea
           name="motivacion"
           rows={3}
@@ -89,3 +91,4 @@ const LNAStep3_Impact = ({
 );
 
 export default LNAStep3_Impact;
+

@@ -234,411 +234,411 @@ const Contacto = () => {
                 {isLNAGratuito ? (
                   <LNAWizard />
                 ) : (
-                  // ... keep existing code (formulario habitual) the same ...
                   <>
-                  {/* Sección: Información personal básica */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                        Nombre completo*
-                      </label>
-                      <input
-                        type="text"
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                        placeholder="Tu nombre"
-                        required
-                      />
+                    {/* Sección: Información personal básica */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
+                          Nombre completo*
+                        </label>
+                        <input
+                          type="text"
+                          id="nombre"
+                          name="nombre"
+                          value={formData.nombre}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="Tu nombre"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                          Correo electrónico*
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                          placeholder="tu@email.com"
+                          required
+                        />
+                      </div>
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Correo electrónico*
+                      <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">
+                        Servicio de interés*
                       </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
+                      <select
+                        id="servicio"
+                        name="servicio"
+                        value={formData.servicio}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                        placeholder="tu@email.com"
                         required
-                      />
+                      >
+                        <option value="">Selecciona un servicio</option>
+                        <option value="Plan Básico">Plan Básico - $14,999 MXN</option>
+                        <option value="Plan Profesional">Plan Profesional - $24,999 MXN</option>
+                        <option value="Plan Premium">Plan Premium - Desde $34,999 MXN</option>
+                        <option value="LNA Gratuito">LNA Gratuito (bien común)</option>
+                        <option value="Desarrollo Web Personalizado">Desarrollo Web Personalizado</option>
+                        <option value="Soluciones a Medida">Soluciones a Medida</option>
+                        <option value="Optimización de Procesos">Optimización de Procesos</option>
+                        <option value="Plataformas Colaborativas">Plataformas Colaborativas</option>
+                        <option value="Sistemas de Gestión">Sistemas de Gestión</option>
+                        <option value="Otro">Otro</option>
+                      </select>
                     </div>
-                  </div>
-                  <div>
-                    <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">
-                      Servicio de interés*
-                    </label>
-                    <select
-                      id="servicio"
-                      name="servicio"
-                      value={formData.servicio}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                      required
-                    >
-                      <option value="">Selecciona un servicio</option>
-                      <option value="Plan Básico">Plan Básico - $14,999 MXN</option>
-                      <option value="Plan Profesional">Plan Profesional - $24,999 MXN</option>
-                      <option value="Plan Premium">Plan Premium - Desde $34,999 MXN</option>
-                      <option value="LNA Gratuito">LNA Gratuito (bien común)</option>
-                      <option value="Desarrollo Web Personalizado">Desarrollo Web Personalizado</option>
-                      <option value="Soluciones a Medida">Soluciones a Medida</option>
-                      <option value="Optimización de Procesos">Optimización de Procesos</option>
-                      <option value="Plataformas Colaborativas">Plataformas Colaborativas</option>
-                      <option value="Sistemas de Gestión">Sistemas de Gestión</option>
-                      <option value="Otro">Otro</option>
-                    </select>
-                  </div>
 
-                  {/* --- SECCIÓN: Datos del solicitante --- */}
-                  {isLNAGratuito && (
-                    <>
-                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Datos del solicitante</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label htmlFor="institucion" className="text-sm text-gray-700">Organización, institución o colectivo *</label>
-                            <input
-                              type="text"
-                              id="institucion"
-                              name="institucion"
-                              value={formData.institucion}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Nombre organización, colectivo, etc."
-                              required
-                            />
+                    {/* --- SECCIÓN: Datos del solicitante --- */}
+                    {isLNAGratuito && (
+                      <>
+                        <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                          <h3 className="text-lg font-bold text-green-700 mb-2">Datos del solicitante</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="institucion" className="text-sm text-gray-700">Organización, institución o colectivo *</label>
+                              <input
+                                type="text"
+                                id="institucion"
+                                name="institucion"
+                                value={formData.institucion}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Nombre organización, colectivo, etc."
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="area" className="text-sm text-gray-700">Área o sector *</label>
+                              <input
+                                type="text"
+                                id="area"
+                                name="area"
+                                value={formData.area}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ej: educación, salud, cultura..."
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="ubicacion" className="text-sm text-gray-700">Ubicación institucional *</label>
+                              <input
+                                type="text"
+                                id="ubicacion"
+                                name="ubicacion"
+                                value={formData.ubicacion}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ciudad, estado, país"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="telefono" className="text-sm text-gray-700">Teléfono de contacto</label>
+                              <input
+                                type="tel"
+                                id="telefono"
+                                name="telefono"
+                                value={formData.telefono}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Número de teléfono"
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <label htmlFor="area" className="text-sm text-gray-700">Área o sector *</label>
-                            <input
-                              type="text"
-                              id="area"
-                              name="area"
-                              value={formData.area}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ej: educación, salud, cultura..."
-                              required
-                            />
+                        </div>
+                        
+                        {/* --- SECCIÓN: Sobre el proyecto --- */}
+                        <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                          <h3 className="text-lg font-bold text-green-700 mb-2">Sobre el proyecto / iniciativa</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="proyecto_nombre" className="text-sm text-gray-700">Nombre del proyecto *</label>
+                              <input
+                                type="text"
+                                id="proyecto_nombre"
+                                name="proyecto_nombre"
+                                value={formData.proyecto_nombre}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ejemplo: Biblioteca digital para niños"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="proyecto_fechainicio" className="text-sm text-gray-700">Fecha prevista de inicio *</label>
+                              <input
+                                type="date"
+                                id="proyecto_fechainicio"
+                                name="proyecto_fechainicio"
+                                value={formData.proyecto_fechainicio}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="proyecto_estado" className="text-sm text-gray-700">Estado del proyecto *</label>
+                              <select
+                                id="proyecto_estado"
+                                name="proyecto_estado"
+                                value={formData.proyecto_estado}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                required
+                              >
+                                <option value="">Selecciona...</option>
+                                <option value="Idea">Solo idea</option>
+                                <option value="En planeación">En planeación</option>
+                                <option value="En curso">En ejecución</option>
+                                <option value="Con resultados iniciales">Con resultados iniciales</option>
+                                <option value="Consolidado">Consolidado</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label htmlFor="proyecto_objetivo" className="text-sm text-gray-700">Objetivo principal *</label>
+                              <input
+                                type="text"
+                                id="proyecto_objetivo"
+                                name="proyecto_objetivo"
+                                value={formData.proyecto_objetivo}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="¿Qué se busca lograr?"
+                                required
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <label htmlFor="ubicacion" className="text-sm text-gray-700">Ubicación institucional *</label>
-                            <input
-                              type="text"
-                              id="ubicacion"
-                              name="ubicacion"
-                              value={formData.ubicacion}
+                          <div className="my-3">
+                            <label htmlFor="proyecto_descripcion" className="text-sm text-gray-700">Descripción breve *</label>
+                            <textarea
+                              id="proyecto_descripcion"
+                              name="proyecto_descripcion"
+                              value={formData.proyecto_descripcion}
                               onChange={handleInputChange}
+                              rows={3}
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ciudad, estado, país"
+                              placeholder="Describe claramente el proyecto, a quién beneficia y cómo funciona"
                               required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="telefono" className="text-sm text-gray-700">Teléfono de contacto</label>
-                            <input
-                              type="tel"
-                              id="telefono"
-                              name="telefono"
-                              value={formData.telefono}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Número de teléfono"
                             />
                           </div>
                         </div>
-                      </div>
-                      
-                      {/* --- SECCIÓN: Sobre el proyecto --- */}
-                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Sobre el proyecto / iniciativa</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label htmlFor="proyecto_nombre" className="text-sm text-gray-700">Nombre del proyecto *</label>
-                            <input
-                              type="text"
-                              id="proyecto_nombre"
-                              name="proyecto_nombre"
-                              value={formData.proyecto_nombre}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ejemplo: Biblioteca digital para niños"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="proyecto_fechainicio" className="text-sm text-gray-700">Fecha prevista de inicio *</label>
-                            <input
-                              type="date"
-                              id="proyecto_fechainicio"
-                              name="proyecto_fechainicio"
-                              value={formData.proyecto_fechainicio}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="proyecto_estado" className="text-sm text-gray-700">Estado del proyecto *</label>
-                            <select
-                              id="proyecto_estado"
-                              name="proyecto_estado"
-                              value={formData.proyecto_estado}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              required
-                            >
-                              <option value="">Selecciona...</option>
-                              <option value="Idea">Solo idea</option>
-                              <option value="En planeación">En planeación</option>
-                              <option value="En curso">En ejecución</option>
-                              <option value="Con resultados iniciales">Con resultados iniciales</option>
-                              <option value="Consolidado">Consolidado</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="proyecto_objetivo" className="text-sm text-gray-700">Objetivo principal *</label>
-                            <input
-                              type="text"
-                              id="proyecto_objetivo"
-                              name="proyecto_objetivo"
-                              value={formData.proyecto_objetivo}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="¿Qué se busca lograr?"
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div className="my-3">
-                          <label htmlFor="proyecto_descripcion" className="text-sm text-gray-700">Descripción breve *</label>
-                          <textarea
-                            id="proyecto_descripcion"
-                            name="proyecto_descripcion"
-                            value={formData.proyecto_descripcion}
-                            onChange={handleInputChange}
-                            rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                            placeholder="Describe claramente el proyecto, a quién beneficia y cómo funciona"
-                            required
-                          />
-                        </div>
-                      </div>
 
-                      {/* --- SECCIÓN: Impacto social o comunitario --- */}
-                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Impacto social/comunitario</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label htmlFor="tipo_impacto" className="text-sm text-gray-700">Tipo de impacto *</label>
-                            <select
-                              id="tipo_impacto"
-                              name="tipo_impacto"
-                              value={formData.tipo_impacto}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              required
-                            >
-                              <option value="">Selecciona...</option>
-                              <option value="Educación">Educación</option>
-                              <option value="Salud">Salud</option>
-                              <option value="Cultura">Cultura</option>
-                              <option value="Medio ambiente">Medio ambiente</option>
-                              <option value="Inclusión">Inclusión</option>
-                              <option value="Tecnología">Tecnología</option>
-                              <option value="Otro">Otro</option>
-                            </select>
+                        {/* --- SECCIÓN: Impacto social o comunitario --- */}
+                        <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                          <h3 className="text-lg font-bold text-green-700 mb-2">Impacto social/comunitario</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="tipo_impacto" className="text-sm text-gray-700">Tipo de impacto *</label>
+                              <select
+                                id="tipo_impacto"
+                                name="tipo_impacto"
+                                value={formData.tipo_impacto}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                required
+                              >
+                                <option value="">Selecciona...</option>
+                                <option value="Educación">Educación</option>
+                                <option value="Salud">Salud</option>
+                                <option value="Cultura">Cultura</option>
+                                <option value="Medio ambiente">Medio ambiente</option>
+                                <option value="Inclusión">Inclusión</option>
+                                <option value="Tecnología">Tecnología</option>
+                                <option value="Otro">Otro</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label htmlFor="grupos_beneficiados" className="text-sm text-gray-700">Grupo(s) beneficiado(s) *</label>
+                              <input
+                                type="text"
+                                id="grupos_beneficiados"
+                                name="grupos_beneficiados"
+                                value={formData.grupos_beneficiados}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ej: niños, comunidad local, mujeres, etc."
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="estimacion_beneficiarios" className="text-sm text-gray-700">Personas beneficiadas *</label>
+                              <input
+                                type="number"
+                                min={1}
+                                id="estimacion_beneficiarios"
+                                name="estimacion_beneficiarios"
+                                value={formData.estimacion_beneficiarios}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ej: 250"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="ubicacion_impacto" className="text-sm text-gray-700">Ubicación del impacto *</label>
+                              <input
+                                type="text"
+                                id="ubicacion_impacto"
+                                name="ubicacion_impacto"
+                                value={formData.ubicacion_impacto}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ciudad, municipio, localidad"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="aliados_colaboradores" className="text-sm text-gray-700">Aliados o colaboradores</label>
+                              <input
+                                type="text"
+                                id="aliados_colaboradores"
+                                name="aliados_colaboradores"
+                                value={formData.aliados_colaboradores}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Instituciones aliadas, ONGs, etc."
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <label htmlFor="grupos_beneficiados" className="text-sm text-gray-700">Grupo(s) beneficiado(s) *</label>
-                            <input
-                              type="text"
-                              id="grupos_beneficiados"
-                              name="grupos_beneficiados"
-                              value={formData.grupos_beneficiados}
+                          {/* Motivación social/comunitaria */}
+                          <div className="my-3">
+                            <label htmlFor="motivacion" className="text-sm text-gray-700">¿Por qué solicita el plan gratuito?* <span className="font-normal text-xs">(breve y claro)</span></label>
+                            <textarea
+                              id="motivacion"
+                              name="motivacion"
+                              value={formData.motivacion}
                               onChange={handleInputChange}
+                              rows={3}
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ej: niños, comunidad local, mujeres, etc."
+                              placeholder="Explica la motivación social/comunitaria..."
                               required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="estimacion_beneficiarios" className="text-sm text-gray-700">Personas beneficiadas *</label>
-                            <input
-                              type="number"
-                              min={1}
-                              id="estimacion_beneficiarios"
-                              name="estimacion_beneficiarios"
-                              value={formData.estimacion_beneficiarios}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ej: 250"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="ubicacion_impacto" className="text-sm text-gray-700">Ubicación del impacto *</label>
-                            <input
-                              type="text"
-                              id="ubicacion_impacto"
-                              name="ubicacion_impacto"
-                              value={formData.ubicacion_impacto}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ciudad, municipio, localidad"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="aliados_colaboradores" className="text-sm text-gray-700">Aliados o colaboradores</label>
-                            <input
-                              type="text"
-                              id="aliados_colaboradores"
-                              name="aliados_colaboradores"
-                              value={formData.aliados_colaboradores}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Instituciones aliadas, ONGs, etc."
                             />
                           </div>
                         </div>
-                        {/* Motivación social/comunitaria */}
-                        <div className="my-3">
-                          <label htmlFor="motivacion" className="text-sm text-gray-700">¿Por qué solicita el plan gratuito?* <span className="font-normal text-xs">(breve y claro)</span></label>
-                          <textarea
-                            id="motivacion"
-                            name="motivacion"
-                            value={formData.motivacion}
-                            onChange={handleInputChange}
-                            rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                            placeholder="Explica la motivación social/comunitaria..."
-                            required
-                          />
-                        </div>
-                      </div>
-                      
-                      {/* --- SECCIÓN: Recursos y sustentabilidad --- */}
-                      <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
-                        <h3 className="text-lg font-bold text-green-700 mb-2">Recursos y sustentabilidad</h3>
-                        <div className="space-y-4">
-                          <div>
-                            <label htmlFor="recursos_adicionales" className="text-sm text-gray-700">¿Cuenta con recursos o apoyos adicionales?</label>
-                            <input
-                              type="text"
-                              id="recursos_adicionales"
-                              name="recursos_adicionales"
-                              value={formData.recursos_adicionales}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="Ej: donaciones, equipo voluntario, etc."
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="plan_seguimiento" className="text-sm text-gray-700">¿Cómo planea dar seguimiento al impacto?</label>
-                            <input
-                              type="text"
-                              id="plan_seguimiento"
-                              name="plan_seguimiento"
-                              value={formData.plan_seguimiento}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="¿Cómo documentarán resultados, retroalimentación, etc.?"
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="plan_sustentabilidad" className="text-sm text-gray-700">Plan de sustentabilidad del proyecto</label>
-                            <input
-                              type="text"
-                              id="plan_sustentabilidad"
-                              name="plan_sustentabilidad"
-                              value={formData.plan_sustentabilidad}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="¿Cómo se dará continuidad cuando acabe el apoyo?"
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="web_o_redes" className="text-sm text-gray-700">Sitio web o redes sociales del proyecto</label>
-                            <input
-                              type="text"
-                              id="web_o_redes"
-                              name="web_o_redes"
-                              value={formData.web_o_redes}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
-                              placeholder="https://o usuario en RRSS"
-                            />
+                        
+                        {/* --- SECCIÓN: Recursos y sustentabilidad --- */}
+                        <div className="border border-green-200 rounded-lg p-4 mt-4 bg-green-50">
+                          <h3 className="text-lg font-bold text-green-700 mb-2">Recursos y sustentabilidad</h3>
+                          <div className="space-y-4">
+                            <div>
+                              <label htmlFor="recursos_adicionales" className="text-sm text-gray-700">¿Cuenta con recursos o apoyos adicionales?</label>
+                              <input
+                                type="text"
+                                id="recursos_adicionales"
+                                name="recursos_adicionales"
+                                value={formData.recursos_adicionales}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="Ej: donaciones, equipo voluntario, etc."
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="plan_seguimiento" className="text-sm text-gray-700">¿Cómo planea dar seguimiento al impacto?</label>
+                              <input
+                                type="text"
+                                id="plan_seguimiento"
+                                name="plan_seguimiento"
+                                value={formData.plan_seguimiento}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="¿Cómo documentarán resultados, retroalimentación, etc.?"
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="plan_sustentabilidad" className="text-sm text-gray-700">Plan de sustentabilidad del proyecto</label>
+                              <input
+                                type="text"
+                                id="plan_sustentabilidad"
+                                name="plan_sustentabilidad"
+                                value={formData.plan_sustentabilidad}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="¿Cómo se dará continuidad cuando acabe el apoyo?"
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="web_o_redes" className="text-sm text-gray-700">Sitio web o redes sociales del proyecto</label>
+                              <input
+                                type="text"
+                                id="web_o_redes"
+                                name="web_o_redes"
+                                value={formData.web_o_redes}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-haby-primary"
+                                placeholder="https://o usuario en RRSS"
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  )}
+                      </>
+                    )}
   
-                  {/* Sección mensaje libre */}
-                  <div>
-                    <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
-                      Mensaje*
-                    </label>
-                    <textarea
-                      id="mensaje"
-                      name="mensaje"
-                      rows={6}
-                      value={formData.mensaje}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                      placeholder="Cuéntanos sobre tu proyecto o problema que quieres resolver..."
-                      required
-                    ></textarea>
-                  </div>
+                    {/* Sección mensaje libre */}
+                    <div>
+                      <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">
+                        Mensaje*
+                      </label>
+                      <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows={6}
+                        value={formData.mensaje}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
+                        placeholder="Cuéntanos sobre tu proyecto o problema que quieres resolver..."
+                        required
+                      ></textarea>
+                    </div>
   
-                  {/* Checkbox de privacidad */}
-                  <div className="flex items-start">
-                    <input
-                      type="checkbox"
-                      id="privacidad"
-                      className="mt-1"
-                      required
-                    />
-                    <label htmlFor="privacidad" className="ml-2 text-sm text-gray-600">
-                      Acepto la <a href="#" className="text-haby-primary hover:underline">Política de Privacidad</a> y el tratamiento de mis datos.
-                    </label>
-                  </div>
-
-                  {/* Checkbox de aceptación LNA solo si corresponde */}
-                  {isLNAGratuito && (
+                    {/* Checkbox de privacidad */}
                     <div className="flex items-start">
                       <input
                         type="checkbox"
-                        id="lna-terms"
-                        checked={lnaTermsAccepted}
-                        onChange={e => setLnaTermsAccepted(e.target.checked)}
+                        id="privacidad"
                         className="mt-1"
                         required
                       />
-                      <label htmlFor="lna-terms" className="ml-2 text-sm text-green-700">
-                        He leído y acepto los <LNATermsDialog /> del plan LNA gratuito.
+                      <label htmlFor="privacidad" className="ml-2 text-sm text-gray-600">
+                        Acepto la <a href="#" className="text-haby-primary hover:underline">Política de Privacidad</a> y el tratamiento de mis datos.
                       </label>
                     </div>
-                  )}
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50"
-                  >
-                    {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-                    <Send className="ml-2 h-5 w-5" />
-                  </button>
-                </form>
+                    {/* Checkbox de aceptación LNA solo si corresponde */}
+                    {isLNAGratuito && (
+                      <div className="flex items-start">
+                        <input
+                          type="checkbox"
+                          id="lna-terms"
+                          checked={lnaTermsAccepted}
+                          onChange={e => setLnaTermsAccepted(e.target.checked)}
+                          className="mt-1"
+                          required
+                        />
+                        <label htmlFor="lna-terms" className="ml-2 text-sm text-green-700">
+                          He leído y acepto los <LNATermsDialog /> del plan LNA gratuito.
+                        </label>
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50"
+                    >
+                      {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                      <Send className="ml-2 h-5 w-5" />
+                    </button>
+                  </>
+                )}
               </div>
-            )}
+            </div>
             {/* Información de contacto */}
             <div>
               <div className="bg-gray-50 rounded-lg p-8 h-full">
