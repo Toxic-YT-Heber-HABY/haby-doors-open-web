@@ -1,4 +1,3 @@
-
 /**
  * App Component
  * 
@@ -49,6 +48,7 @@ const DesarrolloWeb = lazy(() => import("./pages/DesarrolloWeb"));
 const SolucionesPersonalizadas = lazy(() => import("./pages/SolucionesPersonalizadas"));
 const Admin = lazy(() => import("./pages/Admin"));
 const DetalleProyecto = lazy(() => import("./pages/DetalleProyecto"));
+const Cloritizacion = lazy(() => import("./pages/Cloritizacion"));
 
 // Componente para el estado de carga
 const LoadingPage = () => (
@@ -84,6 +84,7 @@ const AnimatedRoutes = () => {
           { path: "/precios", element: <Precios /> },
           { path: "/contacto", element: <Contacto /> },
           { path: "/admin", element: <Admin /> },
+          { path: "/cloritizacion", element: <Cloritizacion /> },
           { path: "*", element: <NotFound /> }
         ].map(route => (
           <Route 
