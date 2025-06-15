@@ -7,6 +7,7 @@ import ThreeDModel from "@/components/ThreeDModel";
 import usePageTitle from "@/hooks/usePageTitle";
 import AnimatedGradient from "@/components/AnimatedGradient";
 import ImageZoom from "@/components/ImageZoom";
+import Monitor from 'lucide-react';
 
 const DesarrolloWeb = () => {
   // Actualiza el título de la página
