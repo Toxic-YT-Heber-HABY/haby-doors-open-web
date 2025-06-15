@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import LNAStep1_UserInfo from "./LNAStep1_UserInfo";
 import LNAStep2_Project from "./LNAStep2_Project";
@@ -159,7 +158,7 @@ const LNAWizard = () => {
         onSubmit={isLastStep ? handleSubmit : handleNext}
         autoComplete="off"
       >
-        {step === 4 ? (
+        {StepComponent === steps[4].component ? (
           <StepComponent
             data={data}
             onChange={handleChange}
@@ -198,4 +197,3 @@ const LNAWizard = () => {
 };
 
 export default LNAWizard;
-
