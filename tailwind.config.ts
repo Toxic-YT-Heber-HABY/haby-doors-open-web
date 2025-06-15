@@ -97,41 +97,70 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'scale-in': {
+					'0%': {
+						transform: 'scale(0.95)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
+				},
+				'slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'scale-in': 'scale-in 0.2s ease-out',
+				'slide-up': 'slide-up 0.4s ease-out',
+				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			}
 		}
 	},
 	plugins: [
 		require("tailwindcss-animate"),
-		// Plugin mejorado para gradientes seguros en móviles con mejor detección de dispositivos
 		function({ addUtilities }: { addUtilities: any }) {
 			const newUtilities = {
-				// Gradiente principal con fallback robusto
 				'.text-gradient-safe': {
-					'color': '#7E69AB !important',
+					'color': '#7E69AB',
 					'font-weight': '600',
-					// Solo aplicar gradiente en dispositivos de escritorio con soporte confirmado
 					'@media (min-width: 1024px) and (hover: hover) and (pointer: fine)': {
 						'background': 'linear-gradient(135deg, #7E69AB, #D946EF)',
 						'-webkit-background-clip': 'text',
 						'-webkit-text-fill-color': 'transparent',
 						'background-clip': 'text',
-						// Fallback adicional si el gradiente falla
 						'@supports not (-webkit-background-clip: text)': {
-							'background': 'none !important',
-							'-webkit-background-clip': 'border-box !important',
-							'-webkit-text-fill-color': 'initial !important',
-							'color': '#7E69AB !important'
+							'background': 'none',
+							'-webkit-background-clip': 'border-box',
+							'-webkit-text-fill-color': 'initial',
+							'color': '#7E69AB'
 						}
 					}
 				},
-				// Gradiente arcoíris mejorado
 				'.text-gradient-rainbow-safe': {
-					'color': '#D946EF !important',
+					'color': '#D946EF',
 					'font-weight': '600',
 					'@media (min-width: 1024px) and (hover: hover) and (pointer: fine)': {
 						'background': 'linear-gradient(90deg, #D946EF 0%, #3b82f6 25%, #10b981 50%, #f59e0b 75%, #D946EF 100%)',
@@ -139,16 +168,15 @@ export default {
 						'-webkit-text-fill-color': 'transparent',
 						'background-clip': 'text',
 						'@supports not (-webkit-background-clip: text)': {
-							'background': 'none !important',
-							'-webkit-background-clip': 'border-box !important',
-							'-webkit-text-fill-color': 'initial !important',
-							'color': '#D946EF !important'
+							'background': 'none',
+							'-webkit-background-clip': 'border-box',
+							'-webkit-text-fill-color': 'initial',
+							'color': '#D946EF'
 						}
 					}
 				},
-				// Gradiente para hero con máxima compatibilidad
 				'.text-gradient-hero-safe': {
-					'color': '#D946EF !important',
+					'color': '#D946EF',
 					'font-weight': '700',
 					'text-shadow': '0 1px 2px rgba(0, 0, 0, 0.1)',
 					'@media (min-width: 1024px) and (hover: hover) and (pointer: fine)': {
@@ -157,37 +185,17 @@ export default {
 						'-webkit-text-fill-color': 'transparent',
 						'background-clip': 'text',
 						'@supports not (-webkit-background-clip: text)': {
-							'background': 'none !important',
-							'-webkit-background-clip': 'border-box !important',
-							'-webkit-text-fill-color': 'initial !important',
-							'color': '#D946EF !important'
+							'background': 'none',
+							'-webkit-background-clip': 'border-box',
+							'-webkit-text-fill-color': 'initial',
+							'color': '#D946EF'
 						}
 					}
 				},
-				// Texto blanco seguro para fondos oscuros
-				'.text-white-safe': {
-					'color': 'white !important',
-					'text-shadow': '0 1px 3px rgba(0, 0, 0, 0.3)',
-					'background': 'none !important',
-					'-webkit-background-clip': 'border-box !important',
-					'-webkit-text-fill-color': 'initial !important'
-				},
-				// Gradiente de fondo móvil-seguro
 				'.bg-gradient-mobile-safe': {
 					'background-color': '#7E69AB',
 					'@media (min-width: 768px)': {
 						'background': 'linear-gradient(135deg, #7E69AB, #6E59A5)',
-					}
-				},
-				// Utilidad para forzar texto visible en móviles
-				'.force-visible-mobile': {
-					'@media (max-width: 1023px)': {
-						'background': 'none !important',
-						'-webkit-background-clip': 'border-box !important',
-						'-webkit-text-fill-color': 'initial !important',
-						'background-clip': 'border-box !important',
-						'color': 'inherit !important',
-						'font-weight': '600 !important'
 					}
 				}
 			}

@@ -36,7 +36,6 @@ const additionalFeatures = [
 const ServicesSection = () => {
   return (
     <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
-      {/* Elementos decorativos de fondo */}
       <div className="absolute inset-0 opacity-40">
         <div className="absolute top-20 right-20 w-64 h-64 bg-haby-light rounded-full mix-blend-multiply filter blur-xl"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-haby-accent/30 rounded-full mix-blend-multiply filter blur-xl"></div>
@@ -56,7 +55,7 @@ const ServicesSection = () => {
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
             ¿Cómo podemos{' '}
-            <span className="text-haby-accent font-bold md:bg-gradient-to-r md:from-haby-primary md:to-haby-accent md:bg-clip-text md:text-transparent">
+            <span className="text-haby-accent font-bold">
               ayudarte?
             </span>
           </h2>
@@ -89,7 +88,6 @@ const ServicesSection = () => {
                   {service.description}
                 </p>
                 
-                {/* Features list */}
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-sm text-gray-500">
@@ -111,7 +109,6 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Features adicionales */}
         <motion.div 
           className="bg-gradient-to-r from-haby-primary to-haby-secondary rounded-2xl p-8 lg:p-12 text-white"
           initial={{ opacity: 0, y: 20 }}

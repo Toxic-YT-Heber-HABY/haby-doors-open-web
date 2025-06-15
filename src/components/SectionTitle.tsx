@@ -1,25 +1,13 @@
 
 import { motion } from 'framer-motion';
 
-/**
- * SectionTitle Component
- * 
- * A reusable component for section titles with consistent styling and animations.
- * Optimizado para máxima compatibilidad móvil con fallbacks de texto seguros.
- * 
- * @param {Object} props - Component props
- * @param {string} props.subtitle - The smaller text above the main title
- * @param {string} props.title - The main heading text
- * @param {string} props.description - Optional description text below the title
- * @param {boolean} props.center - Whether to center align the text
- * @param {string} props.className - Additional CSS classes
- */
 interface SectionTitleProps {
   subtitle: string;
   title: React.ReactNode;
   description?: string;
   center?: boolean;
   className?: string;
+  variant?: 'default' | 'gradient' | 'accent';
 }
 
 const SectionTitle = ({ 
@@ -27,15 +15,26 @@ const SectionTitle = ({
   title, 
   description, 
   center = false,
-  className = "" 
+  className = "",
+  variant = 'default'
 }: SectionTitleProps) => {
-  // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
+
+  const getTitleClasses = () => {
+    switch (variant) {
+      case 'gradient':
+        return "text-3xl md:text-4xl font-bold bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent";
+      case 'accent':
+        return "text-3xl md:text-4xl font-bold text-haby-accent";
+      default:
+        return "text-3xl md:text-4xl font-bold text-gray-800";
     }
   };
   
@@ -55,24 +54,24 @@ const SectionTitle = ({
     >
       <motion.div 
         variants={fadeInUp} 
-        className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium force-visible-mobile"
+        className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium"
       >
-        <span className="force-visible-mobile">{subtitle}</span>
+        {subtitle}
       </motion.div>
       
       <motion.h2 
         variants={fadeInUp} 
-        className="text-3xl md:text-4xl font-bold text-gray-800 force-visible-mobile"
+        className={getTitleClasses()}
       >
-        <span className="force-visible-mobile">{title}</span>
+        {title}
       </motion.h2>
       
       {description && (
         <motion.p 
           variants={fadeInUp} 
-          className="text-gray-600 max-w-3xl force-visible-mobile"
+          className="text-gray-600 max-w-3xl"
         >
-          <span className="force-visible-mobile">{description}</span>
+          {description}
         </motion.p>
       )}
     </motion.div>
