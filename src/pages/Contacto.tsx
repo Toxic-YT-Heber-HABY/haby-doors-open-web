@@ -95,25 +95,26 @@ const useQueryParam = (param: string) => {
   return params.get(param);
 };
 
+// NUEVO: función para estados iniciales
+const getInitialFormData = () => ({
+  nombre: "",
+  email: "",
+  telefono: "",
+  servicio: "",
+  mensaje: "",
+  institucion: "",
+  area: "",
+  ubicacion: "",
+  tipo_impacto: "",
+  estimacion_beneficiarios: "",
+  motivacion: "",
+  recursos_adicionales: "",
+  web_o_redes: ""
+});
+
 const Contacto = () => {
   // Datos base del formulario
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    telefono: "",
-    servicio: "",
-    mensaje: "",
-
-    // NUEVOS CAMPOS LNA GRATIS
-    institucion: "",
-    area: "",
-    ubicacion: "",
-    tipo_impacto: "",
-    estimacion_beneficiarios: "",
-    motivacion: "",
-    recursos_adicionales: "",
-    web_o_redes: "",
-  });
+  const [formData, setFormData] = useState(getInitialFormData());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lnaTermsAccepted, setLnaTermsAccepted] = useState(false);
 
@@ -178,13 +179,8 @@ const Contacto = () => {
       console.log("Correo enviado exitosamente:", data);
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
 
-      setFormData({
-        nombre: "",
-        email: "",
-        telefono: "",
-        servicio: "",
-        mensaje: ""
-      });
+      // USAR LA FUNCIÓN QUE CONTIENE TODOS LOS CAMPOS:
+      setFormData(getInitialFormData());
       setLnaTermsAccepted(false);
 
     } catch (error) {
