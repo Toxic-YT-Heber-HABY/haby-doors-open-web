@@ -102,7 +102,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10 min-h-screen flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          {/* Contenido textual mejorado */}
+          {/* Contenido textual mejorado con textos seguros para móviles */}
           <motion.div 
             className="space-y-8 text-center lg:text-left order-2 lg:order-1"
             initial={{ opacity: 0, x: capabilities.isMobile ? 0 : -50 }}
@@ -111,13 +111,13 @@ const Hero = () => {
           >
             {/* Badge superior */}
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium text-white-safe"
               initial={{ opacity: 0, y: -20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
               <Sparkles className="w-4 h-4 text-haby-accent" />
-              Innovación y Tecnología
+              <span className="text-white-safe">Innovación y Tecnología</span>
             </motion.div>
 
             <motion.h1 
@@ -127,12 +127,13 @@ const Hero = () => {
               animate={animationsEnabled ? "visible" : "visible"}
               aria-label="HABY OPEN THE DOORS"
             >
-              <span className="bg-gradient-to-r from-white via-purple-200 to-haby-accent bg-clip-text text-transparent">
+              <span className="text-gradient-hero-safe force-visible-mobile">
                 HABY
               </span>
               <br />
-              <span className="text-haby-accent font-extrabold">OPEN</span> THE{' '}
-              <span className="text-haby-accent font-extrabold">DOORS</span>
+              <span className="text-haby-accent font-extrabold force-visible-mobile">OPEN</span>{' '}
+              <span className="text-white-safe force-visible-mobile">THE</span>{' '}
+              <span className="text-haby-accent font-extrabold force-visible-mobile">DOORS</span>
             </motion.h1>
             
             <motion.p 
@@ -141,7 +142,9 @@ const Hero = () => {
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
             >
-              Soluciones web <span className="text-haby-accent font-semibold">innovadoras</span> que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.
+              <span className="text-white-safe">Soluciones web </span>
+              <span className="text-gradient-safe force-visible-mobile">innovadoras</span>
+              <span className="text-white-safe"> que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.</span>
             </motion.p>
             
             <motion.div 
@@ -152,23 +155,23 @@ const Hero = () => {
             >
               <Link 
                 to="/contacto" 
-                className="group relative inline-flex items-center justify-center px-8 py-4 bg-haby-accent hover:bg-haby-accent/90 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-haby-accent/25 w-full sm:w-auto"
+                className="group relative inline-flex items-center justify-center px-8 py-4 bg-haby-accent hover:bg-haby-accent/90 text-white-safe font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-haby-accent/25 w-full sm:w-auto"
                 aria-label="Contáctanos ahora"
               >
-                <span className="relative z-10">Contáctanos ahora</span>
+                <span className="relative z-10 text-white-safe">Contáctanos ahora</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-haby-accent to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
               <Link 
                 to="/servicios" 
-                className="group inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-haby-dark font-semibold rounded-full transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white-safe hover:bg-white hover:text-haby-dark font-semibold rounded-full transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
                 aria-label="Ver nuestros servicios"
               >
-                Nuestros servicios 
-                <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-2" aria-hidden="true" />
+                <span className="text-white-safe">Nuestros servicios</span>
+                <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-2 text-white-safe" aria-hidden="true" />
               </Link>
             </motion.div>
 
-            {/* Estadísticas */}
+            {/* Estadísticas con texto seguro */}
             <motion.div 
               className="grid grid-cols-3 gap-8 pt-12 border-t border-white/20"
               initial={{ opacity: 0, y: 20 }}
@@ -176,16 +179,16 @@ const Hero = () => {
               transition={{ delay: 0.8 }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">100+</div>
-                <div className="text-sm text-gray-300">Proyectos</div>
+                <div className="text-3xl font-bold text-haby-accent force-visible-mobile">100+</div>
+                <div className="text-sm text-white-safe">Proyectos</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">24/7</div>
-                <div className="text-sm text-gray-300">Soporte</div>
+                <div className="text-3xl font-bold text-haby-accent force-visible-mobile">24/7</div>
+                <div className="text-sm text-white-safe">Soporte</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">99%</div>
-                <div className="text-sm text-gray-300">Satisfacción</div>
+                <div className="text-3xl font-bold text-haby-accent force-visible-mobile">99%</div>
+                <div className="text-sm text-white-safe">Satisfacción</div>
               </div>
             </motion.div>
           </motion.div>
@@ -200,16 +203,16 @@ const Hero = () => {
             <div className="w-full h-full flex items-center justify-center relative">
               <VisualComponent />
               
-              {/* Badge flotante mejorado */}
+              {/* Badge flotante mejorado con texto seguro */}
               <motion.div 
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-haby-accent to-purple-600 px-6 py-3 rounded-full text-white font-bold text-sm sm:text-base shadow-2xl border border-white/20"
+                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-haby-accent to-purple-600 px-6 py-3 rounded-full text-white-safe font-bold text-sm sm:text-base shadow-2xl border border-white/20"
                 initial={{ y: capabilities.isMobile ? 20 : 50, opacity: 0 }}
                 animate={animationsEnabled ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: capabilities.isMobile ? 0.5 : 1 }}
               >
                 <span className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  OPEN THE DOORS
+                  <Sparkles className="w-4 h-4 text-white-safe" />
+                  <span className="text-white-safe force-visible-mobile">OPEN THE DOORS</span>
                 </span>
               </motion.div>
             </div>
@@ -217,14 +220,14 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator con texto seguro */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white-safe"
         animate={animationsEnabled ? { y: [0, 10, 0] } : {}}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm">Scroll</span>
+          <span className="text-sm text-white-safe">Scroll</span>
           <div className="w-0.5 h-8 bg-white/40 rounded-full"></div>
         </div>
       </motion.div>

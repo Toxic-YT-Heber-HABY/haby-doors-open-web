@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
  * SectionTitle Component
  * 
  * A reusable component for section titles with consistent styling and animations.
+ * Optimizado para máxima compatibilidad móvil con fallbacks de texto seguros.
  * 
  * @param {Object} props - Component props
  * @param {string} props.subtitle - The smaller text above the main title
@@ -54,21 +55,24 @@ const SectionTitle = ({
     >
       <motion.div 
         variants={fadeInUp} 
-        className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium"
+        className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium force-visible-mobile"
       >
-        {subtitle}
+        <span className="force-visible-mobile">{subtitle}</span>
       </motion.div>
       
       <motion.h2 
         variants={fadeInUp} 
-        className="text-3xl md:text-4xl font-bold text-gray-800"
+        className="text-3xl md:text-4xl font-bold text-gray-800 force-visible-mobile"
       >
-        {title}
+        <span className="force-visible-mobile">{title}</span>
       </motion.h2>
       
       {description && (
-        <motion.p variants={fadeInUp} className="text-gray-600 max-w-3xl">
-          {description}
+        <motion.p 
+          variants={fadeInUp} 
+          className="text-gray-600 max-w-3xl force-visible-mobile"
+        >
+          <span className="force-visible-mobile">{description}</span>
         </motion.p>
       )}
     </motion.div>
