@@ -287,18 +287,32 @@ const PricingSection = () => {
                   </li>
                 ))}
               </ul>
-              <button 
-                onClick={() => handlePlanSelection(plan.id)}
-                disabled={loading === plan.id}
-                className={`
-                  w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 disabled:opacity-50
-                  ${plan.highlighted 
-                    ? 'bg-haby-primary text-white hover:bg-haby-secondary' 
-                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}
-                `}
-              >
-                {loading === plan.id ? "Procesando..." : plan.buttonText}
-              </button>
+              {/* Corrección del botón "Contactar" */}
+              {plan.id === "premium" ? (
+                <Link
+                  to="/contacto?plan=premium"
+                  className={`
+                    w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300
+                    bg-haby-primary text-white hover:bg-haby-secondary
+                  `}
+                  tabIndex={0}
+                >
+                  {plan.buttonText}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => handlePlanSelection(plan.id)}
+                  disabled={loading === plan.id}
+                  className={`
+                    w-full block text-center py-3 px-4 rounded-md font-medium transition-all duration-300 disabled:opacity-50
+                    ${plan.highlighted
+                      ? 'bg-haby-primary text-white hover:bg-haby-secondary'
+                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}
+                  `}
+                >
+                  {loading === plan.id ? "Procesando..." : plan.buttonText}
+                </button>
+              )}
             </motion.div>
           ))}
         </motion.div>
@@ -345,7 +359,7 @@ const PricingSection = () => {
           </div>
         </motion.div>
 
-        {/* CTA Solicitar cotización – corregido para NO llevar a LNA */}
+        {/* CTA Solicitar cotización correctamente corregida */}
         <motion.div 
           className="text-center mt-12 bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
@@ -358,8 +372,7 @@ const PricingSection = () => {
             Contáctanos para una cotización detallada adaptada a tus necesidades específicas.
             Analizaremos tu problema y te proporcionaremos la mejor solución posible.
           </p>
-          {/* ¡CORREGIDO! Solo va a /contacto, SIN query, para cotización tradicional */}
-          <Link to="/contacto" className="btn-primary">
+          <Link to="/contacto" className="btn-primary" tabIndex={0}>
             Solicitar cotización
           </Link>
         </motion.div>
