@@ -274,7 +274,7 @@ const Contacto = () => {
               
               {/* CONTACTO LATERAL derecho */}
               <div className="relative z-0 h-fit">
-                <div className="bg-gradient-to-br from-[#ede5fc]/90 to-white/98 rounded-3xl px-8 py-10 shadow-2xl border border-haby-light/60">
+                <div className="bg-white rounded-3xl px-8 py-10 shadow-2xl border border-haby-light/60">
                   <div className="inline-block bg-haby-accent/10 text-haby-accent px-4 py-2 rounded-full text-sm font-semibold mb-3 shadow">
                     Información de contacto
                   </div>
@@ -330,8 +330,12 @@ const Contacto = () => {
                   <div className="pt-10 border-t border-gray-200 mt-8">
                     <h3 className="text-base font-bold text-haby-primary mb-3">Síguenos en redes sociales</h3>
                     <div className="flex space-x-3">
-                      <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group">
+                      <a
+                        href="https://www.facebook.com/zadkiel.garcia.31/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                      >
                         {/* Facebook Icon */}
                         <svg className="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path fillRule="evenodd" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
@@ -339,20 +343,37 @@ const Contacto = () => {
                           <path d="M14.05 6A5 5 0 0 1 18 10"></path>
                         </svg>
                       </a>
-                      <a href="https://www.instagram.com/habydoors/" target="_blank" rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group">
-                        <svg className="h-4 w-4 text-pink-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.045-1.064.218-1.791.465-2.427a4.902 4.902 0 01-1.768-1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.504 2.504 0 01-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255-.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
+                      <a
+                        href="https://www.instagram.com/habydoors/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 w-9 bg-gradient-to-tr from-pink-500 via-yellow-500 to-purple-500 rounded-full flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition will-change-transform group"
+                        style={{ background: "radial-gradient(circle at 30% 120%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)" }}
+                      >
+                        {/* Instagram Lucide Icon */}
+                        <span className="sr-only">Instagram</span>
+                        <svg className="h-5 w-5 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.4)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <rect width="18" height="18" x="3" y="3" rx="5" ry="5" />
+                          <path d="M16.5 7.5h.01" />
+                          <circle cx="12" cy="12" r="4" />
                         </svg>
                       </a>
-                      <a href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1" target="_blank" rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group">
+                      <a
+                        href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                      >
                         <svg className="h-4 w-4 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
                         </svg>
                       </a>
-                      <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer"
-                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group">
+                      <a
+                        href="https://x.com/Haby_Open_Doors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 w-9 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition will-change-transform group"
+                      >
                         <svg className="h-4 w-4 text-black" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                         </svg>
