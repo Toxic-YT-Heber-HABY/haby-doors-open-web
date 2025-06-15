@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Menu, X, ChevronDown, Plus, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -50,7 +49,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-3">
           <nav className="flex items-center justify-between">
             {/* Logo y nombre */}
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center group" tabIndex={0} aria-label="Inicio">
               <img 
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
                 alt="HABY Logo" 
@@ -61,41 +60,35 @@ const Navbar = () => {
 
             {/* Navegación Desktop */}
             <div className="hidden md:flex items-center space-x-5">
-              <Link to="/" className="nav-link">
-                Inicio
-              </Link>
-              <Link to="/sobre-nosotros" className="nav-link">
-                Sobre Nosotros
-              </Link>
+              <Link to="/" className="nav-link" tabIndex={0} aria-label="Inicio">Inicio</Link>
+              <Link to="/sobre-nosotros" className="nav-link" tabIndex={0} aria-label="Sobre Nosotros">Sobre Nosotros</Link>
               {/* menú servicios */}
               <div className="relative group">
                 <button 
                   onClick={toggleServices} 
                   className="nav-link flex items-center"
+                  tabIndex={0}
+                  aria-label="Servicios"
                 >
                   Servicios <ChevronDown className="ml-1 h-4 w-4 transition-transform" />
                 </button>
                 <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg z-40 opacity-0 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 transition-all duration-200 origin-top-left pointer-events-none group-hover:pointer-events-auto">
                   <div className="py-2">
-                    <Link to="/servicios" className="dropdown-link">
+                    <Link to="/servicios" className="dropdown-link" tabIndex={0} aria-label="Todos los Servicios">
                       Todos los Servicios
                     </Link>
-                    <Link to="/desarrollo-web" className="dropdown-link">
+                    <Link to="/desarrollo-web" className="dropdown-link" tabIndex={0} aria-label="Desarrollo Web">
                       Desarrollo Web
                     </Link>
-                    <Link to="/soluciones-personalizadas" className="dropdown-link">
+                    <Link to="/soluciones-personalizadas" className="dropdown-link" tabIndex={0} aria-label="Soluciones Personalizadas">
                       Soluciones Personalizadas
                     </Link>
                   </div>
                 </div>
               </div>
-              <Link to="/portafolio" className="nav-link">
-                Portafolio
-              </Link>
-              <Link to="/precios" className="nav-link">
-                Precios
-              </Link>
-              <Link to="/contacto" className="btn-primary hover:scale-105 active:scale-95 transition-transform">
+              <Link to="/portafolio" className="nav-link" tabIndex={0} aria-label="Portafolio">Portafolio</Link>
+              <Link to="/precios" className="nav-link" tabIndex={0} aria-label="Precios">Precios</Link>
+              <Link to="/contacto" className="btn-primary hover:scale-105 active:scale-95 transition-transform" tabIndex={0} aria-label="Contáctanos">
                 Contáctanos
               </Link>
               
@@ -170,40 +163,34 @@ const Navbar = () => {
           {isOpen && (
             <div className="md:hidden mt-3 pb-4 shadow-inner rounded-lg bg-white/95 animate-fade-in z-40">
               <div className="flex flex-col space-y-2 px-2">
-                <Link to="/" className="mobile-link" onClick={toggleMenu}>
-                  Inicio
-                </Link>
-                <Link to="/sobre-nosotros" className="mobile-link" onClick={toggleMenu}>
-                  Sobre Nosotros
-                </Link>
+                <Link to="/" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Inicio">Inicio</Link>
+                <Link to="/sobre-nosotros" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Sobre Nosotros">Sobre Nosotros</Link>
                 <div>
                   <button 
                     onClick={toggleServices} 
                     className="mobile-link flex items-center w-full"
+                    tabIndex={0}
+                    aria-label="Servicios"
                   >
                     Servicios <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {servicesOpen && (
                     <div className="mt-1 ml-4 flex flex-col space-y-2">
-                      <Link to="/servicios" className="mobile-sublink" onClick={toggleMenu}>
+                      <Link to="/servicios" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Todos los Servicios">
                         Todos los Servicios
                       </Link>
-                      <Link to="/desarrollo-web" className="mobile-sublink" onClick={toggleMenu}>
+                      <Link to="/desarrollo-web" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Desarrollo Web">
                         Desarrollo Web
                       </Link>
-                      <Link to="/soluciones-personalizadas" className="mobile-sublink" onClick={toggleMenu}>
+                      <Link to="/soluciones-personalizadas" className="mobile-sublink" onClick={toggleMenu} tabIndex={0} aria-label="Soluciones Personalizadas">
                         Soluciones Personalizadas
                       </Link>
                     </div>
                   )}
                 </div>
-                <Link to="/portafolio" className="mobile-link" onClick={toggleMenu}>
-                  Portafolio
-                </Link>
-                <Link to="/precios" className="mobile-link" onClick={toggleMenu}>
-                  Precios
-                </Link>
-                <Link to="/contacto" className="mobile-link font-semibold bg-haby-primary/90 text-white rounded-md px-3 py-2 text-center" onClick={toggleMenu}>
+                <Link to="/portafolio" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Portafolio">Portafolio</Link>
+                <Link to="/precios" className="mobile-link" onClick={toggleMenu} tabIndex={0} aria-label="Precios">Precios</Link>
+                <Link to="/contacto" className="mobile-link font-semibold bg-haby-primary/90 text-white rounded-md px-3 py-2 text-center" onClick={toggleMenu} tabIndex={0} aria-label="Contáctanos">
                   Contáctanos
                 </Link>
               </div>

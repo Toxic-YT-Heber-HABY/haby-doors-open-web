@@ -1,6 +1,6 @@
-
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Twitter, Phone } from 'lucide-react';
+import FooterQuickLinks from "./FooterQuickLinks";
 
 const Footer = () => {
   return (
@@ -37,32 +37,7 @@ const Footer = () => {
           </div>
 
           {/* Enlaces rápidos */}
-          <div>
-            <h3 className="text-xl font-heading font-bold mb-4">Enlaces rápidos</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors">Inicio</Link>
-              </li>
-              <li>
-                <Link to="/sobre-nosotros" className="text-gray-300 hover:text-white transition-colors">Sobre Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/servicios" className="text-gray-300 hover:text-white transition-colors">Servicios</Link>
-              </li>
-              <li>
-                <Link to="/portafolio" className="text-gray-300 hover:text-white transition-colors">Portafolio</Link>
-              </li>
-              <li>
-                <Link to="/precios" className="text-gray-300 hover:text-white transition-colors">Precios</Link>
-              </li>
-              <li>
-                <Link to="/contacto" className="text-gray-300 hover:text-white transition-colors">Contacto</Link>
-              </li>
-              <li>
-                <Link to="/cloritizacion" className="text-gray-300 hover:text-haby-accent font-semibold transition-colors">Cloritización</Link>
-              </li>
-            </ul>
-          </div>
+          <FooterQuickLinks />
 
           {/* Contacto */}
           <div>
