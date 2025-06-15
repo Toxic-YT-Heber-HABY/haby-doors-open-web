@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import LNAStep1_UserInfo from "./LNAStep1_UserInfo";
 import LNAStep2_Project from "./LNAStep2_Project";
@@ -137,55 +136,6 @@ const LNAWizard = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const validateStep = () => {
-    switch (step) {
-      case 0:
-        if (!data.nombre || !data.email) {
-          toast.error("Completa tu nombre y correo.");
-          return false;
-        }
-        break;
-      case 1:
-        if (
-          !data.institucion ||
-          !data.area ||
-          !data.ubicacion ||
-          !data.proyecto_nombre ||
-          !data.proyecto_objetivo ||
-          !data.proyecto_estado ||
-          !data.proyecto_fechainicio ||
-          !data.proyecto_descripcion
-        ) {
-          toast.error("Completa todos los campos de tu organización y proyecto.");
-          return false;
-        }
-        break;
-      case 2:
-        if (
-          !data.tipo_impacto ||
-          !data.grupos_beneficiados ||
-          !data.estimacion_beneficiarios ||
-          !data.ubicacion_impacto ||
-          !data.motivacion
-        ) {
-          toast.error("Completa los campos de impacto social/comunitario.");
-          return false;
-        }
-        break;
-      case 4:
-        if (!lnaTermsAccepted) {
-          toast.error("Debes aceptar los términos y condiciones.");
-          return false;
-        }
-        if (!data.mensaje) {
-          toast.error("Por favor escribe un mensaje contextual.");
-          return false;
-        }
-        break;
-    }
-    return true;
   };
 
   return (
