@@ -9,10 +9,16 @@ import AnimatedGradient from "@/components/AnimatedGradient";
 import ImageZoom from "@/components/ImageZoom";
 import Monitor from 'lucide-react';
 
+/**
+ * Página principal para la sección de Desarrollo Web Profesional
+ * Estructura la presentación de servicios, tecnologías, proceso,
+ * portfolio y llamada a la acción, todo con animaciones y estilos premium.
+ */
 const DesarrolloWeb = () => {
-  // Actualiza el título de la página
+  // Hook para actualizar el título de la pestaña del navegador según el contexto de la página.
   usePageTitle();
 
+  // Configuración para animaciones framer-motion en aparición de contenedores hijos.
   const staggerContainer = {
     hidden: { opacity: 0 },
     show: {
@@ -23,18 +29,17 @@ const DesarrolloWeb = () => {
     }
   };
 
+  // Configuración para animaciones de entrada en y y opacidad.
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     show: { 
       opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.6
-      }
+      transition: { duration: 0.6 }
     }
   };
 
-  // Ejemplos de capturas de proyectos de desarrollo web
+  // Imágenes de ejemplo de proyectos desarrollados
   const projectImages = [
     {
       src: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
@@ -52,27 +57,25 @@ const DesarrolloWeb = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Barra de navegación superior */}
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section Mejorado con fondo premium y elementos complementarios */}
+        {/* HERO SECTION: Presentación visual principal con elementos animados y decorativos */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Fondo principal con gradientes múltiples y capas */}
+          {/* Fondo compuesto por capas de gradientes, texturas y puntos */}
           <div className="absolute inset-0">
-            {/* Capa base con gradiente principal */}
+            {/* Capa base: gradiente oscuro */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
-            
-            {/* Gradiente animado superpuesto */}
+            {/* Fondo animado cósmico personalizado */}
             <AnimatedGradient 
               colors={["#0f172a", "#1e1b4b", "#581c87", "#7c2d12", "#0f172a"]}
               className="absolute inset-0 opacity-80"
               duration={25}
               variant="cosmic"
             />
-            
-            {/* Capa de textura sutil */}
+            {/* Gradiente/trama sutil azul/púrpura */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/10 to-purple-500/10"></div>
-            
-            {/* Overlay de puntos para textura */}
+            {/* Overlay de puntos a modo de patrón decorativo */}
             <div 
               className="absolute inset-0 opacity-30"
               style={{
@@ -82,9 +85,9 @@ const DesarrolloWeb = () => {
             ></div>
           </div>
           
-          {/* Elementos decorativos flotantes mejorados */}
+          {/* Elementos decorativos flotantes animados */}
           <div className="absolute inset-0 overflow-hidden">
-            {/* Círculos decorativos animados */}
+            {/* Cada uno decorativo se anima y aporta dinamismo visual */}
             <motion.div 
               className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/30 to-purple-600/30 rounded-full blur-xl"
               animate={{ 
@@ -93,11 +96,7 @@ const DesarrolloWeb = () => {
                 x: [0, 20, 0],
                 y: [0, -10, 0]
               }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div 
               className="absolute bottom-32 right-16 w-48 h-48 bg-gradient-to-br from-haby-accent/40 to-pink-600/40 rounded-full blur-2xl"
@@ -107,12 +106,7 @@ const DesarrolloWeb = () => {
                 x: [0, -30, 0],
                 y: [0, 20, 0]
               }}
-              transition={{ 
-                duration: 12, 
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2
-              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             />
             <motion.div 
               className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-cyan-400/50 to-blue-600/50 rounded-full blur-xl"
@@ -121,51 +115,33 @@ const DesarrolloWeb = () => {
                 opacity: [0.4, 0.7, 0.4],
                 rotate: [0, 180, 360]
               }}
-              transition={{ 
-                duration: 15, 
-                repeat: Infinity,
-                ease: "linear"
-              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             />
             
-            {/* Líneas geométricas decorativas */}
+            {/* Líneas decorativas geométricas animadas */}
             <motion.div 
               className="absolute top-1/4 left-1/3 w-64 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              animate={{ 
-                scaleX: [0, 1, 0],
-                opacity: [0, 1, 0]
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              animate={{ scaleX: [0, 1, 0], opacity: [0, 1, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div 
               className="absolute bottom-1/3 right-1/4 w-32 h-0.5 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent rotate-45"
-              animate={{ 
-                scaleX: [0, 1, 0],
-                opacity: [0, 0.8, 0]
-              }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 3
-              }}
+              animate={{ scaleX: [0, 1, 0], opacity: [0, 0.8, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }}
             />
           </div>
 
-          {/* Contenido principal */}
+          {/* Contenido principal del hero */}
           <div className="relative z-10 container mx-auto px-4 py-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Bloque de título y descripción */}
               <motion.div
                 className="text-center lg:text-left"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                {/* Badge mejorado con más estilo */}
+                {/* Badge destacado */}
                 <motion.div 
                   className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-full text-white text-sm font-medium mb-6 shadow-lg"
                   initial={{ opacity: 0, y: -20 }}
@@ -177,7 +153,7 @@ const DesarrolloWeb = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full blur-xl -z-10"></div>
                 </motion.div>
 
-                {/* Título principal con efectos mejorados */}
+                {/* Título principal animado con gradiente */}
                 <motion.h1 
                   className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
                   initial={{ opacity: 0, y: 30 }}
@@ -191,7 +167,7 @@ const DesarrolloWeb = () => {
                   extraordinarias
                 </motion.h1>
 
-                {/* Descripción mejorada */}
+                {/* Descripción */}
                 <motion.p 
                   className="text-xl text-gray-200 mb-8 max-w-xl leading-relaxed backdrop-blur-sm"
                   initial={{ opacity: 0, y: 20 }}
@@ -202,7 +178,7 @@ const DesarrolloWeb = () => {
                   sino que impulsan tu negocio hacia el éxito digital.
                 </motion.p>
 
-                {/* Botones mejorados con efectos premium */}
+                {/* Botones de acción */}
                 <motion.div 
                   className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                   initial={{ opacity: 0, y: 20 }}
@@ -226,7 +202,7 @@ const DesarrolloWeb = () => {
                   </Link>
                 </motion.div>
 
-                {/* Estadísticas mejoradas con efectos visuales */}
+                {/* Estadísticas destacadas animadas */}
                 <motion.div 
                   className="flex flex-wrap justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-white/30"
                   initial={{ opacity: 0, y: 20 }}
@@ -251,7 +227,7 @@ const DesarrolloWeb = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Sección visual mejorada */}
+              {/* Sección visual premium: marco con modelo 3D y fallback visual */}
               <motion.div
                 className="relative"
                 initial={{ opacity: 0, scale: 0.9, x: 50 }}
@@ -259,38 +235,20 @@ const DesarrolloWeb = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <div className="relative h-96 lg:h-[500px]">
-                  {/* Círculos decorativos mejorados con más capas */}
+                  {/* Decorativos flotantes adicionales */}
                   <motion.div 
                     className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-haby-accent/30 via-purple-500/20 to-transparent rounded-full blur-xl"
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                      rotate: [0, 180, 360]
-                    }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3], rotate: [0, 180, 360] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
                   <motion.div 
                     className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-white/20 via-blue-500/20 to-transparent rounded-full blur-xl"
-                    animate={{ 
-                      scale: [1, 1.3, 1],
-                      opacity: [0.2, 0.5, 0.2],
-                      rotate: [360, 180, 0]
-                    }}
-                    transition={{ 
-                      duration: 5, 
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1
-                    }}
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2], rotate: [360, 180, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   />
-                  
-                  {/* Marco premium mejorado */}
+                  {/* Marco con fondo animado + fallback visual */}
                   <div className="relative w-full h-full bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-3xl border border-white/30 shadow-2xl overflow-hidden flex items-center justify-center">
-                    {/* Fallback visual SIEMPRE visible (debajo o encima del modelo 3D segun el z-index) */}
+                    {/* Visual SIEMPRE visible para evitar marco vacío (imagen + texto) */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none">
                       <img
                         src="/lovable-uploads/photo-1487058792275-0ad4aaf24ca7.jpg"
@@ -300,28 +258,24 @@ const DesarrolloWeb = () => {
                       />
                       <span className="text-white text-lg font-semibold drop-shadow glow-sm opacity-70">Vista previa</span>
                     </div>
-                    
-                    {/* Efectos de borde interno */}
+                    {/* Efectos de borde y brillo */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-purple-500/10 rounded-3xl"></div>
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent"></div>
-                    
-                    {/* Modelo 3D sobre el fallback */}
+                    {/* Modelo 3D (sobre fallback, manejar internamente su visibilidad) */}
                     <div className="relative z-10 w-full h-full">
                       <ThreeDModel type="hero" />
                     </div>
-                    
-                    {/* Efecto de brillo mejorado */}
+                    {/* Brillo interior extra */}
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
-                    
-                    {/* Esquinas */}
+                    {/* Esquinas premium */}
                     <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-lg"></div>
                     <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/30 rounded-tr-lg"></div>
                     <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/30 rounded-bl-lg"></div>
                     <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-white/30 rounded-br-lg"></div>
                   </div>
-                  
-                  {/* Elementos flotantes */}
+
+                  {/* Etiquetas flotantes para stack destacado */}
                   <motion.div 
                     className="absolute -top-6 left-1/4 bg-gradient-to-r from-white/90 to-white/80 backdrop-blur-sm rounded-xl px-4 py-2 shadow-xl border border-white/20"
                     animate={{ y: [0, -10, 0] }}
@@ -348,7 +302,7 @@ const DesarrolloWeb = () => {
             </div>
           </div>
 
-          {/* Scroll indicator mejorado */}
+          {/* Indicador de scroll animado */}
           <motion.div 
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
             animate={{ y: [0, 10, 0] }}
