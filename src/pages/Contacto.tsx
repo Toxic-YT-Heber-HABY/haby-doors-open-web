@@ -1,10 +1,99 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Info } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useLocation } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+// Resumen visual y modal de términos para plan gratuito
+const lnaTermsSummary = [
+  "El proyecto debe estar ligado al bien común y ser accesible para cualquier persona.",
+  "El acceso a la solución debe ser irrestricto y alineado con su propósito original.",
+  "No debe causar ningún daño o perjuicio a los usuarios.",
+  "Los derechos de autor serán propiedad de HABY.",
+  "El solicitante será reconocido únicamente como contribuyente.",
+  "Se recomiendan proyectos sencillos y funcionales."
+];
+
+const LNATermsDialog = () => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <button
+        type="button"
+        className="text-haby-primary hover:text-haby-secondary text-sm underline inline-flex items-center"
+      >
+        <Info className="h-4 w-4 mr-1" />
+        Ver términos completos
+      </button>
+    </DialogTrigger>
+    <DialogContent className="max-w-2xl">
+      <DialogHeader>
+        <DialogTitle>Términos y Condiciones para LNA Gratuito</DialogTitle>
+        <DialogDescription>
+          Para asegurar que este recurso se utilice de manera adecuada y cumpla con su propósito original
+        </DialogDescription>
+      </DialogHeader>
+      <div className="space-y-6 py-2">
+        <p className="text-gray-700">
+          HABY está comprometido con el bien común y ofrece una opción LNA gratuita bajo las siguientes condiciones:
+        </p>
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-bold text-gray-900">1. Enfoque en el bien común</h4>
+            <p className="text-sm text-gray-600">
+              El proyecto, página web o solicitud debe estar intrínsecamente ligado al bien común. El resultado final debe ser accesible y utilizable por cualquier persona. La finalidad principal debe ser el beneficio colectivo, no el provecho personal o individual. Las solicitudes para beneficio particular serán automáticamente descartadas.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">2. Acceso irrestricto</h4>
+            <p className="text-sm text-gray-600">
+              Cualquier persona debe poder utilizar la solución, sin limitaciones geográficas, temporales o de cualquier otra índole. El uso debe estar alineado con el propósito original, fomentando su adopción generalizada y maximizando su impacto positivo en la comunidad.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">3. No causar daño</h4>
+            <p className="text-sm text-gray-600">
+              La solución proporcionada no debe causar ningún daño o perjuicio a los usuarios. Debe garantizar la protección de información personal, evitar la recopilación de datos sensibles y prevenir cualquier forma de incomodidad o perjuicio.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">4. Propiedad intelectual</h4>
+            <p className="text-sm text-gray-600">
+              Todos los derechos de autor de la solución desarrollada serán propiedad de HABY, quien recibirá todo el reconocimiento por la creación y mantenimiento de la solución. El solicitante será reconocido como contribuyente al proyecto.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">5. Rol del solicitante</h4>
+            <p className="text-sm text-gray-600">
+              La persona que realiza la petición será únicamente reconocida como contribuyente, ya que no está contratando un servicio personalizado para su beneficio individual, sino buscando una solución para el beneficio de la comunidad.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">6. Complejidad y viabilidad</h4>
+            <p className="text-sm text-gray-600">
+              Las peticiones deben centrarse en proyectos o soluciones sencillas pero funcionales. A menos que la petición presente una solución excepcionalmente buena para un problema de bien común, es poco probable que proyectos muy complejos puedan ser atendidos bajo la modalidad gratuita.
+            </p>
+          </div>
+        </div>
+      </div>
+    </DialogContent>
+  </Dialog>
+);
+
+const useQueryParam = (param: string) => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  return params.get(param);
+};
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +104,11 @@ const Contacto = () => {
     mensaje: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lnaTermsAccepted, setLnaTermsAccepted] = useState(false);
+
+  // Verifica por query param o selección de servicio
+  const planParam = useQueryParam('plan');
+  const isLNAGratuito = planParam === 'lna-gratuito' || formData.servicio === 'LNA Gratuito';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -22,13 +116,22 @@ const Contacto = () => {
       ...prev,
       [name]: value
     }));
+    // Si cambia el plan, quita check de términos
+    if (name === 'servicio' && value !== 'LNA Gratuito') {
+      setLnaTermsAccepted(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.nombre || !formData.email || !formData.servicio || !formData.mensaje) {
       toast.error("Por favor completa todos los campos requeridos");
+      return;
+    }
+
+    if (isLNAGratuito && !lnaTermsAccepted) {
+      toast.error("Debes aceptar los términos y condiciones del plan gratuito para continuar.");
       return;
     }
 
@@ -36,7 +139,7 @@ const Contacto = () => {
 
     try {
       console.log("Enviando formulario de contacto:", formData);
-      
+
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: formData
       });
@@ -48,8 +151,7 @@ const Contacto = () => {
 
       console.log("Correo enviado exitosamente:", data);
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
-      
-      // Limpiar formulario
+
       setFormData({
         nombre: "",
         email: "",
@@ -57,6 +159,7 @@ const Contacto = () => {
         servicio: "",
         mensaje: ""
       });
+      setLnaTermsAccepted(false);
 
     } catch (error) {
       console.error("Error al enviar mensaje:", error);
@@ -100,6 +203,26 @@ const Contacto = () => {
                     Ya sea que tengas una idea clara o necesites orientación, estamos aquí para ayudarte.
                   </p>
                 </div>
+
+                {/* Advertencia y resumen de Términos LNA Gratuito */}
+                {isLNAGratuito && (
+                  <div className="bg-green-50 border-l-4 border-green-500 shadow p-6 rounded-lg mb-8">
+                    <div className="flex items-center mb-3">
+                      <Info className="h-5 w-5 text-green-600 mr-2" />
+                      <span className="font-medium text-green-700">
+                        ¡Estás solicitando el plan LNA Gratuito para bien común!
+                      </span>
+                    </div>
+                    <ol className="mb-3 list-decimal list-inside text-green-800 space-y-1 text-sm">
+                      {lnaTermsSummary.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ol>
+                    <div>
+                      <LNATermsDialog />
+                    </div>
+                  </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -192,6 +315,7 @@ const Contacto = () => {
                     ></textarea>
                   </div>
 
+                  {/* Checkbox de privacidad */}
                   <div className="flex items-start">
                     <input
                       type="checkbox"
@@ -204,12 +328,29 @@ const Contacto = () => {
                     </label>
                   </div>
 
+                  {/* Checkbox de aceptación LNA solo si corresponde */}
+                  {isLNAGratuito && (
+                    <div className="flex items-start">
+                      <input
+                        type="checkbox"
+                        id="lna-terms"
+                        checked={lnaTermsAccepted}
+                        onChange={e => setLnaTermsAccepted(e.target.checked)}
+                        className="mt-1"
+                        required
+                      />
+                      <label htmlFor="lna-terms" className="ml-2 text-sm text-green-700">
+                        He leído y acepto los <LNATermsDialog /> del plan LNA gratuito.
+                      </label>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="inline-flex items-center bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50"
                   >
-                    {isSubmitting ? "Enviando..." : "Enviar mensaje"} 
+                    {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                     <Send className="ml-2 h-5 w-5" />
                   </button>
                 </form>
@@ -282,7 +423,7 @@ const Contacto = () => {
                         </a>
                         <a href="https://www.instagram.com/habydoors/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                           <svg className="h-5 w-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                            <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.045-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
                           </svg>
                         </a>
                         <a href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1" target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
