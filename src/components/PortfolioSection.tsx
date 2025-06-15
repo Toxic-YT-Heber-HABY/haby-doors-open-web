@@ -98,7 +98,7 @@ const PortfolioSection = () => {
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
             Proyectos que{' '}
-            <span className="text-haby-accent font-bold md:text-gradient-safe">
+            <span className="bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">
               abren puertas
             </span>
           </h2>
