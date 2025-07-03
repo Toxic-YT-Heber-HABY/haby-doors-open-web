@@ -4,9 +4,11 @@ import LNAStep2_Project from "./LNAStep2_Project";
 import LNAStep3_Impact from "./LNAStep3_Impact";
 import LNAStep4_Resources from "./LNAStep4_Resources";
 import LNAStep5_Confirm from "./LNAStep5_Confirm";
+import WizardHeader from "./WizardHeader";
+import WizardNavigation from "./WizardNavigation";
+import { useWizardValidation } from "./useWizardValidation";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 
 const initialData = {
   nombre: "",
@@ -47,6 +49,7 @@ const LNAWizard = () => {
   const [step, setStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lnaTermsAccepted, setLnaTermsAccepted] = useState(false);
+  const { validateStep } = useWizardValidation();
 
   const StepComponent = steps[step].component;
 
@@ -60,64 +63,14 @@ const LNAWizard = () => {
   const isLastStep = step === steps.length - 1;
   const isFirstStep = step === 0;
 
-  // Validación simple por paso (puede ser mejorada por step)
-  const validateStep = () => {
-    switch (step) {
-      case 0:
-        if (!data.nombre || !data.email) {
-          toast.error("Completa tu nombre y correo.");
-          return false;
-        }
-        break;
-      case 1:
-        if (
-          !data.institucion ||
-          !data.area ||
-          !data.ubicacion ||
-          !data.proyecto_nombre ||
-          !data.proyecto_objetivo ||
-          !data.proyecto_estado ||
-          !data.proyecto_fechainicio ||
-          !data.proyecto_descripcion
-        ) {
-          toast.error("Completa todos los campos de tu organización y proyecto.");
-          return false;
-        }
-        break;
-      case 2:
-        if (
-          !data.tipo_impacto ||
-          !data.grupos_beneficiados ||
-          !data.estimacion_beneficiarios ||
-          !data.ubicacion_impacto ||
-          !data.motivacion
-        ) {
-          toast.error("Completa los campos de impacto social/comunitario.");
-          return false;
-        }
-        break;
-      case 4: // Confirmación
-        if (!lnaTermsAccepted) {
-          toast.error("Debes aceptar los términos y condiciones.");
-          return false;
-        }
-        if (!data.mensaje) {
-          toast.error("Por favor escribe un mensaje contextual.");
-          return false;
-        }
-        break;
-    }
-    return true;
-  };
-
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateStep()) next();
+    if (validateStep(step, data, lnaTermsAccepted)) next();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateStep()) return;
+    if (!validateStep(step, data, lnaTermsAccepted)) return;
     setIsSubmitting(true);
     try {
       const { error } = await supabase.functions.invoke("send-contact-email", {
@@ -140,50 +93,7 @@ const LNAWizard = () => {
 
   return (
     <div className="max-w-4xl mx-auto my-8 bg-white rounded-3xl shadow-2xl overflow-hidden">
-      {/* Header with progress */}
-      <div className="bg-gradient-to-r from-haby-primary to-haby-accent px-8 py-6 text-white">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-xl font-bold">Plan Gratuito HABY</h1>
-            <p className="text-sm opacity-90">Solicitud paso a paso</p>
-          </div>
-          <div className="text-right">
-            <div className="text-2xl mb-1">{steps[step].icon}</div>
-            <div className="text-sm opacity-90">Paso {step + 1} de {steps.length}</div>
-          </div>
-        </div>
-        
-        {/* Progress bar */}
-        <div className="relative">
-          <div className="flex justify-between items-center mb-2">
-            {steps.map((s, i) => (
-              <div
-                key={s.title}
-                className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  step >= i 
-                    ? "bg-white text-haby-primary shadow-lg scale-110" 
-                    : "bg-white/20 text-white/70"
-                }`}
-              >
-                {i + 1}
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center">
-            {steps.map((_, i) => (
-              <div
-                key={i}
-                className={`h-2 flex-1 mx-1 rounded-full transition-all duration-500 ${
-                  step >= i ? "bg-white shadow-sm" : "bg-white/20"
-                }`}
-              />
-            ))}
-          </div>
-          <div className="text-center mt-3">
-            <p className="text-sm font-medium opacity-95">{steps[step].title}</p>
-          </div>
-        </div>
-      </div>
+      <WizardHeader steps={steps} currentStep={step} />
 
       {/* Form content */}
       <form
@@ -207,50 +117,14 @@ const LNAWizard = () => {
           )}
         </div>
 
-        {/* Navigation buttons */}
-        <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
-          {!isFirstStep ? (
-            <button
-              type="button"
-              onClick={prev}
-              className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4 mr-2" />
-              Atrás
-            </button>
-          ) : <div />}
-          
-          <button
-            type="submit"
-            className={`inline-flex items-center px-8 py-3 font-semibold text-white rounded-xl transition-all duration-200 ${
-              isLastStep 
-                ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-lg hover:shadow-xl" 
-                : "bg-gradient-to-r from-haby-primary to-haby-accent hover:from-haby-accent hover:to-haby-primary shadow-lg hover:shadow-xl"
-            } ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:scale-105"}`}
-            disabled={isSubmitting}
-          >
-            {isLastStep ? (
-              <>
-                {isSubmitting ? (
-                  <>
-                    <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Enviando...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Enviar solicitud
-                  </>
-                )}
-              </>
-            ) : (
-              <>
-                Siguiente
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </>
-            )}
-          </button>
-        </div>
+        <WizardNavigation
+          isFirstStep={isFirstStep}
+          isLastStep={isLastStep}
+          isSubmitting={isSubmitting}
+          onPrev={prev}
+          onNext={handleNext}
+          onSubmit={handleSubmit}
+        />
       </form>
     </div>
   );
