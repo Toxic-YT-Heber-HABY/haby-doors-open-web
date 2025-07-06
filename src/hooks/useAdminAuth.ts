@@ -21,20 +21,16 @@ export const useAdminAuth = () => {
 
   const checkAuthState = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        // Verify if this is an admin user
-        const { data: adminData, error } = await supabase
-          .from('admin_users')
-          .select('*')
-          .eq('id', session.user.id)
-          .eq('is_active', true)
-          .maybeSingle();
-
-        if (adminData && !error) {
+      // For admin auth, we don't use Supabase Auth sessions
+      // Instead, we check if there's a stored admin session
+      const storedAdmin = localStorage.getItem('admin_user');
+      if (storedAdmin) {
+        try {
+          const adminData = JSON.parse(storedAdmin);
           setAdminUser(adminData);
           setIsAuthenticated(true);
-        } else {
+        } catch {
+          localStorage.removeItem('admin_user');
           setIsAuthenticated(false);
           setAdminUser(null);
         }
@@ -55,7 +51,7 @@ export const useAdminAuth = () => {
     try {
       setIsLoading(true);
       
-      // First verify admin credentials using our secure function
+      // Verify admin credentials using our secure function
       const { data: adminId, error: verifyError } = await supabase
         .rpc('verify_admin_auth', {
           admin_email: email,
@@ -67,31 +63,23 @@ export const useAdminAuth = () => {
         return false;
       }
 
-      // If verification successful, sign in with Supabase Auth
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      // Get admin user data from our admin_users table
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('id', adminId)
+        .eq('is_active', true)
+        .single();
 
-      if (error) {
-        // If Supabase auth fails, we need to create the auth user
-        const { error: signUpError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              admin_id: adminId
-            }
-          }
-        });
-
-        if (signUpError) {
-          toast.error('Error en la autenticación');
-          return false;
-        }
+      if (adminError || !adminData) {
+        toast.error('Error al obtener datos del administrador');
+        return false;
       }
 
-      await checkAuthState();
+      // Store admin session in localStorage and set state
+      localStorage.setItem('admin_user', JSON.stringify(adminData));
+      setAdminUser(adminData);
+      setIsAuthenticated(true);
       toast.success('Acceso autorizado');
       return true;
     } catch (error) {
@@ -105,7 +93,7 @@ export const useAdminAuth = () => {
 
   const logoutAdmin = async () => {
     try {
-      await supabase.auth.signOut();
+      localStorage.removeItem('admin_user');
       setAdminUser(null);
       setIsAuthenticated(false);
       toast.success('Sesión cerrada correctamente');
