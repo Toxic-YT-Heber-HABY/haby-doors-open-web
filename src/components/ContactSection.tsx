@@ -34,7 +34,7 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      console.log("Enviando formulario de contacto:", formData);
+      // Datos del formulario validados
       
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: formData
@@ -45,7 +45,7 @@ const ContactSection = () => {
         throw error;
       }
 
-      console.log("Correo enviado exitosamente:", data);
+      // Correo enviado exitosamente
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
       
       // Limpiar formulario

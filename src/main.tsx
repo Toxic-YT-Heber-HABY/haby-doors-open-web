@@ -1,77 +1,23 @@
-
 /**
  * Punto de entrada principal de la aplicación
  * 
  * Este archivo configura el renderizado inicial de la aplicación React,
  * incluyendo:
- * - Manejo de errores con ErrorBoundary
+ * - Manejo de errores con SecureErrorBoundary
  * - Suspense para carga lazy
  * - Configuraciones de accesibilidad
  * - Compatibilidad cross-browser
+ * - Auditoría de seguridad
  */
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { StrictMode, Suspense } from 'react';
+import { SecureErrorBoundary } from '@/components/SecureErrorBoundary';
+import { SecurityAudit } from '@/components/SecurityAudit';
+import { designTokens } from '@/lib/design-tokens';
 import App from './App.tsx';
 import './index.css';
-
-// TypeScript interfaces for ErrorBoundary
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-}
-
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error?: Error;
-}
-
-/**
- * ErrorBoundary Component
- * 
- * Catches JavaScript errors in child components and displays a fallback UI
- * instead of crashing the entire application.
- */
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    // Update state so the next render will show the fallback UI
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log error information for debugging
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // Fallback UI when an error occurs
-      return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Algo salió mal</h2>
-            <p className="text-gray-700 mb-4">
-              Ha ocurrido un error inesperado. Por favor, recarga la página o intenta nuevamente más tarde.
-            </p>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="btn-primary"
-            >
-              Recargar página
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
 
 // Loading component for Suspense fallback
 const Loading = () => (
@@ -89,6 +35,56 @@ const Loading = () => (
   </div>
 );
 
+// Secure browser warning - creates DOM elements safely
+const createSecureBrowserWarning = () => {
+  const warningDiv = document.createElement('div');
+  
+  // Apply styles securely
+  Object.assign(warningDiv.style, {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    right: '0',
+    backgroundColor: '#fff3cd',
+    color: '#664d03',
+    padding: '12px',
+    textAlign: 'center',
+    zIndex: '9999',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  });
+
+  const messageText = document.createTextNode(
+    'Estás usando un navegador obsoleto. Para una mejor experiencia, te recomendamos actualizar tu navegador.'
+  );
+  
+  const dismissButton = document.createElement('button');
+  dismissButton.id = 'dismiss-warning';
+  dismissButton.textContent = 'Cerrar';
+  dismissButton.setAttribute('aria-label', 'Cerrar advertencia de navegador');
+  
+  Object.assign(dismissButton.style, {
+    background: 'none',
+    border: 'none',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    color: '#0d6efd',
+    marginLeft: '10px',
+  });
+
+  const paragraph = document.createElement('p');
+  paragraph.style.cssText = 'margin: 0; font-family: sans-serif;';
+  paragraph.appendChild(messageText);
+  paragraph.appendChild(dismissButton);
+
+  warningDiv.appendChild(paragraph);
+  
+  dismissButton.addEventListener('click', () => {
+    warningDiv.remove();
+  });
+
+  return warningDiv;
+};
+
 // Root element where the app will be mounted
 const rootElement = document.getElementById('root');
 
@@ -99,56 +95,48 @@ if (!rootElement) {
 // Establecer atributos de accesibilidad en el documento
 document.documentElement.lang = 'es';
 
-// Create root and render app with error handling
+// Create root and render app with secure error handling
 const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <ErrorBoundary>
+    <SecureErrorBoundary>
+      <SecurityAudit />
       <Suspense fallback={<Loading />}>
         <App />
       </Suspense>
-    </ErrorBoundary>
+    </SecureErrorBoundary>
   </StrictMode>
 );
 
-// Detectar navegadores obsoletos y mostrar advertencia si es necesario
-const isIE = /*@cc_on!@*/false || !!(document as any).documentMode;
-const isEdgeLegacy = !isIE && !!(window as any).StyleMedia;
+// Detectar navegadores obsoletos de manera segura
+const detectObsoleteBrowser = () => {
+  const isIE = /*@cc_on!@*/false || !!(document as any).documentMode;
+  const isEdgeLegacy = !isIE && !!(window as any).StyleMedia;
+  
+  if (isIE || isEdgeLegacy) {
+    // Solo mostrar warning en desarrollo
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Navegador obsoleto detectado');
+    }
+    
+    const warningElement = createSecureBrowserWarning();
+    document.body.prepend(warningElement);
+  }
+};
 
-if (isIE || isEdgeLegacy) {
-  console.warn('Estás usando un navegador obsoleto. Algunas funcionalidades pueden no estar disponibles.');
-  
-  const showBrowserWarning = () => {
-    const warningDiv = document.createElement('div');
-    warningDiv.style.position = 'fixed';
-    warningDiv.style.top = '0';
-    warningDiv.style.left = '0';
-    warningDiv.style.right = '0';
-    warningDiv.style.backgroundColor = '#fff3cd';
-    warningDiv.style.color = '#664d03';
-    warningDiv.style.padding = '12px';
-    warningDiv.style.textAlign = 'center';
-    warningDiv.style.zIndex = '9999';
-    warningDiv.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-    
-    warningDiv.innerHTML = `
-      <p style="margin: 0; font-family: sans-serif;">
-        Estás usando un navegador obsoleto. Para una mejor experiencia, 
-        te recomendamos actualizar tu navegador.
-        <button id="dismiss-warning" style="background: none; border: none; text-decoration: underline; cursor: pointer; color: #0d6efd; margin-left: 10px;">
-          Cerrar
-        </button>
-      </p>
-    `;
-    
-    document.body.prepend(warningDiv);
-    
-    document.getElementById('dismiss-warning')?.addEventListener('click', () => {
-      warningDiv.style.display = 'none';
-    });
-  };
-  
-  // Mostrar advertencia después de que el sitio haya cargado
-  window.addEventListener('load', showBrowserWarning);
+// Mostrar advertencia después de que el sitio haya cargado
+window.addEventListener('load', detectObsoleteBrowser);
+
+// Performance monitoring en desarrollo
+if (process.env.NODE_ENV === 'development') {
+  window.addEventListener('load', () => {
+    const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+    if (navigationEntry) {
+      console.group('📊 Performance Metrics');
+      console.log(`Dom Content Loaded: ${navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime}ms`);
+      console.log(`Load Complete: ${navigationEntry.loadEventEnd - navigationEntry.startTime}ms`);
+      console.groupEnd();
+    }
+  });
 }
