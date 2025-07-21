@@ -81,9 +81,9 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gray-50 rounded-lg p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Ponte en contacto</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="bg-gray-50 rounded-lg p-6 sm:p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Ponte en contacto</h3>
             <div className="space-y-6">
               <div className="flex items-start">
                 <Phone className="h-6 w-6 text-haby-primary mt-1 mr-4 flex-shrink-0" />
@@ -148,8 +148,8 @@ const ContactSection = () => {
           </div>
           
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 sm:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
               
               <div className="space-y-4">
                 <div>

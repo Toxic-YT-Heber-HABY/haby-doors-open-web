@@ -152,22 +152,22 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-3 gap-8 pt-12 border-t border-white/20"
+              className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-8 sm:pt-12 border-t border-white/20"
               initial={{ opacity: 0, y: 20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">100+</div>
-                <div className="text-sm text-white">Proyectos</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">100+</div>
+                <div className="text-xs sm:text-sm text-white">Proyectos</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">24/7</div>
-                <div className="text-sm text-white">Soporte</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">24/7</div>
+                <div className="text-xs sm:text-sm text-white">Soporte</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-haby-accent">99%</div>
-                <div className="text-sm text-white">Satisfacción</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">99%</div>
+                <div className="text-xs sm:text-sm text-white">Satisfacción</div>
               </div>
             </motion.div>
           </motion.div>

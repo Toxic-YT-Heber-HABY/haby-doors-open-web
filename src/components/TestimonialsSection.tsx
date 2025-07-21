@@ -122,13 +122,13 @@ const TestimonialsSection = () => {
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div
                     className="h-full"
                     whileHover={{ y: -8, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <div className="relative h-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+                    <div className="relative h-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 lg:p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
                       {/* Quote icon */}
                       <div className="absolute top-6 right-6 opacity-20 hover:opacity-40 transition-opacity">
                         <Quote className="w-8 h-8 text-haby-accent" />
@@ -142,7 +142,7 @@ const TestimonialsSection = () => {
                       </div>
 
                       {/* Content */}
-                      <p className="text-gray-200 mb-8 leading-relaxed text-lg italic min-h-[120px]">
+                      <p className="text-gray-200 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg italic min-h-[100px] sm:min-h-[120px]">
                         "{testimonial.content}"
                       </p>
 
@@ -157,14 +157,14 @@ const TestimonialsSection = () => {
                           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-haby-accent/20 to-purple-400/20 hover:opacity-0 transition-opacity"></div>
                         </div>
                         <div>
-                          <p className="font-semibold text-white text-lg">{testimonial.author}</p>
-                          <div className="flex items-center gap-2 text-sm text-gray-300">
+                          <p className="font-semibold text-white text-base sm:text-lg">{testimonial.author}</p>
+                          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300">
                             <User className="w-3 h-3" />
-                            <span>{testimonial.position}</span>
+                            <span className="truncate">{testimonial.position}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-sm text-haby-accent">
+                          <div className="flex items-center gap-2 text-xs sm:text-sm text-haby-accent">
                             <Building className="w-3 h-3" />
-                            <span>{testimonial.company}</span>
+                            <span className="truncate">{testimonial.company}</span>
                           </div>
                         </div>
                       </div>

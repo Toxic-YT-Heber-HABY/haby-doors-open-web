@@ -1,0 +1,148 @@
+/* Mobile-specific fixes for better UX */
+
+/* Fix for very small screens */
+@media screen and (max-width: 360px) {
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Reduce font sizes on very small screens */
+  h1, .text-4xl { font-size: 2rem !important; }
+  h2, .text-3xl { font-size: 1.75rem !important; }
+  h3, .text-2xl { font-size: 1.5rem !important; }
+  
+  /* Adjust card padding */
+  .card, .bg-white { padding: 1rem !important; }
+  
+  /* Ensure minimum touch targets */
+  button, a[role="button"], .btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* Fix for landscape orientation on mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .min-h-screen {
+    min-height: auto !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Reduce hero height on landscape mobile */
+  .hero-section {
+    height: auto !important;
+    min-height: 80vh !important;
+  }
+  
+  /* Stack elements vertically on landscape mobile */
+  .lg\\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Better grid stacking on tablets */
+@media screen and (min-width: 640px) and (max-width: 1023px) {
+  .md\\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .md\\:grid-cols-3 > :last-child:nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    max-width: 50% !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Improve touch interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects that don't work on touch */
+  .hover\\:scale-105:hover,
+  .group:hover .group-hover\\:scale-110,
+  .hover\\:translate-x-2:hover {
+    transform: none !important;
+  }
+  
+  /* Increase tap targets */
+  .nav-link, .mobile-link {
+    padding: 0.75rem 1rem !important;
+  }
+  
+  /* Better visual feedback for taps */
+  .btn, button, .nav-link {
+    transition: background-color 0.2s ease !important;
+  }
+  
+  .btn:active, button:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* Fix for Safari mobile viewport units */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available !important;
+  }
+}
+
+/* Better carousel handling on mobile */
+@media screen and (max-width: 767px) {
+  .carousel-item {
+    scroll-snap-align: center !important;
+  }
+  
+  /* Hide carousel navigation on small screens */
+  .carousel-previous,
+  .carousel-next {
+    display: none !important;
+  }
+}
+
+/* Improve form inputs on mobile */
+@media screen and (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 0.75rem !important;
+  }
+  
+  /* Better spacing for form elements */
+  .form-element + .form-element {
+    margin-top: 1rem !important;
+  }
+}
+
+/* Fix for modal/dialog positioning on mobile */
+@media screen and (max-width: 767px) {
+  .modal, .dialog {
+    margin: 1rem !important;
+    max-height: calc(100vh - 2rem) !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Ensure proper text rendering on mobile */
+@media screen and (max-width: 767px) {
+  body {
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+  
+  /* Prevent text from being too small */
+  p, span, div {
+    font-size: inherit !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Better handling of overflow on mobile */
+@media screen and (max-width: 767px) {
+  .overflow-hidden {
+    overflow-x: hidden !important;
+  }
+  
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden !important;
+  }
+}

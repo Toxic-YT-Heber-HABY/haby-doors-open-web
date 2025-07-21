@@ -109,7 +109,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -157,29 +157,30 @@ const PortfolioSection = () => {
                   </CardHeader>
                   
                   <CardContent className="pb-4 flex-grow">
-                    <CardDescription className="text-gray-600 leading-relaxed mb-4">
+                    <CardDescription className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
                       {project.description}
                     </CardDescription>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <User className="w-4 h-4" />
-                      <span className="font-medium">Cliente:</span> {project.client}
+                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                      <User className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="font-medium">Cliente:</span> 
+                      <span className="truncate">{project.client}</span>
                     </div>
                   </CardContent>
                   
-                  <CardFooter className="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <CardFooter className="flex flex-col sm:flex-row justify-between items-start sm:items-center pt-4 border-t border-gray-100 gap-3 sm:gap-0">
                     <a 
                       href={project.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="inline-flex items-center gap-2 text-haby-primary hover:text-haby-secondary font-semibold transition-all duration-300 group-hover:translate-x-1"
+                      className="inline-flex items-center gap-2 text-haby-primary hover:text-haby-secondary font-semibold transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base"
                     >
                       Ver proyecto 
-                      <ExternalLink className="w-4 h-4 transition-transform group-hover:scale-110" />
+                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:scale-110" />
                     </a>
 
                     <Link 
                       to={`/portafolio/${project.id}`}
-                      className="text-sm text-gray-500 hover:text-haby-primary transition-colors font-medium"
+                      className="text-xs sm:text-sm text-gray-500 hover:text-haby-primary transition-colors font-medium"
                     >
                       Más detalles →
                     </Link>

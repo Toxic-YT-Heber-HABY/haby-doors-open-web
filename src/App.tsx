@@ -24,6 +24,7 @@ import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { AnimationController } from "./components/AnimationController";
 import PageTransition from "./components/PageTransition";
+import ResponsiveTest from "./components/ResponsiveTest";
 
 // Configuración del cliente de consultas
 const queryClient = new QueryClient({
@@ -113,6 +114,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <ResponsiveTest />
         <BrowserRouter>
           <AnimatedRoutes />
         </BrowserRouter>
