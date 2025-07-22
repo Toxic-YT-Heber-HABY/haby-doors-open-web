@@ -1,0 +1,189 @@
+/* Sistema unificado de colores y fondos para móvil/desktop */
+
+/* Variables CSS mejoradas para gradientes consistentes */
+:root {
+  --gradient-hero-mobile: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)));
+  --gradient-card-mobile: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+  --gradient-section-mobile: linear-gradient(180deg, hsl(220 14% 96%), hsl(220 13% 91%));
+}
+
+/* Asegurar que los gradientes se vean igual en móvil y desktop */
+@media screen and (max-width: 1024px) {
+  /* Hero section - gradiente unificado */
+  .bg-gradient-to-br,
+  .bg-gradient-hero {
+    background: var(--gradient-hero-mobile) !important;
+    background-attachment: fixed !important;
+  }
+
+  /* Cards - fondos consistentes */
+  .bg-white,
+  .card-enhanced {
+    background: var(--gradient-card-mobile) !important;
+    border: 1px solid hsl(var(--haby-primary) / 0.1) !important;
+  }
+
+  /* Sections - fondos de sección uniformes */
+  .bg-gray-50,
+  .bg-gradient-light {
+    background: var(--gradient-section-mobile) !important;
+  }
+
+  /* Elementos decorativos más visibles en móvil */
+  .mix-blend-multiply {
+    mix-blend-mode: normal !important;
+    opacity: 0.15 !important;
+  }
+
+  /* Blur effects más suaves en móvil */
+  .filter.blur-xl {
+    filter: blur(40px) !important;
+  }
+
+  /* Glass effects consistentes */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
+
+/* Pantallas muy pequeñas - optimización adicional */
+@media screen and (max-width: 640px) {
+  /* Simplificar fondos complejos */
+  .bg-gradient-to-br,
+  .bg-gradient-hero {
+    background: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-primary))) !important;
+  }
+
+  /* Cards más simples pero elegantes */
+  .card-enhanced {
+    background: white !important;
+    box-shadow: 0 4px 20px -2px hsl(var(--haby-primary) / 0.15) !important;
+  }
+
+  /* Reducir complejidad visual en elementos decorativos */
+  .absolute.opacity-20,
+  .absolute.opacity-40 {
+    opacity: 0.05 !important;
+  }
+}
+
+/* Mejorar contraste en todos los dispositivos */
+@media screen {
+  /* Asegurar que el texto sea siempre legible */
+  .text-white {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .text-gray-200 {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .text-gray-600 {
+    color: hsl(215 16% 47%) !important;
+  }
+
+  .text-gray-700 {
+    color: hsl(215 19% 35%) !important;
+  }
+
+  .text-gray-800 {
+    color: hsl(215 28% 17%) !important;
+  }
+
+  /* Botones con mejor consistencia visual */
+  .btn-primary,
+  .bg-haby-accent {
+    background: var(--gradient-accent) !important;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .btn-secondary {
+    background: white !important;
+    border: 2px solid hsl(var(--haby-primary)) !important;
+    color: hsl(var(--haby-primary)) !important;
+  }
+
+  /* Navegación más consistente */
+  .backdrop-blur {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+/* Hover effects unificados */
+@media (hover: hover) and (pointer: fine) {
+  .card-enhanced:hover,
+  .group:hover .group-hover\\:shadow-2xl {
+    transform: translateY(-6px) !important;
+    box-shadow: var(--shadow-primary) !important;
+  }
+
+  .btn-primary:hover,
+  .btn-accent:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: var(--shadow-accent) !important;
+  }
+
+  .btn-secondary:hover {
+    background: hsl(var(--haby-light)) !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+/* Touch devices - mejores interacciones */
+@media (hover: none) and (pointer: coarse) {
+  .card-enhanced:active,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.98) !important;
+  }
+
+  /* Remover efectos hover problemáticos */
+  .group:hover .group-hover\\:scale-110,
+  .hover\\:scale-105 {
+    transform: none !important;
+  }
+}
+
+/* Asegurar que los colores de marca sean consistentes */
+.text-haby-primary {
+  color: hsl(var(--haby-primary)) !important;
+}
+
+.text-haby-accent {
+  color: hsl(var(--haby-accent)) !important;
+}
+
+.bg-haby-primary {
+  background-color: hsl(var(--haby-primary)) !important;
+}
+
+.bg-haby-accent {
+  background: var(--gradient-accent) !important;
+}
+
+/* Gradientes de texto más consistentes */
+.text-gradient-primary,
+.bg-gradient-to-r {
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Fallback para dispositivos que no soportan text gradients */
+@supports not (-webkit-background-clip: text) {
+  .text-gradient-primary,
+  .bg-gradient-to-r {
+    background: none !important;
+    color: hsl(var(--haby-accent)) !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}

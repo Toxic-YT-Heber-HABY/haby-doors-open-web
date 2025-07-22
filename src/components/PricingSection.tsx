@@ -130,7 +130,7 @@ const PricingSection = () => {
   };
 
   return (
-    <section className="section bg-gray-50 py-20">
+    <section className="py-responsive bg-gradient-light">
       <div className="container mx-auto">
         <motion.div
           className="text-center max-w-3xl mx-auto mb-16"

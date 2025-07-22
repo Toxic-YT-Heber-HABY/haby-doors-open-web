@@ -74,7 +74,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary text-white overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-hero text-white overflow-hidden">
       {/* Elementos decorativos optimizados */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-72 h-72 bg-haby-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
@@ -135,15 +135,14 @@ const Hero = () => {
             >
               <Link 
                 to="/contacto" 
-                className="group relative inline-flex items-center justify-center px-8 py-4 bg-haby-accent hover:bg-haby-accent/90 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-haby-accent/25 w-full sm:w-auto"
+                className="btn-accent group relative w-full sm:w-auto"
                 aria-label="Contáctanos ahora"
               >
                 <span className="relative z-10">Contáctanos ahora</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-haby-accent to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
               <Link 
                 to="/servicios" 
-                className="group inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-haby-dark font-semibold rounded-full transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+                className="btn-secondary group w-full sm:w-auto"
                 aria-label="Ver nuestros servicios"
               >
                 <span>Nuestros servicios</span>

@@ -35,7 +35,7 @@ const additionalFeatures = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+    <section className="py-responsive bg-gradient-light relative overflow-hidden">
       <div className="absolute inset-0 opacity-40">
         <div className="absolute top-20 right-20 w-64 h-64 bg-haby-light rounded-full mix-blend-multiply filter blur-xl"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-haby-accent/30 rounded-full mix-blend-multiply filter blur-xl"></div>
@@ -77,7 +77,7 @@ const ServicesSection = () => {
               whileHover={{ y: -8 }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-              <div className="relative bg-white rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 p-6 sm:p-8 border border-gray-100 group-hover:border-haby-accent/30">
+              <div className="relative card-enhanced p-6 sm:p-8">
                 <div className="mb-4 sm:mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
@@ -110,7 +110,7 @@ const ServicesSection = () => {
         </div>
 
         <motion.div 
-          className="bg-gradient-to-r from-haby-primary to-haby-secondary rounded-2xl p-8 lg:p-12 text-white"
+          className="bg-gradient-primary rounded-2xl p-8 lg:p-12 text-white shadow-primary"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -136,7 +136,7 @@ const ServicesSection = () => {
             <div className="text-center lg:text-right">
               <Link 
                 to="/servicios" 
-                className="inline-block bg-white text-haby-primary px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors transform hover:scale-105 hover:shadow-lg"
+                className="btn-secondary bg-white text-haby-primary hover:bg-gray-50"
               >
                 Ver todos nuestros servicios
               </Link>
