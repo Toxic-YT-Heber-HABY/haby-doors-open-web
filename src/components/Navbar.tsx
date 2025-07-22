@@ -48,7 +48,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 glass-effect border-b border-haby-light/50 shadow-elegant transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 glass-effect shadow-elegant transition-all duration-300">
         <div className="container mx-auto px-4 py-3">
           <nav className="flex items-center justify-between">
             {/* Logo y nombre */}

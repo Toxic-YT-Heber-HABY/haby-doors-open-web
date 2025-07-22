@@ -1,71 +1,115 @@
 /* Sistema unificado de colores y fondos para móvil/desktop */
 
-/* Variables CSS mejoradas para gradientes consistentes */
+/* Variables CSS mejoradas para gradientes consistentes móvil/PC */
 :root {
-  --gradient-hero-mobile: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)));
-  --gradient-card-mobile: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
-  --gradient-section-mobile: linear-gradient(180deg, hsl(220 14% 96%), hsl(220 13% 91%));
+  --gradient-hero-unified: linear-gradient(135deg, hsl(252 84% 20%), hsl(264 32% 50%), hsl(259 32% 54%));
+  --gradient-card-unified: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+  --gradient-section-unified: linear-gradient(135deg, hsl(220 14% 96%), hsl(220 13% 91%));
+  --brand-primary: hsl(259 32% 54%);
+  --brand-accent: hsl(291 84% 61%);
+  --brand-dark: hsl(252 84% 20%);
 }
 
-/* Asegurar que los gradientes se vean igual en móvil y desktop */
-@media screen and (max-width: 1024px) {
-  /* Hero section - gradiente unificado */
+/* Unificación completa móvil/desktop - mismo aspecto visual */
+@media screen {
+  /* Hero section - exactamente igual en móvil y PC */
   .bg-gradient-to-br,
   .bg-gradient-hero {
-    background: var(--gradient-hero-mobile) !important;
-    background-attachment: fixed !important;
+    background: var(--gradient-hero-unified) !important;
+    background-attachment: scroll !important; /* Más estable */
   }
 
-  /* Cards - fondos consistentes */
+  /* Cards - exactamente iguales en móvil y PC */
   .bg-white,
   .card-enhanced {
-    background: var(--gradient-card-mobile) !important;
-    border: 1px solid hsl(var(--haby-primary) / 0.1) !important;
+    background: var(--gradient-card-unified) !important;
+    border: 1px solid hsl(259 32% 54% / 0.1) !important;
+    box-shadow: 0 4px 20px -2px hsl(259 32% 54% / 0.15) !important;
   }
 
-  /* Sections - fondos de sección uniformes */
+  /* Sections - exactamente iguales en móvil y PC */
   .bg-gray-50,
   .bg-gradient-light {
-    background: var(--gradient-section-mobile) !important;
+    background: var(--gradient-section-unified) !important;
   }
 
-  /* Elementos decorativos más visibles en móvil */
-  .mix-blend-multiply {
-    mix-blend-mode: normal !important;
-    opacity: 0.15 !important;
+  /* Botones unificados */
+  .btn-primary,
+  .btn-accent,
+  .bg-haby-accent {
+    background: linear-gradient(135deg, var(--brand-accent), hsl(291 64% 51%)) !important;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 10px 30px -10px hsl(291 84% 61% / 0.3) !important;
   }
 
-  /* Blur effects más suaves en móvil */
-  .filter.blur-xl {
-    filter: blur(40px) !important;
+  .btn-secondary {
+    background: white !important;
+    border: 2px solid var(--brand-primary) !important;
+    color: var(--brand-primary) !important;
   }
 
-  /* Glass effects consistentes */
+  /* Texto de marca consistente */
+  .text-haby-primary {
+    color: var(--brand-primary) !important;
+  }
+  
+  .text-haby-accent {
+    color: var(--brand-accent) !important;
+  }
+
+  /* Gradientes de texto unificados */
+  .text-gradient-primary,
+  .bg-gradient-to-r {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+
+  /* Navbar unificado */
   .glass-effect {
     background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Elementos decorativos optimizados */
+  .mix-blend-multiply {
+    mix-blend-mode: multiply !important;
+    opacity: 0.2 !important;
+  }
+
+  .filter.blur-xl {
+    filter: blur(60px) !important;
   }
 }
 
-/* Pantallas muy pequeñas - optimización adicional */
+/* Mantener la misma calidad visual en todas las pantallas */
 @media screen and (max-width: 640px) {
-  /* Simplificar fondos complejos */
+  /* Hero igual de impactante en móviles pequeños */
   .bg-gradient-to-br,
   .bg-gradient-hero {
-    background: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-primary))) !important;
+    background: var(--gradient-hero-unified) !important;
   }
 
-  /* Cards más simples pero elegantes */
+  /* Cards mantienen elegancia en móviles pequeños */
   .card-enhanced {
-    background: white !important;
-    box-shadow: 0 4px 20px -2px hsl(var(--haby-primary) / 0.15) !important;
+    background: var(--gradient-card-unified) !important;
+    box-shadow: 0 4px 20px -2px hsl(259 32% 54% / 0.15) !important;
+    border: 1px solid hsl(259 32% 54% / 0.1) !important;
   }
 
-  /* Reducir complejidad visual en elementos decorativos */
+  /* Elementos decorativos más sutiles pero visibles */
   .absolute.opacity-20,
   .absolute.opacity-40 {
-    opacity: 0.05 !important;
+    opacity: 0.1 !important;
+  }
+
+  /* Texto más legible en pantallas pequeñas */
+  .text-white {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
   }
 }
 
@@ -116,23 +160,32 @@
   }
 }
 
-/* Hover effects unificados */
+/* Hover effects profesionales y unificados */
 @media (hover: hover) and (pointer: fine) {
   .card-enhanced:hover,
   .group:hover .group-hover\\:shadow-2xl {
-    transform: translateY(-6px) !important;
-    box-shadow: var(--shadow-primary) !important;
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px -10px hsl(259 32% 54% / 0.25) !important;
+    border-color: hsl(291 84% 61% / 0.3) !important;
   }
 
   .btn-primary:hover,
   .btn-accent:hover {
-    transform: translateY(-2px) scale(1.02) !important;
-    box-shadow: var(--shadow-accent) !important;
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 15px 35px -5px hsl(291 84% 61% / 0.4) !important;
+    filter: brightness(1.05) !important;
   }
 
   .btn-secondary:hover {
-    background: hsl(var(--haby-light)) !important;
-    transform: translateY(-2px) !important;
+    background: hsl(268 100% 93%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px -5px hsl(259 32% 54% / 0.2) !important;
+  }
+
+  /* Navegación con hover mejorado */
+  .navbar-link:hover {
+    color: var(--brand-accent) !important;
+    text-shadow: 0 0 8px hsl(291 84% 61% / 0.3) !important;
   }
 }
 

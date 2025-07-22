@@ -1,0 +1,268 @@
+/* Mejoras UI profesionales y unificadas */
+
+/* Botones mejorados con efectos premium */
+.btn-primary,
+.btn-accent {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, hsl(291, 84%, 61%), hsl(291, 64%, 51%));
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 4px 15px -3px hsl(291, 84%, 61%, 0.25),
+    0 0 0 1px hsl(291, 84%, 61%, 0.1);
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary::before,
+.btn-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before,
+.btn-accent:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover,
+.btn-accent:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 10px 25px -5px hsl(291, 84%, 61%, 0.4),
+    0 0 0 1px hsl(291, 84%, 61%, 0.2);
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid hsl(259, 32%, 54%);
+  color: hsl(259, 32%, 54%);
+  box-shadow: 
+    0 2px 8px -2px hsl(259, 32%, 54%, 0.1),
+    0 0 0 1px hsl(259, 32%, 54%, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: hsl(268, 100%, 93%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px -5px hsl(259, 32%, 54%, 0.2),
+    0 0 0 1px hsl(259, 32%, 54%, 0.1);
+  border-color: hsl(291, 84%, 61%);
+  color: hsl(291, 84%, 61%);
+}
+
+/* Cards premium */
+.card-enhanced {
+  background: linear-gradient(145deg, 
+    hsl(0, 0%, 100%), 
+    hsl(0, 0%, 98%)
+  );
+  border: 1px solid hsl(259, 32%, 54%, 0.08);
+  box-shadow: 
+    0 4px 20px -2px hsl(259, 32%, 54%, 0.1),
+    0 1px 4px -1px hsl(259, 32%, 54%, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    hsl(259, 32%, 54%), 
+    hsl(291, 84%, 61%), 
+    hsl(259, 32%, 54%)
+  );
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card-enhanced:hover::before {
+  transform: scaleX(1);
+}
+
+.card-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px -10px hsl(259, 32%, 54%, 0.15),
+    0 4px 12px -2px hsl(291, 84%, 61%, 0.1);
+  border-color: hsl(291, 84%, 61%, 0.2);
+}
+
+/* Navbar glass effect mejorado */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px -8px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Gradientes de texto mejorados */
+.text-gradient-primary {
+  background: linear-gradient(135deg, 
+    hsl(259, 32%, 54%) 0%, 
+    hsl(291, 84%, 61%) 50%,
+    hsl(259, 32%, 54%) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.text-gradient-rainbow {
+  background: linear-gradient(90deg, 
+    hsl(291, 84%, 61%) 0%, 
+    hsl(216, 85%, 60%) 25%, 
+    hsl(158, 64%, 52%) 50%, 
+    hsl(43, 96%, 56%) 75%, 
+    hsl(291, 84%, 61%) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Sombras elegantes */
+.shadow-elegant {
+  box-shadow: 
+    0 4px 20px -2px hsl(259, 32%, 54%, 0.08),
+    0 2px 8px -2px hsl(259, 32%, 54%, 0.04);
+}
+
+.shadow-primary {
+  box-shadow: 
+    0 10px 30px -10px hsl(259, 32%, 54%, 0.2),
+    0 4px 12px -2px hsl(259, 32%, 54%, 0.1);
+}
+
+.shadow-accent {
+  box-shadow: 
+    0 10px 30px -10px hsl(291, 84%, 61%, 0.25),
+    0 4px 15px -3px hsl(291, 84%, 61%, 0.15);
+}
+
+/* Animaciones suaves para móvil */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:active,
+  .btn-secondary:active,
+  .card-enhanced:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Remover hover effects problemáticos en móvil */
+  .btn-primary:hover::before,
+  .btn-accent:hover::before {
+    left: -100%;
+  }
+}
+
+/* Modo alto contraste */
+@media (forced-colors: active) {
+  .btn-primary,
+  .btn-secondary,
+  .card-enhanced {
+    border: 1px solid;
+  }
+  
+  .text-gradient-primary,
+  .text-gradient-rainbow {
+    background: none;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: initial;
+    color: hsl(259, 32%, 54%);
+  }
+}
+
+/* Improved focus states */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.card-enhanced:focus-visible {
+  outline: 2px solid hsl(291, 84%, 61%);
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: loading-shine 1.5s infinite;
+}
+
+@keyframes loading-shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Micro-interactions */
+.interactive-scale {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-scale:hover {
+  transform: scale(1.02);
+}
+
+.interactive-scale:active {
+  transform: scale(0.98);
+}
+
+/* Consistent typography shadows */
+.text-shadow-soft {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-hero {
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}

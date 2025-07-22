@@ -36,8 +36,8 @@ const additionalFeatures = [
 const ServicesSection = () => {
   return (
     <section className="py-responsive bg-gradient-light relative overflow-hidden">
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-haby-light rounded-full mix-blend-multiply filter blur-xl"></div>
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 right-20 w-64 h-64 bg-haby-accent rounded-full mix-blend-multiply filter blur-xl"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-haby-accent/30 rounded-full mix-blend-multiply filter blur-xl"></div>
       </div>
 

@@ -5,6 +5,7 @@
 @import './styles/mobile-fixes.css';
 @import './styles/text-fixes.css';
 @import './styles/unified-colors.css';
+@import './styles/ui-enhancements.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -50,10 +51,15 @@
     --gradient-accent: linear-gradient(135deg, hsl(var(--haby-accent)), hsl(291 64% 51%));
     --gradient-rainbow: linear-gradient(90deg, hsl(var(--haby-accent)), hsl(216 85% 60%), hsl(158 64% 52%), hsl(43 96% 56%), hsl(var(--haby-accent)));
     
-    /* Background gradients */
+    /* Background gradients unificados para móvil y PC */
     --bg-gradient-light: linear-gradient(135deg, hsl(220 14% 96%), hsl(220 13% 91%));
     --bg-gradient-dark: linear-gradient(135deg, hsl(var(--haby-dark)), hsl(252 84% 15%));
     --bg-gradient-hero: linear-gradient(135deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)), hsl(var(--haby-primary)));
+    
+    /* Mobile optimized gradients */
+    --mobile-gradient-hero: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)));
+    --mobile-gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --mobile-gradient-section: linear-gradient(180deg, hsl(220 14% 96%), hsl(220 13% 91%));
     
     /* Shadow colors */
     --shadow-primary: 0 10px 30px -10px hsl(var(--haby-primary) / 0.3);
