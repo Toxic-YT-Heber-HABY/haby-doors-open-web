@@ -3,6 +3,7 @@
 @import './styles/cross-browser.css';
 @import './styles/mobile-optimizations.css';
 @import './styles/mobile-fixes.css';
+@import './styles/text-fixes.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,11 +36,11 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    --haby-primary: #7E69AB;
-    --haby-secondary: #6E59A5;
-    --haby-accent: #D946EF;
-    --haby-light: #E5DEFF;
-    --haby-dark: #2A1065;
+    --haby-primary: 259 32% 54%;
+    --haby-secondary: 264 32% 50%;
+    --haby-accent: 291 84% 61%;
+    --haby-light: 268 100% 93%;
+    --haby-dark: 252 84% 20%;
   }
 
   .dark {
@@ -185,26 +186,26 @@
   }
 
   .text-gradient-primary {
-    color: var(--haby-primary);
-    background: linear-gradient(135deg, var(--haby-primary), var(--haby-accent));
+    color: hsl(var(--haby-primary));
+    background: linear-gradient(135deg, hsl(var(--haby-primary)), hsl(var(--haby-accent)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     
     @supports not (-webkit-background-clip: text) {
       background: none;
-      color: var(--haby-primary);
+      color: hsl(var(--haby-primary));
     }
   }
 
   .text-gradient-rainbow {
-    color: var(--haby-accent);
+    color: hsl(var(--haby-accent));
     background: linear-gradient(90deg, 
-      var(--haby-accent) 0%, 
-      #3b82f6 25%, 
-      #10b981 50%, 
-      #f59e0b 75%, 
-      var(--haby-accent) 100%
+      hsl(var(--haby-accent)) 0%, 
+      hsl(216 85% 60%) 25%, 
+      hsl(158 64% 52%) 50%, 
+      hsl(43 96% 56%) 75%, 
+      hsl(var(--haby-accent)) 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -212,26 +213,26 @@
     
     @supports not (-webkit-background-clip: text) {
       background: none;
-      color: var(--haby-accent);
+      color: hsl(var(--haby-accent));
     }
   }
 }
 
 @layer utilities {
-  .text-haby-primary { color: var(--haby-primary); }
-  .text-haby-secondary { color: var(--haby-secondary); }
-  .text-haby-accent { color: var(--haby-accent); }
-  .text-haby-light { color: var(--haby-light); }
-  .text-haby-dark { color: var(--haby-dark); }
+  .text-haby-primary { color: hsl(var(--haby-primary)); }
+  .text-haby-secondary { color: hsl(var(--haby-secondary)); }
+  .text-haby-accent { color: hsl(var(--haby-accent)); }
+  .text-haby-light { color: hsl(var(--haby-light)); }
+  .text-haby-dark { color: hsl(var(--haby-dark)); }
 
-  .bg-haby-primary { background-color: var(--haby-primary); }
-  .bg-haby-secondary { background-color: var(--haby-secondary); }
-  .bg-haby-accent { background-color: var(--haby-accent); }
-  .bg-haby-light { background-color: var(--haby-light); }
-  .bg-haby-dark { background-color: var(--haby-dark); }
+  .bg-haby-primary { background-color: hsl(var(--haby-primary)); }
+  .bg-haby-secondary { background-color: hsl(var(--haby-secondary)); }
+  .bg-haby-accent { background-color: hsl(var(--haby-accent)); }
+  .bg-haby-light { background-color: hsl(var(--haby-light)); }
+  .bg-haby-dark { background-color: hsl(var(--haby-dark)); }
 
-  .border-haby-primary { border-color: var(--haby-primary); }
-  .border-haby-accent { border-color: var(--haby-accent); }
+  .border-haby-primary { border-color: hsl(var(--haby-primary)); }
+  .border-haby-accent { border-color: hsl(var(--haby-accent)); }
 
   .space-y-responsive > * + * {
     margin-top: clamp(0.5rem, 2vw, 2rem);

@@ -64,11 +64,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				haby: {
-					primary: '#7E69AB',
-					secondary: '#6E59A5',
-					dark: '#1A1F2C',
-					light: '#E5DEFF',
-					accent: '#D946EF'
+					primary: 'var(--haby-primary)',
+					secondary: 'var(--haby-secondary)',
+					dark: 'var(--haby-dark)',
+					light: 'var(--haby-light)',
+					accent: 'var(--haby-accent)'
 				}
 			},
 			fontFamily: {
