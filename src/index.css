@@ -6,6 +6,10 @@
 @import './styles/text-fixes.css';
 @import './styles/unified-colors.css';
 @import './styles/ui-enhancements.css';
+@import './styles/performance-optimizations.css';
+@import './styles/seo-typography.css';
+@import './styles/modern-interactions.css';
+@import './styles/responsive-grid-system.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

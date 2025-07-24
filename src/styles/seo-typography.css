@@ -1,0 +1,199 @@
+/* Tipografía optimizada para SEO y legibilidad */
+
+/* Jerarquía semántica clara */
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: hsl(var(--haby-primary));
+  margin-bottom: 1rem;
+  text-rendering: optimizeLegibility;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: hsl(var(--haby-primary));
+  margin-bottom: 0.75rem;
+  text-rendering: optimizeLegibility;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: hsl(var(--haby-primary));
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: hsl(var(--haby-secondary));
+  margin-bottom: 0.5rem;
+}
+
+h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: hsl(var(--haby-secondary));
+  margin-bottom: 0.25rem;
+}
+
+/* Párrafos optimizados */
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+  text-rendering: optimizeLegibility;
+}
+
+/* Enlaces semánticamente correctos */
+a {
+  color: hsl(var(--haby-accent));
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.3s ease;
+  text-underline-offset: 4px;
+}
+
+a:hover,
+a:focus {
+  color: hsl(var(--haby-primary));
+  text-decoration-color: currentColor;
+  outline: 2px solid hsl(var(--haby-accent) / 0.2);
+  outline-offset: 2px;
+}
+
+/* Listas estructuradas */
+ul, ol {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Texto destacado */
+strong, b {
+  font-weight: 600;
+  color: hsl(var(--haby-primary));
+}
+
+em, i {
+  font-style: italic;
+  color: hsl(var(--haby-secondary));
+}
+
+/* Citas y testimonios */
+blockquote {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: hsl(var(--haby-secondary));
+  border-left: 4px solid hsl(var(--haby-accent));
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Texto pequeño y legal */
+small {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.4;
+}
+
+/* Código */
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875rem;
+  background: hsl(var(--muted));
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: hsl(var(--haby-primary));
+}
+
+/* Accesibilidad mejorada */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Texto gradiente accesible */
+.text-gradient-accessible {
+  background: linear-gradient(135deg, hsl(var(--haby-primary)), hsl(var(--haby-accent)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Fallback para dispositivos que no soportan text gradient */
+@supports not (-webkit-background-clip: text) {
+  .text-gradient-accessible {
+    background: none;
+    color: hsl(var(--haby-primary));
+    -webkit-text-fill-color: initial;
+  }
+}
+
+/* Mejoras para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  h1, h2, h3, h4, h5, h6 {
+    color: hsl(var(--foreground));
+  }
+  
+  p {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-gradient-accessible {
+    color: hsl(var(--haby-accent));
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+}
+
+/* Optimización para impresión */
+@media print {
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+  
+  p {
+    color: black !important;
+    orphans: 3;
+    widows: 3;
+  }
+  
+  .text-gradient-accessible {
+    color: black !important;
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+  }
+}

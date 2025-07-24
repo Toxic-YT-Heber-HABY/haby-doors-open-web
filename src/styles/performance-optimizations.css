@@ -1,0 +1,103 @@
+/* Optimizaciones de rendimiento y velocidad de carga */
+
+/* Optimización de imágenes */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Lazy loading optimizado */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Optimización de fuentes */
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-display: swap;
+}
+
+/* Precarga de recursos críticos */
+.preload-critical {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
+/* Optimización de scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Optimización de transforms 3D para aceleración de hardware */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Contenido above-the-fold optimizado */
+.above-fold {
+  contain: layout style paint;
+}
+
+/* Optimización de animaciones costosas */
+.will-change-auto {
+  will-change: auto;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Reducir reflows */
+.no-layout-shift {
+  contain: layout;
+}
+
+/* Optimización de memoria para dispositivos de baja potencia */
+@media (max-width: 768px), (max-height: 600px) {
+  .memory-optimized {
+    contain: strict;
+    content-visibility: auto;
+  }
+  
+  /* Reducir complejidad visual en móviles */
+  .complex-shadows {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .complex-gradients {
+    background: var(--haby-primary) !important;
+  }
+}
+
+/* Optimización de recursos de red */
+.resource-optimized {
+  font-display: swap;
+  loading: lazy;
+  decoding: async;
+}
+
+/* Minimizar repaints */
+.minimize-repaint {
+  contain: paint;
+  isolation: isolate;
+}
