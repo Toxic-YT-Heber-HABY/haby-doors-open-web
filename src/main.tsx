@@ -13,8 +13,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { StrictMode, Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { SecureErrorBoundary } from '@/components/SecureErrorBoundary';
 import { SecurityAudit } from '@/components/SecurityAudit';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 import { designTokens } from '@/lib/design-tokens';
 import App from './App.tsx';
 import './index.css';
@@ -100,12 +102,16 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <SecureErrorBoundary>
-      <SecurityAudit />
-      <Suspense fallback={<Loading />}>
-        <App />
-      </Suspense>
-    </SecureErrorBoundary>
+    <ErrorBoundary>
+      <SecureErrorBoundary>
+        <SecurityAudit />
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </SecureErrorBoundary>
+    </ErrorBoundary>
   </StrictMode>
 );
 

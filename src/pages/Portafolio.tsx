@@ -1,6 +1,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LinkValidator from "@/components/LinkValidator";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -40,7 +41,7 @@ const proyectos = [
     imagen: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
     tecnologias: ["React", "Supabase", "PostgreSQL", "Real-time"],
     categoria: "Educación",
-    url: "#",
+    url: null,
     github: null,
     esPrivado: true,
     cliente: "Proyecto Personal",
@@ -207,27 +208,23 @@ const Portafolio = () => {
                       
                       {!proyecto.esPrivado && (
                         <div className="flex gap-2">
-                          {proyecto.url && proyecto.url !== "#" && (
-                            <a 
-                              href={proyecto.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                          {proyecto.url && (
+                            <LinkValidator 
+                              url={proyecto.url}
                               className="text-gray-600 hover:text-haby-primary transition-colors"
-                              title="Ver sitio"
+                              title="Ver sitio web"
                             >
                               <ExternalLink className="h-4 w-4" />
-                            </a>
+                            </LinkValidator>
                           )}
                           {proyecto.github && (
-                            <a 
-                              href={proyecto.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <LinkValidator 
+                              url={proyecto.github}
                               className="text-gray-600 hover:text-haby-primary transition-colors"
-                              title="Ver código"
+                              title="Ver código fuente"
                             >
                               <Github className="h-4 w-4" />
-                            </a>
+                            </LinkValidator>
                           )}
                         </div>
                       )}
