@@ -19,7 +19,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { AnimationController } from "./components/AnimationController";
@@ -115,9 +115,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <ResponsiveTest />
-        <BrowserRouter>
-          <AnimatedRoutes />
-        </BrowserRouter>
+        <AnimatedRoutes />
       </TooltipProvider>
     </AnimationController>
   </QueryClientProvider>
