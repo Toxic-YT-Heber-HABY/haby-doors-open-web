@@ -4,51 +4,11 @@ import { ExternalLink, Star, Calendar, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ImageZoom from './ImageZoom';
+import ValidatedExternalLink from './ValidatedExternalLink';
+import { getFeaturedProjects } from '@/data/projectsData';
 
-const projects = [
-  {
-    id: "1",
-    title: "HABYKeys",
-    description: "Teclado virtual avanzado diseñado para programadores, contadores y otros profesionales, con una interfaz intuitiva y personalizable que mejora la productividad.",
-    image: "/lovable-uploads/7d27120f-0c6b-4fdf-989a-e0b32feb1843.png",
-    category: "Productividad",
-    url: "https://haby-advanced-virtual-keyboard-help.vercel.app",
-    client: "Perla Itzel Rosales Flores",
-    date: "2024",
-    featured: true
-  },
-  {
-    id: "2",
-    title: "HABY Score Tracker",
-    description: "Herramienta educativa interactiva que ayuda a los estudiantes a comprender y calcular sus calificaciones usando regla de tres, con exportación de resultados en múltiples formatos.",
-    image: "/lovable-uploads/8ba55e5f-90b4-4561-90c1-d8b8986c025b.png",
-    category: "Educación",
-    url: "https://prep-score-tracker.lovable.app",
-    client: "Prof. Martha Norma Ramírez Albarrán",
-    date: "2024",
-    featured: true
-  },
-  {
-    id: "3",
-    title: "HABY CLASS",
-    description: "Plataforma educativa moderna que simplifica la gestión del aula y mejora la experiencia de aprendizaje mediante herramientas intuitivas y eficientes.",
-    image: "/lovable-uploads/d93cbf56-5f67-47f8-9472-e864723e0be6.png",
-    category: "Proyecto Escolar",
-    client: "Proyecto Personal",
-    url: "#",
-    date: "2024"
-  },
-  {
-    id: "4",
-    title: "Progresión 8: Los poderes fácticos y el Estado",
-    description: "Material educativo sobre los poderes fácticos y su influencia en las decisiones políticas, económicas y sociales, para la asignatura de Ciencias Sociales III.",
-    image: "/lovable-uploads/dd203339-d26a-44c4-91b1-9162915ae828.png",
-    category: "Educacional e Informativa",
-    url: "https://1-glosario-de-terminos-t-5pfyq4z.gamma.site/",
-    client: "Colegio De Estudios y Tecnológicos Del Estado De México",
-    date: "2024"
-  }
-];
+// Obtener solo proyectos destacados y públicos para la sección principal
+const projects = getFeaturedProjects();
 
 // Variantes para las animaciones
 const containerVariants = {
@@ -163,20 +123,23 @@ const PortfolioSection = () => {
                     <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
                       <User className="w-3 h-3 sm:w-4 sm:h-4" />
                       <span className="font-medium">Cliente:</span> 
-                      <span className="truncate">{project.client}</span>
+                      <span className="truncate">{project.client || 'Proyecto Personal'}</span>
                     </div>
                   </CardContent>
                   
                   <CardFooter className="flex flex-col sm:flex-row justify-between items-start sm:items-center pt-4 border-t border-gray-100 gap-3 sm:gap-0">
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center gap-2 text-haby-primary hover:text-haby-secondary font-semibold transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base"
-                    >
-                      Ver proyecto 
-                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:scale-110" />
-                    </a>
+                    {project.url ? (
+                      <ValidatedExternalLink
+                        url={project.url}
+                        className="text-haby-primary hover:text-haby-secondary font-semibold transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base"
+                      >
+                        Ver proyecto
+                      </ValidatedExternalLink>
+                    ) : (
+                      <span className="text-gray-400 text-sm sm:text-base">
+                        Proyecto privado
+                      </span>
+                    )}
 
                     <Link 
                       to={`/portafolio/${project.id}`}
