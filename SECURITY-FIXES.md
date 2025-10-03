@@ -36,6 +36,16 @@
 - **Solución**: Agregado try/catch con fallback
 - **Estado**: ✅ RESUELTO
 
+### 6. **CRÍTICO - Exposición de Credenciales de Admin**
+- **Problema**: La tabla `admin_users` tenía políticas RLS que permitían a usuarios autenticados hacer SELECT de password hashes
+- **Riesgo**: Cualquier usuario autenticado podría robar hashes de contraseñas y intentar crackearlos offline
+- **Solución**: 
+  - Eliminada política SELECT "Admin users can view their own data"
+  - Eliminada política UPDATE "Admin users can update their own data"
+  - Tabla `admin_users` completamente bloqueada desde el cliente
+  - Acceso SOLO a través de funciones security definer: `verify_admin_auth()` y `create_admin_user()`
+- **Estado**: ✅ RESUELTO
+
 ## 🛡️ Componentes de Seguridad Implementados
 
 ### 1. **SecureErrorBoundary**
@@ -64,6 +74,8 @@
 - ✅ Auditoría automática de seguridad
 - ✅ Manejo seguro de navegadores obsoletos
 - ✅ Performance monitoring solo en desarrollo
+- ✅ Tabla admin_users bloqueada desde el cliente
+- ✅ Password hashes inaccesibles para robo/cracking
 
 ## 🚀 Próximos Pasos Recomendados
 
@@ -76,7 +88,9 @@
    - Implementar HSTS headers
 
 3. **Autenticación**
-   - Revisar políticas RLS de Supabase
+   - Migrar de localStorage a Supabase Auth con roles
+   - Crear tabla user_roles con función has_role()
+   - Actualizar políticas RLS de projects para usar roles
    - Implementar rate limiting en login
 
 4. **Monitoreo**
