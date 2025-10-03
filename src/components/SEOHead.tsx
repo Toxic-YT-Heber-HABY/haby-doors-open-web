@@ -11,6 +11,7 @@ interface SEOHeadProps {
   publishedTime?: string;
   modifiedTime?: string;
   canonicalUrl?: string;
+  structuredData?: Record<string, any>;
 }
 
 const SEOHead = ({
@@ -23,7 +24,8 @@ const SEOHead = ({
   author = "Heber Zadkiel García Pérez",
   publishedTime,
   modifiedTime,
-  canonicalUrl
+  canonicalUrl,
+  structuredData
 }: SEOHeadProps) => {
   
   useEffect(() => {
@@ -77,7 +79,7 @@ const SEOHead = ({
     }
 
     // Schema.org JSON-LD
-    const schemaData = {
+    const schemaData = structuredData || {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "HABY - Open The Doors",
@@ -126,7 +128,7 @@ const SEOHead = ({
     return () => {
       // No necesitamos limpiar ya que las meta tags se actualizan para cada página
     };
-  }, [title, description, keywords, image, url, type, author, publishedTime, modifiedTime, canonicalUrl]);
+  }, [title, description, keywords, image, url, type, author, publishedTime, modifiedTime, canonicalUrl, structuredData]);
 
   return null; // Este componente no renderiza nada visible
 };

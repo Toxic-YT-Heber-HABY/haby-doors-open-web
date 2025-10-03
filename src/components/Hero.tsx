@@ -135,15 +135,15 @@ const Hero = () => {
             >
               <Link 
                 to="/contacto" 
-                className="btn-accent group relative w-full sm:w-auto"
-                aria-label="Contáctanos ahora"
+                className="btn-accent group relative w-full sm:w-auto min-h-[48px] touch-manipulation"
+                aria-label="Contáctanos ahora para iniciar tu proyecto"
               >
                 <span className="relative z-10">Contáctanos ahora</span>
               </Link>
               <Link 
                 to="/servicios" 
-                className="btn-secondary group w-full sm:w-auto"
-                aria-label="Ver nuestros servicios"
+                className="btn-secondary group w-full sm:w-auto min-h-[48px] touch-manipulation"
+                aria-label="Explorar todos nuestros servicios de desarrollo web"
               >
                 <span>Nuestros servicios</span>
                 <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-2" aria-hidden="true" />

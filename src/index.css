@@ -12,6 +12,8 @@
 @import './styles/responsive-grid-system.css';
 @import './styles/mobile-navigation-fix.css';
 @import './styles/carousel-mobile-fix.css';
+@import './styles/accessibility-enhancements.css';
+@import './styles/microinteractions.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

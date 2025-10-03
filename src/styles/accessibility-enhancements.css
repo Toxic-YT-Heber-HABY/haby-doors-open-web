@@ -1,0 +1,316 @@
+/* Mejoras de Accesibilidad AAA */
+
+/* Focus States Mejorados */
+*:focus-visible {
+  outline: 3px solid hsl(var(--haby-accent));
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+  transition: outline-offset 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid hsl(var(--haby-accent));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px hsl(var(--haby-accent) / 0.1);
+}
+
+/* Navegación por Teclado */
+.keyboard-navigation *:focus {
+  outline: 3px solid hsl(var(--haby-accent));
+  outline-offset: 2px;
+}
+
+/* Skip Links para Accesibilidad */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: hsl(var(--haby-primary));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid hsl(var(--haby-accent));
+  outline-offset: 2px;
+}
+
+/* Touch Targets Mejorados (mínimo 44x44px según WCAG) */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.interactive-element {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mejora de Contraste - Botones */
+.btn-primary,
+.btn-secondary,
+.btn-accent {
+  position: relative;
+}
+
+.btn-primary::before,
+.btn-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.btn-primary:hover::before,
+.btn-accent:hover::before {
+  opacity: 1;
+}
+
+/* Mejora de Contraste para Texto en Gradientes */
+.text-gradient-primary,
+.text-gradient-rainbow {
+  filter: contrast(1.2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Indicadores de Estado Accesibles */
+[aria-busy="true"] {
+  cursor: wait;
+  pointer-events: none;
+}
+
+[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* Mejoras para Lectores de Pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Animaciones Respetuosas con prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mejoras de Contraste para Modo Alto Contraste */
+@media (prefers-contrast: high) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-accent {
+    border: 2px solid currentColor;
+  }
+
+  .card-enhanced {
+    border: 2px solid hsl(var(--haby-primary));
+  }
+
+  .text-gradient-primary,
+  .text-gradient-rainbow {
+    background: none !important;
+    color: hsl(var(--haby-primary)) !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
+}
+
+/* Mejoras de Legibilidad */
+p, li, td, th {
+  line-height: 1.6;
+  word-spacing: 0.05em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Estados de Error Accesibles */
+.error-message {
+  color: hsl(var(--destructive));
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: hsl(var(--destructive) / 0.1);
+  border-left: 4px solid hsl(var(--destructive));
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.error-message::before {
+  content: '⚠';
+  font-size: 1.25rem;
+}
+
+/* Mejoras para Inputs */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid hsl(var(--haby-accent));
+  outline-offset: 2px;
+  border-color: hsl(var(--haby-accent));
+}
+
+input:invalid,
+textarea:invalid {
+  border-color: hsl(var(--destructive));
+  box-shadow: 0 0 0 3px hsl(var(--destructive) / 0.1);
+}
+
+/* Mejoras para Links */
+a:not(.btn-primary):not(.btn-secondary):not(.btn-accent) {
+  color: hsl(var(--haby-primary));
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+}
+
+a:not(.btn-primary):not(.btn-secondary):not(.btn-accent):hover,
+a:not(.btn-primary):not(.btn-secondary):not(.btn-accent):focus {
+  text-decoration-color: currentColor;
+  color: hsl(var(--haby-accent));
+}
+
+/* Estados Hover Accesibles */
+@media (hover: hover) and (pointer: fine) {
+  .interactive-element:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+  }
+}
+
+/* Touch Feedback para Dispositivos Táctiles */
+@media (hover: none) and (pointer: coarse) {
+  button:active,
+  a:active,
+  .interactive-element:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Mejoras de Espaciado para Legibilidad */
+.content-section {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
+}
+
+.content-section > * + * {
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* Indicadores Visuales para Estados Interactivos */
+button:not(:disabled):hover,
+a:hover,
+.interactive-element:hover {
+  cursor: pointer;
+}
+
+button:disabled,
+a[aria-disabled="true"],
+.interactive-element[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Mejoras para Tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+th {
+  font-weight: 600;
+  color: hsl(var(--haby-primary));
+  background: hsl(var(--haby-light) / 0.3);
+}
+
+/* Mejoras para Formularios */
+label {
+  font-weight: 500;
+  color: hsl(var(--haby-primary));
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+fieldset {
+  border: 2px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  font-weight: 600;
+  color: hsl(var(--haby-primary));
+  padding: 0 0.5rem;
+}
+
+/* Modo Oscuro Accesible */
+@media (prefers-color-scheme: dark) {
+  .text-gradient-primary,
+  .text-gradient-rainbow {
+    filter: brightness(1.3) contrast(1.1);
+  }
+
+  .card-enhanced {
+    border-color: hsl(var(--haby-accent) / 0.3);
+  }
+}
