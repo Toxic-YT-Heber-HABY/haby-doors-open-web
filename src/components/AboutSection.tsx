@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
+import ImageOptimized from './ImageOptimized';
 
 /**
  * AboutSection component
@@ -42,11 +43,12 @@ const AboutSection = () => {
             <div className="relative mx-auto max-w-md">
               <div className="aspect-square w-full bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                 {/* Optimized image with lazy loading and proper sizing */}
-                <img 
+                <ImageOptimized 
                   src="/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png" 
                   alt="Heber Zadkiel García Pérez - Fundador de HABY" 
                   className="w-full h-full object-cover"
-                  loading="lazy"
+                  aspectRatio="square"
+                  lazy={!isMobile}
                 />
               </div>
               <motion.div 
