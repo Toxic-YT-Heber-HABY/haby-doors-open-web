@@ -41,7 +41,7 @@ const ContactSection = () => {
       });
 
       if (error) {
-        console.error("Error al enviar correo:", error);
+        // Security: Don't log user data or detailed errors
         throw error;
       }
 
@@ -58,7 +58,7 @@ const ContactSection = () => {
       });
 
     } catch (error) {
-      console.error("Error al enviar mensaje:", error);
+      // Security: Don't log user form data to console
       toast.error("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
     } finally {
       setIsSubmitting(false);

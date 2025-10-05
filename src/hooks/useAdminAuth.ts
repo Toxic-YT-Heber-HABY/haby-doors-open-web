@@ -39,7 +39,7 @@ export const useAdminAuth = () => {
         setAdminUser(null);
       }
     } catch (error) {
-      console.error('Error checking auth state:', error);
+      // Security: Don't log auth errors to console in production
       setIsAuthenticated(false);
       setAdminUser(null);
     } finally {
@@ -83,7 +83,7 @@ export const useAdminAuth = () => {
       toast.success('Acceso autorizado');
       return true;
     } catch (error) {
-      console.error('Admin login error:', error);
+      // Security: Don't log sensitive auth errors
       toast.error('Error en el acceso de administrador');
       return false;
     } finally {
@@ -98,7 +98,7 @@ export const useAdminAuth = () => {
       setIsAuthenticated(false);
       toast.success('Sesión cerrada correctamente');
     } catch (error) {
-      console.error('Logout error:', error);
+      // Security: Don't log auth errors
       toast.error('Error al cerrar sesión');
     }
   };
@@ -118,7 +118,7 @@ export const useAdminAuth = () => {
       toast.success('Usuario administrador creado correctamente');
       return adminId;
     } catch (error: any) {
-      console.error('Create admin error:', error);
+      // Security: Don't log sensitive error details
       if (error.message?.includes('already exists')) {
         toast.error('El usuario administrador ya existe');
       } else {

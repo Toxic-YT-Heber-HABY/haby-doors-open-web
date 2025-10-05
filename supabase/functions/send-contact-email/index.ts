@@ -3,11 +3,44 @@ import { Resend } from "npm:resend@2.0.0";
 import { ContactEmailRequest } from "./types.ts";
 import { userConfirmationHeader, userProfessionalMessage, profesionalHeader, tablaResumen } from "./emailTemplates.ts";
 import { logStep } from "./logger.ts";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Input validation schema to prevent injection attacks
+const ContactSchema = z.object({
+  nombre: z.string()
+    .trim()
+    .min(1, "Nombre es requerido")
+    .max(100, "Nombre debe tener menos de 100 caracteres")
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]+$/, "Nombre contiene caracteres inválidos"),
+  
+  email: z.string()
+    .trim()
+    .email("Email inválido")
+    .max(255, "Email debe tener menos de 255 caracteres")
+    .toLowerCase(),
+  
+  telefono: z.string()
+    .trim()
+    .max(20, "Teléfono debe tener menos de 20 caracteres")
+    .regex(/^[\d\s+()-]*$/, "Teléfono contiene caracteres inválidos")
+    .optional()
+    .or(z.literal("")),
+  
+  servicio: z.string()
+    .trim()
+    .min(1, "Servicio es requerido")
+    .max(100, "Servicio debe tener menos de 100 caracteres"),
+  
+  mensaje: z.string()
+    .trim()
+    .min(10, "Mensaje debe tener al menos 10 caracteres")
+    .max(5000, "Mensaje debe tener menos de 5000 caracteres"),
+});
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -22,21 +55,27 @@ serve(async (req) => {
 
     const resend = new Resend(resendKey);
 
+    let rawData: unknown;
+    try {
+      rawData = await req.json();
+    } catch (parseError) {
+      throw new Error("Solicitud inválida: JSON malformado");
+    }
+
+    // Validate and sanitize input using Zod schema
     let requestData: ContactEmailRequest;
     try {
-      requestData = await req.json();
-    } catch (parseError) {
-      logStep("ERROR parsing JSON request", { error: parseError.message });
-      throw new Error(`Error al parsear la solicitud: ${parseError.message}`);
+      requestData = ContactSchema.parse(rawData);
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        const errorMessages = validationError.errors.map(e => e.message).join(", ");
+        throw new Error(`Datos inválidos: ${errorMessages}`);
+      }
+      throw new Error("Error de validación");
     }
-    const { nombre, email, servicio, mensaje } = requestData;
-    logStep("Request data received", { nombre, email, servicio });
 
-    if (!nombre || !email || !servicio || !mensaje) {
-      throw new Error(
-        "Todos los campos requeridos deben estar presentes: nombre, email, servicio, mensaje"
-      );
-    }
+    const { nombre, email, servicio, mensaje } = requestData;
+    logStep("Valid request received", { servicio }); // Don't log PII
 
     // Enviar correo a equipo HABY
     let emailToHaby;
@@ -57,9 +96,9 @@ serve(async (req) => {
           </div>
         `,
       });
-      logStep("Email to HABY sent", { messageId: emailToHaby.data?.id, to: "info@habydoors.com" });
+      logStep("Email to HABY sent", { messageId: emailToHaby.data?.id });
     } catch (e) {
-      logStep("ERROR enviando correo a HABY", { error: e instanceof Error ? e.message : e });
+      logStep("ERROR sending email to HABY");
       throw new Error("No se pudo enviar el correo a HABY. Inténtalo más tarde.");
     }
 
@@ -86,9 +125,9 @@ serve(async (req) => {
           </div>
         `,
       });
-      logStep("Confirmation email sent", { messageId: emailToClient.data?.id, to: email });
+      logStep("Confirmation email sent", { messageId: emailToClient.data?.id });
     } catch (e) {
-      logStep("ERROR enviando correo a USUARIO", { error: e instanceof Error ? e.message : e, to: email });
+      logStep("ERROR sending confirmation email");
       // Si ya se notificó a HABY, damos feedback explícito de fallo al usuario
       return new Response(
         JSON.stringify({
@@ -113,8 +152,8 @@ serve(async (req) => {
       }
     );
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR in send-contact-email", { message: errorMessage });
+    const errorMessage = error instanceof Error ? error.message : "Error desconocido";
+    logStep("ERROR in send-contact-email");
 
     return new Response(
       JSON.stringify({
