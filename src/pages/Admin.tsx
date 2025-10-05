@@ -85,7 +85,8 @@ const Admin = () => {
       setEditingProject(null);
       setIsFormOpen(false);
     } catch (error) {
-      console.error('Error saving project:', error);
+      // Security: Don't log error details
+      toast.error('Error al guardar el proyecto');
     }
   };
 
