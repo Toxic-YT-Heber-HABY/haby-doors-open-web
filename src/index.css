@@ -1,5 +1,5 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Modern Premium Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import './styles/cross-browser.css';
 @import './styles/mobile-optimizations.css';
 @import './styles/mobile-fixes.css';
@@ -47,32 +47,34 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    /* HABY Brand Colors - HSL format for consistency */
-    --haby-primary: 259 32% 54%;
-    --haby-secondary: 264 32% 50%;
-    --haby-accent: 291 84% 61%;
-    --haby-light: 268 100% 93%;
-    --haby-dark: 252 84% 20%;
+    /* HABY Ultra-Modern Brand Colors - Premium Palette */
+    --haby-primary: 250 70% 60%;      /* Vibrant Purple-Blue */
+    --haby-secondary: 265 80% 55%;     /* Deep Electric Purple */
+    --haby-accent: 280 100% 70%;       /* Bright Magenta */
+    --haby-light: 265 85% 95%;         /* Soft Lavender */
+    --haby-dark: 250 100% 12%;         /* Rich Deep Blue */
     
-    /* Enhanced gradient colors */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--haby-primary)), hsl(var(--haby-secondary)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--haby-accent)), hsl(291 64% 51%));
-    --gradient-rainbow: linear-gradient(90deg, hsl(var(--haby-accent)), hsl(216 85% 60%), hsl(158 64% 52%), hsl(43 96% 56%), hsl(var(--haby-accent)));
+    /* Ultra-Modern Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(250 70% 60%), hsl(280 100% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(280 100% 70%), hsl(320 100% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(250 100% 12%), hsl(250 70% 60%), hsl(280 100% 70%));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
     
-    /* Background gradients unificados para móvil y PC */
-    --bg-gradient-light: linear-gradient(135deg, hsl(220 14% 96%), hsl(220 13% 91%));
-    --bg-gradient-dark: linear-gradient(135deg, hsl(var(--haby-dark)), hsl(252 84% 15%));
-    --bg-gradient-hero: linear-gradient(135deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)), hsl(var(--haby-primary)));
+    /* Premium Background Gradients */
+    --bg-gradient-light: linear-gradient(135deg, hsl(240 20% 98%), hsl(240 30% 96%));
+    --bg-gradient-dark: linear-gradient(135deg, hsl(250 100% 12%), hsl(250 100% 8%));
+    --bg-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,1));
     
-    /* Mobile optimized gradients */
-    --mobile-gradient-hero: linear-gradient(180deg, hsl(var(--haby-dark)), hsl(var(--haby-secondary)));
-    --mobile-gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
-    --mobile-gradient-section: linear-gradient(180deg, hsl(220 14% 96%), hsl(220 13% 91%));
+    /* Premium Mobile Optimized Gradients */
+    --mobile-gradient-hero: linear-gradient(180deg, hsl(250 100% 12%), hsl(250 70% 60%));
+    --mobile-gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(240 30% 99%));
+    --mobile-gradient-section: linear-gradient(180deg, hsl(240 20% 98%), hsl(240 30% 96%));
     
-    /* Shadow colors */
-    --shadow-primary: 0 10px 30px -10px hsl(var(--haby-primary) / 0.3);
-    --shadow-accent: 0 10px 30px -10px hsl(var(--haby-accent) / 0.3);
-    --shadow-elegant: 0 4px 20px -2px hsl(var(--haby-primary) / 0.15);
+    /* Premium Shadow System */
+    --shadow-primary: 0 20px 50px -15px hsl(250 70% 60% / 0.4);
+    --shadow-accent: 0 20px 50px -15px hsl(280 100% 70% / 0.5);
+    --shadow-elegant: 0 8px 30px -5px hsl(250 50% 40% / 0.15);
+    --shadow-soft: 0 4px 15px -3px hsl(250 50% 60% / 0.1);
   }
 
   .dark {
@@ -149,51 +151,78 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl text-sm font-semibold 
+    @apply inline-flex items-center justify-center rounded-2xl text-sm font-bold 
            transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 
            focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50
-           px-6 py-3.5 shadow-lg active:scale-95;
+           px-8 py-4 shadow-2xl active:scale-95 relative overflow-hidden;
     background: var(--gradient-primary);
     color: white;
     box-shadow: var(--shadow-primary);
-    min-height: 48px;
+    min-height: 52px;
     touch-action: manipulation;
   }
 
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.6s;
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(100%) skewX(-15deg);
+  }
+
   .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.02);
     box-shadow: var(--shadow-accent);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl text-sm font-semibold 
+    @apply inline-flex items-center justify-center rounded-2xl text-sm font-bold 
            transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 
            focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50
-           px-6 py-3.5 border-2 shadow-md active:scale-95;
+           px-8 py-4 border-2 shadow-lg active:scale-95 backdrop-blur-sm;
     border-color: hsl(var(--haby-primary));
     color: hsl(var(--haby-primary));
-    background: white;
-    min-height: 48px;
+    background: rgba(255, 255, 255, 0.9);
+    min-height: 52px;
     touch-action: manipulation;
   }
 
   .btn-secondary:hover {
-    background: hsl(var(--haby-light));
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, hsl(var(--haby-light)), rgba(255, 255, 255, 0.95));
+    transform: translateY(-3px) scale(1.02);
     box-shadow: var(--shadow-elegant);
+    border-color: hsl(var(--haby-accent));
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center rounded-xl text-sm font-semibold 
-           transition-all duration-300 px-6 py-3.5 shadow-lg active:scale-95;
+    @apply inline-flex items-center justify-center rounded-2xl text-sm font-bold 
+           transition-all duration-300 px-8 py-4 shadow-2xl active:scale-95 relative overflow-hidden;
     background: var(--gradient-accent);
     color: white;
     box-shadow: var(--shadow-accent);
-    min-height: 48px;
+    min-height: 52px;
+  }
+
+  .btn-accent::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.6s;
+  }
+
+  .btn-accent:hover::before {
+    transform: translateX(100%) skewX(-15deg);
   }
 
   .btn-accent:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.02);
     filter: brightness(1.1);
   }
 

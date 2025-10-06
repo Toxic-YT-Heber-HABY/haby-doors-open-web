@@ -72,9 +72,9 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Poppins', 'sans-serif'],
-				heading: ['Montserrat', 'sans-serif'],
-				poppins: ['Poppins', 'sans-serif']
+				sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				heading: ['Space Grotesk', 'Inter', 'sans-serif'],
+				display: ['Space Grotesk', 'Inter', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

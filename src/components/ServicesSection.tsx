@@ -35,63 +35,64 @@ const additionalFeatures = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-responsive bg-gradient-light relative overflow-hidden">
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-haby-accent rounded-full mix-blend-multiply filter blur-xl"></div>
-        <div className="absolute bottom-20 left-20 w-64 h-64 bg-haby-accent/30 rounded-full mix-blend-multiply filter blur-xl"></div>
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Ultra-Modern Decorative Elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-haby-accent to-haby-primary rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-haby-primary to-haby-secondary rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="container mx-auto relative z-10">
         <motion.div 
-          className="text-center max-w-4xl mx-auto mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center max-w-4xl mx-auto mb-24"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 bg-haby-light text-haby-primary px-6 py-3 rounded-full text-sm font-semibold mb-6 border border-haby-primary/20">
-            <Zap className="w-4 h-4" />
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-haby-light/80 to-haby-light/60 backdrop-blur-sm text-haby-primary px-7 py-3.5 rounded-full text-sm font-bold mb-8 border border-haby-primary/30 shadow-lg">
+            <Zap className="w-5 h-5" />
             Nuestros Servicios
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-gray-900 mb-8 leading-[1.1] tracking-tight">
             ¿Cómo podemos{' '}
-            <span className="text-haby-accent font-bold">
+            <span className="bg-gradient-to-r from-haby-accent via-haby-primary to-haby-secondary bg-clip-text text-transparent">
               ayudarte?
             </span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
             En HABY nos especializamos en abrir puertas a través de soluciones web 
-            innovadoras que transforman la manera en que gestionas tu tiempo y optimizas tus procesos.
+            innovadoras que transforman la manera en que gestionas tu tiempo.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-20">
           {services.map((service, index) => (
             <motion.div 
               key={index} 
               className="group relative"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ y: -8 }}
+              transition={{ duration: 0.7, delay: index * 0.15 }}
+              whileHover={{ y: -12, transition: { duration: 0.3 } }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-              <div className="relative card-enhanced p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6 transform group-hover:scale-110 transition-transform duration-300">
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl`}></div>
+              <div className="relative bg-white rounded-3xl p-10 shadow-elegant border border-gray-100 group-hover:border-haby-accent/30 transition-all duration-300">
+                <div className="mb-8 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                   {service.icon}
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4 group-hover:text-haby-primary transition-colors">
+                <h3 className="text-2xl font-display font-bold text-gray-900 mb-4 group-hover:text-haby-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+                <p className="text-gray-600 mb-8 leading-relaxed font-light">
                   {service.description}
                 </p>
                 
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-sm text-gray-500">
-                      <div className="w-2 h-2 bg-haby-accent rounded-full mr-3"></div>
+                    <li key={idx} className="flex items-center text-sm text-gray-600 font-medium">
+                      <div className="w-2.5 h-2.5 bg-gradient-to-r from-haby-accent to-haby-primary rounded-full mr-3"></div>
                       {feature}
                     </li>
                   ))}
@@ -99,10 +100,10 @@ const ServicesSection = () => {
 
                 <Link 
                   to="/servicios" 
-                  className="inline-flex items-center text-haby-primary hover:text-haby-secondary font-semibold group-hover:translate-x-2 transition-all duration-300"
+                  className="inline-flex items-center text-haby-primary hover:text-haby-accent font-bold group-hover:translate-x-3 transition-all duration-300"
                 >
                   Saber más 
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
                 </Link>
               </div>
             </motion.div>
@@ -110,25 +111,28 @@ const ServicesSection = () => {
         </div>
 
         <motion.div 
-          className="bg-gradient-primary rounded-2xl p-8 lg:p-12 text-white shadow-primary"
-          initial={{ opacity: 0, y: 20 }}
+          className="relative bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary rounded-3xl p-12 lg:p-16 text-white shadow-2xl overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-screen filter blur-3xl"></div>
+          </div>
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-4xl font-display font-black mb-6 leading-tight">
                 ¿Por qué elegir HABY?
               </h3>
-              <p className="text-lg text-purple-100 mb-6">
+              <p className="text-xl text-white/90 mb-10 font-light leading-relaxed">
                 Nos comprometemos a entregar soluciones que realmente marquen la diferencia en tu día a día.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {additionalFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3 text-purple-100">
+                  <div key={index} className="flex items-center gap-3 text-white/95 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
                     {feature.icon}
-                    <span className="font-medium">{feature.text}</span>
+                    <span className="font-semibold">{feature.text}</span>
                   </div>
                 ))}
               </div>
@@ -136,9 +140,10 @@ const ServicesSection = () => {
             <div className="text-center lg:text-right">
               <Link 
                 to="/servicios" 
-                className="btn-secondary bg-white text-haby-primary hover:bg-gray-50"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-haby-primary rounded-2xl font-bold text-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 shadow-2xl"
               >
-                Ver todos nuestros servicios
+                Ver todos los servicios
+                <ArrowRight className="ml-3 h-5 w-5" />
               </Link>
             </div>
           </div>

@@ -75,104 +75,117 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-hero text-white overflow-hidden">
-      {/* Elementos decorativos profesionales y consistentes */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-haby-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-haby-primary rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-gradient-to-r from-haby-accent to-haby-primary rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
+      {/* Ultra-Modern Decorative Elements */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-haby-accent/60 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute top-40 right-10 w-96 h-96 bg-gradient-to-l from-haby-primary/50 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -bottom-8 left-1/4 w-80 h-80 bg-gradient-to-tr from-haby-secondary/40 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
       </div>
 
+      {/* Elegant Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+        backgroundSize: '4rem 4rem'
+      }}></div>
+
       <div className="container mx-auto px-4 relative z-10 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
           <motion.div 
-            className="space-y-8 text-center lg:text-left order-2 lg:order-1"
+            className="space-y-10 text-center lg:text-left order-2 lg:order-1"
             initial={{ opacity: 0, x: capabilities.isMobile ? 0 : -50 }}
             animate={animationsEnabled ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={{ duration: capabilities.isMobile ? 0.4 : 0.8, delay: 0.2 }}
           >
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium text-white"
+              className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
               initial={{ opacity: 0, y: -20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Sparkles className="w-4 h-4 text-haby-accent" />
-              <span>Innovación y Tecnología</span>
+              <Sparkles className="w-5 h-5 text-haby-accent" />
+              <span className="tracking-wide">Innovación & Tecnología</span>
             </motion.div>
 
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.95] tracking-tighter"
               variants={titleVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
               aria-label="HABY OPEN THE DOORS"
             >
-              <span className="bg-gradient-to-r from-haby-accent to-purple-600 bg-clip-text text-transparent font-extrabold">
+              <span className="bg-gradient-to-r from-white via-haby-accent to-haby-accent bg-clip-text text-transparent">
                 HABY
               </span>
               <br />
-              <span className="text-haby-accent font-extrabold">OPEN</span>{' '}
-              <span className="text-white">THE</span>{' '}
-              <span className="text-haby-accent font-extrabold">DOORS</span>
+              <span className="text-haby-accent drop-shadow-2xl">OPEN</span>{' '}
+              <span className="text-white/90">THE</span>
+              <br />
+              <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent">DOORS</span>
             </motion.h1>
             
             <motion.p 
-              className="text-xl sm:text-2xl lg:text-3xl text-gray-200 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+              className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light tracking-wide"
               variants={paragraphVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
             >
-              <span className="text-white">Soluciones web </span>
-              <span className="bg-gradient-to-r from-haby-accent to-purple-600 bg-clip-text text-transparent font-semibold">innovadoras</span>
-              <span className="text-white"> que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.</span>
+              <span className="text-white/95 font-medium">Soluciones web </span>
+              <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent font-semibold">innovadoras</span>
+              <span className="text-white/85"> que transforman ideas en experiencias digitales extraordinarias.</span>
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start pt-4"
+              className="flex flex-col sm:flex-row gap-5 items-center justify-center lg:justify-start pt-6"
               variants={buttonsVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
             >
               <Link 
                 to="/contacto" 
-                className="btn-accent group relative w-full sm:w-auto min-h-[48px] touch-manipulation"
+                className="group relative w-full sm:w-auto min-h-[52px] px-8 py-4 bg-gradient-to-r from-haby-accent to-haby-primary rounded-xl text-white font-semibold text-base shadow-2xl shadow-haby-accent/50 hover:shadow-haby-accent/70 hover:scale-105 transition-all duration-300 touch-manipulation overflow-hidden"
                 aria-label="Contáctanos ahora para iniciar tu proyecto"
               >
-                <span className="relative z-10">Contáctanos ahora</span>
+                <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Contáctanos ahora
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
               <Link 
                 to="/servicios" 
-                className="btn-secondary group w-full sm:w-auto min-h-[48px] touch-manipulation"
+                className="group w-full sm:w-auto min-h-[52px] px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-xl text-white font-semibold text-base hover:bg-white/20 hover:border-white/50 transition-all duration-300 touch-manipulation"
                 aria-label="Explorar todos nuestros servicios de desarrollo web"
               >
-                <span>Nuestros servicios</span>
-                <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-2" aria-hidden="true" />
+                <span className="flex items-center justify-center gap-2">
+                  Nuestros servicios
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </span>
               </Link>
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-8 sm:pt-12 border-t border-white/20"
+              className="grid grid-cols-3 gap-6 sm:gap-8 lg:gap-10 pt-10 sm:pt-14 border-t border-white/20"
               initial={{ opacity: 0, y: 20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
               <div className="text-center">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">100+</div>
-                <div className="text-xs sm:text-sm text-white">Proyectos</div>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">100+</div>
+                <div className="text-sm sm:text-base text-white/70 font-medium">Proyectos</div>
               </div>
               <div className="text-center">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">24/7</div>
-                <div className="text-xs sm:text-sm text-white">Soporte</div>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">24/7</div>
+                <div className="text-sm sm:text-base text-white/70 font-medium">Soporte</div>
               </div>
               <div className="text-center">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-haby-accent">99%</div>
-                <div className="text-xs sm:text-sm text-white">Satisfacción</div>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">99%</div>
+                <div className="text-sm sm:text-base text-white/70 font-medium">Satisfacción</div>
               </div>
             </motion.div>
           </motion.div>
           
           <motion.div 
-            className="relative h-96 sm:h-[500px] lg:h-[600px] order-1 lg:order-2"
+            className="relative h-96 sm:h-[500px] lg:h-[650px] order-1 lg:order-2"
             initial={{ opacity: 0, scale: capabilities.isMobile ? 1 : 0.8 }}
             animate={animationsEnabled ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
             transition={{ duration: capabilities.isMobile ? 0.4 : 0.8, delay: 0.4 }}
@@ -181,14 +194,15 @@ const Hero = () => {
               <VisualComponent />
               
               <motion.div 
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-haby-accent to-purple-600 px-6 py-3 rounded-full text-white font-bold text-sm sm:text-base shadow-2xl border border-white/20"
+                className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-haby-accent via-haby-primary to-haby-secondary px-8 py-4 rounded-2xl text-white font-bold text-base sm:text-lg shadow-2xl border border-white/30 backdrop-blur-sm"
                 initial={{ y: capabilities.isMobile ? 20 : 50, opacity: 0 }}
                 animate={animationsEnabled ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: capabilities.isMobile ? 0.5 : 1 }}
+                transition={{ duration: 0.6, delay: capabilities.isMobile ? 0.5 : 1 }}
               >
-                <span className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  <span>OPEN THE DOORS</span>
+                <span className="flex items-center gap-3">
+                  <Sparkles className="w-5 h-5 animate-pulse" />
+                  <span className="tracking-wider">OPEN THE DOORS</span>
+                  <Sparkles className="w-5 h-5 animate-pulse" />
                 </span>
               </motion.div>
             </div>
@@ -197,13 +211,13 @@ const Hero = () => {
       </div>
 
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
-        animate={animationsEnabled ? { y: [0, 10, 0] } : {}}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70"
+        animate={animationsEnabled ? { y: [0, 12, 0] } : {}}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm">Scroll</span>
-          <div className="w-0.5 h-8 bg-white/40 rounded-full"></div>
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-sm font-medium tracking-wider">Scroll</span>
+          <div className="w-[2px] h-10 bg-gradient-to-b from-white/50 to-transparent rounded-full"></div>
         </div>
       </motion.div>
     </section>
