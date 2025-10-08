@@ -88,10 +88,10 @@ const Hero = () => {
         backgroundSize: '4rem 4rem'
       }}></div>
 
-      <div className="container mx-auto px-4 relative z-10 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen flex items-center py-20 sm:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full">
           <motion.div 
-            className="space-y-10 text-center lg:text-left order-2 lg:order-1"
+            className="space-y-6 sm:space-y-8 lg:space-y-10 text-center lg:text-left order-2 lg:order-1"
             initial={{ opacity: 0, x: capabilities.isMobile ? 0 : -50 }}
             animate={animationsEnabled ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={{ duration: capabilities.isMobile ? 0.4 : 0.8, delay: 0.2 }}
@@ -107,7 +107,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1 
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.95] tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black leading-[0.95] tracking-tighter"
               variants={titleVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
@@ -124,7 +124,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light tracking-wide"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light tracking-wide"
               variants={paragraphVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
@@ -135,7 +135,7 @@ const Hero = () => {
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-5 items-center justify-center lg:justify-start pt-6"
+              className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center lg:justify-start pt-4 w-full sm:w-auto"
               variants={buttonsVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
@@ -164,28 +164,28 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-3 gap-6 sm:gap-8 lg:gap-10 pt-10 sm:pt-14 border-t border-white/20"
+              className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-10 pt-8 sm:pt-10 lg:pt-14 border-t border-white/20"
               initial={{ opacity: 0, y: 20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">100+</div>
-                <div className="text-sm sm:text-base text-white/70 font-medium">Proyectos</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">100+</div>
+                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Proyectos</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">24/7</div>
-                <div className="text-sm sm:text-base text-white/70 font-medium">Soporte</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">24/7</div>
+                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Soporte</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-haby-accent mb-1">99%</div>
-                <div className="text-sm sm:text-base text-white/70 font-medium">Satisfacción</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">99%</div>
+                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Satisfacción</div>
               </div>
             </motion.div>
           </motion.div>
           
           <motion.div 
-            className="relative h-96 sm:h-[500px] lg:h-[650px] order-1 lg:order-2"
+            className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[650px] order-1 lg:order-2"
             initial={{ opacity: 0, scale: capabilities.isMobile ? 1 : 0.8 }}
             animate={animationsEnabled ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
             transition={{ duration: capabilities.isMobile ? 0.4 : 0.8, delay: 0.4 }}

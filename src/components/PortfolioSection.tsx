@@ -37,16 +37,16 @@ const itemVariants = {
 
 const PortfolioSection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-white via-gray-50 to-haby-light/30 relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-white via-gray-50 to-haby-light/30 relative overflow-hidden">
       {/* Elementos decorativos de fondo */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-32 left-10 w-72 h-72 bg-haby-accent/20 rounded-full mix-blend-multiply filter blur-xl"></div>
         <div className="absolute bottom-32 right-10 w-72 h-72 bg-haby-primary/20 rounded-full mix-blend-multiply filter blur-xl"></div>
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          className="text-center max-w-4xl mx-auto mb-20"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -56,20 +56,20 @@ const PortfolioSection = () => {
             <Star className="w-4 h-4" />
             Nuestro Portafolio
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight">
             Proyectos que{' '}
             <span className="bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">
               abren puertas
             </span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
             Descubre cómo hemos ayudado a nuestros clientes a solucionar problemas cotidianos 
             y optimizar su tiempo a través de soluciones web personalizadas e innovadoras.
           </p>
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -155,7 +155,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div 
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

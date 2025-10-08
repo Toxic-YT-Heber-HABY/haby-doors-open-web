@@ -49,16 +49,16 @@ const Navbar = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect shadow-elegant transition-all duration-300 border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <nav className="flex items-center justify-between">
             {/* Ultra-Modern Logo */}
             <Link to="/" className="flex items-center group" tabIndex={0} aria-label="Inicio">
               <img 
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
                 alt="HABY Logo" 
-                className="h-11 mr-3 drop-shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
+                className="h-9 sm:h-11 mr-2 sm:mr-3 drop-shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
               />
-              <span className="text-2xl font-display font-black text-haby-primary drop-shadow-sm tracking-tight bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">HABY</span>
+              <span className="text-xl sm:text-2xl font-display font-black text-haby-primary drop-shadow-sm tracking-tight bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">HABY</span>
             </Link>
 
             {/* Navegación Desktop */}

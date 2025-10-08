@@ -74,7 +74,7 @@ const containerVariants = {
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary text-white relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary text-white relative overflow-hidden">
       {/* Elementos decorativos de fondo */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-64 h-64 bg-haby-accent rounded-full mix-blend-screen filter blur-xl animate-pulse"></div>
@@ -82,9 +82,9 @@ const TestimonialsSection = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          className="text-center max-w-4xl mx-auto mb-20"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -94,13 +94,13 @@ const TestimonialsSection = () => {
             <Quote className="w-4 h-4" />
             Testimonios
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             Lo que dicen nuestros{' '}
             <span className="bg-gradient-to-r from-haby-accent to-pink-300 bg-clip-text text-transparent">
               clientes
             </span>
           </h2>
-          <p className="text-xl text-gray-300 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
             Descubre cómo hemos ayudado a otros clientes a optimizar su tiempo 
             y resolver problemas cotidianos a través de nuestras soluciones web innovadoras.
           </p>
@@ -128,7 +128,7 @@ const TestimonialsSection = () => {
                     whileHover={{ y: -8, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <div className="relative h-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 lg:p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+                    <div className="relative h-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
                       {/* Quote icon */}
                       <div className="absolute top-6 right-6 opacity-20 hover:opacity-40 transition-opacity">
                         <Quote className="w-8 h-8 text-haby-accent" />
@@ -142,7 +142,7 @@ const TestimonialsSection = () => {
                       </div>
 
                       {/* Content */}
-                      <p className="text-gray-200 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg italic min-h-[100px] sm:min-h-[120px]">
+                      <p className="text-gray-200 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base italic line-clamp-6 sm:line-clamp-none">
                         "{testimonial.content}"
                       </p>
 
@@ -193,15 +193,15 @@ const TestimonialsSection = () => {
 
         {/* Call to action */}
         <motion.div 
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
         >
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">¿Listo para unirte a nuestros clientes satisfechos?</h3>
-            <p className="text-gray-300 mb-6">Descubre cómo podemos ayudarte a optimizar tu tiempo y resolver tus desafíos tecnológicos.</p>
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">¿Listo para unirte a nuestros clientes satisfechos?</h3>
+            <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">Descubre cómo podemos ayudarte a optimizar tu tiempo y resolver tus desafíos tecnológicos.</p>
             <a 
               href="/contacto" 
               className="inline-flex items-center gap-2 bg-haby-accent hover:bg-haby-accent/90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"

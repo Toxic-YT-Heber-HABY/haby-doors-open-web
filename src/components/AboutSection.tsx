@@ -30,9 +30,9 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="section bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+    <section className="section bg-white py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <motion.div 
             className="order-2 lg:order-1"
             initial="hidden"
@@ -88,14 +88,14 @@ const AboutSection = () => {
             
             <motion.h2 
               variants={fadeInUp} 
-              className="text-3xl md:text-4xl font-bold text-gray-800"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800"
             >
               El concepto <span className="text-haby-primary">HABY OPEN THE DOORS</span>
             </motion.h2>
             
             <motion.p 
               variants={fadeInUp} 
-              className="text-gray-600"
+              className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed"
             >
               En HABY nos especializamos en el desarrollo de soluciones web innovadoras que resuelven problemas cotidianos. 
               Nuestra misión es ayudar a nuestros clientes a optimizar su tiempo, eliminando tareas repetitivas 
@@ -104,7 +104,7 @@ const AboutSection = () => {
             
             <motion.p 
               variants={fadeInUp} 
-              className="text-gray-600"
+              className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed"
             >
               Nuestro fundador, Heber Zadkiel García Pérez, creó HABY con una visión clara: abrir puertas 
               a nuevas posibilidades mediante el desarrollo web personalizado y centrado en soluciones prácticas.
