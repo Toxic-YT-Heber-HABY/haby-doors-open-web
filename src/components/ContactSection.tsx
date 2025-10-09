@@ -68,47 +68,47 @@ const ContactSection = () => {
   return (
     <section className="section bg-white">
       <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4">
+          <div className="inline-block bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
             Contáctanos
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             ¿Listo para abrir nuevas puertas?
           </h2>
-          <p className="text-gray-600">
+          <p className="text-base md:text-lg text-gray-600">
             Cuéntanos sobre el problema que quieres resolver o la idea que tienes en mente.
             Estamos aquí para ayudarte a optimizar tu tiempo y mejorar tu vida cotidiana.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          <div className="bg-gray-50 rounded-lg p-6 sm:p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Ponte en contacto</h3>
+          <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Ponte en contacto</h3>
             <div className="space-y-6">
               <div className="flex items-start">
-                <Phone className="h-6 w-6 text-haby-primary mt-1 mr-4 flex-shrink-0" />
+                <Phone className="h-6 w-6 text-purple-600 mt-1 mr-4 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-gray-800">Teléfono / WhatsApp</p>
-                  <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-haby-primary hover:text-haby-secondary">
+                  <p className="font-semibold text-gray-900">Teléfono / WhatsApp</p>
+                  <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:text-purple-700 font-medium">
                     56 5368 1237
                   </a>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <Mail className="h-6 w-6 text-haby-primary mt-1 mr-4 flex-shrink-0" />
+                <Mail className="h-6 w-6 text-purple-600 mt-1 mr-4 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-gray-800">Correo electrónico</p>
-                  <a href="mailto:habyopenthedoors@gmail.com" className="text-haby-primary hover:text-haby-secondary">
+                  <p className="font-semibold text-gray-900">Correo electrónico</p>
+                  <a href="mailto:habyopenthedoors@gmail.com" className="text-purple-600 hover:text-purple-700 font-medium">
                     habyopenthedoors@gmail.com
                   </a>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <MessageCircle className="h-6 w-6 text-haby-primary mt-1 mr-4 flex-shrink-0" />
+                <MessageCircle className="h-6 w-6 text-purple-600 mt-1 mr-4 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-gray-800">Redes sociales</p>
+                  <p className="font-semibold text-gray-900">Redes sociales</p>
                   <div className="flex space-x-4 mt-2">
                     <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 transition-colors">
                       <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -148,8 +148,8 @@ const ContactSection = () => {
           </div>
           
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
+            <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Envíanos un mensaje</h3>
               
               <div className="space-y-4">
                 <div>
@@ -229,7 +229,7 @@ const ContactSection = () => {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-4 rounded-md transition-colors disabled:opacity-50 flex items-center justify-center"
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold py-3 px-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg hover:shadow-xl"
                 >
                   {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                   {!isSubmitting && <Mail className="ml-2 h-4 w-4" />}

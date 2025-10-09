@@ -1,242 +1,58 @@
-/* Sistema unificado de colores y fondos para móvil/desktop */
+/* Sistema unificado de colores - Compatible con diseño moderno */
 
-/* Variables CSS mejoradas para gradientes consistentes móvil/PC */
 :root {
-  --gradient-hero-unified: linear-gradient(135deg, hsl(252 84% 20%), hsl(264 32% 50%), hsl(259 32% 54%));
-  --gradient-card-unified: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
-  --gradient-section-unified: linear-gradient(135deg, hsl(220 14% 96%), hsl(220 13% 91%));
-  --brand-primary: hsl(259 32% 54%);
-  --brand-accent: hsl(291 84% 61%);
-  --brand-dark: hsl(252 84% 20%);
+  --gradient-hero-modern: linear-gradient(135deg, hsl(250 70% 55%), hsl(260 70% 65%));
+  --gradient-card: linear-gradient(to bottom, hsl(0 0% 100%), hsl(0 0% 99%));
+  --gradient-section: linear-gradient(to bottom, hsl(220 14% 98%), hsl(220 13% 96%));
 }
 
-/* Unificación completa móvil/desktop - mismo aspecto visual */
-@media screen {
-  /* Hero section - exactamente igual en móvil y PC */
-  .bg-gradient-to-br,
-  .bg-gradient-hero {
-    background: var(--gradient-hero-unified) !important;
-    background-attachment: scroll !important; /* Más estable */
-  }
-
-  /* Cards - exactamente iguales en móvil y PC */
-  .bg-white,
-  .card-enhanced {
-    background: var(--gradient-card-unified) !important;
-    border: 1px solid hsl(259 32% 54% / 0.1) !important;
-    box-shadow: 0 4px 20px -2px hsl(259 32% 54% / 0.15) !important;
-  }
-
-  /* Sections - exactamente iguales en móvil y PC */
-  .bg-gray-50,
-  .bg-gradient-light {
-    background: var(--gradient-section-unified) !important;
-  }
-
-  /* Botones unificados */
-  .btn-primary,
-  .btn-accent,
-  .bg-haby-accent {
-    background: linear-gradient(135deg, var(--brand-accent), hsl(291 64% 51%)) !important;
-    color: white !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-    box-shadow: 0 10px 30px -10px hsl(291 84% 61% / 0.3) !important;
-  }
-
-  .btn-secondary {
-    background: white !important;
-    border: 2px solid var(--brand-primary) !important;
-    color: var(--brand-primary) !important;
-  }
-
-  /* Texto de marca consistente */
-  .text-haby-primary {
-    color: var(--brand-primary) !important;
-  }
-  
-  .text-haby-accent {
-    color: var(--brand-accent) !important;
-  }
-
-  /* Gradientes de texto unificados */
-  .text-gradient-primary,
-  .bg-gradient-to-r {
-    background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent)) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-  }
-
-  /* Navbar unificado */
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  }
-
-  /* Elementos decorativos optimizados */
-  .mix-blend-multiply {
-    mix-blend-mode: multiply !important;
-    opacity: 0.2 !important;
-  }
-
-  .filter.blur-xl {
-    filter: blur(60px) !important;
-  }
+/* Fondos base - sin forzar con !important */
+.bg-gradient-light {
+  background: var(--gradient-section);
 }
 
-/* Mantener la misma calidad visual en todas las pantallas */
+.card-enhanced {
+  background: var(--gradient-card);
+  border: 1px solid hsl(250 70% 60% / 0.1);
+  box-shadow: 0 4px 20px -2px hsl(250 70% 60% / 0.15);
+}
+
+/* Responsividad móvil */
 @media screen and (max-width: 640px) {
-  /* Hero igual de impactante en móviles pequeños */
-  .bg-gradient-to-br,
-  .bg-gradient-hero {
-    background: var(--gradient-hero-unified) !important;
-  }
-
-  /* Cards mantienen elegancia en móviles pequeños */
   .card-enhanced {
-    background: var(--gradient-card-unified) !important;
-    box-shadow: 0 4px 20px -2px hsl(259 32% 54% / 0.15) !important;
-    border: 1px solid hsl(259 32% 54% / 0.1) !important;
-  }
-
-  /* Elementos decorativos más sutiles pero visibles */
-  .absolute.opacity-20,
-  .absolute.opacity-40 {
-    opacity: 0.1 !important;
-  }
-
-  /* Texto más legible en pantallas pequeñas */
-  .text-white {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 12px -2px hsl(250 70% 60% / 0.12);
   }
 }
 
-/* Mejorar contraste en todos los dispositivos */
-@media screen {
-  /* Asegurar que el texto sea siempre legible */
-  .text-white {
-    color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-  }
-
-  .text-gray-200 {
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-  }
-
-  .text-gray-600 {
-    color: hsl(215 16% 47%) !important;
-  }
-
-  .text-gray-700 {
-    color: hsl(215 19% 35%) !important;
-  }
-
-  .text-gray-800 {
-    color: hsl(215 28% 17%) !important;
-  }
-
-  /* Botones con mejor consistencia visual */
-  .btn-primary,
-  .bg-haby-accent {
-    background: var(--gradient-accent) !important;
-    color: white !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-  }
-
-  .btn-secondary {
-    background: white !important;
-    border: 2px solid hsl(var(--haby-primary)) !important;
-    color: hsl(var(--haby-primary)) !important;
-  }
-
-  /* Navegación más consistente */
-  .backdrop-blur {
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-  }
+/* Contraste mejorado para legibilidad */
+.text-white {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Hover effects profesionales y unificados */
+.text-gray-600 {
+  color: hsl(215 16% 45%);
+}
+
+.text-gray-700 {
+  color: hsl(215 19% 30%);
+}
+
+.text-gray-800 {
+  color: hsl(215 28% 17%);
+}
+
+/* Hover effects suaves */
 @media (hover: hover) and (pointer: fine) {
-  .card-enhanced:hover,
-  .group:hover .group-hover\\:shadow-2xl {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 20px 40px -10px hsl(259 32% 54% / 0.25) !important;
-    border-color: hsl(291 84% 61% / 0.3) !important;
-  }
-
-  .btn-primary:hover,
-  .btn-accent:hover {
-    transform: translateY(-3px) scale(1.03) !important;
-    box-shadow: 0 15px 35px -5px hsl(291 84% 61% / 0.4) !important;
-    filter: brightness(1.05) !important;
-  }
-
-  .btn-secondary:hover {
-    background: hsl(268 100% 93%) !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 10px 25px -5px hsl(259 32% 54% / 0.2) !important;
-  }
-
-  /* Navegación con hover mejorado */
-  .navbar-link:hover {
-    color: var(--brand-accent) !important;
-    text-shadow: 0 0 8px hsl(291 84% 61% / 0.3) !important;
+  .card-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px -4px hsl(250 70% 60% / 0.2);
   }
 }
 
-/* Touch devices - mejores interacciones */
+/* Touch interactions */
 @media (hover: none) and (pointer: coarse) {
-  .card-enhanced:active,
-  .btn-primary:active,
-  .btn-secondary:active {
-    transform: scale(0.98) !important;
-  }
-
-  /* Remover efectos hover problemáticos */
-  .group:hover .group-hover\\:scale-110,
-  .hover\\:scale-105 {
-    transform: none !important;
-  }
-}
-
-/* Asegurar que los colores de marca sean consistentes */
-.text-haby-primary {
-  color: hsl(var(--haby-primary)) !important;
-}
-
-.text-haby-accent {
-  color: hsl(var(--haby-accent)) !important;
-}
-
-.bg-haby-primary {
-  background-color: hsl(var(--haby-primary)) !important;
-}
-
-.bg-haby-accent {
-  background: var(--gradient-accent) !important;
-}
-
-/* Gradientes de texto más consistentes */
-.text-gradient-primary,
-.bg-gradient-to-r {
-  background: var(--gradient-primary) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
-/* Fallback para dispositivos que no soportan text gradients */
-@supports not (-webkit-background-clip: text) {
-  .text-gradient-primary,
-  .bg-gradient-to-r {
-    background: none !important;
-    color: hsl(var(--haby-accent)) !important;
-    -webkit-background-clip: border-box !important;
-    -webkit-text-fill-color: initial !important;
+  .card-enhanced:active {
+    transform: scale(0.98);
   }
 }

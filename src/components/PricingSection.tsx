@@ -133,19 +133,19 @@ const PricingSection = () => {
     <section className="py-responsive bg-gradient-light">
       <div className="container mx-auto">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-block bg-haby-light text-haby-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <div className="inline-block bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
             Nuestros Precios
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Inversión para abrir nuevas puertas
           </h2>
-          <p className="text-gray-600">
+          <p className="text-base md:text-lg text-gray-600">
             Ofrecemos diferentes planes para adaptarnos a tus necesidades y presupuesto.
             Todos nuestros precios incluyen un análisis personalizado de tu problema.
           </p>

@@ -53,14 +53,14 @@ const FAQSection = () => {
   return (
     <section className="py-responsive bg-gradient-light">
       <div className="container-responsive">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-haby-accent/10 mb-6">
-            <HelpCircle className="w-8 h-8 text-haby-accent" />
+        <div className="text-center mb-12 md:mb-16 px-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-100 mb-6">
+            <HelpCircle className="w-7 h-7 md:w-8 md:h-8 text-purple-600" />
           </div>
-          <h2 className="text-4xl font-bold text-haby-primary mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             Preguntas Frecuentes
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             Encuentra respuestas a las dudas más comunes sobre nuestros servicios 
             y proceso de desarrollo
           </p>
@@ -72,15 +72,15 @@ const FAQSection = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="card-interactive border-none shadow-elegant"
+                className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
-                <AccordionTrigger className="text-left px-6 py-4 hover:no-underline">
-                  <span className="text-lg font-semibold text-haby-primary pr-4">
+                <AccordionTrigger className="text-left px-4 md:px-6 py-4 hover:no-underline">
+                  <span className="text-base md:text-lg font-semibold text-gray-900 pr-4">
                     {faq.question}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-gray-600 leading-relaxed">
+                <AccordionContent className="px-4 md:px-6 pb-4 md:pb-6">
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                     {faq.answer}
                   </p>
                 </AccordionContent>
@@ -89,13 +89,13 @@ const FAQSection = () => {
           </Accordion>
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600 mb-6">
+        <div className="text-center mt-10 md:mt-12 px-4">
+          <p className="text-base md:text-lg text-gray-600 mb-6">
             ¿No encuentras la respuesta que buscas?
           </p>
           <a 
             href="/contacto"
-            className="btn-modern"
+            className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-xl transition-all shadow-lg hover:shadow-xl"
           >
             Contáctanos Directamente
           </a>
