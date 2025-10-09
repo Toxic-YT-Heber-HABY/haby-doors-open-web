@@ -27,7 +27,7 @@
 /* Contraste mejorado para legibilidad */
 .text-white {
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: none;
 }
 
 .text-gray-600 {
