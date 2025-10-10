@@ -35,13 +35,12 @@ const additionalFeatures = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      {/* Ultra-Modern Decorative Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-haby-accent to-haby-primary rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-haby-primary to-haby-secondary rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-      </div>
-
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
+      {/* Decorative gradients */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 via-white to-pink-50/50" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
@@ -50,19 +49,19 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-haby-light/80 to-haby-light/60 backdrop-blur-sm text-haby-primary px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold mb-6 sm:mb-8 border border-haby-primary/30 shadow-lg">
-            <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+          <motion.span 
+            className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold mb-4"
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+          >
+            ¿Qué ofrecemos?
+          </motion.span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600 mb-3 sm:mb-4 md:mb-6">
             Nuestros Servicios
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-black text-gray-900 mb-4 sm:mb-6 lg:mb-8 leading-[1.1] tracking-tight">
-            ¿Cómo podemos{' '}
-            <span className="bg-gradient-to-r from-haby-accent via-haby-primary to-haby-secondary bg-clip-text text-transparent">
-              ayudarte?
-            </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
-            En HABY nos especializamos en abrir puertas a través de soluciones web 
-            innovadoras que transforman la manera en que gestionas tu tiempo.
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-4 font-medium">
+            Soluciones completas para llevar tu negocio al siguiente nivel
           </p>
         </motion.div>
 
@@ -75,36 +74,44 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.15 }}
-              whileHover={{ y: -12, transition: { duration: 0.3 } }}
+              whileHover={{ y: -8 }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl`}></div>
-              <div className="relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-elegant border border-gray-100 group-hover:border-haby-accent/30 transition-all duration-300">
-                <div className="mb-6 sm:mb-8 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
+              
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-100/50 overflow-hidden">
+                <motion.div 
+                  className="mb-6 sm:mb-8 p-3 sm:p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl inline-block group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
                   {service.icon}
-                </div>
-                <h3 className="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-haby-primary transition-colors">
+                </motion.div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
                   {service.title}
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed font-light">
+                <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6 leading-relaxed">
                   {service.description}
                 </p>
                 
                 <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-xs sm:text-sm text-gray-600 font-medium">
-                      <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-gradient-to-r from-haby-accent to-haby-primary rounded-full mr-2 sm:mr-3"></div>
+                      <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mr-2 sm:mr-3"></div>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
-                <Link 
-                  to="/servicios" 
-                  className="inline-flex items-center text-sm sm:text-base text-haby-primary hover:text-haby-accent font-bold group-hover:translate-x-3 transition-all duration-300"
-                >
-                  Saber más 
-                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-2" />
-                </Link>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link 
+                    to="/servicios" 
+                    className="inline-flex items-center w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg justify-center"
+                  >
+                    Más información
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           ))}

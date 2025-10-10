@@ -74,14 +74,12 @@ const containerVariants = {
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary text-white relative overflow-hidden">
-      {/* Elementos decorativos de fondo */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-haby-accent rounded-full mix-blend-screen filter blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-64 h-64 bg-purple-400 rounded-full mix-blend-screen filter blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
-      </div>
-
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
+      {/* Background with gradients */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-50/40 via-white to-pink-50/40" />
+      <div className="absolute top-0 left-1/3 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
@@ -90,19 +88,18 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-haby-accent px-6 py-3 rounded-full text-sm font-semibold mb-6">
-            <Quote className="w-4 h-4" />
+          <motion.span 
+            className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold mb-4"
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1 }}
+          >
             Testimonios
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-            Lo que dicen nuestros{' '}
-            <span className="bg-gradient-to-r from-haby-accent to-pink-300 bg-clip-text text-transparent">
-              clientes
-            </span>
+          </motion.span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600 mb-3 sm:mb-4 md:mb-6">
+            Lo que Dicen Nuestros Clientes
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
-            Descubre cómo hemos ayudado a otros clientes a optimizar su tiempo 
-            y resolver problemas cotidianos a través de nuestras soluciones web innovadoras.
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-4 font-medium">
+            La satisfacción de nuestros clientes es nuestra mejor carta de presentación
           </p>
         </motion.div>
 
@@ -125,52 +122,46 @@ const TestimonialsSection = () => {
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div
                     className="h-full"
-                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <div className="relative h-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
-                      {/* Quote icon */}
-                      <div className="absolute top-6 right-6 opacity-20 hover:opacity-40 transition-opacity">
-                        <Quote className="w-8 h-8 text-haby-accent" />
-                      </div>
-
-                      {/* Rating */}
-                      <div className="flex mb-6">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-
-                      {/* Content */}
-                      <p className="text-gray-200 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base italic line-clamp-6 sm:line-clamp-none">
-                        "{testimonial.content}"
-                      </p>
-
-                      {/* Author info */}
-                      <div className="flex items-center gap-4">
-                        <div className="relative">
-                          <img 
-                            src={testimonial.image} 
-                            alt={testimonial.author}
-                            className="w-12 h-12 rounded-full object-cover border-2 border-white/30"
-                          />
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-haby-accent/20 to-purple-400/20 hover:opacity-0 transition-opacity"></div>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-white text-base sm:text-lg">{testimonial.author}</p>
-                          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300">
-                            <User className="w-3 h-3" />
-                            <span className="truncate">{testimonial.position}</span>
+                    <div className="relative h-full bg-white/90 backdrop-blur-sm border border-purple-100/50 rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative z-10">
+                        <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                          <div className="relative">
+                            <img 
+                              src={testimonial.image} 
+                              alt={testimonial.author}
+                              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-purple-200"
+                            />
+                            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                              <Quote className="w-3 h-3 text-white" />
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 text-xs sm:text-sm text-haby-accent">
-                            <Building className="w-3 h-3" />
-                            <span className="truncate">{testimonial.company}</span>
+                          <div className="flex-1">
+                            <h4 className="font-bold text-base sm:text-lg text-gray-900">
+                              {testimonial.author}
+                            </h4>
+                            <p className="text-xs sm:text-sm text-gray-600 font-medium">
+                              {testimonial.position}
+                            </p>
+                            <div className="flex gap-0.5 sm:gap-1 mt-1 sm:mt-2">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400"
+                                />
+                              ))}
+                            </div>
                           </div>
                         </div>
+                        <p className="text-sm sm:text-base md:text-lg text-gray-700 italic leading-relaxed">
+                          "{testimonial.content}"
+                        </p>
                       </div>
-
-                      {/* Decorative gradient */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-haby-accent via-purple-400 to-pink-400 rounded-b-2xl opacity-50 hover:opacity-100 transition-opacity"></div>
                     </div>
                   </motion.div>
                 </CarouselItem>

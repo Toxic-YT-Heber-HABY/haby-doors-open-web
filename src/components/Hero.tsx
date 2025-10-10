@@ -74,19 +74,34 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-hero text-white overflow-hidden">
-      {/* Ultra-Modern Decorative Elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-haby-accent/60 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-gradient-to-l from-haby-primary/50 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute -bottom-8 left-1/4 w-80 h-80 bg-gradient-to-tr from-haby-secondary/40 to-transparent rounded-full mix-blend-screen filter blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
+    <section 
+      className="relative min-h-screen text-white overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, hsl(250 100% 12%), hsl(250 70% 60%), hsl(280 100% 70%))'
+      }}
+    >
+      {/* Animated gradient orbs premium */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, delay: 1 }}
+        />
       </div>
-
-      {/* Elegant Grid Pattern Overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-        backgroundSize: '4rem 4rem'
-      }}></div>
+      
+      {/* Glass overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/20"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen flex items-center py-20 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full">
@@ -97,12 +112,13 @@ const Hero = () => {
             transition={{ duration: capabilities.isMobile ? 0.4 : 0.8, delay: 0.2 }}
           >
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-2xl"
               initial={{ opacity: 0, y: -20 }}
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
+              whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.5)' }}
             >
-              <Sparkles className="w-5 h-5 text-haby-accent" />
+              <Sparkles className="w-5 h-5 text-yellow-300 animate-pulse" />
               <span className="tracking-wide">Innovación & Tecnología</span>
             </motion.div>
 
@@ -112,26 +128,36 @@ const Hero = () => {
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
               aria-label="HABY OPEN THE DOORS"
+              style={{
+                textShadow: '0 4px 20px rgba(0,0,0,0.5), 0 2px 8px rgba(139,92,246,0.3)'
+              }}
             >
-              <span className="bg-gradient-to-r from-white via-haby-accent to-haby-accent bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-yellow-200 to-pink-200 bg-clip-text text-transparent"
+                style={{ filter: 'drop-shadow(0 2px 10px rgba(236,72,153,0.5))' }}
+              >
                 HABY
               </span>
               <br />
-              <span className="text-haby-accent drop-shadow-2xl">OPEN</span>{' '}
+              <span className="text-white drop-shadow-2xl">OPEN</span>{' '}
               <span className="text-white/90">THE</span>
               <br />
-              <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent">DOORS</span>
+              <span className="bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 bg-clip-text text-transparent"
+                style={{ filter: 'drop-shadow(0 2px 10px rgba(236,72,153,0.5))' }}
+              >DOORS</span>
             </motion.h1>
             
             <motion.p 
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light tracking-wide"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light tracking-wide"
               variants={paragraphVariants}
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
+              style={{
+                textShadow: '0 2px 8px rgba(0,0,0,0.4)'
+              }}
             >
-              <span className="text-white/95 font-medium">Soluciones web </span>
-              <span className="bg-gradient-to-r from-haby-accent to-white bg-clip-text text-transparent font-semibold">innovadoras</span>
-              <span className="text-white/85"> que transforman ideas en experiencias digitales extraordinarias.</span>
+              <span className="text-white font-medium">Soluciones web </span>
+              <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent font-semibold">innovadoras</span>
+              <span className="text-white/90"> que transforman ideas en experiencias digitales extraordinarias.</span>
             </motion.p>
             
             <motion.div 
@@ -140,27 +166,31 @@ const Hero = () => {
               initial="hidden"
               animate={animationsEnabled ? "visible" : "visible"}
             >
-              <Link 
-                to="/contacto" 
-                className="group relative w-full sm:w-auto min-h-[52px] px-8 py-4 bg-gradient-to-r from-haby-accent to-haby-primary rounded-xl text-white font-semibold text-base shadow-2xl shadow-haby-accent/50 hover:shadow-haby-accent/70 hover:scale-105 transition-all duration-300 touch-manipulation overflow-hidden"
-                aria-label="Contáctanos ahora para iniciar tu proyecto"
-              >
-                <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Contáctanos ahora
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-              <Link 
-                to="/servicios" 
-                className="group w-full sm:w-auto min-h-[52px] px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-xl text-white font-semibold text-base hover:bg-white/20 hover:border-white/50 transition-all duration-300 touch-manipulation"
-                aria-label="Explorar todos nuestros servicios de desarrollo web"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  Nuestros servicios
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                </span>
-              </Link>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  to="/contacto" 
+                  className="group relative w-full sm:w-auto min-h-[52px] px-8 py-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 hover:from-yellow-500 hover:via-pink-600 hover:to-purple-600 rounded-full text-white font-bold text-base shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 touch-manipulation overflow-hidden inline-flex items-center justify-center"
+                  aria-label="Contáctanos ahora para iniciar tu proyecto"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Contáctanos ahora
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  to="/servicios" 
+                  className="group w-full sm:w-auto min-h-[52px] px-8 py-4 bg-white/5 backdrop-blur-md border-2 border-white/40 rounded-full text-white font-bold text-base hover:bg-white/20 transition-all duration-300 touch-manipulation inline-flex items-center justify-center shadow-lg"
+                  aria-label="Explorar todos nuestros servicios de desarrollo web"
+                >
+                  <span className="flex items-center gap-2">
+                    Nuestros servicios
+                    <Sparkles className="w-5 h-5" />
+                  </span>
+                </Link>
+              </motion.div>
             </motion.div>
 
             <motion.div 
@@ -169,18 +199,29 @@ const Hero = () => {
               animate={animationsEnabled ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">100+</div>
-                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Proyectos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">24/7</div>
-                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Soporte</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-haby-accent mb-1">99%</div>
-                <div className="text-xs sm:text-sm lg:text-base text-white/70 font-medium">Satisfacción</div>
-              </div>
+              {[
+                { value: "100+", label: "Proyectos" },
+                { value: "24/7", label: "Soporte" },
+                { value: "99%", label: "Satisfacción" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center p-4 sm:p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/30 shadow-xl hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                >
+                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-white mb-1"
+                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-xs sm:text-sm lg:text-base text-white/80 font-medium">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
           

@@ -37,13 +37,12 @@ const itemVariants = {
 
 const PortfolioSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-white via-gray-50 to-haby-light/30 relative overflow-hidden">
-      {/* Elementos decorativos de fondo */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-32 left-10 w-72 h-72 bg-haby-accent/20 rounded-full mix-blend-multiply filter blur-xl"></div>
-        <div className="absolute bottom-32 right-10 w-72 h-72 bg-haby-primary/20 rounded-full mix-blend-multiply filter blur-xl"></div>
-      </div>
-
+    <section className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-pink-50/30 via-white to-purple-50/30" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
