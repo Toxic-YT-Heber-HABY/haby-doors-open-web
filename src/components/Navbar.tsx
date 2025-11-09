@@ -48,17 +48,19 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 glass-effect shadow-elegant transition-all duration-300 border-b border-white/10">
-        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 transition-all duration-300 backdrop-blur-xl">
+        <div className="container mx-auto px-4 sm:px-6 py-2.5 sm:py-3">
           <nav className="flex items-center justify-between">
-            {/* Ultra-Modern Logo */}
-            <Link to="/" className="flex items-center group" tabIndex={0} aria-label="Inicio">
+            {/* Modern Minimal Logo */}
+            <Link to="/" className="flex items-center gap-2.5 group" tabIndex={0} aria-label="Inicio">
               <img 
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
                 alt="HABY Logo" 
-                className="h-9 sm:h-11 mr-2 sm:mr-3 drop-shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
+                className="h-7 sm:h-8 transition-all duration-300 group-hover:scale-105" 
               />
-              <span className="text-xl sm:text-2xl font-display font-black text-haby-primary drop-shadow-sm tracking-tight bg-gradient-to-r from-haby-primary to-haby-accent bg-clip-text text-transparent">HABY</span>
+              <span className="text-lg sm:text-xl font-display font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-haby-primary via-haby-accent to-haby-secondary bg-clip-text text-transparent">HABY</span>
+              </span>
             </Link>
 
             {/* Navegación Desktop */}
@@ -103,22 +105,22 @@ const Navbar = () => {
         onLogin={handleAdminLogin}
       />
 
-      {/* Ultra-Modern Styles */}
+      {/* Modern Minimal Styles */}
       <style>{`
         .nav-link {
-          @apply relative px-5 py-3 rounded-2xl text-gray-700 font-semibold hover:text-haby-primary hover:bg-gradient-to-r hover:from-haby-light/60 hover:to-haby-light/40 focus:outline-none transition-all duration-300;
+          @apply relative px-4 py-2 rounded-lg text-gray-700 font-medium text-sm hover:text-haby-primary hover:bg-haby-light/30 focus:outline-none transition-all duration-200;
         }
         .dropdown-link {
-          @apply block w-full px-5 py-3.5 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-haby-light/70 hover:to-haby-light/50 hover:text-haby-primary rounded-xl transition-all duration-300;
+          @apply block w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-haby-light/40 hover:text-haby-primary rounded-lg transition-all duration-200;
         }
         .icon-btn {
-          @apply flex items-center justify-center w-11 h-11 rounded-2xl transition-all duration-300 shadow-lg hover:scale-110 hover:shadow-xl;
+          @apply flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 hover:scale-105;
         }
         .mobile-link {
-          @apply block w-full px-5 py-3.5 rounded-2xl text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-haby-light/80 hover:to-haby-light/60 hover:text-haby-primary transition-all duration-300 text-left;
+          @apply block w-full px-4 py-2.5 rounded-lg text-gray-700 font-medium text-sm hover:bg-haby-light/40 hover:text-haby-primary transition-all duration-200 text-left;
         }
         .mobile-sublink {
-          @apply block w-full px-5 py-3 text-haby-primary font-medium hover:bg-haby-light/60 rounded-xl transition-all duration-300 text-left;
+          @apply block w-full px-4 py-2 text-haby-primary font-medium text-sm hover:bg-haby-light/40 rounded-lg transition-all duration-200 text-left;
         }
       `}</style>
     </>

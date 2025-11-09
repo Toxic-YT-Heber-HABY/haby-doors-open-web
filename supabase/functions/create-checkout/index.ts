@@ -39,6 +39,13 @@ serve(async (req) => {
       throw new Error("El parámetro 'plan' es requerido");
     }
 
+    // Validación estricta del plan
+    const validPlans = ['basico', 'profesional', 'premium'];
+    if (!validPlans.includes(plan.toLowerCase())) {
+      logStep("ERROR: Invalid plan", { plan, validPlans });
+      throw new Error(`Plan inválido. Los planes válidos son: ${validPlans.join(', ')}`);
+    }
+
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
       logStep("ERROR: STRIPE_SECRET_KEY not found");
@@ -61,8 +68,14 @@ serve(async (req) => {
         const { data } = await supabaseClient.auth.getUser(token);
         user = data.user;
         if (user?.email) {
-          email = user.email;
-          logStep("User authenticated", { userId: user.id, email: user.email });
+          // Validación básica de formato de email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailRegex.test(user.email)) {
+            email = user.email;
+            logStep("User authenticated", { userId: user.id, email: user.email });
+          } else {
+            logStep("Invalid email format", { email: user.email });
+          }
         }
       } catch (authError) {
         logStep("Auth error (continuing as guest)", { error: authError.message });
