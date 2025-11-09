@@ -20,7 +20,7 @@ export default function FooterQuickLinks() {
           <li key={to}>
             <Link
               to={to}
-              className={`text-gray-300 hover:text-${accent ? "haby-accent font-semibold" : "white"} transition-colors`}
+              className={`text-gray-300 transition-colors ${accent ? "text-haby-accent hover:text-haby-accent font-semibold" : "hover:text-white"}`}
               tabIndex={0}
               aria-label={label}
             >

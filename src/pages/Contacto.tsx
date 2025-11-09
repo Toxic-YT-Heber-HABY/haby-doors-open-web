@@ -417,7 +417,7 @@ const Contacto = () => {
                     <div className="flex space-x-3">
                       {/* Facebook */}
                       <a
-                        href="https://www.facebook.com/zadkiel.garcia.31/"
+                        href="https://www.facebook.com/habyopenthedoors"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Facebook"
@@ -427,7 +427,7 @@ const Contacto = () => {
                       </a>
                       {/* Instagram - ENLACE ACTUALIZADO */}
                       <a
-                        href="https://www.instagram.com/habyopenthedoors/"
+                        href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ=="
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"
@@ -437,7 +437,7 @@ const Contacto = () => {
                       </a>
                       {/* YouTube */}
                       <a
-                        href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1"
+                        href="https://www.youtube.com/@HABYOpenDoors"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="YouTube"

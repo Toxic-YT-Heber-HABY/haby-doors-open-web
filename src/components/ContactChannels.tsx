@@ -40,25 +40,25 @@ const ContactChannels = () => {
     {
       icon: Facebook,
       name: "Facebook",
-      href: "https://facebook.com/habyopenthedoors",
+      href: "https://www.facebook.com/habyopenthedoors",
       color: "text-blue-600 hover:text-blue-700"
     },
     {
       icon: Instagram,
       name: "Instagram", 
-      href: "https://instagram.com/haby_open_doors",
+      href: "https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==",
       color: "text-pink-600 hover:text-pink-700"
     },
     {
       icon: Twitter,
       name: "Twitter",
-      href: "https://twitter.com/haby_open_doors",
+      href: "https://x.com/Haby_Open_Doors",
       color: "text-blue-400 hover:text-blue-500"
     },
     {
       icon: Youtube,
       name: "YouTube",
-      href: "https://youtube.com/@habyopenthedoors",
+      href: "https://www.youtube.com/@HABYOpenDoors",
       color: "text-red-600 hover:text-red-700"
     }
   ];

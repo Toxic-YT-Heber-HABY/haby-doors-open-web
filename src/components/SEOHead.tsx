@@ -99,10 +99,10 @@ const SEOHead = ({
       },
       "image": image,
       "sameAs": [
-        "https://facebook.com/habyopenthedoors",
-        "https://instagram.com/haby_open_doors",
-        "https://twitter.com/haby_open_doors",
-        "https://youtube.com/@habyopenthedoors"
+        "https://www.facebook.com/habyopenthedoors",
+        "https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==",
+        "https://x.com/Haby_Open_Doors",
+        "https://www.youtube.com/@HABYOpenDoors"
       ]
     };
 

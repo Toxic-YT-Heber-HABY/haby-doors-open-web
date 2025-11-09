@@ -27,13 +27,13 @@ const Footer = () => {
               Desarrollamos soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.
             </p>
             <div className="mt-6 sm:mt-8 flex space-x-3 sm:space-x-4">
-              <a href="https://www.facebook.com/zadkiel.garcia.31/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.instagram.com/habydoors/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.youtube.com/@HABYOpenDoors?themeRefresh=1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
