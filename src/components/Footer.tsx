@@ -12,31 +12,32 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
           {/* Premium Logo Section */}
-          <div>
+          <div className="lg:col-span-1">
             <Link to="/" className="flex items-center group mb-4 sm:mb-6">
               <img 
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
                 alt="HABY Logo" 
                 className="h-10 sm:h-12 mr-2 sm:mr-3 brightness-0 invert group-hover:scale-110 transition-transform duration-300" 
+                loading="lazy"
               />
               <span className="text-2xl sm:text-3xl font-display font-black bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">HABY</span>
             </Link>
-            <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-light">
+            <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-light mb-6">
               Desarrollamos soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.
             </p>
-            <div className="mt-6 sm:mt-8 flex space-x-3 sm:space-x-4">
-              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+            <div className="flex space-x-3 sm:space-x-4">
+              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
                 <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </div>
@@ -45,8 +46,40 @@ const Footer = () => {
           {/* Modern Quick Links */}
           <FooterQuickLinks />
 
+          {/* Servicios Section */}
+          <div>
+            <h3 className="text-xl font-heading font-bold mb-4 bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">Servicios</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/desarrollo-web" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+                  Desarrollo Web
+                </Link>
+              </li>
+              <li>
+                <Link to="/soluciones-personalizadas" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+                  Soluciones Personalizadas
+                </Link>
+              </li>
+              <li>
+                <Link to="/cloritizacion" className="text-haby-accent hover:text-haby-accent/80 font-semibold transition-colors text-sm sm:text-base">
+                  Cloritización de Agua
+                </Link>
+              </li>
+              <li>
+                <Link to="/portafolio" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+                  Portafolio
+                </Link>
+              </li>
+              <li>
+                <Link to="/precios" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+                  Planes y Precios
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Premium Contact Section */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <h3 className="text-xl sm:text-2xl font-display font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">Contacto</h3>
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center gap-2 sm:gap-3 text-gray-200 group">

@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import AnimatedGradient from "@/components/AnimatedGradient";
 import SEOHead from "@/components/SEOHead";
 import usePageTitle from "@/hooks/usePageTitle";
+import FAQSection from "@/components/FAQSection";
 
 const Index = () => {
   usePageTitle();
@@ -60,6 +61,7 @@ const Index = () => {
             <TestimonialsSection />
           </AnimatedGradient>
           <PricingSection />
+          <FAQSection />
           <ContactSection />
         </main>
         <Footer />

@@ -114,6 +114,7 @@ const TestimonialsSection = () => {
             opts={{
               align: "start",
               loop: true,
+              dragFree: true,
             }}
             className="w-full"
           >
@@ -122,25 +123,48 @@ const TestimonialsSection = () => {
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div
                     className="h-full"
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1,
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
+                    whileHover={{ 
+                      y: -8, 
+                      scale: 1.03,
+                      transition: { type: "spring", stiffness: 400, damping: 25 }
+                    }}
                   >
-                    <div className="relative h-full bg-white/90 backdrop-blur-sm border border-purple-100/50 rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative h-full bg-white/90 backdrop-blur-sm border border-purple-100/50 rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden group">
+                      {/* Gradient overlay animado */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                       
                       <div className="relative z-10">
                         <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
-                          <div className="relative">
+                          <motion.div 
+                            className="relative"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                          >
                             <img 
                               src={testimonial.image} 
                               alt={testimonial.author}
-                              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-purple-200"
+                              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-purple-200 transition-all duration-300"
+                              loading="lazy"
                             />
-                            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                            <motion.div 
+                              className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center"
+                              animate={{ scale: [1, 1.2, 1] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
                               <Quote className="w-3 h-3 text-white" />
-                            </div>
-                          </div>
+                            </motion.div>
+                          </motion.div>
                           <div className="flex-1">
                             <h4 className="font-bold text-base sm:text-lg text-gray-900">
                               {testimonial.author}
