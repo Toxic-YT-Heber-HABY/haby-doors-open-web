@@ -31,8 +31,8 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
           onAuthSuccess();
         }
       }
-    } catch (error) {
-      console.error('Auth error:', error);
+    } catch {
+      // Security: Don't log auth errors
     }
   };
 
