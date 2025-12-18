@@ -1,29 +1,25 @@
-
 import { Link } from 'react-router-dom';
 import { Code, Lightbulb, Clock, ArrowRight, Zap, Shield, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
 const services = [
   {
-    icon: <Code className="h-10 w-10 sm:h-12 sm:w-12 text-haby-accent" />,
+    icon: <Code className="h-10 w-10 sm:h-12 sm:w-12 text-white" />,
     title: "Desarrollo Web",
     description: "Creamos páginas web y aplicaciones a medida, diseñadas meticulosamente para resolver problemas específicos con tecnología moderna.",
     features: ["React & Next.js", "Responsive Design", "SEO Optimizado"],
-    color: "from-blue-500/20 to-cyan-500/20"
   },
   {
-    icon: <Lightbulb className="h-10 w-10 sm:h-12 sm:w-12 text-haby-accent" />,
+    icon: <Lightbulb className="h-10 w-10 sm:h-12 sm:w-12 text-white" />,
     title: "Soluciones Personalizadas",
     description: "Diseñamos soluciones a medida para problemas específicos, incluso cuando no tienes claro qué necesitas exactamente.",
     features: ["Consultoría Gratuita", "Análisis Profundo", "Propuesta Única"],
-    color: "from-purple-500/20 to-pink-500/20"
   },
   {
-    icon: <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-haby-accent" />,
+    icon: <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-white" />,
     title: "Optimización de Tiempo",
     description: "Nuestro enfoque principal es ayudarte a trabajar de forma más eficiente, eliminando tareas repetitivas y automatizando procesos.",
     features: ["Automatización", "Integración API", "Workflow Mejorado"],
-    color: "from-green-500/20 to-emerald-500/20"
   }
 ];
 
@@ -34,59 +30,64 @@ const additionalFeatures = [
 ];
 
 const ServicesSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const getCardStyle = (index: number) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+    transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s`,
+  });
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
-      {/* Decorative gradients */}
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 via-white to-pink-50/50" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <div 
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
         >
-          <motion.span 
-            className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold mb-4"
-            initial={{ scale: 0.9 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-          >
+          <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold mb-4">
             ¿Qué ofrecemos?
-          </motion.span>
+          </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600 mb-3 sm:mb-4 md:mb-6">
             Nuestros Servicios
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-4 font-medium">
             Soluciones completas para llevar tu negocio al siguiente nivel
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-12 sm:mb-16 lg:mb-20">
           {services.map((service, index) => (
-            <motion.div 
-              key={index} 
-              className="group relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.15 }}
-              whileHover={{ y: -8 }}
-            >
-              {/* Gradient overlay on hover */}
+            <div key={index} className="group relative" style={getCardStyle(index)}>
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
               
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-100/50 overflow-hidden">
-                <motion.div 
-                  className="mb-6 sm:mb-8 p-3 sm:p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl inline-block group-hover:scale-110 transition-transform duration-300 shadow-lg"
-                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-100/50 overflow-hidden hover:-translate-y-2">
+                <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl inline-block group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   {service.icon}
-                </motion.div>
+                </div>
                 <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
                   {service.title}
                 </h3>
@@ -103,26 +104,25 @@ const ServicesSection = () => {
                   ))}
                 </ul>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link 
-                    to="/servicios" 
-                    className="inline-flex items-center w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg justify-center"
-                  >
-                    Más información
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </motion.div>
+                <Link 
+                  to="/servicios" 
+                  className="inline-flex items-center w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg justify-center transition-all duration-300 hover:scale-105"
+                >
+                  Más información
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div 
+        <div 
           className="relative bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-primary rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 text-white shadow-2xl overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s'
+          }}
         >
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-screen filter blur-3xl"></div>
@@ -154,7 +154,7 @@ const ServicesSection = () => {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

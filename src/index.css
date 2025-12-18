@@ -14,6 +14,7 @@
 @import './styles/carousel-mobile-fix.css';
 @import './styles/accessibility-enhancements.css';
 @import './styles/microinteractions.css';
+@import './styles/scroll-reveal.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

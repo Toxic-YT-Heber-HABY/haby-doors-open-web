@@ -1,10 +1,12 @@
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 const ContactSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -13,6 +15,20 @@ const ContactSection = () => {
     mensaje: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -25,7 +41,6 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validación básica
     if (!formData.nombre || !formData.email || !formData.servicio || !formData.mensaje) {
       toast.error("Por favor completa todos los campos requeridos");
       return;
@@ -34,31 +49,16 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Datos del formulario validados
-      
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: formData
       });
 
-      if (error) {
-        // Security: Don't log user data or detailed errors
-        throw error;
-      }
+      if (error) throw error;
 
-      // Correo enviado exitosamente
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
-      
-      // Limpiar formulario
-      setFormData({
-        nombre: '',
-        email: '',
-        telefono: '',
-        servicio: '',
-        mensaje: ''
-      });
+      setFormData({ nombre: '', email: '', telefono: '', servicio: '', mensaje: '' });
 
     } catch (error) {
-      // Security: Don't log user form data to console
       toast.error("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
     } finally {
       setIsSubmitting(false);
@@ -66,9 +66,16 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="section bg-white">
+    <section ref={sectionRef} className="section bg-white">
       <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4">
+        <div 
+          className="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
+        >
           <div className="inline-block bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
             Contáctanos
           </div>
@@ -82,7 +89,14 @@ const ContactSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div 
+            className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateX(0)' : 'translateX(-30px)',
+              transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s'
+            }}
+          >
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Ponte en contacto</h3>
             <div className="space-y-6">
               <div className="flex items-start">
@@ -147,7 +161,13 @@ const ContactSection = () => {
             </div>
           </div>
           
-          <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div 
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateX(0)' : 'translateX(30px)',
+              transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s'
+            }}
+          >
             <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100">
               <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Envíanos un mensaje</h3>
               
