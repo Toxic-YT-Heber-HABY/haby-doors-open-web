@@ -1,55 +1,51 @@
-
 import { Link } from 'react-router-dom';
 import { ExternalLink, Star, Calendar, User } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ImageZoom from './ImageZoom';
 import ValidatedExternalLink from './ValidatedExternalLink';
 import { getFeaturedProjects } from '@/data/projectsData';
 
-// Obtener solo proyectos destacados y públicos para la sección principal
 const projects = getFeaturedProjects();
 
-// Variantes para las animaciones
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 12
-    }
-  }
-};
-
 const PortfolioSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const getCardStyle = (index: number) => ({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.98)',
+    transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s`,
+  });
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
-      {/* Decorative elements */}
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-pink-50/30 via-white to-purple-50/30" />
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <div 
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
         >
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-haby-primary to-haby-accent text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
             <Star className="w-4 h-4" />
@@ -65,26 +61,12 @@ const PortfolioSection = () => {
             Descubre cómo hemos ayudado a nuestros clientes a solucionar problemas cotidianos 
             y optimizar su tiempo a través de soluciones web personalizadas e innovadoras.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12">
           {projects.map((project, index) => (
-            <motion.div 
-              key={project.id} 
-              variants={itemVariants}
-              className={index < 2 ? "lg:col-span-1" : "lg:col-span-1"}
-            >
-              <motion.div
-                className="h-full group cursor-pointer"
-                whileHover={{ y: -12 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
+            <div key={project.id} style={getCardStyle(index)}>
+              <div className="h-full group cursor-pointer transition-transform duration-300 hover:-translate-y-3">
                 <Card className="h-full overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:bg-white">
                   <div className="relative aspect-video w-full overflow-hidden">
                     <ImageZoom 
@@ -148,17 +130,18 @@ const PortfolioSection = () => {
                     </Link>
                   </CardFooter>
                 </Card>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div 
+        <div 
           className="text-center mt-12 sm:mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s'
+          }}
         >
           <Link 
             to="/portafolio" 
@@ -167,7 +150,7 @@ const PortfolioSection = () => {
             Ver todos los proyectos
             <Star className="w-5 h-5" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

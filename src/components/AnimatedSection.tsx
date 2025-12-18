@@ -1,14 +1,14 @@
-
-import { ReactNode } from "react";
-import { motion, Variants } from "framer-motion";
+import { ReactNode, useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right";
+  direction?: "up" | "down" | "left" | "right" | "none";
   distance?: number;
+  threshold?: number;
+  stagger?: boolean;
 }
 
 const AnimatedSection = ({
@@ -16,53 +16,56 @@ const AnimatedSection = ({
   className,
   delay = 0,
   direction = "up",
-  distance = 50,
+  distance = 40,
+  threshold = 0.1,
+  stagger = false,
 }: AnimatedSectionProps) => {
-  const getDirection = (): { x: number; y: number } => {
-    switch (direction) {
-      case "up":
-        return { x: 0, y: distance };
-      case "down":
-        return { x: 0, y: -distance };
-      case "left":
-        return { x: distance, y: 0 };
-      case "right":
-        return { x: -distance, y: 0 };
-      default:
-        return { x: 0, y: distance };
+  const ref = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold, rootMargin: "-50px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  const getTransform = () => {
+    if (!isVisible) {
+      switch (direction) {
+        case "up": return `translateY(${distance}px)`;
+        case "down": return `translateY(-${distance}px)`;
+        case "left": return `translateX(${distance}px)`;
+        case "right": return `translateX(-${distance}px)`;
+        case "none": return "none";
+        default: return `translateY(${distance}px)`;
+      }
     }
+    return "translate(0)";
   };
 
-  const directionValues = getDirection();
-
-  const variants: Variants = {
-    hidden: {
-      opacity: 0,
-      x: directionValues.x,
-      y: directionValues.y,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-        delay: delay,
-      },
-    },
+  const styles = {
+    opacity: isVisible ? 1 : 0,
+    transform: getTransform(),
+    transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+    willChange: isVisible ? "auto" : "opacity, transform",
   };
 
   return (
-    <motion.section
-      className={cn(className)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={variants}
-    >
+    <section ref={ref} className={cn(className)} style={styles}>
       {children}
-    </motion.section>
+    </section>
   );
 };
 
