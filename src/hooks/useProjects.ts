@@ -16,6 +16,8 @@ export interface Project {
   created_by: string | null;
 }
 
+const TOKEN_STORAGE_KEY = 'admin_session_token';
+
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,88 +30,97 @@ export const useProjects = () => {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) {
-        throw error;
-      }
-
+      if (error) throw error;
       setProjects(data || []);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
+    } catch {
       toast.error('Error al cargar los proyectos');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const createProject = async (projectData: Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>) => {
+  const getAdminTokenOrThrow = () => {
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (!token) {
+      toast.error('Sesión de administrador inválida. Inicia sesión de nuevo.');
+      throw new Error('Missing admin session token');
+    }
+    return token;
+  };
+
+  const createProject = async (
+    projectData: Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>
+  ) => {
     try {
-      const { data, error } = await supabase
-        .from('projects')
-        .insert([{
-          ...projectData,
-          url: projectData.url || null,
-          client: projectData.client || null
-        }])
-        .select()
-        .single();
+      const token = getAdminTokenOrThrow();
 
-      if (error) {
-        throw error;
-      }
+      const { data, error } = await supabase.rpc('admin_create_project', {
+        session_token: token,
+        p_title: projectData.title,
+        p_description: projectData.description,
+        p_category: projectData.category,
+        p_image: projectData.image,
+        p_url: projectData.url ?? '',
+        p_client: projectData.client ?? '',
+      });
 
-      setProjects(prev => [data, ...prev]);
+      if (error) throw error;
+
+      setProjects((prev) => [data as Project, ...prev]);
       toast.success('Proyecto creado correctamente');
-      return data;
-    } catch (error) {
-      console.error('Error creating project:', error);
+      return data as Project;
+    } catch {
       toast.error('Error al crear el proyecto');
-      throw error;
+      throw new Error('Error creating project');
     }
   };
 
-  const updateProject = async (id: string, projectData: Partial<Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>>) => {
+  const updateProject = async (
+    id: string,
+    projectData: Partial<Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>>
+  ) => {
     try {
-      const { data, error } = await supabase
-        .from('projects')
-        .update({
-          ...projectData,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', id)
-        .select()
-        .single();
+      const token = getAdminTokenOrThrow();
 
-      if (error) {
-        throw error;
-      }
+      const { data, error } = await supabase.rpc('admin_update_project', {
+        session_token: token,
+        p_project_id: id,
+        p_title: projectData.title ?? '',
+        p_description: projectData.description ?? '',
+        p_category: projectData.category ?? '',
+        p_image: projectData.image ?? '',
+        p_url: projectData.url ?? '',
+        p_client: projectData.client ?? '',
+      });
 
-      setProjects(prev => prev.map(p => p.id === id ? data : p));
+      if (error) throw error;
+
+      setProjects((prev) => prev.map((p) => (p.id === id ? (data as Project) : p)));
       toast.success('Proyecto actualizado correctamente');
-      return data;
-    } catch (error) {
-      console.error('Error updating project:', error);
+      return data as Project;
+    } catch {
       toast.error('Error al actualizar el proyecto');
-      throw error;
+      throw new Error('Error updating project');
     }
   };
 
   const deleteProject = async (id: string) => {
     try {
-      const { error } = await supabase
-        .from('projects')
-        .delete()
-        .eq('id', id);
+      const token = getAdminTokenOrThrow();
 
-      if (error) {
-        throw error;
-      }
+      const { data, error } = await supabase.rpc('admin_delete_project', {
+        session_token: token,
+        p_project_id: id,
+      });
 
-      setProjects(prev => prev.filter(p => p.id !== id));
+      if (error) throw error;
+      if (!data) throw new Error('Delete failed');
+
+      setProjects((prev) => prev.filter((p) => p.id !== id));
       toast.success('Proyecto eliminado correctamente');
-    } catch (error) {
-      console.error('Error deleting project:', error);
+    } catch {
       toast.error('Error al eliminar el proyecto');
-      throw error;
+      throw new Error('Error deleting project');
     }
   };
 
@@ -123,6 +134,7 @@ export const useProjects = () => {
     fetchProjects,
     createProject,
     updateProject,
-    deleteProject
+    deleteProject,
   };
 };
+

@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_sessions: {
+        Row: {
+          admin_id: string
+          created_at: string
+          expires_at: string
+          id: string
+          last_used_at: string | null
+          token_hash: string
+        }
+        Insert: {
+          admin_id: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          last_used_at?: string | null
+          token_hash: string
+        }
+        Update: {
+          admin_id?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          last_used_at?: string | null
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_sessions_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       admin_users: {
         Row: {
           created_at: string
@@ -96,16 +131,84 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      create_admin_user: {
+      admin_create_project: {
+        Args: {
+          p_category: string
+          p_client: string
+          p_description: string
+          p_image: string
+          p_title: string
+          p_url: string
+          session_token: string
+        }
+        Returns: {
+          category: string
+          client: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          image: string
+          title: string
+          updated_at: string
+          url: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "projects"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      admin_create_session: {
         Args: { admin_email: string; admin_password: string }
         Returns: string
       }
-      dearmor: { Args: { "": string }; Returns: string }
-      gen_random_uuid: { Args: never; Returns: string }
-      gen_salt: { Args: { "": string }; Returns: string }
-      pgp_armor_headers: {
-        Args: { "": string }
-        Returns: Record<string, unknown>[]
+      admin_delete_project: {
+        Args: { p_project_id: string; session_token: string }
+        Returns: boolean
+      }
+      admin_revoke_session: {
+        Args: { session_token: string }
+        Returns: boolean
+      }
+      admin_update_project: {
+        Args: {
+          p_category: string
+          p_client: string
+          p_description: string
+          p_image: string
+          p_project_id: string
+          p_title: string
+          p_url: string
+          session_token: string
+        }
+        Returns: {
+          category: string
+          client: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          image: string
+          title: string
+          updated_at: string
+          url: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "projects"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      admin_validate_session: {
+        Args: { session_token: string }
+        Returns: string
+      }
+      create_admin_user: {
+        Args: { admin_email: string; admin_password: string }
+        Returns: string
       }
       verify_admin_auth: {
         Args: { admin_email: string; admin_password: string }
