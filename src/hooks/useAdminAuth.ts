@@ -10,6 +10,9 @@ interface AdminUser {
   is_active: boolean;
 }
 
+const TOKEN_STORAGE_KEY = 'admin_session_token';
+const EMAIL_STORAGE_KEY = 'admin_session_email';
+
 export const useAdminAuth = () => {
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,29 +20,41 @@ export const useAdminAuth = () => {
 
   useEffect(() => {
     checkAuthState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkAuthState = async () => {
     try {
-      // For admin auth, we don't use Supabase Auth sessions
-      // Instead, we check if there's a stored admin session
-      const storedAdmin = localStorage.getItem('admin_user');
-      if (storedAdmin) {
-        try {
-          const adminData = JSON.parse(storedAdmin);
-          setAdminUser(adminData);
-          setIsAuthenticated(true);
-        } catch {
-          localStorage.removeItem('admin_user');
-          setIsAuthenticated(false);
-          setAdminUser(null);
-        }
-      } else {
+      setIsLoading(true);
+      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+
+      if (!token) {
         setIsAuthenticated(false);
         setAdminUser(null);
+        return;
       }
-    } catch (error) {
-      // Security: Don't log auth errors to console in production
+
+      const { data: adminId, error } = await supabase.rpc('admin_validate_session', {
+        session_token: token,
+      });
+
+      if (error || !adminId) {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        localStorage.removeItem(EMAIL_STORAGE_KEY);
+        setIsAuthenticated(false);
+        setAdminUser(null);
+        return;
+      }
+
+      const storedEmail = localStorage.getItem(EMAIL_STORAGE_KEY) || 'admin';
+      setAdminUser({
+        id: adminId,
+        email: storedEmail,
+        last_login: null,
+        is_active: true,
+      });
+      setIsAuthenticated(true);
+    } catch {
       setIsAuthenticated(false);
       setAdminUser(null);
     } finally {
@@ -50,40 +65,38 @@ export const useAdminAuth = () => {
   const loginAdmin = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      
-      // Verify admin credentials using our secure function
-      const { data: adminId, error: verifyError } = await supabase
-        .rpc('verify_admin_auth', {
-          admin_email: email,
-          admin_password: password
-        });
 
-      if (verifyError || !adminId) {
+      const { data: sessionToken, error: sessionError } = await supabase.rpc(
+        'admin_create_session',
+        {
+          admin_email: email,
+          admin_password: password,
+        }
+      );
+
+      if (sessionError || !sessionToken) {
         toast.error('Credenciales de administrador incorrectas');
         return false;
       }
 
-      // Get admin user data from our admin_users table
-      const { data: adminData, error: adminError } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('id', adminId)
-        .eq('is_active', true)
-        .single();
+      localStorage.setItem(TOKEN_STORAGE_KEY, sessionToken);
+      localStorage.setItem(EMAIL_STORAGE_KEY, email);
 
-      if (adminError || !adminData) {
-        toast.error('Error al obtener datos del administrador');
-        return false;
-      }
+      // Validate to get admin id (and ensure token is usable)
+      const { data: adminId } = await supabase.rpc('admin_validate_session', {
+        session_token: sessionToken,
+      });
 
-      // Store admin session in localStorage and set state
-      localStorage.setItem('admin_user', JSON.stringify(adminData));
-      setAdminUser(adminData);
+      setAdminUser({
+        id: adminId || 'unknown',
+        email,
+        last_login: null,
+        is_active: true,
+      });
       setIsAuthenticated(true);
       toast.success('Acceso autorizado');
       return true;
-    } catch (error) {
-      // Security: Don't log sensitive auth errors
+    } catch {
       toast.error('Error en el acceso de administrador');
       return false;
     } finally {
@@ -93,38 +106,18 @@ export const useAdminAuth = () => {
 
   const logoutAdmin = async () => {
     try {
-      localStorage.removeItem('admin_user');
+      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+      if (token) {
+        await supabase.rpc('admin_revoke_session', { session_token: token });
+      }
+
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
+      localStorage.removeItem(EMAIL_STORAGE_KEY);
       setAdminUser(null);
       setIsAuthenticated(false);
       toast.success('Sesión cerrada correctamente');
-    } catch (error) {
-      // Security: Don't log auth errors
+    } catch {
       toast.error('Error al cerrar sesión');
-    }
-  };
-
-  const createAdminUser = async (email: string, password: string) => {
-    try {
-      const { data: adminId, error } = await supabase
-        .rpc('create_admin_user', {
-          admin_email: email,
-          admin_password: password
-        });
-
-      if (error) {
-        throw error;
-      }
-
-      toast.success('Usuario administrador creado correctamente');
-      return adminId;
-    } catch (error: any) {
-      // Security: Don't log sensitive error details
-      if (error.message?.includes('already exists')) {
-        toast.error('El usuario administrador ya existe');
-      } else {
-        toast.error('Error al crear usuario administrador');
-      }
-      throw error;
     }
   };
 
@@ -134,7 +127,7 @@ export const useAdminAuth = () => {
     isAuthenticated,
     loginAdmin,
     logoutAdmin,
-    createAdminUser,
-    checkAuthState
+    checkAuthState,
   };
 };
+
