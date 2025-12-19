@@ -11,8 +11,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
-  const { loginAdmin, createAdminUser, isLoading } = useAdminAuth();
+  const { loginAdmin, isLoading } = useAdminAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,14 +21,9 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
     }
 
     try {
-      if (isSignUp) {
-        await createAdminUser(email, password);
-        setIsSignUp(false);
-      } else {
-        const success = await loginAdmin(email, password);
-        if (success) {
-          onAuthSuccess();
-        }
+      const success = await loginAdmin(email, password);
+      if (success) {
+        onAuthSuccess();
       }
     } catch {
       // Security: Don't log auth errors
@@ -44,13 +38,10 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
             <Shield className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">
-            {isSignUp ? 'Crear Administrador' : 'Acceso de Administrador'}
+            Acceso de Administrador
           </h1>
           <p className="text-gray-600 mt-2">
-            {isSignUp 
-              ? 'Crear nueva cuenta de administrador' 
-              : 'Ingresa tus credenciales para acceder al panel'
-            }
+            Ingresa tus credenciales para acceder al panel
           </p>
         </div>
 
@@ -67,7 +58,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
-                placeholder="admin@haby.com"
+                placeholder="admin@ejemplo.com"
                 required
               />
             </div>
@@ -85,7 +76,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
-                placeholder="Contraseña segura"
+                placeholder="Contraseña"
                 required
               />
               <button
@@ -112,24 +103,11 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
             ) : (
               <>
                 <Shield className="h-5 w-5 mr-2" />
-                {isSignUp ? 'Crear Administrador' : 'Acceder'}
+                Acceder
               </>
             )}
           </button>
         </form>
-
-        <div className="mt-6 text-center">
-          <button
-            type="button"
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="text-haby-primary hover:text-haby-secondary text-sm font-medium"
-          >
-            {isSignUp 
-              ? '¿Ya tienes cuenta? Iniciar sesión' 
-              : '¿Crear nueva cuenta de administrador?'
-            }
-          </button>
-        </div>
       </div>
     </div>
   );
