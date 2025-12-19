@@ -53,9 +53,9 @@ const FAQSection = () => {
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-b from-white via-purple-50/30 to-white">
-      {/* Decorative elements */}
-      <div className="absolute top-10 right-10 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
+      {/* Decorative elements - Solo en desktop */}
+      <div className="hidden md:block absolute top-10 right-10 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-10 left-10 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 md:mb-16 px-4">
@@ -77,7 +77,7 @@ const FAQSection = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-white/80 backdrop-blur-sm border border-purple-100/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group data-[state=open]:shadow-2xl data-[state=open]:border-purple-200"
+                className="bg-white border border-purple-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group data-[state=open]:shadow-2xl data-[state=open]:border-purple-200"
               >
                 <AccordionTrigger className="text-left px-4 md:px-6 py-4 md:py-5 hover:no-underline group-hover:bg-gradient-to-r group-hover:from-purple-50/50 group-hover:to-pink-50/50 transition-all duration-300 [&[data-state=open]]:bg-gradient-to-r [&[data-state=open]]:from-purple-50 [&[data-state=open]]:to-pink-50">
                   <span className="text-base md:text-lg font-semibold text-gray-900 pr-4 group-hover:text-purple-700 transition-colors">

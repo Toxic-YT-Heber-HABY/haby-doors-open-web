@@ -5,8 +5,8 @@ import FooterQuickLinks from "./FooterQuickLinks";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-dark text-white relative overflow-hidden">
-      {/* Modern decorative elements */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Modern decorative elements - Solo en desktop */}
+      <div className="hidden md:block absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-96 h-96 bg-haby-accent rounded-full mix-blend-screen filter blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-haby-primary rounded-full mix-blend-screen filter blur-3xl"></div>
       </div>
@@ -28,16 +28,16 @@ const Footer = () => {
               Desarrollamos soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.
             </p>
             <div className="flex space-x-3 sm:space-x-4">
-              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
                 <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
                 <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
                 <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
-              <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/20">
+              <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
                 <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </div>
@@ -82,8 +82,8 @@ const Footer = () => {
           <div>
             <h3 className="text-xl sm:text-2xl font-display font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">Contacto</h3>
             <div className="space-y-4 sm:space-y-6">
-              <div className="flex items-center gap-2 sm:gap-3 text-gray-200 group">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-haby-accent transition-all duration-300 border border-white/20">
+              <div className="flex items-center gap-2 sm:gap-3 text-white group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center group-hover:bg-haby-accent transition-all duration-300 border border-white/30">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
                 <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-base sm:text-lg font-medium hover:text-haby-accent transition-colors">

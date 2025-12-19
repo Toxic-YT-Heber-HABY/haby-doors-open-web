@@ -80,25 +80,27 @@ const Hero = () => {
         background: 'linear-gradient(135deg, hsl(250 100% 8%) 0%, hsl(260 90% 15%) 50%, hsl(270 85% 25%) 100%)'
       }}
     >
-      {/* Elegant gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-haby-accent/20 rounded-full blur-[120px]"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-1/3 right-1/4 w-[600px] h-[600px] bg-haby-primary/15 rounded-full blur-[140px]"
-          animate={{
-            scale: [1.1, 1, 1.1],
-            opacity: [0.2, 0.35, 0.2],
-          }}
-          transition={{ duration: 12, repeat: Infinity, delay: 2, ease: "easeInOut" }}
-        />
-      </div>
+      {/* Elegant gradient orbs - Solo en desktop */}
+      {!capabilities.isMobile && (
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div 
+            className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-haby-accent/20 rounded-full blur-[120px]"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-1/3 right-1/4 w-[600px] h-[600px] bg-haby-primary/15 rounded-full blur-[140px]"
+            animate={{
+              scale: [1.1, 1, 1.1],
+              opacity: [0.2, 0.35, 0.2],
+            }}
+            transition={{ duration: 12, repeat: Infinity, delay: 2, ease: "easeInOut" }}
+          />
+        </div>
+      )}
       
       {/* Subtle overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/30"></div>
