@@ -21,14 +21,12 @@
   .text-xl, .text-2xl {
     font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
     line-height: 1.4 !important;
-    font-weight: 400 !important;
   }
 
   /* Párrafos base optimizados */
   p, .text-base {
     font-size: 1rem !important;
     line-height: 1.5 !important;
-    font-weight: 400 !important;
   }
 
   /* Texto pequeño pero legible */
@@ -42,25 +40,13 @@
     line-height: 1.3 !important;
   }
 
-  /* Gradientes de texto más visibles en móvil */
-  .text-gradient-primary,
-  .bg-gradient-to-r {
-    color: hsl(var(--haby-accent)) !important;
-    background: none !important;
-    -webkit-background-clip: border-box !important;
-    -webkit-text-fill-color: initial !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
-    font-weight: 700 !important;
-  }
-
-  /* Mejorar contraste en móvil */
+  /* Mejorar contraste en móvil - NO afectar gradientes de fondo */
   .text-gray-200 {
     color: rgba(255, 255, 255, 0.95) !important;
   }
 
   .text-white {
     color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
   }
 
   /* Estadísticas más legibles */
@@ -69,7 +55,6 @@
   .grid .text-3xl {
     font-size: clamp(1.25rem, 5vw, 2rem) !important;
     font-weight: 800 !important;
-    color: hsl(var(--haby-accent)) !important;
   }
 
   /* Botones con texto más grande */
@@ -120,30 +105,10 @@
   }
 }
 
-/* Asegurar que el texto sea siempre legible */
-@media (prefers-color-scheme: dark), (max-width: 768px) {
-  .text-transparent {
-    color: hsl(var(--haby-accent)) !important;
-    -webkit-text-fill-color: hsl(var(--haby-accent)) !important;
-  }
-
-  .bg-clip-text {
-    background: none !important;
-    -webkit-background-clip: border-box !important;
-  }
-}
-
 /* Mejorar legibilidad en dispositivos de baja resolución */
 @media (-webkit-max-device-pixel-ratio: 1) {
   h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-  }
-
-  .text-gradient-primary,
-  .bg-gradient-to-r {
-    color: hsl(var(--haby-accent)) !important;
-    background: none !important;
-    font-weight: 700 !important;
   }
 }

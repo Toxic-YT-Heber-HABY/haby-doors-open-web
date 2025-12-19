@@ -56,8 +56,9 @@ const ServicesSection = () => {
   return (
     <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 via-white to-pink-50/50" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
+      {/* Orbes decorativos solo en desktop */}
+      <div className="hidden md:block absolute top-0 left-1/4 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div 

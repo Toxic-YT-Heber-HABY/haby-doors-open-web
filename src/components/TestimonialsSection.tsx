@@ -77,8 +77,9 @@ const TestimonialsSection = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
       {/* Background with gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-50/40 via-white to-pink-50/40" />
-      <div className="absolute top-0 left-1/3 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
+      {/* Orbes decorativos solo en desktop */}
+      <div className="hidden md:block absolute top-0 left-1/3 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl" />
+      <div className="hidden md:block absolute bottom-0 right-1/3 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
@@ -191,8 +192,8 @@ const TestimonialsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12 bg-white/10 border-white/20 text-white hover:bg-white/20" />
-            <CarouselNext className="hidden md:flex -right-12 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+            <CarouselPrevious className="hidden md:flex -left-12 bg-purple-600 border-purple-500 text-white hover:bg-purple-700" />
+            <CarouselNext className="hidden md:flex -right-12 bg-purple-600 border-purple-500 text-white hover:bg-purple-700" />
           </Carousel>
 
           {/* Indicadores de puntos para móvil */}
@@ -200,13 +201,13 @@ const TestimonialsSection = () => {
             {testimonials.map((_, index) => (
               <div
                 key={index}
-                className="w-2 h-2 rounded-full bg-white/30"
+                className="w-2 h-2 rounded-full bg-purple-400"
               />
             ))}
           </div>
         </motion.div>
 
-        {/* Call to action */}
+        {/* Call to action - CORREGIDO: Fondo sólido para mejor contraste */}
         <motion.div 
           className="text-center mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 20 }}
@@ -214,12 +215,12 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
         >
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">¿Listo para unirte a nuestros clientes satisfechos?</h3>
-            <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">Descubre cómo podemos ayudarte a optimizar tu tiempo y resolver tus desafíos tecnológicos.</p>
+          <div className="bg-gradient-to-br from-purple-900 via-purple-800 to-pink-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto shadow-xl">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-white">¿Listo para unirte a nuestros clientes satisfechos?</h3>
+            <p className="text-sm sm:text-base text-purple-100 mb-4 sm:mb-6">Descubre cómo podemos ayudarte a optimizar tu tiempo y resolver tus desafíos tecnológicos.</p>
             <a 
               href="/contacto" 
-              className="inline-flex items-center gap-2 bg-haby-accent hover:bg-haby-accent/90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-purple-900 px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
             >
               Contáctanos ahora
               <Star className="w-4 h-4" />

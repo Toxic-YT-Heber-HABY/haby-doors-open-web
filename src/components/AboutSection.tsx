@@ -23,7 +23,8 @@ const AboutSection = () => {
 
   return (
     <section ref={sectionRef as React.RefObject<HTMLElement>} className="section py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Orbes decorativos solo en desktop */}
+      <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-0 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
       </div>
