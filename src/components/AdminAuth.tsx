@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Eye, EyeOff, User, Lock, Shield } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Shield, UserPlus } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 interface AdminAuthProps {
@@ -11,7 +10,8 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { loginAdmin, isLoading } = useAdminAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const { loginAdmin, signUpAdmin, isLoading } = useAdminAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +21,18 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
     }
 
     try {
-      const success = await loginAdmin(email, password);
-      if (success) {
-        onAuthSuccess();
+      let success: boolean;
+      
+      if (isSignUp) {
+        success = await signUpAdmin(email, password);
+        if (success) {
+          setIsSignUp(false); // Switch to login after successful signup
+        }
+      } else {
+        success = await loginAdmin(email, password);
+        if (success) {
+          onAuthSuccess();
+        }
       }
     } catch {
       // Security: Don't log auth errors
@@ -38,10 +47,12 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
             <Shield className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">
-            Acceso de Administrador
+            {isSignUp ? 'Registro de Administrador' : 'Acceso de Administrador'}
           </h1>
           <p className="text-gray-600 mt-2">
-            Ingresa tus credenciales para acceder al panel
+            {isSignUp 
+              ? 'Crea una cuenta de administrador' 
+              : 'Ingresa tus credenciales para acceder al panel'}
           </p>
         </div>
 
@@ -60,6 +71,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                 placeholder="admin@ejemplo.com"
                 required
+                autoComplete="email"
               />
             </div>
           </div>
@@ -78,6 +90,8 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-haby-primary focus:outline-none focus:ring-1 focus:ring-haby-primary"
                 placeholder="Contraseña"
                 required
+                autoComplete={isSignUp ? 'new-password' : 'current-password'}
+                minLength={6}
               />
               <button
                 type="button"
@@ -91,6 +105,11 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 )}
               </button>
             </div>
+            {isSignUp && (
+              <p className="text-xs text-gray-500">
+                Mínimo 6 caracteres
+              </p>
+            )}
           </div>
 
           <button
@@ -102,12 +121,41 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
             ) : (
               <>
-                <Shield className="h-5 w-5 mr-2" />
-                Acceder
+                {isSignUp ? (
+                  <>
+                    <UserPlus className="h-5 w-5 mr-2" />
+                    Registrarse
+                  </>
+                ) : (
+                  <>
+                    <Shield className="h-5 w-5 mr-2" />
+                    Acceder
+                  </>
+                )}
               </>
             )}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <button
+            type="button"
+            onClick={() => setIsSignUp(!isSignUp)}
+            className="text-sm text-haby-primary hover:text-haby-secondary transition-colors"
+          >
+            {isSignUp 
+              ? '¿Ya tienes cuenta? Inicia sesión' 
+              : '¿No tienes cuenta? Regístrate'}
+          </button>
+        </div>
+
+        {!isSignUp && (
+          <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+            <p className="text-xs text-amber-700 text-center">
+              Nota: El primer administrador debe ser asignado manualmente en la base de datos.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
