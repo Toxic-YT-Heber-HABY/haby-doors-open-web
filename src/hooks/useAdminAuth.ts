@@ -1,62 +1,78 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { User, Session } from '@supabase/supabase-js';
 
 interface AdminUser {
   id: string;
   email: string;
-  last_login: string | null;
-  is_active: boolean;
+  isAdmin: boolean;
 }
 
-const TOKEN_STORAGE_KEY = 'admin_session_token';
-const EMAIL_STORAGE_KEY = 'admin_session_email';
-
 export const useAdminAuth = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    checkAuthState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Defer admin check with setTimeout to avoid deadlock
+        if (session?.user) {
+          setTimeout(() => {
+            checkAdminRole(session.user.id, session.user.email || '');
+          }, 0);
+        } else {
+          setAdminUser(null);
+          setIsAuthenticated(false);
+          setIsLoading(false);
+        }
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        checkAdminRole(session.user.id, session.user.email || '');
+      } else {
+        setIsLoading(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const checkAuthState = async () => {
+  const checkAdminRole = async (userId: string, email: string) => {
     try {
-      setIsLoading(true);
-      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-
-      if (!token) {
-        setIsAuthenticated(false);
+      const { data: isAdmin, error } = await supabase.rpc('is_admin');
+      
+      if (error) {
+        console.error('Error checking admin role:', error);
         setAdminUser(null);
-        return;
-      }
-
-      const { data: adminId, error } = await supabase.rpc('admin_validate_session', {
-        session_token: token,
-      });
-
-      if (error || !adminId) {
-        localStorage.removeItem(TOKEN_STORAGE_KEY);
-        localStorage.removeItem(EMAIL_STORAGE_KEY);
         setIsAuthenticated(false);
+      } else if (isAdmin) {
+        setAdminUser({
+          id: userId,
+          email: email,
+          isAdmin: true,
+        });
+        setIsAuthenticated(true);
+      } else {
         setAdminUser(null);
-        return;
+        setIsAuthenticated(false);
       }
-
-      const storedEmail = localStorage.getItem(EMAIL_STORAGE_KEY) || 'admin';
-      setAdminUser({
-        id: adminId,
-        email: storedEmail,
-        last_login: null,
-        is_active: true,
-      });
-      setIsAuthenticated(true);
     } catch {
-      setIsAuthenticated(false);
       setAdminUser(null);
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -66,34 +82,31 @@ export const useAdminAuth = () => {
     try {
       setIsLoading(true);
 
-      const { data: sessionToken, error: sessionError } = await supabase.rpc(
-        'admin_create_session',
-        {
-          admin_email: email,
-          admin_password: password,
-        }
-      );
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-      if (sessionError || !sessionToken) {
-        toast.error('Credenciales de administrador incorrectas');
+      if (error) {
+        toast.error(error.message || 'Error en el acceso');
         return false;
       }
 
-      localStorage.setItem(TOKEN_STORAGE_KEY, sessionToken);
-      localStorage.setItem(EMAIL_STORAGE_KEY, email);
+      if (!data.user) {
+        toast.error('No se pudo iniciar sesión');
+        return false;
+      }
 
-      // Validate to get admin id (and ensure token is usable)
-      const { data: adminId } = await supabase.rpc('admin_validate_session', {
-        session_token: sessionToken,
-      });
+      // Check if user has admin role
+      const { data: isAdmin, error: roleError } = await supabase.rpc('is_admin');
+      
+      if (roleError || !isAdmin) {
+        // Sign out non-admin users
+        await supabase.auth.signOut();
+        toast.error('Acceso denegado. No tienes permisos de administrador.');
+        return false;
+      }
 
-      setAdminUser({
-        id: adminId || 'unknown',
-        email,
-        last_login: null,
-        is_active: true,
-      });
-      setIsAuthenticated(true);
       toast.success('Acceso autorizado');
       return true;
     } catch {
@@ -104,15 +117,48 @@ export const useAdminAuth = () => {
     }
   };
 
-  const logoutAdmin = async () => {
+  const signUpAdmin = async (email: string, password: string) => {
     try {
-      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-      if (token) {
-        await supabase.rpc('admin_revoke_session', { session_token: token });
+      setIsLoading(true);
+      
+      const redirectUrl = `${window.location.origin}/admin`;
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl
+        }
+      });
+
+      if (error) {
+        toast.error(error.message || 'Error en el registro');
+        return false;
       }
 
-      localStorage.removeItem(TOKEN_STORAGE_KEY);
-      localStorage.removeItem(EMAIL_STORAGE_KEY);
+      if (data.user) {
+        toast.success('Registro exitoso. Verifica tu email para confirmar.');
+        return true;
+      }
+
+      return false;
+    } catch {
+      toast.error('Error en el registro');
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const logoutAdmin = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        toast.error('Error al cerrar sesión');
+        return;
+      }
+
       setAdminUser(null);
       setIsAuthenticated(false);
       toast.success('Sesión cerrada correctamente');
@@ -122,12 +168,13 @@ export const useAdminAuth = () => {
   };
 
   return {
+    user,
+    session,
     adminUser,
     isLoading,
     isAuthenticated,
     loginAdmin,
+    signUpAdmin,
     logoutAdmin,
-    checkAuthState,
   };
 };
-

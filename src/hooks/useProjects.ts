@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -15,8 +14,6 @@ export interface Project {
   updated_at: string;
   created_by: string | null;
 }
-
-const TOKEN_STORAGE_KEY = 'admin_session_token';
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -39,38 +36,40 @@ export const useProjects = () => {
     }
   };
 
-  const getAdminTokenOrThrow = () => {
-    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (!token) {
-      toast.error('Sesión de administrador inválida. Inicia sesión de nuevo.');
-      throw new Error('Missing admin session token');
-    }
-    return token;
-  };
-
   const createProject = async (
     projectData: Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>
   ) => {
     try {
-      const token = getAdminTokenOrThrow();
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast.error('Sesión de administrador inválida. Inicia sesión de nuevo.');
+        throw new Error('Not authenticated');
+      }
 
-      const { data, error } = await supabase.rpc('admin_create_project', {
-        session_token: token,
-        p_title: projectData.title,
-        p_description: projectData.description,
-        p_category: projectData.category,
-        p_image: projectData.image,
-        p_url: projectData.url ?? '',
-        p_client: projectData.client ?? '',
-      });
+      const { data, error } = await supabase
+        .from('projects')
+        .insert({
+          title: projectData.title,
+          description: projectData.description,
+          category: projectData.category,
+          image: projectData.image,
+          url: projectData.url || null,
+          client: projectData.client || null,
+          created_by: user.id,
+        })
+        .select()
+        .single();
 
       if (error) throw error;
 
       setProjects((prev) => [data as Project, ...prev]);
       toast.success('Proyecto creado correctamente');
       return data as Project;
-    } catch {
-      toast.error('Error al crear el proyecto');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Error al crear el proyecto';
+      toast.error(message);
       throw new Error('Error creating project');
     }
   };
@@ -80,18 +79,28 @@ export const useProjects = () => {
     projectData: Partial<Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>>
   ) => {
     try {
-      const token = getAdminTokenOrThrow();
+      // Get current user to verify auth
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast.error('Sesión de administrador inválida. Inicia sesión de nuevo.');
+        throw new Error('Not authenticated');
+      }
 
-      const { data, error } = await supabase.rpc('admin_update_project', {
-        session_token: token,
-        p_project_id: id,
-        p_title: projectData.title ?? '',
-        p_description: projectData.description ?? '',
-        p_category: projectData.category ?? '',
-        p_image: projectData.image ?? '',
-        p_url: projectData.url ?? '',
-        p_client: projectData.client ?? '',
-      });
+      const { data, error } = await supabase
+        .from('projects')
+        .update({
+          title: projectData.title,
+          description: projectData.description,
+          category: projectData.category,
+          image: projectData.image,
+          url: projectData.url || null,
+          client: projectData.client || null,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+        .select()
+        .single();
 
       if (error) throw error;
 
@@ -106,15 +115,20 @@ export const useProjects = () => {
 
   const deleteProject = async (id: string) => {
     try {
-      const token = getAdminTokenOrThrow();
+      // Get current user to verify auth
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast.error('Sesión de administrador inválida. Inicia sesión de nuevo.');
+        throw new Error('Not authenticated');
+      }
 
-      const { data, error } = await supabase.rpc('admin_delete_project', {
-        session_token: token,
-        p_project_id: id,
-      });
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', id);
 
       if (error) throw error;
-      if (!data) throw new Error('Delete failed');
 
       setProjects((prev) => prev.filter((p) => p.id !== id));
       toast.success('Proyecto eliminado correctamente');
@@ -137,4 +151,3 @@ export const useProjects = () => {
     deleteProject,
   };
 };
-
