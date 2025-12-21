@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_login_attempts: {
+        Row: {
+          attempted_at: string
+          email: string
+          id: string
+          success: boolean
+        }
+        Insert: {
+          attempted_at?: string
+          email: string
+          id?: string
+          success?: boolean
+        }
+        Update: {
+          attempted_at?: string
+          email?: string
+          id?: string
+          success?: boolean
+        }
+        Relationships: []
+      }
       admin_sessions: {
         Row: {
           admin_id: string
@@ -206,9 +227,14 @@ export type Database = {
         Args: { session_token: string }
         Returns: string
       }
+      check_login_rate_limit: { Args: { p_email: string }; Returns: boolean }
       create_admin_user: {
         Args: { admin_email: string; admin_password: string }
         Returns: string
+      }
+      log_login_attempt: {
+        Args: { p_email: string; p_success: boolean }
+        Returns: undefined
       }
       verify_admin_auth: {
         Args: { admin_email: string; admin_password: string }
