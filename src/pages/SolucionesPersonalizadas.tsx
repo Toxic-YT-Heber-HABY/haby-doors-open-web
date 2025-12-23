@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 import { CheckCircle, Lightbulb, BarChart3, BookOpen, Clock, Zap } from 'lucide-react';
-import ThreeDModel from "@/components/ThreeDModel";
+import LazyThreeDModel from "@/components/LazyThreeDModel";
 
 const SolucionesPersonalizadas = () => {
   const staggerContainer = {
@@ -61,7 +61,7 @@ const SolucionesPersonalizadas = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <div className="h-80 relative">
-                  <ThreeDModel type="logo" />
+                  <LazyThreeDModel type="logo" />
                 </div>
               </motion.div>
             </div>
