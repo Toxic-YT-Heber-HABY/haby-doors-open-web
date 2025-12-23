@@ -14,92 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      admin_login_attempts: {
-        Row: {
-          attempted_at: string
-          email: string
-          id: string
-          success: boolean
-        }
-        Insert: {
-          attempted_at?: string
-          email: string
-          id?: string
-          success?: boolean
-        }
-        Update: {
-          attempted_at?: string
-          email?: string
-          id?: string
-          success?: boolean
-        }
-        Relationships: []
-      }
-      admin_sessions: {
-        Row: {
-          admin_id: string
-          created_at: string
-          expires_at: string
-          id: string
-          last_used_at: string | null
-          token_hash: string
-        }
-        Insert: {
-          admin_id: string
-          created_at?: string
-          expires_at?: string
-          id?: string
-          last_used_at?: string | null
-          token_hash: string
-        }
-        Update: {
-          admin_id?: string
-          created_at?: string
-          expires_at?: string
-          id?: string
-          last_used_at?: string | null
-          token_hash?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "admin_sessions_admin_id_fkey"
-            columns: ["admin_id"]
-            isOneToOne: false
-            referencedRelation: "admin_users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      admin_users: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          is_active: boolean
-          last_login: string | null
-          password_hash: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          is_active?: boolean
-          last_login?: string | null
-          password_hash: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          is_active?: boolean
-          last_login?: string | null
-          password_hash?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       projects: {
         Row: {
           category: string
@@ -137,15 +51,7 @@ export type Database = {
           updated_at?: string
           url?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "projects_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "admin_users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       user_roles: {
         Row: {
@@ -173,86 +79,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      admin_create_project: {
-        Args: {
-          p_category: string
-          p_client: string
-          p_description: string
-          p_image: string
-          p_title: string
-          p_url: string
-          session_token: string
-        }
-        Returns: {
-          category: string
-          client: string | null
-          created_at: string
-          created_by: string | null
-          description: string
-          id: string
-          image: string
-          title: string
-          updated_at: string
-          url: string | null
-        }
-        SetofOptions: {
-          from: "*"
-          to: "projects"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
-      admin_create_session: {
-        Args: { admin_email: string; admin_password: string }
-        Returns: string
-      }
-      admin_delete_project: {
-        Args: { p_project_id: string; session_token: string }
-        Returns: boolean
-      }
-      admin_revoke_session: {
-        Args: { session_token: string }
-        Returns: boolean
-      }
-      admin_update_project: {
-        Args: {
-          p_category: string
-          p_client: string
-          p_description: string
-          p_image: string
-          p_project_id: string
-          p_title: string
-          p_url: string
-          session_token: string
-        }
-        Returns: {
-          category: string
-          client: string | null
-          created_at: string
-          created_by: string | null
-          description: string
-          id: string
-          image: string
-          title: string
-          updated_at: string
-          url: string | null
-        }
-        SetofOptions: {
-          from: "*"
-          to: "projects"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
-      admin_validate_session: {
-        Args: { session_token: string }
-        Returns: string
-      }
-      check_login_rate_limit: { Args: { p_email: string }; Returns: boolean }
-      create_admin_user: {
-        Args: { admin_email: string; admin_password: string }
-        Returns: string
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -261,14 +87,6 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
-      log_login_attempt: {
-        Args: { p_email: string; p_success: boolean }
-        Returns: undefined
-      }
-      verify_admin_auth: {
-        Args: { admin_email: string; admin_password: string }
-        Returns: string
-      }
     }
     Enums: {
       app_role: "admin" | "user"
