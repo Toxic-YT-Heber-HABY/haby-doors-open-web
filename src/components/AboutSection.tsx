@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,7 +9,8 @@ const AboutSection = () => {
   const isMobile = useIsMobile();
   const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
 
-  const getAnimationStyle = (delay: number = 0, direction: 'up' | 'left' | 'right' = 'up') => {
+  // Memoize animation styles to prevent recalculation
+  const getAnimationStyle = React.useCallback((delay: number = 0, direction: 'up' | 'left' | 'right' = 'up') => {
     const transforms = {
       up: isVisible ? 'translateY(0)' : 'translateY(30px)',
       left: isVisible ? 'translateX(0)' : 'translateX(-30px)',
@@ -18,8 +20,9 @@ const AboutSection = () => {
       opacity: isVisible ? 1 : 0,
       transform: transforms[direction],
       transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+      willChange: isVisible ? 'auto' : 'opacity, transform',
     };
-  };
+  }, [isVisible]);
 
   return (
     <section ref={sectionRef as React.RefObject<HTMLElement>} className="section py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
