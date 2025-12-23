@@ -1,14 +1,10 @@
-
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import ThreeDModel from './ThreeDModel';
 import { useAnimations } from './AnimationController';
 import { useDeviceCapabilities } from '@/hooks/useDeviceCapabilities';
-import { lazy, Suspense } from 'react';
 import MobileOptimizedVisual from './MobileOptimizedVisual';
-
-const LazyThreeDModel = lazy(() => import('./ThreeDModel'));
+import LazyThreeDModel from './LazyThreeDModel';
 
 const Hero = () => {
   const capabilities = useDeviceCapabilities();
@@ -66,11 +62,7 @@ const Hero = () => {
       return <MobileOptimizedVisual type="hero" animate={animationsEnabled} />;
     }
     
-    return (
-      <Suspense fallback={<MobileOptimizedVisual type="hero" />}>
-        <LazyThreeDModel />
-      </Suspense>
-    );
+    return <LazyThreeDModel type="hero" />;
   };
 
   return (

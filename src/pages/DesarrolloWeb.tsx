@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
 import { CheckCircle, Code, Layout, Server, Smartphone, Globe } from 'lucide-react';
-import ThreeDModel from "@/components/ThreeDModel";
+import LazyThreeDModel from "@/components/LazyThreeDModel";
 import usePageTitle from "@/hooks/usePageTitle";
 import AnimatedGradient from "@/components/AnimatedGradient";
 import ImageZoom from "@/components/ImageZoom";
@@ -264,7 +264,7 @@ const DesarrolloWeb = () => {
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-haby-accent/50 to-transparent"></div>
                     {/* Modelo 3D (sobre fallback, manejar internamente su visibilidad) */}
                     <div className="relative z-10 w-full h-full">
-                      <ThreeDModel type="hero" />
+                      <LazyThreeDModel type="hero" />
                     </div>
                     {/* Brillo interior extra */}
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
