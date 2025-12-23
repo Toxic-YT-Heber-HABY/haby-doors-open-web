@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, Star, Calendar, User } from 'lucide-react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ImageZoom from './ImageZoom';
 import ValidatedExternalLink from './ValidatedExternalLink';
@@ -16,7 +16,10 @@ const PortfolioSection = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Batch the state update with requestAnimationFrame to avoid forced reflow
+          requestAnimationFrame(() => {
+            setIsVisible(true);
+          });
           observer.disconnect();
         }
       },
@@ -26,11 +29,13 @@ const PortfolioSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const getCardStyle = (index: number) => ({
+  // Memoize card styles to avoid recalculation on every render
+  const getCardStyle = useMemo(() => (index: number) => ({
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.98)',
     transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s`,
-  });
+    willChange: isVisible ? 'auto' : 'opacity, transform',
+  }), [isVisible]);
 
   return (
     <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">

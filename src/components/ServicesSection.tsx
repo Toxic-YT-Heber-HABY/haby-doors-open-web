@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Code, Lightbulb, Clock, ArrowRight, Zap, Shield, Users } from 'lucide-react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 
 const services = [
   {
@@ -37,7 +37,10 @@ const ServicesSection = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Batch the state update with requestAnimationFrame to avoid forced reflow
+          requestAnimationFrame(() => {
+            setIsVisible(true);
+          });
           observer.disconnect();
         }
       },
@@ -47,11 +50,13 @@ const ServicesSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const getCardStyle = (index: number) => ({
+  // Memoize card styles to avoid recalculation on every render
+  const getCardStyle = useMemo(() => (index: number) => ({
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
     transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s`,
-  });
+    willChange: isVisible ? 'auto' : 'opacity, transform',
+  }), [isVisible]);
 
   return (
     <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">

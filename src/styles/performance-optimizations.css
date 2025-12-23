@@ -101,3 +101,27 @@ html {
   contain: paint;
   isolation: isolate;
 }
+
+/* Optimize intersection observer animations */
+.reveal-animation {
+  contain: layout style;
+  will-change: auto;
+}
+
+.reveal-animation.animating {
+  will-change: opacity, transform;
+}
+
+/* Prevent layout thrashing during scroll */
+.scroll-optimized {
+  contain: layout;
+  overflow-anchor: none;
+}
+
+/* Batch visual updates */
+@media (prefers-reduced-motion: no-preference) {
+  .batch-updates {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
+  }
+}

@@ -18,9 +18,14 @@ export const useScrollReveal = ({
     (entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        setIsVisible(true);
+        // Batch the state update with requestAnimationFrame to avoid forced reflow
+        requestAnimationFrame(() => {
+          setIsVisible(true);
+        });
       } else if (!triggerOnce) {
-        setIsVisible(false);
+        requestAnimationFrame(() => {
+          setIsVisible(false);
+        });
       }
     },
     [triggerOnce]

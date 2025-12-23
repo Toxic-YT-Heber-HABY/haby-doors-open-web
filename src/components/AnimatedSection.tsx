@@ -39,10 +39,13 @@ const AnimatedSection = ({
     const element = ref.current;
     if (!element) return;
 
+    // Use requestAnimationFrame to batch visibility updates
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          requestAnimationFrame(() => {
+            setIsVisible(true);
+          });
           observer.disconnect();
         }
       },
