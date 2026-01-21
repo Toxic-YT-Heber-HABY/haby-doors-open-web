@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Twitter, Phone } from 'lucide-react';
 import FooterQuickLinks from "./FooterQuickLinks";
+import PDFReportDownloader from "./PDFReportDownloader";
 
 const Footer = () => {
   return (
@@ -74,6 +75,13 @@ const Footer = () => {
                 <Link to="/precios" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                   Planes y Precios
                 </Link>
+              </li>
+              <li className="pt-3">
+                <PDFReportDownloader 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full border-haby-accent text-haby-accent hover:bg-haby-accent hover:text-white"
+                />
               </li>
             </ul>
           </div>
