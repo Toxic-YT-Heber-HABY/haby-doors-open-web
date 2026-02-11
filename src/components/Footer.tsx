@@ -1,119 +1,100 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Twitter, Phone } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Twitter, Phone, Mail, ArrowUpRight } from 'lucide-react';
 import FooterQuickLinks from "./FooterQuickLinks";
-import PDFReportDownloader from "./PDFReportDownloader";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-haby-dark via-haby-secondary to-haby-dark text-white relative overflow-hidden">
-      {/* Modern decorative elements - Solo en desktop */}
-      <div className="hidden md:block absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-96 h-96 bg-haby-accent rounded-full mix-blend-screen filter blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-haby-primary rounded-full mix-blend-screen filter blur-3xl"></div>
-      </div>
+    <footer className="bg-[hsl(250,100%,4%)] text-white relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full bg-[hsl(250,70%,50%/0.05)] blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
-          {/* Premium Logo Section */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center group mb-4 sm:mb-6">
-              <img 
-                src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
-                alt="HABY Logo" 
-                className="h-10 sm:h-12 mr-2 sm:mr-3 brightness-0 invert group-hover:scale-110 transition-transform duration-300" 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+          {/* Logo */}
+          <div>
+            <Link to="/" className="flex items-center gap-2 group mb-5">
+              <img
+                src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png"
+                alt="HABY Logo"
+                className="h-8 brightness-0 invert"
                 loading="lazy"
               />
-              <span className="text-2xl sm:text-3xl font-display font-black bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">HABY</span>
+              <span className="text-xl font-display font-bold">HABY</span>
             </Link>
-            <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-light mb-6">
-              Desarrollamos soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo con tecnología de vanguardia.
+            <p className="text-sm text-white/40 leading-relaxed mb-6">
+              Soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo.
             </p>
-            <div className="flex space-x-3 sm:space-x-4">
-              <a href="https://www.facebook.com/habyopenthedoors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
-                <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
-              <a href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
-                <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
-              <a href="https://www.youtube.com/@HABYOpenDoors" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
-                <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
-              <a href="https://x.com/Haby_Open_Doors" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center text-white hover:bg-haby-accent hover:scale-110 transition-all duration-300 border border-white/30">
-                <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
+            <div className="flex gap-2">
+              {[
+                { href: "https://www.facebook.com/habyopenthedoors", icon: <Facebook className="w-4 h-4" />, label: "Facebook" },
+                { href: "https://www.instagram.com/habyopenthedoors", icon: <Instagram className="w-4 h-4" />, label: "Instagram" },
+                { href: "https://www.youtube.com/@HABYOpenDoors", icon: <Youtube className="w-4 h-4" />, label: "YouTube" },
+                { href: "https://x.com/Haby_Open_Doors", icon: <Twitter className="w-4 h-4" />, label: "X" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Modern Quick Links */}
           <FooterQuickLinks />
 
-          {/* Servicios Section */}
+          {/* Services */}
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4 bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">Servicios</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/desarrollo-web" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
-                  Desarrollo Web
-                </Link>
-              </li>
-              <li>
-                <Link to="/soluciones-personalizadas" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
-                  Soluciones Personalizadas
-                </Link>
-              </li>
-              <li>
-                <Link to="/cloritizacion" className="text-haby-accent hover:text-haby-accent/80 font-semibold transition-colors text-sm sm:text-base">
-                  Cloritización de Agua
-                </Link>
-              </li>
-              <li>
-                <Link to="/portafolio" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
-                  Portafolio
-                </Link>
-              </li>
-              <li>
-                <Link to="/precios" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
-                  Planes y Precios
-                </Link>
-              </li>
-              <li className="pt-3">
-                <PDFReportDownloader 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full border-haby-accent text-haby-accent hover:bg-haby-accent hover:text-white"
-                />
-              </li>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-5">Servicios</h3>
+            <ul className="space-y-3">
+              {[
+                { to: "/desarrollo-web", label: "Desarrollo Web" },
+                { to: "/soluciones-personalizadas", label: "Soluciones Personalizadas" },
+                { to: "/portafolio", label: "Portafolio" },
+                { to: "/precios", label: "Planes y Precios" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-sm text-white/40 hover:text-white transition-colors duration-200">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Premium Contact Section */}
+          {/* Contact */}
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-haby-accent bg-clip-text text-transparent">Contacto</h3>
-            <div className="space-y-4 sm:space-y-6">
-              <div className="flex items-center gap-2 sm:gap-3 text-white group">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center group-hover:bg-haby-accent transition-all duration-300 border border-white/30">
-                  <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                </div>
-                <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="text-base sm:text-lg font-medium hover:text-haby-accent transition-colors">
-                  56 5368 1237
-                </a>
-              </div>
-              <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center px-5 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-green-600 rounded-xl sm:rounded-2xl text-white font-bold text-sm sm:text-base shadow-2xl hover:shadow-green-500/50 hover:scale-105 transition-all duration-300 w-full justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 relative z-10">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
-                  <path d="M14.05 6A5 5 0 0 1 18 10"></path>
-                </svg>
-                <span className="relative z-10">WhatsApp</span>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-5">Contacto</h3>
+            <div className="space-y-4">
+              <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors">
+                <Phone className="w-4 h-4" />
+                56 5368 1237
+              </a>
+              <a href="mailto:habyopenthedoors@gmail.com" className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors">
+                <Mail className="w-4 h-4" />
+                habyopenthedoors@gmail.com
               </a>
             </div>
+            <a
+              href="https://wa.me/5653681237"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg text-sm font-medium hover:bg-emerald-500/20 transition-all duration-300"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              WhatsApp
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
           </div>
         </div>
 
-        <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/20">
-          <p className="text-center text-gray-300 font-light text-sm sm:text-base px-4">
-            © {new Date().getFullYear()} <span className="font-semibold">HABY</span>. Todos los derechos reservados. Creado con <span className="text-haby-accent">❤</span> por Heber Zadkiel García Pérez.
+        <div className="mt-16 pt-8 border-t border-white/5">
+          <p className="text-center text-xs text-white/25">
+            © {new Date().getFullYear()} HABY. Todos los derechos reservados. Creado por Heber Zadkiel García Pérez.
           </p>
         </div>
       </div>

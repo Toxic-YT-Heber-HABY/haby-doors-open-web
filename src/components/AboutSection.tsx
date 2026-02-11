@@ -1,87 +1,83 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { motion } from 'framer-motion';
 import ImageOptimized from './ImageOptimized';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const AboutSection = () => {
-  const isMobile = useIsMobile();
-  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
-
-  // Memoize animation styles to prevent recalculation
-  const getAnimationStyle = React.useCallback((delay: number = 0, direction: 'up' | 'left' | 'right' = 'up') => {
-    const transforms = {
-      up: isVisible ? 'translateY(0)' : 'translateY(30px)',
-      left: isVisible ? 'translateX(0)' : 'translateX(-30px)',
-      right: isVisible ? 'translateX(0)' : 'translateX(30px)',
-    };
-    return {
-      opacity: isVisible ? 1 : 0,
-      transform: transforms[direction],
-      transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
-      willChange: isVisible ? 'auto' : 'opacity, transform',
-    };
-  }, [isVisible]);
-
   return (
-    <section ref={sectionRef as React.RefObject<HTMLElement>} className="section py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden">
-      {/* Orbes decorativos solo en desktop */}
-      <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl" />
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-          <div className="order-2 lg:order-1" style={getAnimationStyle(0.1, 'left')}>
-            <div className="relative mx-auto max-w-md">
-              <div className="aspect-square w-full bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                <ImageOptimized 
-                  src="/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png" 
-                  alt="Heber Zadkiel García Pérez - Fundador de HABY" 
+    <section className="py-24 sm:py-32 relative overflow-hidden bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Image */}
+          <motion.div
+            className="order-2 lg:order-1"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="relative max-w-md mx-auto lg:mx-0">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100">
+                <ImageOptimized
+                  src="/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png"
+                  alt="Heber Zadkiel García Pérez - Fundador de HABY"
                   className="w-full h-full object-cover"
                   aspectRatio="square"
-                  lazy={!isMobile}
                 />
               </div>
-              <div 
-                className="absolute -bottom-5 -right-5 bg-white p-4 shadow-lg rounded-lg max-w-[250px]"
-                style={getAnimationStyle(0.3)}
+              {/* Floating card */}
+              <motion.div
+                className="absolute -bottom-6 -right-6 bg-white rounded-xl p-5 shadow-[0_8px_30px_-10px_hsl(250,50%,40%/0.2)] border border-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
               >
-                <p className="text-haby-primary font-medium">Fundador de HABY</p>
-                <p className="text-gray-600 text-sm mt-1">Visionario detrás de "HABY OPEN THE DOORS"</p>
-              </div>
+                <p className="text-sm font-semibold text-gray-900">Fundador de HABY</p>
+                <p className="text-xs text-gray-500 mt-1">Heber Zadkiel García Pérez</p>
+              </motion.div>
             </div>
-          </div>
-          
-          <div className="order-1 lg:order-2 space-y-6" style={getAnimationStyle(0.2, 'right')}>
-            <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold">
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            className="order-1 lg:order-2 space-y-6"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-[hsl(250,70%,60%)] bg-[hsl(250,70%,60%/0.08)] border border-[hsl(250,70%,60%/0.15)]">
               Sobre Nosotros
             </span>
-            
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600">
-              El concepto <span className="text-gradient-primary">HABY OPEN THE DOORS</span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              El concepto{' '}
+              <span className="bg-gradient-to-r from-[hsl(250,70%,55%)] to-[hsl(280,80%,60%)] bg-clip-text text-transparent">
+                HABY
+              </span>
             </h2>
-            
-            <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-medium">
-              En HABY nos especializamos en el desarrollo de soluciones web innovadoras que resuelven problemas cotidianos. 
-              Nuestra misión es ayudar a nuestros clientes a optimizar su tiempo, eliminando tareas repetitivas 
-              y permitiéndoles enfocarse en lo que realmente importa.
-            </p>
-            
-            <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-medium">
-              Nuestro fundador, Heber Zadkiel García Pérez, creó HABY con una visión clara: abrir puertas 
-              a nuevas posibilidades mediante el desarrollo web personalizado y centrado en soluciones prácticas.
-            </p>
-            
-            <div>
-              <Link to="/sobre-nosotros" className="inline-flex items-center text-haby-primary hover:text-haby-secondary font-medium group transition-all duration-300">
-                Conoce más sobre HABY 
-                <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+
+            <div className="space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                En HABY nos especializamos en el desarrollo de soluciones web innovadoras que resuelven problemas cotidianos. 
+                Nuestra misión es ayudar a nuestros clientes a optimizar su tiempo, eliminando tareas repetitivas.
+              </p>
+              <p>
+                Nuestro fundador, Heber Zadkiel García Pérez, creó HABY con una visión clara: abrir puertas 
+                a nuevas posibilidades mediante el desarrollo web personalizado.
+              </p>
             </div>
-          </div>
+
+            <Link
+              to="/sobre-nosotros"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(250,70%,55%)] hover:gap-3 transition-all duration-300 group"
+            >
+              Conoce más sobre HABY
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
