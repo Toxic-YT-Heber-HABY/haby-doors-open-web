@@ -2,16 +2,13 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
+import SkillsSection from "@/components/SkillsSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import PricingSection from "@/components/PricingSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import AnimatedGradient from "@/components/AnimatedGradient";
 import SEOHead from "@/components/SEOHead";
 import usePageTitle from "@/hooks/usePageTitle";
-import FAQSection from "@/components/FAQSection";
 
 const Index = () => {
   usePageTitle();
@@ -31,18 +28,18 @@ const Index = () => {
       "availableLanguage": "Spanish"
     },
     "sameAs": [
-      "https://facebook.com/haby",
-      "https://instagram.com/haby",
-      "https://twitter.com/haby"
+      "https://facebook.com/habyopenthedoors",
+      "https://instagram.com/habyopenthedoors",
+      "https://x.com/Haby_Open_Doors"
     ]
   };
   
   return (
     <>
       <SEOHead 
-        title="HABY | Soluciones Web Personalizadas - Desarrollo y Diseño Profesional"
-        description="HABY Open The Doors: Desarrollamos soluciones web personalizadas, aplicaciones modernas y herramientas digitales que resuelven problemas cotidianos y optimizan tu productividad."
-        keywords="desarrollo web profesional, diseño web moderno, aplicaciones web personalizadas, herramientas productividad, soluciones digitales"
+        title="HABY | Portafolio & Soluciones Web - Desarrollo Profesional"
+        description="HABY Open The Doors: Portafolio profesional de desarrollo web, aplicaciones modernas y soluciones digitales personalizadas que impulsan tu negocio."
+        keywords="portafolio desarrollo web, diseño web moderno, aplicaciones web personalizadas, soluciones digitales, HABY"
         image="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png"
         url="https://haby-open-doors.com/"
         type="website"
@@ -52,16 +49,10 @@ const Index = () => {
         <Navbar />
         <main className="flex-grow" role="main">
           <Hero />
-          <AnimatedGradient>
-            <AboutSection />
-          </AnimatedGradient>
-          <ServicesSection />
+          <AboutSection />
+          <SkillsSection />
           <PortfolioSection />
-          <AnimatedGradient colors={["#E5DEFF", "#D946EF", "#7E69AB", "#6E59A5"]}>
-            <TestimonialsSection />
-          </AnimatedGradient>
-          <PricingSection />
-          <FAQSection />
+          <TestimonialsSection />
           <ContactSection />
         </main>
         <Footer />
