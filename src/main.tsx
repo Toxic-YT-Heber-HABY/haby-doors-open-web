@@ -17,14 +17,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { SecureErrorBoundary } from '@/components/SecureErrorBoundary';
 import { SecurityAudit } from '@/components/SecurityAudit';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
-import { designTokens } from '@/lib/design-tokens';
+
 import App from './App.tsx';
 import './index.css';
 
 // Loading component for Suspense fallback
 const Loading = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="animate-pulse-slow text-primary flex flex-col items-center">
       <div className="w-16 h-16 mb-4">
         <img 
           src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 

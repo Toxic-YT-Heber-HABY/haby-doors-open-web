@@ -51,13 +51,13 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-[0_1px_3px_hsl(0,0%,0%/0.05)]'
+            ? 'bg-background/90 backdrop-blur-xl border-b border-border shadow-sm'
             : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div className="container py-3 sm:py-4">
           <nav className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 group" aria-label="Inicio">
               <img
@@ -65,14 +65,15 @@ const Navbar = () => {
                 alt="HABY Logo"
                 className="h-7 sm:h-8 transition-transform duration-300 group-hover:scale-105"
               />
-              <span className={`text-lg sm:text-xl font-display font-bold tracking-tight transition-colors duration-500 ${
-                scrolled ? 'text-gray-900' : 'text-white'
+              <span className={`text-lg sm:text-xl font-display font-bold tracking-tight transition-colors duration-300 ${
+                scrolled ? 'text-foreground' : 'text-primary-foreground'
               }`}>
                 HABY
               </span>
             </Link>
 
             <DesktopNavMenu
+              scrolled={scrolled}
               servicesOpen={servicesOpen}
               toggleServices={toggleServices}
               isAuthenticated={isAuthenticated}
@@ -89,7 +90,7 @@ const Navbar = () => {
               />
               <button
                 className={`p-2 rounded-lg transition-colors ${
-                  scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+                  scrolled ? 'text-foreground hover:bg-secondary' : 'text-primary-foreground hover:bg-primary-foreground/10'
                 }`}
                 onClick={toggleMenu}
                 aria-label="Abrir menú"
@@ -112,26 +113,6 @@ const Navbar = () => {
         onClose={() => setIsAdminModalOpen(false)}
         onLogin={handleAdminLogin}
       />
-
-      <style>{`
-        .nav-link {
-          @apply relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200;
-          color: ${scrolled ? 'hsl(0 0% 40%)' : 'rgba(255,255,255,0.7)'};
-        }
-        .nav-link:hover {
-          color: ${scrolled ? 'hsl(250 70% 55%)' : 'white'};
-          background: ${scrolled ? 'hsl(250 70% 60% / 0.06)' : 'rgba(255,255,255,0.1)'};
-        }
-        .dropdown-link {
-          @apply block w-full px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200;
-        }
-        .mobile-link {
-          @apply block w-full px-4 py-2.5 rounded-lg text-gray-700 font-medium text-sm hover:bg-gray-50 transition-all duration-200 text-left;
-        }
-        .mobile-sublink {
-          @apply block w-full px-4 py-2 text-gray-500 font-medium text-sm hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-200 text-left;
-        }
-      `}</style>
     </>
   );
 };

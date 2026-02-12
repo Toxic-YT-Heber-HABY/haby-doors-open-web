@@ -4,11 +4,11 @@ import FooterQuickLinks from "./FooterQuickLinks";
 
 const Footer = () => {
   return (
-    <footer className="bg-[hsl(250,100%,4%)] text-white relative overflow-hidden">
+    <footer className="bg-brand-dark text-primary-foreground relative overflow-hidden">
       {/* Ambient glow */}
-      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full bg-[hsl(250,70%,50%/0.05)] blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10">
+      <div className="container py-16 sm:py-20 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Logo */}
           <div>
@@ -21,7 +21,7 @@ const Footer = () => {
               />
               <span className="text-xl font-display font-bold">HABY</span>
             </Link>
-            <p className="text-sm text-white/40 leading-relaxed mb-6">
+            <p className="text-sm text-primary-foreground/40 leading-relaxed mb-6">
               Soluciones web personalizadas que resuelven problemas cotidianos y optimizan tu tiempo.
             </p>
             <div className="flex gap-2">
@@ -37,7 +37,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-300"
+                  className="w-9 h-9 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/40 hover:text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-300"
                 >
                   {s.icon}
                 </a>
@@ -49,7 +49,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-5">Servicios</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/30 mb-5">Servicios</h3>
             <ul className="space-y-3">
               {[
                 { to: "/desarrollo-web", label: "Desarrollo Web" },
@@ -58,7 +58,7 @@ const Footer = () => {
                 { to: "/precios", label: "Planes y Precios" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-white/40 hover:text-white transition-colors duration-200">
+                  <Link to={l.to} className="text-sm text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-200">
                     {l.label}
                   </Link>
                 </li>
@@ -68,13 +68,13 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-5">Contacto</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/30 mb-5">Contacto</h3>
             <div className="space-y-4">
-              <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors">
+              <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-primary-foreground/40 hover:text-primary-foreground transition-colors">
                 <Phone className="w-4 h-4" />
                 56 5368 1237
               </a>
-              <a href="mailto:habyopenthedoors@gmail.com" className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors">
+              <a href="mailto:habyopenthedoors@gmail.com" className="flex items-center gap-3 text-sm text-primary-foreground/40 hover:text-primary-foreground transition-colors">
                 <Mail className="w-4 h-4" />
                 habyopenthedoors@gmail.com
               </a>
@@ -92,8 +92,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5">
-          <p className="text-center text-xs text-white/25">
+        <div className="mt-16 pt-8 border-t border-primary-foreground/5">
+          <p className="text-center text-xs text-primary-foreground/25">
             © {new Date().getFullYear()} HABY. Todos los derechos reservados. Creado por Heber Zadkiel García Pérez.
           </p>
         </div>
