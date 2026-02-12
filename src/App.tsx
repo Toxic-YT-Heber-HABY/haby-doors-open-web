@@ -54,7 +54,7 @@ const Cloritizacion = lazy(() => import("./pages/Cloritizacion"));
 // Componente para el estado de carga
 const LoadingPage = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse-slow text-haby-primary flex flex-col items-center">
+    <div className="animate-pulse-slow text-primary flex flex-col items-center">
       <div className="w-16 h-16 mb-4">
         <img 
           src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 

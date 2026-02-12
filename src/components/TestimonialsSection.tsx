@@ -48,26 +48,26 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden bg-[hsl(240,20%,97%)]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 sm:py-32 bg-secondary">
+      <div className="container">
         {/* Header */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-[hsl(250,70%,60%)] bg-[hsl(250,70%,60%/0.08)] border border-[hsl(250,70%,60%/0.15)] mb-4">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Testimonios
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
             Lo que dicen nuestros{' '}
-            <span className="bg-gradient-to-r from-[hsl(250,70%,55%)] to-[hsl(280,80%,60%)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               clientes
             </span>
           </h2>
-          <p className="text-gray-500 text-lg">
+          <p className="text-muted-foreground text-lg">
             La satisfacción de nuestros clientes es nuestra mejor carta de presentación.
           </p>
         </motion.div>
@@ -78,18 +78,18 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-4">
               {testimonials.map((t, i) => (
                 <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <div className="h-full bg-white rounded-2xl p-6 border border-gray-100 hover:border-[hsl(250,70%,60%/0.2)] hover:shadow-[0_8px_30px_-10px_hsl(250,50%,40%/0.1)] transition-all duration-500">
-                    <Quote className="w-8 h-8 text-[hsl(250,70%,60%/0.15)] mb-4" />
-                    <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                  <div className="h-full bg-card rounded-2xl p-6 border border-border hover:border-primary/20 hover:shadow-md transition-all duration-400">
+                    <Quote className="w-8 h-8 text-primary/15 mb-4" />
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
                       "{t.content}"
                     </p>
-                    <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
+                    <div className="flex items-center gap-3 pt-4 border-t border-border">
                       <img
                         src={t.image}
                         alt={t.author}
@@ -97,8 +97,8 @@ const TestimonialsSection = () => {
                         loading="lazy"
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 truncate">{t.author}</p>
-                        <p className="text-xs text-gray-400 truncate">{t.position}, {t.company}</p>
+                        <p className="text-sm font-semibold text-foreground truncate">{t.author}</p>
+                        <p className="text-xs text-muted-foreground truncate">{t.position}, {t.company}</p>
                       </div>
                       <div className="flex gap-0.5">
                         {[...Array(5)].map((_, j) => (
@@ -110,8 +110,8 @@ const TestimonialsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12 bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" />
-            <CarouselNext className="hidden md:flex -right-12 bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" />
+            <CarouselPrevious className="hidden md:flex -left-12" />
+            <CarouselNext className="hidden md:flex -right-12" />
           </Carousel>
         </motion.div>
 
@@ -123,12 +123,12 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <div className="inline-block bg-gradient-to-r from-[hsl(250,70%,55%)] to-[hsl(280,80%,55%)] rounded-2xl p-8 max-w-xl">
-            <h3 className="text-xl font-bold text-white mb-2">¿Listo para unirte?</h3>
-            <p className="text-white/70 text-sm mb-6">Descubre cómo podemos ayudarte a resolver tus desafíos tecnológicos.</p>
+          <div className="inline-block bg-gradient-to-r from-primary to-accent rounded-2xl p-8 max-w-xl">
+            <h3 className="text-xl font-bold text-primary-foreground mb-2">¿Listo para unirte?</h3>
+            <p className="text-primary-foreground/70 text-sm mb-6">Descubre cómo podemos ayudarte a resolver tus desafíos tecnológicos.</p>
             <a
               href="/contacto"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-primary-foreground text-foreground px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300"
             >
               Contáctanos ahora
               <Star className="w-4 h-4" />
