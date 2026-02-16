@@ -1,10 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Clock, Send, Info } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
+import { Mail, Phone, MapPin, Clock, Send, Info, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -14,9 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import LNAWizard from "@/components/contacto-lna/LNAWizard";
-import { Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 
-// Resumen visual y modal de términos para plan gratuito
 const lnaTermsSummary = [
   "El proyecto debe estar ligado al bien común y ser accesible para cualquier persona.",
   "El acceso a la solución debe ser irrestricto y alineado con su propósito original.",
@@ -29,11 +29,8 @@ const lnaTermsSummary = [
 const LNATermsDialog = () => (
   <Dialog>
     <DialogTrigger asChild>
-      <button
-        type="button"
-        className="text-haby-primary hover:text-haby-secondary text-sm underline inline-flex items-center"
-      >
-        <Info className="h-4 w-4 mr-1" />
+      <button type="button" className="text-primary hover:text-primary/80 text-sm underline inline-flex items-center gap-1">
+        <Info className="h-3.5 w-3.5" />
         Ver términos completos
       </button>
     </DialogTrigger>
@@ -41,51 +38,23 @@ const LNATermsDialog = () => (
       <DialogHeader>
         <DialogTitle>Términos y Condiciones para LNA Gratuito</DialogTitle>
         <DialogDescription>
-          Para asegurar que este recurso se utilice de manera adecuada y cumpla con su propósito original
+          Para asegurar que este recurso se utilice de manera adecuada
         </DialogDescription>
       </DialogHeader>
-      <div className="space-y-6 py-2">
-        <p className="text-gray-700">
-          HABY está comprometido con el bien común y ofrece una opción LNA gratuita bajo las siguientes condiciones:
-        </p>
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-bold text-gray-900">1. Enfoque en el bien común</h4>
-            <p className="text-sm text-gray-600">
-              El proyecto, página web o solicitud debe estar intrínsecamente ligado al bien común. El resultado final debe ser accesible y utilizable por cualquier persona. La finalidad principal debe ser el beneficio colectivo, no el provecho personal o individual. Las solicitudes para beneficio particular serán automáticamente descartadas.
-            </p>
+      <div className="space-y-4 py-2 text-sm">
+        {[
+          { t: "1. Enfoque en el bien común", d: "El proyecto debe estar intrínsecamente ligado al bien común. Las solicitudes para beneficio particular serán descartadas." },
+          { t: "2. Acceso irrestricto", d: "Cualquier persona debe poder utilizar la solución, sin limitaciones." },
+          { t: "3. No causar daño", d: "La solución no debe causar ningún daño o perjuicio a los usuarios." },
+          { t: "4. Propiedad intelectual", d: "Todos los derechos de autor serán propiedad de HABY." },
+          { t: "5. Rol del solicitante", d: "La persona será reconocida como contribuyente al proyecto." },
+          { t: "6. Complejidad y viabilidad", d: "Las peticiones deben centrarse en proyectos sencillos pero funcionales." },
+        ].map((item, i) => (
+          <div key={i}>
+            <h4 className="font-semibold text-foreground">{item.t}</h4>
+            <p className="text-muted-foreground">{item.d}</p>
           </div>
-          <div>
-            <h4 className="font-bold text-gray-900">2. Acceso irrestricto</h4>
-            <p className="text-sm text-gray-600">
-              Cualquier persona debe poder utilizar la solución, sin limitaciones geográficas, temporales o de cualquier otra índole. El uso debe estar alineado con el propósito original, fomentando su adopción generalizada y maximizando su impacto positivo en la comunidad.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-bold text-gray-900">3. No causar daño</h4>
-            <p className="text-sm text-gray-600">
-              La solución proporcionada no debe causar ningún daño o perjuicio a los usuarios. Debe garantizar la protección de información personal, evitar la recopilación de datos sensibles y prevenir cualquier forma de incomodidad o perjuicio.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-bold text-gray-900">4. Propiedad intelectual</h4>
-            <p className="text-sm text-gray-600">
-              Todos los derechos de autor de la solución desarrollada serán propiedad de HABY, quien recibirá todo el reconocimiento por la creación y mantenimiento de la solución. El solicitante será reconocido como contribuyente al proyecto.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-bold text-gray-900">5. Rol del solicitante</h4>
-            <p className="text-sm text-gray-600">
-              La persona que realiza la petición será únicamente reconocida como contribuyente, ya que no está contratando un servicio personalizado para su beneficio individual, sino buscando una solución para el beneficio de la comunidad.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-bold text-gray-900">6. Complejidad y viabilidad</h4>
-            <p className="text-sm text-gray-600">
-              Las peticiones deben centrarse en proyectos o soluciones sencillas pero funcionales. A menos que la petición presente una solución excepcionalmente buena para un problema de bien común, es poco probable que proyectos muy complejos puedan ser atendidos bajo la modalidad gratuita.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </DialogContent>
   </Dialog>
@@ -93,118 +62,59 @@ const LNATermsDialog = () => (
 
 const useQueryParam = (param: string) => {
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  return params.get(param);
+  return new URLSearchParams(search).get(param);
 };
 
-// NUEVO: función para estados iniciales, ahora incluye más campos
 const getInitialFormData = () => ({
-  nombre: "",
-  email: "",
-  telefono: "",
-  servicio: "",
-  mensaje: "",
-  institucion: "",
-  area: "",
-  ubicacion: "",
-  proyecto_nombre: "",
-  proyecto_objetivo: "",
-  proyecto_estado: "",
-  proyecto_fechainicio: "",
-  proyecto_descripcion: "",
-  tipo_impacto: "",
-  grupos_beneficiados: "",
-  estimacion_beneficiarios: "",
-  ubicacion_impacto: "",
-  aliados_colaboradores: "",
-  recursos_adicionales: "",
-  plan_seguimiento: "",
-  plan_sustentabilidad: "",
-  web_o_redes: "",
-  motivacion: ""
+  nombre: "", email: "", telefono: "", servicio: "", mensaje: "",
+  institucion: "", area: "", ubicacion: "", proyecto_nombre: "",
+  proyecto_objetivo: "", proyecto_estado: "", proyecto_fechainicio: "",
+  proyecto_descripcion: "", tipo_impacto: "", grupos_beneficiados: "",
+  estimacion_beneficiarios: "", ubicacion_impacto: "", aliados_colaboradores: "",
+  recursos_adicionales: "", plan_seguimiento: "", plan_sustentabilidad: "",
+  web_o_redes: "", motivacion: ""
 });
 
-const lnaHeroBg =
-  "bg-gradient-to-r from-haby-primary to-haby-accent shadow-xl transition-all";
-
 const Contacto = () => {
-  // Datos base del formulario
   const [formData, setFormData] = useState(getInitialFormData());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lnaTermsAccepted, setLnaTermsAccepted] = useState(false);
 
-  // Verifica por query param o selección de servicio
   const planParam = useQueryParam('plan');
   const isLNAGratuito = planParam === 'lna-gratuito' || formData.servicio === 'LNA Gratuito';
 
-  // Si se cambia de modalidad, se limpian los campos adicionales y términos
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    if (name === 'servicio' && value !== 'LNA Gratuito') {
-      setLnaTermsAccepted(false);
-    }
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'servicio' && value !== 'LNA Gratuito') setLnaTermsAccepted(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validación básica
     if (!formData.nombre || !formData.email || !formData.servicio || !formData.mensaje) {
       toast.error("Por favor completa todos los campos requeridos");
       return;
     }
-
-    // Validación de campos extra si LNA Gratuito
     if (isLNAGratuito) {
-      if (
-        !formData.institucion ||
-        !formData.area ||
-        !formData.ubicacion ||
-        !formData.proyecto_nombre ||
-        !formData.proyecto_objetivo ||
-        !formData.proyecto_estado ||
-        !formData.proyecto_fechainicio ||
-        !formData.proyecto_descripcion ||
-        !formData.tipo_impacto ||
-        !formData.grupos_beneficiados ||
-        !formData.estimacion_beneficiarios ||
-        !formData.ubicacion_impacto ||
-        !formData.motivacion
-      ) {
+      if (!formData.institucion || !formData.area || !formData.ubicacion || !formData.proyecto_nombre ||
+        !formData.proyecto_objetivo || !formData.proyecto_estado || !formData.proyecto_fechainicio ||
+        !formData.proyecto_descripcion || !formData.tipo_impacto || !formData.grupos_beneficiados ||
+        !formData.estimacion_beneficiarios || !formData.ubicacion_impacto || !formData.motivacion) {
         toast.error("Completa todos los campos obligatorios del plan gratuito.");
         return;
       }
       if (!lnaTermsAccepted) {
-        toast.error("Debes aceptar los términos y condiciones del plan gratuito para continuar.");
+        toast.error("Debes aceptar los términos y condiciones.");
         return;
       }
     }
-
     setIsSubmitting(true);
-
     try {
-      // Datos del formulario validados
-
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
-      });
-
-      if (error) {
-        console.error("Error al enviar correo:", error);
-        throw error;
-      }
-
-      // Correo enviado exitosamente
+      const { error } = await supabase.functions.invoke('send-contact-email', { body: formData });
+      if (error) throw error;
       toast.success("¡Mensaje enviado! Te responderemos pronto.");
-
-      // USAR LA FUNCIÓN QUE CONTIENE TODOS LOS CAMPOS:
       setFormData(getInitialFormData());
       setLnaTermsAccepted(false);
-
     } catch (error) {
       console.error("Error al enviar mensaje:", error);
       toast.error("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
@@ -213,114 +123,53 @@ const Contacto = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#e5d9fa] via-[#f9f7fb] to-white">
-      <Navbar />
-      <main className="flex-grow w-full">
-        {/* HERO HEADER para LNA */}
-        <section className={`${lnaHeroBg} py-10 md:py-20`}>
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row md:items-center gap-8">
-              <div className="flex-1 min-w-[240px]">
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-16 h-16 bg-white/80 rounded-2xl flex items-center justify-center shadow-xl">
-                    <span className="text-4xl">🎁</span>
-                  </div>
-                  <span className="text-3xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow animate-fade-in">
-                    Solicita tu LNA Gratuito
-                  </span>
-                </div>
-                <p className="text-white/90 text-lg mb-4">
-                  Beneficia a tu comunidad. Presenta tu iniciativa de bien común y recibe una solución digital sin costo si cumples los requisitos.
-                </p>
-                <ul className="mt-3 mb-2 pl-5 text-white/90 text-base space-y-1 list-disc font-medium">
-                  <li>✔ Para proyectos sociales, educativos o culturales.</li>
-                  <li>✔ La solución será gratuita y abierta para todos.</li>
-                  <li>✔ Proceso simple, transparente y seguro.</li>
-                </ul>
-                <div className="mt-3">
-                  <LNATermsDialog />
-                </div>
-              </div>
-              <div className="hidden md:flex flex-1 items-center justify-center">
-                <img
-                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=facearea&w=480&q=80"
-                  alt="Hero bienvenida LNA"
-                  className="rounded-3xl shadow-2xl w-full max-w-md h-auto object-cover object-center border-4 border-white"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+  const inputClass = "w-full px-4 py-2.5 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors";
 
-        {/* BLOQUE PRINCIPAL: Wizard y contacto */}
-        <section className="py-12 md:py-20">
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Navbar />
+      <main className="flex-grow">
+        <PageHeader
+          badge="Contacto"
+          title={isLNAGratuito ? "Solicita tu LNA Gratuito" : "Hablemos de tu proyecto"}
+          description={isLNAGratuito
+            ? "Presenta tu iniciativa de bien común y recibe una solución digital sin costo."
+            : "Estamos listos para escuchar tu idea y convertirla en realidad."
+          }
+        />
+
+        <section className="py-20 md:py-28">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative">
-              <div className="relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+              {/* Form */}
+              <motion.div
+                className="lg:col-span-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
                 {isLNAGratuito ? (
-                  <div className="rounded-[2.5rem] shadow-[0_12px_40px_0_rgba(127,105,180,0.10)] border-y-4 border-haby-accent bg-white/95 py-2">
-                    {/* Wizard visualmente destacado */}
+                  <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
                     <LNAWizard />
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
-
+                  <form onSubmit={handleSubmit} className="rounded-2xl border border-border bg-card p-6 md:p-8">
+                    <h3 className="text-xl font-display font-bold text-foreground mb-6">Envíanos un mensaje</h3>
                     <div className="space-y-4">
                       <div>
-                        <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
-                        <input
-                          type="text"
-                          id="nombre"
-                          name="nombre"
-                          value={formData.nombre}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                          placeholder="Tu nombre"
-                          required
-                        />
+                        <label htmlFor="nombre" className="block text-sm font-medium text-foreground mb-1.5">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleInputChange} className={inputClass} placeholder="Tu nombre" required />
                       </div>
-
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                          placeholder="tu@email.com"
-                          required
-                        />
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">Correo electrónico</label>
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} className={inputClass} placeholder="tu@email.com" required />
                       </div>
-
                       <div>
-                        <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">Teléfono (opcional)</label>
-                        <input
-                          type="tel"
-                          id="telefono"
-                          name="telefono"
-                          value={formData.telefono}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                          placeholder="Tu número de teléfono"
-                        />
+                        <label htmlFor="telefono" className="block text-sm font-medium text-foreground mb-1.5">Teléfono (opcional)</label>
+                        <input type="tel" id="telefono" name="telefono" value={formData.telefono} onChange={handleInputChange} className={inputClass} placeholder="Tu número" />
                       </div>
-
                       <div>
-                        <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-1">Servicio de interés</label>
-                        <select
-                          id="servicio"
-                          name="servicio"
-                          value={formData.servicio}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                          required
-                        >
+                        <label htmlFor="servicio" className="block text-sm font-medium text-foreground mb-1.5">Servicio de interés</label>
+                        <select id="servicio" name="servicio" value={formData.servicio} onChange={handleInputChange} className={inputClass} required>
                           <option value="">Selecciona un servicio</option>
                           <option value="Plan Básico">Plan Básico</option>
                           <option value="Plan Profesional">Plan Profesional</option>
@@ -329,136 +178,80 @@ const Contacto = () => {
                           <option value="Otro">Otro / Consulta general</option>
                         </select>
                       </div>
-
                       <div>
-                        <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
-                        <textarea
-                          id="mensaje"
-                          name="mensaje"
-                          value={formData.mensaje}
-                          onChange={handleInputChange}
-                          rows={5}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-haby-primary"
-                          placeholder="Describe el problema que quieres resolver o la idea que tienes en mente..."
-                          required
-                        ></textarea>
+                        <label htmlFor="mensaje" className="block text-sm font-medium text-foreground mb-1.5">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleInputChange} rows={5} className={inputClass} placeholder="Describe tu idea o problema..." required />
                       </div>
-
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-haby-primary hover:bg-haby-secondary text-white font-medium py-3 px-4 rounded-md transition-colors disabled:opacity-50 flex items-center justify-center"
+                        className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold py-3 px-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
                       >
                         {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-                        {!isSubmitting && <Mail className="ml-2 h-4 w-4" />}
+                        {!isSubmitting && <Send className="w-4 h-4" />}
                       </button>
                     </div>
                   </form>
                 )}
-              </div>
-              
-              {/* CONTACTO LATERAL derecho */}
-              <div className="relative z-0 h-fit">
-                <div className="bg-white rounded-3xl px-8 py-10 shadow-2xl border border-haby-light/60">
-                  <div className="inline-block bg-haby-accent/10 text-haby-accent px-4 py-2 rounded-full text-sm font-semibold mb-3 shadow">
-                    Información de contacto
+              </motion.div>
+
+              {/* Contact Info */}
+              <motion.div
+                className="lg:col-span-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <div className="rounded-2xl border border-border bg-card p-6 md:p-8 sticky top-24">
+                  <h3 className="text-lg font-display font-bold text-foreground mb-6">Información de contacto</h3>
+                  <div className="space-y-5">
+                    {[
+                      { icon: Phone, label: "Teléfono / WhatsApp", value: "56 5368 1237", href: "https://wa.me/5653681237" },
+                      { icon: Mail, label: "Correo electrónico", value: "habyopenthedoors@gmail.com", href: "mailto:habyopenthedoors@gmail.com" },
+                      { icon: MapPin, label: "Ubicación", value: "Ciudad de México, México" },
+                      { icon: Clock, label: "Horario", value: "Lun-Vie, 9:00 - 18:00" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <item.icon className="h-4 w-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-0.5">{item.label}</p>
+                          {item.href ? (
+                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                              {item.value}
+                            </a>
+                          ) : (
+                            <p className="text-sm font-medium text-foreground">{item.value}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <h2 className="text-2xl font-extrabold text-haby-primary mb-3 drop-shadow-sm">
-                    ¿Prefieres contactarnos directamente?
-                  </h2>
-                  <p className="text-gray-700/90 text-base mb-8">
-                    Puedes comunicarte por cualquiera de estos medios para apoyo rápido y personalizado.
-                  </p>
-                  {/* BLOQUES DE CONTACTO */}
-                  <ul className="space-y-6">
-                    <li className="flex items-start hover:bg-green-50 rounded-xl p-4 transition group">
-                      <div className="h-11 w-11 rounded-full bg-haby-light flex items-center justify-center text-haby-primary mr-4 flex-shrink-0 border border-green-200 shadow group-hover:scale-110 transition will-change-transform">
-                        {/* Teléfono */}
-                        <Phone className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="text-base font-bold text-haby-primary mb-1">Teléfono / WhatsApp</h3>
-                        <a href="https://wa.me/5653681237" target="_blank" rel="noopener noreferrer"
-                          className="text-green-700 hover:underline font-semibold hover:text-green-900 transition-colors">
-                          56 5368 1237
+
+                  <div className="mt-8 pt-6 border-t border-border">
+                    <p className="text-xs text-muted-foreground mb-3">Síguenos</p>
+                    <div className="flex gap-3">
+                      {[
+                        { icon: Facebook, href: "https://facebook.com/habyopenthedoors" },
+                        { icon: Instagram, href: "https://instagram.com/habyopenthedoors" },
+                        { icon: Twitter, href: "https://x.com/Haby_Open_Doors" },
+                        { icon: Youtube, href: "https://youtube.com/@HabyOpenTheDoors" },
+                      ].map((s, i) => (
+                        <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                          <s.icon className="h-4 w-4" />
                         </a>
-                        <p className="text-xs text-gray-600 mt-1">Lunes a viernes, 9:00 a 18:00</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start hover:bg-purple-50 rounded-xl p-4 transition group">
-                      <div className="h-11 w-11 rounded-full bg-haby-light flex items-center justify-center text-purple-700 mr-4 flex-shrink-0 border border-purple-200 shadow group-hover:scale-110 transition will-change-transform">
-                        <Mail className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="text-base font-bold text-purple-800 mb-1">Correo electrónico</h3>
-                        <a href="mailto:habyopenthedoors@gmail.com"
-                          className="text-haby-primary hover:underline font-semibold hover:text-haby-secondary transition-colors">
-                          habyopenthedoors@gmail.com
-                        </a>
-                        <p className="text-xs text-gray-600 mt-1">
-                          Te responderemos en menos de 24 horas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start hover:bg-blue-50 rounded-xl p-4 transition group">
-                      <div className="h-11 w-11 rounded-full bg-haby-light flex items-center justify-center text-blue-700 mr-4 flex-shrink-0 border border-blue-200 shadow group-hover:scale-110 transition will-change-transform">
-                        <Clock className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="text-base font-bold text-blue-800 mb-1">Horario de atención</h3>
-                        <p className="text-gray-700 text-xs">Lunes a Viernes</p>
-                        <p className="text-gray-700 text-xs">9:00 - 18:00</p>
-                      </div>
-                    </li>
-                  </ul>
-                  {/* REDES SOCIALES */}
-                  <div className="pt-10 border-t border-gray-200 mt-8">
-                    <h3 className="text-base font-bold text-haby-primary mb-3">Síguenos en redes sociales</h3>
-                    <div className="flex space-x-3">
-                      {/* Facebook */}
-                      <a
-                        href="https://www.facebook.com/habyopenthedoors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Facebook"
-                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-gray-200"
-                      >
-                        <Facebook className="h-5 w-5 text-blue-600 group-hover:text-haby-primary transition-colors" />
-                      </a>
-                      {/* Instagram - ENLACE ACTUALIZADO */}
-                      <a
-                        href="https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ=="
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Instagram"
-                        className="h-10 w-10 bg-gradient-to-tr from-pink-500 via-yellow-400 to-purple-500 rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all border border-pink-200"
-                      >
-                        <Instagram className="h-5 w-5 text-white drop-shadow" />
-                      </a>
-                      {/* YouTube */}
-                      <a
-                        href="https://www.youtube.com/@HABYOpenDoors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="YouTube"
-                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-red-200"
-                      >
-                        <Youtube className="h-5 w-5 text-red-600 group-hover:text-haby-accent transition-colors" />
-                      </a>
-                      {/* X / Twitter */}
-                      <a
-                        href="https://x.com/Haby_Open_Doors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Twitter"
-                        className="h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md hover:scale-110 transition-all group border border-gray-300"
-                      >
-                        <Twitter className="h-5 w-5 text-black group-hover:text-haby-primary transition-colors" />
-                      </a>
+                      ))}
                     </div>
                   </div>
+
+                  {isLNAGratuito && (
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <LNATermsDialog />
+                    </div>
+                  )}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>

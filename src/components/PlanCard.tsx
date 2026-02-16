@@ -1,4 +1,3 @@
-
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -20,58 +19,50 @@ type PlanCardProps = {
   onHover: (on: boolean) => void;
 };
 
-const PriceDisplay = ({ prices }: { prices: Plan["prices"] }) => (
-  <div className="space-y-1">
-    <div className="text-2xl font-bold text-haby-primary">
-      ${prices.mxn} MXN
-    </div>
-    <div className="text-sm text-gray-600">
-      (${prices.usd} USD / €{prices.eur} EUR)
-    </div>
-  </div>
-);
-
-export function PlanCard({
-  plan,
-  loading,
-  onSelect,
-  hovered,
-  onHover,
-}: PlanCardProps) {
+export function PlanCard({ plan, loading, onSelect, hovered, onHover }: PlanCardProps) {
   return (
     <div
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
       className={`
-        relative bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-elegant p-10 hover:shadow-2xl transition-all duration-500 border
-        ${plan.highlighted ? "border-2 border-haby-accent shadow-haby-accent/30" : "border-gray-200"}
-        ${hovered ? "transform scale-105 -translate-y-2" : ""}
+        relative rounded-2xl p-8 transition-all duration-300 border bg-card
+        ${plan.highlighted
+          ? "border-primary shadow-lg ring-1 ring-primary/20"
+          : "border-border hover:border-primary/20"
+        }
+        ${hovered ? "shadow-lg -translate-y-1" : ""}
       `}
     >
       {plan.highlighted && (
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-haby-accent to-haby-primary text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-semibold">
           Más popular
         </div>
       )}
-      <h3 className="text-2xl font-display font-black text-gray-900 mb-3">{plan.name}</h3>
-      <p className="text-gray-600 mb-6 font-light leading-relaxed">{plan.description}</p>
-      <PriceDisplay prices={plan.prices} />
-      <ul className="space-y-4 mb-10">
+      <h3 className="text-xl font-display font-bold text-foreground mb-2">{plan.name}</h3>
+      <p className="text-sm text-muted-foreground mb-6">{plan.description}</p>
+
+      <div className="mb-6">
+        <div className="text-2xl font-bold text-primary">${plan.prices.mxn} MXN</div>
+        <div className="text-xs text-muted-foreground mt-1">
+          (${plan.prices.usd} USD / €{plan.prices.eur} EUR)
+        </div>
+      </div>
+
+      <ul className="space-y-3 mb-8">
         {plan.features.map((feature, i) => (
-          <li key={i} className="flex items-start group">
-            <div className="mr-3 mt-1 w-6 h-6 rounded-lg bg-haby-light flex items-center justify-center group-hover:bg-haby-accent transition-colors duration-300">
-              <Check className="h-4 w-4 text-haby-primary group-hover:text-white transition-colors" />
+          <li key={i} className="flex items-start gap-2.5">
+            <div className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Check className="h-3 w-3 text-primary" />
             </div>
-            <span className="text-gray-700 font-medium">{feature}</span>
+            <span className="text-sm text-muted-foreground">{feature}</span>
           </li>
         ))}
       </ul>
+
       {plan.id === "premium" ? (
         <Link
           to="/contacto?plan=premium"
-          className="w-full block text-center py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 bg-gradient-to-r from-haby-accent to-haby-primary text-white hover:scale-105 shadow-2xl hover:shadow-haby-accent/50"
-          tabIndex={0}
-          aria-label="Contactar para plan Premium"
+          className="w-full block text-center py-3 rounded-xl font-semibold transition-all bg-primary text-primary-foreground hover:opacity-90"
         >
           {plan.buttonText}
         </Link>
@@ -79,13 +70,11 @@ export function PlanCard({
         <button
           onClick={() => onSelect(plan.id)}
           disabled={loading === plan.id}
-          className={`w-full block text-center py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 disabled:opacity-50 shadow-lg ${
+          className={`w-full py-3 rounded-xl font-semibold transition-all disabled:opacity-50 ${
             plan.highlighted
-              ? "bg-gradient-to-r from-haby-primary to-haby-secondary text-white hover:scale-105 shadow-haby-primary/50"
-              : "bg-white border-2 border-gray-300 text-gray-800 hover:border-haby-primary hover:text-haby-primary hover:scale-105"
+              ? "bg-primary text-primary-foreground hover:opacity-90"
+              : "bg-muted text-foreground border border-border hover:border-primary/30 hover:bg-primary/5"
           }`}
-          tabIndex={0}
-          aria-label={`Seleccionar plan ${plan.name}`}
         >
           {loading === plan.id ? "Procesando..." : plan.buttonText}
         </button>

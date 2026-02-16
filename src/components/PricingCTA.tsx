@@ -1,21 +1,21 @@
-
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 export function PricingCTA() {
   return (
-    <div className="text-center mt-12 bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
-      <h3 className="text-xl font-bold text-gray-800 mb-4">¿Necesitas una solución personalizada?</h3>
-      <p className="text-gray-600 mb-6">
-        Contáctanos para una cotización detallada adaptada a tus necesidades específicas.
-        Analizaremos tu problema y te proporcionaremos la mejor solución posible.
+    <div className="mt-12 text-center max-w-2xl mx-auto p-8 rounded-2xl border border-border bg-card">
+      <h3 className="text-lg font-display font-bold text-foreground mb-3">
+        ¿Necesitas algo personalizado?
+      </h3>
+      <p className="text-sm text-muted-foreground mb-6">
+        Contáctanos para una cotización detallada adaptada a tus necesidades.
       </p>
       <Link
         to="/contacto"
-        className="btn-primary"
-        tabIndex={0}
-        aria-label="Solicitar cotización"
+        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
       >
         Solicitar cotización
+        <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
   );
