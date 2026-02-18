@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code2, Database, Terminal, Palette, Globe, Smartphone, Shield, Cpu, GitBranch, Cloud, Layers, Braces } from 'lucide-react';
+import { Code2, Database, Terminal, Palette, Globe, Smartphone, Shield, Cpu, GitBranch, Cloud, Layers, Braces, Figma, Zap } from 'lucide-react';
 
 const skillCategories = [
   {
@@ -7,29 +7,29 @@ const skillCategories = [
     icon: <Code2 className="w-5 h-5" />,
     skills: [
       { name: "React / TypeScript", level: 95 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "Next.js", level: 85 },
+      { name: "Tailwind CSS", level: 92 },
       { name: "Framer Motion", level: 88 },
+      { name: "HTML5 / CSS3", level: 95 },
     ],
   },
   {
-    title: "Backend",
+    title: "Backend & Cloud",
     icon: <Database className="w-5 h-5" />,
     skills: [
-      { name: "Node.js", level: 90 },
-      { name: "Supabase / PostgreSQL", level: 92 },
-      { name: "REST APIs", level: 95 },
+      { name: "Supabase / PostgreSQL", level: 90 },
+      { name: "Node.js / Deno", level: 85 },
+      { name: "REST APIs", level: 92 },
       { name: "Edge Functions", level: 85 },
     ],
   },
   {
-    title: "Herramientas",
+    title: "Herramientas & DevOps",
     icon: <Terminal className="w-5 h-5" />,
     skills: [
       { name: "Git / GitHub", level: 95 },
       { name: "Vite / Webpack", level: 88 },
-      { name: "Docker", level: 75 },
-      { name: "CI/CD", level: 80 },
+      { name: "Vercel / Netlify", level: 90 },
+      { name: "CI/CD Pipelines", level: 80 },
     ],
   },
 ];
@@ -47,6 +47,8 @@ const techItems = [
   { name: "Cloud", icon: <Cloud className="w-5 h-5" /> },
   { name: "APIs", icon: <Layers className="w-5 h-5" /> },
   { name: "Deno", icon: <Terminal className="w-5 h-5" /> },
+  { name: "Figma", icon: <Figma className="w-5 h-5" /> },
+  { name: "Vite", icon: <Zap className="w-5 h-5" /> },
 ];
 
 const SkillsSection = () => {
@@ -64,7 +66,7 @@ const SkillsSection = () => {
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Stack Tecnológico
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Conocimientos &{' '}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Tecnologías
@@ -80,7 +82,7 @@ const SkillsSection = () => {
           {skillCategories.map((category, catIndex) => (
             <motion.div
               key={category.title}
-              className="bg-card rounded-2xl p-7 border border-border hover:border-primary/20 hover:shadow-lg transition-all duration-400"
+              className="bg-card rounded-2xl p-7 border border-border hover:border-primary/20 hover:shadow-lg transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -125,7 +127,7 @@ const SkillsSection = () => {
           <h3 className="text-center text-sm font-medium text-muted-foreground uppercase tracking-widest mb-8">
             Tecnologías que utilizo
           </h3>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-w-3xl mx-auto">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 max-w-4xl mx-auto">
             {techItems.map((tech, index) => (
               <motion.div
                 key={tech.name}
