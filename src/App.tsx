@@ -19,8 +19,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { AnimationController } from "./components/AnimationController";
 import PageTransition from "./components/PageTransition";
@@ -67,41 +66,37 @@ const LoadingPage = () => (
   </div>
 );
 
-// Componente para manejar las animaciones de transición
-const AnimatedRoutes = () => {
-  const location = useLocation();
-  
+// Componente para manejar las rutas
+const AppRoutes = () => {
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        {[
-          { path: "/", element: <Index /> },
-          { path: "/sobre-nosotros", element: <SobreNosotros /> },
-          { path: "/servicios", element: <Servicios /> },
-          { path: "/desarrollo-web", element: <DesarrolloWeb /> },
-          { path: "/soluciones-personalizadas", element: <SolucionesPersonalizadas /> },
-          { path: "/portafolio", element: <Portafolio /> },
-          { path: "/portafolio/:id", element: <DetalleProyecto /> },
-          { path: "/precios", element: <Precios /> },
-          { path: "/contacto", element: <Contacto /> },
-          { path: "/admin", element: <Admin /> },
-          { path: "/cloritizacion", element: <Cloritizacion /> },
-          { path: "*", element: <NotFound /> }
-        ].map(route => (
-          <Route 
-            key={route.path} 
-            path={route.path} 
-            element={
-              <PageTransition>
-                <Suspense fallback={<LoadingPage />}>
-                  {route.element}
-                </Suspense>
-              </PageTransition>
-            } 
-          />
-        ))}
-      </Routes>
-    </AnimatePresence>
+    <Routes>
+      {[
+        { path: "/", element: <Index /> },
+        { path: "/sobre-nosotros", element: <SobreNosotros /> },
+        { path: "/servicios", element: <Servicios /> },
+        { path: "/desarrollo-web", element: <DesarrolloWeb /> },
+        { path: "/soluciones-personalizadas", element: <SolucionesPersonalizadas /> },
+        { path: "/portafolio", element: <Portafolio /> },
+        { path: "/portafolio/:id", element: <DetalleProyecto /> },
+        { path: "/precios", element: <Precios /> },
+        { path: "/contacto", element: <Contacto /> },
+        { path: "/admin", element: <Admin /> },
+        { path: "/cloritizacion", element: <Cloritizacion /> },
+        { path: "*", element: <NotFound /> }
+      ].map(route => (
+        <Route 
+          key={route.path} 
+          path={route.path} 
+          element={
+            <PageTransition>
+              <Suspense fallback={<LoadingPage />}>
+                {route.element}
+              </Suspense>
+            </PageTransition>
+          } 
+        />
+      ))}
+    </Routes>
   );
 };
 
@@ -115,7 +110,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <ResponsiveTest />
-        <AnimatedRoutes />
+        <AppRoutes />
       </TooltipProvider>
     </AnimationController>
   </QueryClientProvider>

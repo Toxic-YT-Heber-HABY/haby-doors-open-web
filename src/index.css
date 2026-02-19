@@ -159,6 +159,15 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(12px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
 /* Hero CSS animations (replaces framer-motion to avoid forced reflow) */
 @keyframes heroFadeIn {
   from { opacity: 0; transform: translateY(20px); }
