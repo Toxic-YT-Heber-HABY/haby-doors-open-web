@@ -91,7 +91,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
                 placeholder="Contraseña"
                 required
                 autoComplete={isSignUp ? 'new-password' : 'current-password'}
-                minLength={6}
+                minLength={isSignUp ? 12 : 6}
               />
               <button
                 type="button"
@@ -107,7 +107,7 @@ const AdminAuth = ({ onAuthSuccess }: AdminAuthProps) => {
             </div>
             {isSignUp && (
               <p className="text-xs text-gray-500">
-                Mínimo 6 caracteres
+                Mínimo 12 caracteres, con mayúsculas, minúsculas, números y caracteres especiales
               </p>
             )}
           </div>
