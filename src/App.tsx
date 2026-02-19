@@ -38,7 +38,7 @@ const queryClient = new QueryClient({
 });
 
 // Carga perezosa (lazy) de páginas para mejorar el rendimiento inicial
-const Index = lazy(() => import("./pages/Index"));
+import Index from "./pages/Index";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Portafolio = lazy(() => import("./pages/Portafolio"));
 const SobreNosotros = lazy(() => import("./pages/SobreNosotros"));
