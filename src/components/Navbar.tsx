@@ -59,7 +59,7 @@ const Navbar = () => {
       >
         <div className="container py-3 sm:py-4">
           <nav className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 group" aria-label="Inicio">
+            <Link to="/" className="flex items-center gap-2 group" aria-label="HABY - Inicio">
               <img
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png"
                 alt="HABY Logo"
