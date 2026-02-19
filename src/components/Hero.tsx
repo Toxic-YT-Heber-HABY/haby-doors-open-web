@@ -1,6 +1,5 @@
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 const Hero = () => {
   const scrollToNext = () => {
@@ -27,24 +26,20 @@ const Hero = () => {
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
+          <div
+            className="mb-10 animate-hero-fade-in"
+            style={{ animationDelay: '0.1s' }}
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase border border-primary-foreground/10 text-primary-foreground/70 bg-primary-foreground/[0.03]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Disponible para proyectos
             </span>
-          </motion.div>
+          </div>
 
           {/* Heading */}
-          <motion.h1
-            className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <h1
+            className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8 animate-hero-fade-in"
+            style={{ animationDelay: '0.2s' }}
           >
             <span className="text-primary-foreground">HABY</span>
             <br />
@@ -53,24 +48,20 @@ const Hero = () => {
             </span>
             <br />
             <span className="text-primary-foreground/80">DOORS</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtitle */}
-          <motion.p
-            className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mx-auto mb-12 font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+          <p
+            className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mx-auto mb-12 font-light animate-hero-fade-in"
+            style={{ animationDelay: '0.4s' }}
           >
             Diseño y desarrollo de experiencias digitales que transforman ideas en realidad.
-          </motion.p>
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 items-center justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+          <div
+            className="flex flex-col sm:flex-row gap-4 items-center justify-center animate-hero-fade-in"
+            style={{ animationDelay: '0.6s' }}
           >
             <Link
               to="/contacto"
@@ -87,14 +78,12 @@ const Hero = () => {
             >
               Ver portafolio
             </Link>
-          </motion.div>
+          </div>
 
           {/* Stats */}
-          <motion.div
-            className="grid grid-cols-3 gap-8 max-w-md mx-auto mt-24"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+          <div
+            className="grid grid-cols-3 gap-8 max-w-md mx-auto mt-24 animate-hero-fade-in"
+            style={{ animationDelay: '0.9s' }}
           >
             {[
               { value: "100+", label: "Proyectos" },
@@ -106,20 +95,18 @@ const Hero = () => {
                 <div className="text-[11px] text-primary-foreground/50 uppercase tracking-widest">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.button
+      <button
         onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/20 hover:text-primary-foreground/50 transition-colors cursor-pointer"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/20 hover:text-primary-foreground/50 transition-colors cursor-pointer animate-bounce-slow"
         aria-label="Scroll down"
       >
         <ChevronDown className="w-6 h-6" />
-      </motion.button>
+      </button>
     </section>
   );
 };
