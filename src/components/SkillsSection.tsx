@@ -4,7 +4,7 @@ import { Code2, Database, Terminal, Palette, Globe, Smartphone, Shield, Cpu, Git
 const skillCategories = [
   {
     title: "Frontend",
-    icon: <Code2 className="w-5 h-5" />,
+    icon: <Code2 className="w-5 h-5" aria-hidden="true" />,
     skills: [
       { name: "React / TypeScript", level: 95 },
       { name: "Tailwind CSS", level: 92 },
@@ -14,7 +14,7 @@ const skillCategories = [
   },
   {
     title: "Backend & Cloud",
-    icon: <Database className="w-5 h-5" />,
+    icon: <Database className="w-5 h-5" aria-hidden="true" />,
     skills: [
       { name: "Supabase / PostgreSQL", level: 90 },
       { name: "Node.js / Deno", level: 85 },
@@ -24,7 +24,7 @@ const skillCategories = [
   },
   {
     title: "Herramientas & DevOps",
-    icon: <Terminal className="w-5 h-5" />,
+    icon: <Terminal className="w-5 h-5" aria-hidden="true" />,
     skills: [
       { name: "Git / GitHub", level: 95 },
       { name: "Vite / Webpack", level: 88 },
@@ -35,20 +35,20 @@ const skillCategories = [
 ];
 
 const techItems = [
-  { name: "React", icon: <Braces className="w-5 h-5" /> },
-  { name: "TypeScript", icon: <Code2 className="w-5 h-5" /> },
-  { name: "Supabase", icon: <Database className="w-5 h-5" /> },
-  { name: "Tailwind", icon: <Palette className="w-5 h-5" /> },
-  { name: "SEO", icon: <Globe className="w-5 h-5" /> },
-  { name: "Responsive", icon: <Smartphone className="w-5 h-5" /> },
-  { name: "Seguridad", icon: <Shield className="w-5 h-5" /> },
-  { name: "Performance", icon: <Cpu className="w-5 h-5" /> },
-  { name: "Git", icon: <GitBranch className="w-5 h-5" /> },
-  { name: "Cloud", icon: <Cloud className="w-5 h-5" /> },
-  { name: "APIs", icon: <Layers className="w-5 h-5" /> },
-  { name: "Deno", icon: <Terminal className="w-5 h-5" /> },
-  { name: "Figma", icon: <Figma className="w-5 h-5" /> },
-  { name: "Vite", icon: <Zap className="w-5 h-5" /> },
+  { name: "React", icon: <Braces className="w-5 h-5" aria-hidden="true" /> },
+  { name: "TypeScript", icon: <Code2 className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Supabase", icon: <Database className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Tailwind", icon: <Palette className="w-5 h-5" aria-hidden="true" /> },
+  { name: "SEO", icon: <Globe className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Responsive", icon: <Smartphone className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Seguridad", icon: <Shield className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Performance", icon: <Cpu className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Git", icon: <GitBranch className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Cloud", icon: <Cloud className="w-5 h-5" aria-hidden="true" /> },
+  { name: "APIs", icon: <Layers className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Deno", icon: <Terminal className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Figma", icon: <Figma className="w-5 h-5" aria-hidden="true" /> },
+  { name: "Vite", icon: <Zap className="w-5 h-5" aria-hidden="true" /> },
 ];
 
 const SkillsSection = () => {

@@ -33,7 +33,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-10"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase border border-primary-foreground/10 text-primary-foreground/50 bg-primary-foreground/[0.03]">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase border border-primary-foreground/10 text-primary-foreground/70 bg-primary-foreground/[0.03]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Disponible para proyectos
             </span>
@@ -57,7 +57,7 @@ const Hero = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg sm:text-xl text-primary-foreground/40 max-w-xl mx-auto mb-12 font-light"
+            className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mx-auto mb-12 font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -103,7 +103,7 @@ const Hero = () => {
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-primary-foreground mb-1">{stat.value}</div>
-                <div className="text-[11px] text-primary-foreground/25 uppercase tracking-widest">{stat.label}</div>
+                <div className="text-[11px] text-primary-foreground/50 uppercase tracking-widest">{stat.label}</div>
               </div>
             ))}
           </motion.div>
