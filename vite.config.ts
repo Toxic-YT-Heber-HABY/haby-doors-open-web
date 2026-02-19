@@ -19,4 +19,16 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // Bundle all lucide-react icons together to avoid many tiny chunks
+          if (id.includes('lucide-react')) {
+            return 'icons';
+          }
+        },
+      },
+    },
+  },
 }));
