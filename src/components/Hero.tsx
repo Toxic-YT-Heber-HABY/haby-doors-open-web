@@ -38,8 +38,7 @@ const Hero = () => {
 
           {/* Heading */}
           <h1
-            className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8 animate-hero-fade-in"
-            style={{ animationDelay: '0.2s' }}
+            className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8"
           >
             <span className="text-primary-foreground">HABY</span>
             <br />
