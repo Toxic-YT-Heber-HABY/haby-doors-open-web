@@ -21,16 +21,12 @@ const ImageZoom = ({ src, alt, className }: ImageZoomProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
   }, []);
 
   const handleOpen = () => {

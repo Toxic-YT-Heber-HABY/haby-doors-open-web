@@ -9,9 +9,14 @@ const ResponsiveTest = () => {
   });
 
   useEffect(() => {
+    // Skip in production since component renders null
+    if (process.env.NODE_ENV === 'production') return;
+
     const updateScreenSize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      // Use visualViewport to avoid forced reflow from window.innerWidth/innerHeight
+      const vv = window.visualViewport;
+      const width = vv ? Math.round(vv.width) : document.documentElement.clientWidth;
+      const height = vv ? Math.round(vv.height) : document.documentElement.clientHeight;
       let type = 'desktop';
       
       if (width < 640) type = 'mobile';
@@ -22,7 +27,7 @@ const ResponsiveTest = () => {
       setScreenSize({ width, height, type });
     };
 
-    updateScreenSize();
+    requestAnimationFrame(updateScreenSize);
     window.addEventListener('resize', updateScreenSize);
     return () => window.removeEventListener('resize', updateScreenSize);
   }, []);
