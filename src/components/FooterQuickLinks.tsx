@@ -14,13 +14,13 @@ const quickLinks = [
 export default function FooterQuickLinks() {
   return (
     <div>
-      <h3 className="text-xl font-heading font-bold mb-4">Enlaces rápidos</h3>
-      <ul className="space-y-2">
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/60 mb-5">Enlaces rápidos</h3>
+      <ul className="space-y-3">
         {quickLinks.map(({ to, label, accent }) => (
           <li key={to}>
             <Link
               to={to}
-              className={`text-gray-300 transition-colors ${accent ? "text-haby-accent hover:text-haby-accent font-semibold" : "hover:text-white"}`}
+              className={`text-sm transition-colors duration-200 ${accent ? "text-accent font-semibold hover:text-primary-foreground" : "text-primary-foreground/70 hover:text-primary-foreground"}`}
               tabIndex={0}
               aria-label={label}
             >
