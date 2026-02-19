@@ -5,9 +5,21 @@ import { userConfirmationHeader, userProfessionalMessage, profesionalHeader, tab
 import { logStep } from "./logger.ts";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+const allowedOrigins = [
+  'https://habydoors.com',
+  'https://www.habydoors.com',
+  'https://haby-three.vercel.app',
+  'https://haby-doors-open-web.lovable.app',
+  ...(Deno.env.get('ALLOWED_ORIGINS')?.split(',').filter(Boolean) || []),
+];
+
+const getCorsHeaders = (req: Request) => {
+  const origin = req.headers.get('origin') || '';
+  return {
+    'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
 };
 
 // Input validation schema to prevent injection attacks
@@ -44,7 +56,7 @@ const ContactSchema = z.object({
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: getCorsHeaders(req) });
   }
 
   try {
@@ -135,7 +147,7 @@ serve(async (req) => {
           success: false,
         }),
         {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
           status: 500,
         }
       );
@@ -147,7 +159,7 @@ serve(async (req) => {
         message: "Correos enviados exitosamente. ¡Gracias por tu confianza!",
       }),
       {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
         status: 200,
       }
     );
@@ -161,7 +173,7 @@ serve(async (req) => {
         success: false,
       }),
       {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
         status: 500,
       }
     );
