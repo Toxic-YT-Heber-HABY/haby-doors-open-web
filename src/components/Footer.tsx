@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Logo */}
           <div>
-            <Link to="/" className="flex items-center gap-2 group mb-5" aria-label="HABY - Inicio">
+            <Link to="/" className="flex items-center gap-2 group mb-5">
               <img
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png"
                 alt="HABY Logo"
