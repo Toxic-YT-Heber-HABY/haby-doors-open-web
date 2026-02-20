@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 const experiences = [
   {
@@ -32,13 +32,7 @@ const ExperienceTimeline = () => {
   return (
     <section className="py-24 sm:py-32 bg-background">
       <div className="container max-w-4xl">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <ScrollReveal className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Trayectoria
           </span>
@@ -51,7 +45,7 @@ const ExperienceTimeline = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Mi camino en el desarrollo web, construyendo soluciones que marcan la diferencia.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="relative">
           {/* Timeline line */}
@@ -59,13 +53,11 @@ const ExperienceTimeline = () => {
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <motion.div
+              <ScrollReveal
                 key={index}
                 className="relative pl-16 sm:pl-20"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
+                direction="right"
+                delay={index * 0.15}
               >
                 {/* Dot */}
                 <div className="absolute left-4 sm:left-6 top-1 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-[0_0_12px_hsl(var(--primary)/0.4)]" />
@@ -100,7 +92,7 @@ const ExperienceTimeline = () => {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

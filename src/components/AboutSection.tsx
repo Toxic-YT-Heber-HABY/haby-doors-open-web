@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 import ImageOptimized from './ImageOptimized';
 
 const AboutSection = () => {
@@ -9,13 +9,7 @@ const AboutSection = () => {
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Image */}
-          <motion.div
-            className="order-2 lg:order-1"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <ScrollReveal className="order-2 lg:order-1" direction="right">
             <div className="relative max-w-md mx-auto lg:mx-0">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
                 <ImageOptimized
@@ -25,27 +19,18 @@ const AboutSection = () => {
                   aspectRatio="square"
                 />
               </div>
-              <motion.div
+              <ScrollReveal
                 className="absolute -bottom-5 -right-5 bg-card rounded-xl p-5 shadow-lg border border-border"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
+                delay={0.3}
               >
                 <p className="text-sm font-semibold text-foreground">Fundador de HABY</p>
                 <p className="text-xs text-muted-foreground mt-1">Heber Zadkiel García Pérez</p>
-              </motion.div>
+              </ScrollReveal>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Content */}
-          <motion.div
-            className="order-1 lg:order-2 space-y-6"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <ScrollReveal className="order-1 lg:order-2 space-y-6" direction="left">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15">
               Sobre Nosotros
             </span>
@@ -75,7 +60,7 @@ const AboutSection = () => {
               Conoce más sobre HABY
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight, Calendar } from 'lucide-react';
-import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 import ImageZoom from './ImageZoom';
 import ValidatedExternalLink from './ValidatedExternalLink';
 import { getFeaturedProjects } from '@/data/projectsData';
@@ -12,13 +12,7 @@ const PortfolioSection = () => {
     <section className="py-24 sm:py-32 bg-background">
       <div className="container">
         {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Portafolio
           </span>
@@ -31,17 +25,14 @@ const PortfolioSection = () => {
           <p className="text-muted-foreground text-lg">
             Soluciones web personalizadas que resuelven problemas reales.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <motion.div
+            <ScrollReveal
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              delay={index * 0.1}
             >
               <div className="group h-full bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/20 hover:shadow-xl transition-all duration-500">
                 <div className="relative aspect-video overflow-hidden">
@@ -93,18 +84,12 @@ const PortfolioSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
+        <ScrollReveal className="text-center mt-16" delay={0.3}>
           <Link
             to="/portafolio"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300"
@@ -112,7 +97,7 @@ const PortfolioSection = () => {
             Ver todos los proyectos
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Code2, Database, Terminal, Palette, Globe, Smartphone, Shield, Cpu, GitBranch, Cloud, Layers, Braces, Figma, Zap } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 const skillCategories = [
   {
@@ -51,18 +51,25 @@ const techItems = [
   { name: "Vite", icon: <Zap className="w-5 h-5" aria-hidden="true" /> },
 ];
 
+const SkillBar = ({ level, delay }: { level: number; delay: number }) => {
+  return (
+    <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+      <ScrollReveal delay={delay} direction="none">
+        <div
+          className="h-1.5 rounded-full bg-gradient-to-r from-primary to-accent"
+          style={{ width: `${level}%` }}
+        />
+      </ScrollReveal>
+    </div>
+  );
+};
+
 const SkillsSection = () => {
   return (
     <section className="py-24 sm:py-32 bg-secondary">
       <div className="container relative z-10">
         {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Stack Tecnológico
           </span>
@@ -75,18 +82,15 @@ const SkillsSection = () => {
           <p className="text-muted-foreground text-lg">
             Domino las herramientas más modernas para crear soluciones de alto impacto.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Skill cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {skillCategories.map((category, catIndex) => (
-            <motion.div
+            <ScrollReveal
               key={category.title}
               className="bg-card rounded-2xl p-7 border border-border hover:border-primary/20 hover:shadow-lg transition-all duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIndex * 0.1 }}
+              delay={catIndex * 0.1}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground">
@@ -101,42 +105,26 @@ const SkillsSection = () => {
                       <span className="text-sm text-muted-foreground">{skill.name}</span>
                       <span className="text-xs font-mono text-muted-foreground/60">{skill.level}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.2 + catIndex * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                      />
-                    </div>
+                    <SkillBar level={skill.level} delay={0.2 + catIndex * 0.1} />
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* Tech grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <ScrollReveal delay={0.2}>
           <h3 className="text-center text-sm font-medium text-muted-foreground uppercase tracking-widest mb-8">
             Tecnologías que utilizo
           </h3>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 max-w-4xl mx-auto">
             {techItems.map((tech, index) => (
-              <motion.div
+              <ScrollReveal
                 key={tech.name}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-card border border-border hover:border-primary/25 hover:shadow-sm transition-all duration-300 group cursor-default"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.03 * index }}
-                whileHover={{ y: -2 }}
+                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-card border border-border hover:border-primary/25 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-300 group cursor-default"
+                delay={0.03 * index}
+                direction="none"
               >
                 <div className="text-muted-foreground group-hover:text-primary transition-colors duration-300">
                   {tech.icon}
@@ -144,10 +132,10 @@ const SkillsSection = () => {
                 <span className="text-[11px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {tech.name}
                 </span>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );
