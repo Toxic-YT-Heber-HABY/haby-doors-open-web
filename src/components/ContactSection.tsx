@@ -1,6 +1,6 @@
 import { Mail, Phone, MessageCircle, Send } from 'lucide-react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
@@ -39,13 +39,7 @@ const ContactSection = () => {
     <section className="py-24 sm:py-32 bg-background">
       <div className="container">
         {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Contacto
           </span>
@@ -58,17 +52,11 @@ const ContactSection = () => {
           <p className="text-muted-foreground text-lg">
             Cuéntanos tu idea y hagamos algo extraordinario juntos.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
           {/* Contact info */}
-          <motion.div
-            className="lg:col-span-2 space-y-8"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+          <ScrollReveal className="lg:col-span-2 space-y-8" direction="right">
             <div>
               <h3 className="text-lg font-bold text-foreground mb-6">Ponte en contacto</h3>
               <div className="space-y-5">
@@ -129,16 +117,10 @@ const ContactSection = () => {
               <Phone className="w-4 h-4" />
               Contactar por WhatsApp
             </a>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Form */}
-          <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          <ScrollReveal className="lg:col-span-3" direction="left" delay={0.1}>
             <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-8 border border-border shadow-sm">
               <h3 className="text-lg font-bold text-foreground mb-6">Envíanos un mensaje</h3>
               <div className="space-y-4">
@@ -183,7 +165,7 @@ const ContactSection = () => {
                 </button>
               </div>
             </form>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

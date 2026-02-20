@@ -1,5 +1,5 @@
 import { Star, Quote } from 'lucide-react';
-import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 import {
   Carousel,
   CarouselContent,
@@ -51,13 +51,7 @@ const TestimonialsSection = () => {
     <section className="py-24 sm:py-32 bg-secondary">
       <div className="container">
         {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15 mb-4">
             Testimonios
           </span>
@@ -70,16 +64,10 @@ const TestimonialsSection = () => {
           <p className="text-muted-foreground text-lg">
             La satisfacción de nuestros clientes es nuestra mejor carta de presentación.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Carousel */}
-        <motion.div
-          className="max-w-5xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <ScrollReveal className="max-w-5xl mx-auto" delay={0.2} direction="none">
           <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-4">
               {testimonials.map((t, i) => (
@@ -113,16 +101,10 @@ const TestimonialsSection = () => {
             <CarouselPrevious className="hidden md:flex -left-12" />
             <CarouselNext className="hidden md:flex -right-12" />
           </Carousel>
-        </motion.div>
+        </ScrollReveal>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
+        <ScrollReveal className="text-center mt-16" delay={0.4}>
           <div className="inline-block bg-gradient-to-r from-primary to-accent rounded-2xl p-8 max-w-xl">
             <h3 className="text-xl font-bold text-primary-foreground mb-2">¿Listo para unirte?</h3>
             <p className="text-primary-foreground/70 text-sm mb-6">Descubre cómo podemos ayudarte a resolver tus desafíos tecnológicos.</p>
@@ -134,7 +116,7 @@ const TestimonialsSection = () => {
               <Star className="w-4 h-4" />
             </a>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );
