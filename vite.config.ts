@@ -23,9 +23,21 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Bundle all lucide-react icons together to avoid many tiny chunks
+          // Bundle lucide-react icons into main vendor chunk to avoid tiny chained requests
           if (id.includes('lucide-react')) {
-            return 'icons';
+            return 'vendor';
+          }
+          // Bundle small shared modules into vendor to reduce chain depth
+          if (id.includes('node_modules')) {
+            if (
+              id.includes('framer-motion') ||
+              id.includes('react-router') ||
+              id.includes('clsx') ||
+              id.includes('tailwind-merge') ||
+              id.includes('class-variance-authority')
+            ) {
+              return 'vendor';
+            }
           }
         },
       },
