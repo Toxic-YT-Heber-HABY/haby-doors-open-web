@@ -65,6 +65,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.158.0",
     "vaul": "^0.9.3",
+    "vite-plugin-image-optimizer": "^2.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
