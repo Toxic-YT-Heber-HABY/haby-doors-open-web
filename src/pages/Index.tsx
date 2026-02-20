@@ -1,15 +1,16 @@
-
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import PortfolioSection from "@/components/PortfolioSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import usePageTitle from "@/hooks/usePageTitle";
+
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   usePageTitle();
@@ -54,10 +55,14 @@ const Index = () => {
           <SkillsSection />
           <ExperienceTimeline />
           <PortfolioSection />
-          <TestimonialsSection />
-          <ContactSection />
+          <Suspense fallback={null}>
+            <TestimonialsSection />
+            <ContactSection />
+          </Suspense>
         </main>
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </div>
     </>
   );
