@@ -17,6 +17,8 @@ const AboutSection = () => {
                   alt="Heber Zadkiel García Pérez - Fundador de HABY"
                   className="w-full h-full object-cover"
                   aspectRatio="square"
+                  width={400}
+                  height={500}
                 />
               </div>
               <ScrollReveal

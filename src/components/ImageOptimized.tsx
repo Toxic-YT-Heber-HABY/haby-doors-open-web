@@ -27,6 +27,8 @@ interface ImageOptimizedProps {
   fallback?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
+  width?: number;
+  height?: number;
 }
 
 const ImageOptimized = ({
@@ -38,6 +40,8 @@ const ImageOptimized = ({
   fallback = "/placeholder.svg",
   style,
   onClick,
+  width,
+  height,
 }: ImageOptimizedProps) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -86,6 +90,9 @@ const ImageOptimized = ({
         alt={alt}
         className={imgClasses}
         loading={lazy ? "lazy" : "eager"}
+        decoding="async"
+        width={width}
+        height={height}
         onLoad={() => setIsLoaded(true)}
         onError={handleError}
         draggable={false}
