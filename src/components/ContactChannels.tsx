@@ -32,7 +32,7 @@ const ContactChannels = () => {
       value: "Ciudad de México, México",
       href: "#location",
       description: "Servicios en toda la región",
-      color: "text-gray-600"
+      color: "text-muted-foreground"
     }
   ];
 
@@ -64,16 +64,16 @@ const ContactChannels = () => {
   ];
 
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-elegant border border-gray-100">
-      <div className="inline-block bg-haby-accent/10 text-haby-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
+    <div className="bg-card rounded-3xl p-8 shadow-elegant border border-border">
+      <div className="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
         Información de contacto
       </div>
       
-      <h2 className="text-2xl font-bold text-haby-primary mb-3">
+      <h2 className="text-2xl font-bold text-foreground mb-3">
         ¿Prefieres contactarnos directamente?
       </h2>
       
-      <p className="text-gray-600 mb-8">
+      <p className="text-muted-foreground mb-8">
         Puedes comunicarte por cualquiera de estos medios para apoyo rápido y personalizado.
       </p>
 
@@ -82,12 +82,12 @@ const ContactChannels = () => {
         {contactInfo.map((contact, index) => {
           const IconComponent = contact.icon;
           return (
-            <div key={index} className="flex items-start hover:bg-gray-50 rounded-xl p-4 transition group">
-              <div className={`h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center ${contact.color} mr-4 flex-shrink-0 group-hover:scale-110 transition`}>
+            <div key={index} className="flex items-start hover:bg-muted rounded-xl p-4 transition group">
+              <div className={`h-12 w-12 rounded-full bg-muted flex items-center justify-center ${contact.color} mr-4 flex-shrink-0 group-hover:scale-110 transition`}>
                 <IconComponent className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <h3 className="text-base font-semibold text-gray-900 mb-1">
+                <h3 className="text-base font-semibold text-foreground mb-1">
                   {contact.title}
                 </h3>
                 <a 
@@ -98,7 +98,7 @@ const ContactChannels = () => {
                 >
                   {contact.value}
                 </a>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   {contact.description}
                 </p>
               </div>
@@ -109,7 +109,7 @@ const ContactChannels = () => {
 
       {/* Redes sociales */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-foreground mb-4">
           Síguenos en redes sociales
         </h3>
         <div className="flex space-x-4">
@@ -121,7 +121,7 @@ const ContactChannels = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-3 rounded-full bg-gray-100 ${social.color} hover:bg-gray-200 transition-all duration-300 hover:scale-110`}
+                className={`p-3 rounded-full bg-muted ${social.color} hover:bg-muted/80 transition-all duration-300 hover:scale-110`}
                 aria-label={`Seguir en ${social.name}`}
               >
                 <IconComponent className="h-5 w-5" />

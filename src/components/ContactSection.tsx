@@ -1,4 +1,4 @@
-import { Mail, Phone, MessageCircle, Send } from 'lucide-react';
+import { Mail, Phone, Send, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 import { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
 import { supabase } from '@/integrations/supabase/client';
@@ -89,10 +89,10 @@ const ContactSection = () => {
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Redes sociales</p>
               <div className="flex gap-3">
                 {[
-                  { href: "https://www.facebook.com/habyopenthedoors", label: "Facebook" },
-                  { href: "https://www.instagram.com/habyopenthedoors", label: "Instagram" },
-                  { href: "https://www.youtube.com/@HABYOpenDoors", label: "YouTube" },
-                  { href: "https://x.com/Haby_Open_Doors", label: "X" },
+                  { href: "https://www.facebook.com/habyopenthedoors", label: "Facebook", icon: Facebook },
+                  { href: "https://www.instagram.com/habyopenthedoors", label: "Instagram", icon: Instagram },
+                  { href: "https://www.youtube.com/@HABYOpenDoors", label: "YouTube", icon: Youtube },
+                  { href: "https://x.com/Haby_Open_Doors", label: "X", icon: Twitter },
                 ].map((social) => (
                   <a
                     key={social.label}
@@ -102,7 +102,7 @@ const ContactSection = () => {
                     className="w-10 h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
                     aria-label={social.label}
                   >
-                    <MessageCircle className="w-4 h-4" />
+                    <social.icon className="w-4 h-4" />
                   </a>
                 ))}
               </div>
