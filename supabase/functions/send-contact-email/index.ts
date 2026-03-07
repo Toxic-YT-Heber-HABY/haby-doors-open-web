@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
+import { Resend } from "npm:resend@4.1.0";
 import { ContactEmailRequest } from "./types.ts";
 import { userConfirmationHeader, userProfessionalMessage, profesionalHeader, tablaResumen } from "./emailTemplates.ts";
 import { logStep } from "./logger.ts";
