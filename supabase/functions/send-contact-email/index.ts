@@ -148,7 +148,7 @@ serve(async (req) => {
         message: "Correos enviados exitosamente. ¡Gracias por tu confianza!",
       }),
       {
-        headers: { ...getCorsHeaders(req), "Content-Type": "application/json" },
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       }
     );
