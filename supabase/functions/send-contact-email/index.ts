@@ -5,21 +5,10 @@ import { userConfirmationHeader, userProfessionalMessage, profesionalHeader, tab
 import { logStep } from "./logger.ts";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
-const allowedOrigins = [
-  'https://habydoors.com',
-  'https://www.habydoors.com',
-  'https://haby-three.vercel.app',
-  'https://haby-doors-open-web.lovable.app',
-  ...(Deno.env.get('ALLOWED_ORIGINS')?.split(',').filter(Boolean) || []),
-];
-
-const getCorsHeaders = (req: Request) => {
-  const origin = req.headers.get('origin') || '';
-  return {
-    'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  };
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
 // Input validation schema to prevent injection attacks
