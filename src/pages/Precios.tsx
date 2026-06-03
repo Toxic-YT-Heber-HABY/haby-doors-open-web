@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import PricingSection from "@/components/PricingSection";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { HelpCircle, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -34,8 +35,24 @@ const preguntas = [
 ];
 
 const Precios = () => {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": preguntas.map((p) => ({
+      "@type": "Question",
+      "name": p.pregunta,
+      "acceptedAnswer": { "@type": "Answer", "text": p.respuesta }
+    }))
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Precios y planes | HABY"
+        description="Planes flexibles para desarrollo web: Básico, Profesional y Premium. Inversión transparente con soporte post-entrega y sin costos ocultos."
+        url="https://haby-doors-open-web.lovable.app/precios"
+        structuredData={faqSchema}
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader
