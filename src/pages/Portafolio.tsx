@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import ValidatedExternalLink from "@/components/ValidatedExternalLink";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Lock, ArrowRight } from "lucide-react";
@@ -10,6 +11,11 @@ import { projectsData } from "@/data/projectsData";
 const Portafolio = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Portafolio de Proyectos | HABY"
+        description="Explora los proyectos desarrollados por HABY: aplicaciones, sistemas de gestión y plataformas web a medida para clientes reales."
+        url="https://haby-doors-open-web.lovable.app/portafolio"
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

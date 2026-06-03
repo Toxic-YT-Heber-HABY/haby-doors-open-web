@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CheckCircle, Code, Layout, Server, Smartphone, Globe, ArrowRight } from "lucide-react";
@@ -28,6 +29,11 @@ const DesarrolloWeb = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Desarrollo Web Profesional | HABY"
+        description="Diseñamos y desarrollamos sitios web y aplicaciones responsive con React, TypeScript y backend escalable, optimizados para SEO y mobile-first."
+        url="https://haby-doors-open-web.lovable.app/desarrollo-web"
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

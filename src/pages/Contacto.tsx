@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { Mail, Phone, MapPin, Clock, Send, Info, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
