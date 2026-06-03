@@ -1,38 +1,14 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
-import ImageOptimized from './ImageOptimized';
 
 const AboutSection = () => {
   return (
     <section className="py-24 sm:py-32 bg-background">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Image */}
-          <ScrollReveal className="order-2 lg:order-1" direction="right">
-            <div className="relative max-w-md mx-auto lg:mx-0">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
-                <ImageOptimized
-                  src="/lovable-uploads/90ffa1ad-1f42-465a-b17e-61918ab82862.png"
-                  alt="Heber Zadkiel García Pérez - Fundador de HABY"
-                  className="w-full h-full object-cover"
-                  aspectRatio="square"
-                  width={400}
-                  height={500}
-                />
-              </div>
-              <ScrollReveal
-                className="absolute -bottom-5 -right-5 bg-card rounded-xl p-5 shadow-lg border border-border"
-                delay={0.3}
-              >
-                <p className="text-sm font-semibold text-foreground">Fundador de HABY</p>
-                <p className="text-xs text-muted-foreground mt-1">Heber Zadkiel García Pérez</p>
-              </ScrollReveal>
-            </div>
-          </ScrollReveal>
-
           {/* Content */}
-          <ScrollReveal className="order-1 lg:order-2 space-y-6" direction="left">
+          <ScrollReveal className="order-1 lg:order-1 space-y-6">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase text-primary bg-primary/8 border border-primary/15">
               Sobre Nosotros
             </span>
