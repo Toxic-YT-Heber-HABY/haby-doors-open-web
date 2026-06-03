@@ -47,6 +47,7 @@ const Hero = () => {
             </span>
             <br />
             <span className="text-primary-foreground/80">DOORS</span>
+            <span className="sr-only"> — Soluciones de Desarrollo Web y Aplicaciones Digitales</span>
           </h1>
 
           {/* Subtitle */}

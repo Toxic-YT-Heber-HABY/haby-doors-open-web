@@ -57,7 +57,7 @@ const LoadingPage = () => (
       <div className="w-16 h-16 mb-4">
         <img 
           src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png" 
-          alt="HABY Logo" 
+          alt="Logotipo de HABY Open The Doors" 
           className="w-full h-full"
         />
       </div>

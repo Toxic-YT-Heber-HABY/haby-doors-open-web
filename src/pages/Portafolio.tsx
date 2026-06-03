@@ -101,13 +101,13 @@ const Portafolio = () => {
                       {!proyecto.isPrivate && (
                         <div className="flex gap-2">
                           {proyecto.url && (
-                            <ValidatedExternalLink url={proyecto.url} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false}>
-                              <ExternalLink className="h-4 w-4" />
+                            <ValidatedExternalLink url={proyecto.url} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false} aria-label={`Abrir sitio web del proyecto ${proyecto.title}`}>
+                              <ExternalLink className="h-4 w-4" aria-hidden="true" />
                             </ValidatedExternalLink>
                           )}
                           {proyecto.github && (
-                            <ValidatedExternalLink url={proyecto.github} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false}>
-                              <Github className="h-4 w-4" />
+                            <ValidatedExternalLink url={proyecto.github} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false} aria-label={`Ver código fuente de ${proyecto.title} en GitHub`}>
+                              <Github className="h-4 w-4" aria-hidden="true" />
                             </ValidatedExternalLink>
                           )}
                         </div>
