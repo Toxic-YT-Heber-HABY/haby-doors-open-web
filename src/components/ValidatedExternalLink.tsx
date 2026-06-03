@@ -8,18 +8,20 @@ interface ValidatedExternalLinkProps {
   className?: string;
   showIcon?: boolean;
   onError?: () => void;
+  'aria-label'?: string;
 }
 
 /**
  * Componente de enlace externo con validación
  * Valida URLs antes de abrirlas y proporciona feedback visual
  */
-const ValidatedExternalLink = ({ 
-  url, 
-  children, 
-  className = '', 
+const ValidatedExternalLink = ({
+  url,
+  children,
+  className = '',
   showIcon = true,
-  onError 
+  onError,
+  'aria-label': ariaLabel,
 }: ValidatedExternalLinkProps) => {
   const [isValid, setIsValid] = useState(true);
   const [isChecking, setIsChecking] = useState(false);
@@ -69,7 +71,7 @@ const ValidatedExternalLink = ({
 
   if (!url || !isValid) {
     return (
-      <span className={`inline-flex items-center gap-2 text-gray-400 cursor-not-allowed ${className}`}>
+      <span className={`inline-flex items-center gap-2 text-gray-400 cursor-not-allowed ${className}`} aria-label={ariaLabel}>
         {children}
         {showIcon && <AlertCircle className="w-4 h-4" />}
       </span>
@@ -84,7 +86,7 @@ const ValidatedExternalLink = ({
         isChecking ? 'opacity-50 cursor-wait' : 'cursor-pointer'
       } ${className}`}
       rel="noopener noreferrer"
-      aria-label={`Abrir enlace externo: ${url}`}
+      aria-label={ariaLabel ?? `Abrir enlace externo: ${url}`}
     >
       {children}
       {showIcon && <ExternalLink className="w-4 h-4" />}
