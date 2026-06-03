@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CheckCircle, Lightbulb, BarChart3, BookOpen, Clock, Zap, ArrowRight } from "lucide-react";
@@ -46,6 +47,11 @@ const SolucionesPersonalizadas = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Soluciones Personalizadas | HABY"
+        description="Sistemas de gestión, herramientas de productividad, plataformas educativas y finanzas: soluciones digitales a medida para tu organización."
+        url="https://haby-doors-open-web.lovable.app/soluciones-personalizadas"
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

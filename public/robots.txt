@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://haby-doors-open-web.lovable.app/sitemap.xml

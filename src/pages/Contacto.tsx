@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { Mail, Phone, MapPin, Clock, Send, Info, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -127,6 +128,11 @@ const Contacto = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Contacto | HABY - Open The Doors"
+        description="Cuéntanos tu proyecto: solicita una cotización o postula al programa LNA Gratuito para iniciativas de bien común."
+        url="https://haby-doors-open-web.lovable.app/contacto"
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

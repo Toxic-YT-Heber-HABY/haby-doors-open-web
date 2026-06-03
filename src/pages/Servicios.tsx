@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { Code, Lightbulb, Clock, Users, Settings, BarChart, MessageSquare, PenTool, Zap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -71,8 +72,34 @@ const steps = [
 ];
 
 const Servicios = () => {
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Desarrollo web y soluciones digitales personalizadas",
+    "provider": {
+      "@type": "Organization",
+      "name": "HABY - Open The Doors",
+      "url": "https://haby-doors-open-web.lovable.app/"
+    },
+    "areaServed": "MX",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios HABY",
+      "itemListElement": servicios.map((s) => ({
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": s.title, "description": s.description }
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Servicios de Desarrollo Web | HABY"
+        description="Desarrollo web a medida, automatización, sistemas de gestión, UX/UI y soporte continuo: nueve servicios para abrir puertas digitales a tu negocio."
+        url="https://haby-doors-open-web.lovable.app/servicios"
+        structuredData={servicesSchema}
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

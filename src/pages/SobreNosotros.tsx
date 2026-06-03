@@ -1,13 +1,34 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const SobreNosotros = () => {
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Sobre HABY - Open The Doors",
+    "url": "https://haby-doors-open-web.lovable.app/sobre-nosotros",
+    "description": "Historia, misión, visión y valores de HABY, fundada por Heber Zadkiel García Pérez.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "HABY - Open The Doors",
+      "founder": { "@type": "Person", "name": "Heber Zadkiel García Pérez" },
+      "url": "https://haby-doors-open-web.lovable.app/"
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Sobre Nosotros | HABY - Open The Doors"
+        description="Conoce la historia, misión y filosofía de HABY: soluciones web personalizadas que abren puertas a nuevas posibilidades."
+        url="https://haby-doors-open-web.lovable.app/sobre-nosotros"
+        structuredData={aboutSchema}
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader

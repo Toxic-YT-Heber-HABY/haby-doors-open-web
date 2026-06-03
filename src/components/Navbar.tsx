@@ -62,7 +62,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center gap-2 group">
               <img
                 src="/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png"
-                alt="HABY Logo"
+                alt="Logotipo de HABY Open The Doors"
                 className="h-7 sm:h-8 transition-transform duration-300 group-hover:scale-105"
               />
               <span className={`text-lg sm:text-xl font-display font-bold tracking-tight transition-colors duration-300 ${

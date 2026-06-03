@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import ValidatedExternalLink from "@/components/ValidatedExternalLink";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Lock, ArrowRight } from "lucide-react";
@@ -10,6 +11,11 @@ import { projectsData } from "@/data/projectsData";
 const Portafolio = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Portafolio de Proyectos | HABY"
+        description="Explora los proyectos desarrollados por HABY: aplicaciones, sistemas de gestión y plataformas web a medida para clientes reales."
+        url="https://haby-doors-open-web.lovable.app/portafolio"
+      />
       <Navbar />
       <main className="flex-grow">
         <PageHeader
@@ -101,13 +107,13 @@ const Portafolio = () => {
                       {!proyecto.isPrivate && (
                         <div className="flex gap-2">
                           {proyecto.url && (
-                            <ValidatedExternalLink url={proyecto.url} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false}>
-                              <ExternalLink className="h-4 w-4" />
+                            <ValidatedExternalLink url={proyecto.url} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false} aria-label={`Abrir sitio web del proyecto ${proyecto.title}`}>
+                              <ExternalLink className="h-4 w-4" aria-hidden="true" />
                             </ValidatedExternalLink>
                           )}
                           {proyecto.github && (
-                            <ValidatedExternalLink url={proyecto.github} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false}>
-                              <Github className="h-4 w-4" />
+                            <ValidatedExternalLink url={proyecto.github} className="text-muted-foreground hover:text-primary transition-colors" showIcon={false} aria-label={`Ver código fuente de ${proyecto.title} en GitHub`}>
+                              <Github className="h-4 w-4" aria-hidden="true" />
                             </ValidatedExternalLink>
                           )}
                         </div>

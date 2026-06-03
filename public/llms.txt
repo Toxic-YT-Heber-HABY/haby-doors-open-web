@@ -1,0 +1,20 @@
+# HABY - Open The Doors
+
+> Estudio de desarrollo web que crea soluciones digitales personalizadas, aplicaciones modernas y herramientas que optimizan la productividad.
+
+HABY es un estudio fundado por Heber Zadkiel García Pérez. Diseñamos y desarrollamos sitios web, aplicaciones y plataformas a medida para empresas, instituciones educativas y proyectos de bien común.
+
+## Pages
+
+- [Inicio](/): Portafolio y propuesta de HABY Open The Doors.
+- [Sobre Nosotros](/sobre-nosotros): Historia, misión, visión y valores de HABY.
+- [Servicios](/servicios): Catálogo completo de servicios de desarrollo y diseño.
+- [Desarrollo Web](/desarrollo-web): Sitios web y aplicaciones a medida.
+- [Soluciones Personalizadas](/soluciones-personalizadas): Sistemas de gestión, productividad y plataformas educativas.
+- [Portafolio](/portafolio): Proyectos desarrollados para clientes.
+- [Precios](/precios): Planes de inversión y preguntas frecuentes.
+- [Contacto](/contacto): Formulario de contacto y acceso al programa LNA Gratuito.
+
+## Optional
+
+- [Cloritización](/cloritizacion): Servicio complementario de cloritización.
