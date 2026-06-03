@@ -61,8 +61,8 @@ const SEOHead = ({
     // Open Graph
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:url', url, true);
+    updateMetaTag('og:image', resolvedImage, true);
+    updateMetaTag('og:url', resolvedUrl, true);
     updateMetaTag('og:type', type, true);
     updateMetaTag('og:site_name', 'HABY - Open The Doors', true);
 
@@ -71,7 +71,7 @@ const SEOHead = ({
     updateMetaTag('twitter:site', '@Haby_Open_Doors');
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
+    updateMetaTag('twitter:image', resolvedImage);
 
     // Article específico
     if (publishedTime) {
@@ -84,59 +84,43 @@ const SEOHead = ({
       updateMetaTag('article:author', author, true);
     }
 
-    // Schema.org JSON-LD
+    // Schema.org JSON-LD (per-page; uses a dedicated <script id> to avoid
+    // overwriting the sitewide Organization/WebSite graph from index.html)
     const schemaData = structuredData || {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "HABY - Open The Doors",
+      "@type": "WebPage",
+      "name": title,
       "description": description,
-      "url": url,
-      "author": {
-        "@type": "Person",
-        "name": author
-      },
+      "url": resolvedUrl,
+      "image": resolvedImage,
+      "author": { "@type": "Person", "name": author },
       "publisher": {
         "@type": "Organization",
         "name": "HABY - Open The Doors",
-        "logo": {
-          "@type": "ImageObject",
-          "url": image
-        }
-      },
-      "image": image,
-      "sameAs": [
-        "https://www.facebook.com/habyopenthedoors",
-        "https://www.instagram.com/habyopenthedoors?igsh=MTlkam4yeXE2NGFxMQ==",
-        "https://x.com/Haby_Open_Doors",
-        "https://www.youtube.com/@HABYOpenDoors"
-      ]
+        "logo": { "@type": "ImageObject", "url": resolvedImage }
+      }
     };
 
-    // Insertar o actualizar JSON-LD
-    let jsonLd = document.querySelector('script[type="application/ld+json"]');
+    let jsonLd = document.getElementById('seo-head-jsonld') as HTMLScriptElement | null;
     if (!jsonLd) {
       jsonLd = document.createElement('script');
       jsonLd.setAttribute('type', 'application/ld+json');
+      jsonLd.id = 'seo-head-jsonld';
       document.head.appendChild(jsonLd);
     }
     jsonLd.textContent = JSON.stringify(schemaData);
 
-    // Canonical URL
+    // Canonical URL — self-referencing per route
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', canonicalUrl || url);
+    canonical.setAttribute('href', resolvedCanonical);
+  }, [title, description, keywords, resolvedImage, resolvedUrl, type, author, publishedTime, modifiedTime, resolvedCanonical, structuredData]);
 
-    // Cleanup function
-    return () => {
-      // No necesitamos limpiar ya que las meta tags se actualizan para cada página
-    };
-  }, [title, description, keywords, image, url, type, author, publishedTime, modifiedTime, canonicalUrl, structuredData]);
-
-  return null; // Este componente no renderiza nada visible
+  return null;
 };
 
 export default SEOHead;
