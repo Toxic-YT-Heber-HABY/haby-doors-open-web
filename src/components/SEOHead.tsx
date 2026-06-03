@@ -14,12 +14,14 @@ interface SEOHeadProps {
   structuredData?: Record<string, any>;
 }
 
+const SITE_ORIGIN = 'https://haby-doors-open-web.lovable.app';
+
 const SEOHead = ({
-  title = "HABY | Soluciones Web Personalizadas - Desarrollo y Diseño Profesional",
-  description = "HABY Open The Doors: Desarrollamos soluciones web personalizadas, aplicaciones modernas y herramientas digitales que resuelven problemas cotidianos y optimizan tu productividad.",
+  title = "HABY — Desarrollo Web y Soluciones Digitales",
+  description = "HABY Open The Doors desarrolla soluciones web personalizadas, aplicaciones modernas y herramientas digitales que optimizan tu productividad.",
   keywords = "desarrollo web profesional, diseño web moderno, aplicaciones web personalizadas, herramientas productividad, soluciones digitales, desarrollo frontend, backend, haby, programación, diseño UX/UI",
-  image = "/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png",
-  url = "https://haby-open-doors.com/",
+  image = `${SITE_ORIGIN}/lovable-uploads/f3e5eff1-a976-44c3-97a2-1e1e73c75a36.png`,
+  url,
   type = "website",
   author = "Heber Zadkiel García Pérez",
   publishedTime,
@@ -27,6 +29,10 @@ const SEOHead = ({
   canonicalUrl,
   structuredData
 }: SEOHeadProps) => {
+  const resolvedUrl = url
+    || (typeof window !== 'undefined' ? `${SITE_ORIGIN}${window.location.pathname}` : `${SITE_ORIGIN}/`);
+  const resolvedImage = image.startsWith('http') ? image : `${SITE_ORIGIN}${image.startsWith('/') ? '' : '/'}${image}`;
+  const resolvedCanonical = canonicalUrl || resolvedUrl;
   
   useEffect(() => {
     // Actualizar título
